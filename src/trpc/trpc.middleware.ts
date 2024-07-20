@@ -6,6 +6,6 @@ export const trpcMiddleware = createExpressMiddleware({
   router: trpcRouter,
   createContext,
   onError({ error }) {
-    console.error(`Server error ${error.stack}`);
+    console.error(`${error.name} ${error.code} ${error.message}`);
   },
 });
