@@ -9,7 +9,7 @@
     "dev": "nodemon src/index.ts"
   },
   "exports": {
-    "./trpc": {
+    ".": {
       "types": "./src/index.ts"
     }
   },
