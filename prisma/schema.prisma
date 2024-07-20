@@ -1,0 +1,213 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ACCOUNT__ROLE_ALIAS {
+  ADMIN
+  USER
+  LOT_OWNER
+  SUPPORT_AGENT
+}
+
+enum USER__STATUS_ALIAS {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  DELETED
+}
+
+enum USER__GENDER_ALIAS {
+  MALE
+  FEMALE
+  OTHER
+  PRIVATE
+}
+
+enum VEHICLE__TYPE_ALIAS {
+  MOTORCYCLE
+  CAR
+  TRUCK
+}
+
+enum PARKING_LOT__STATUS_ALIAS {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  DELETED
+}
+
+enum PARKING_SPOT__STATUS_ALIAS {
+  AVAILABLE
+  OCCUPIED
+  RESERVED
+  MAINTENANCE
+}
+
+enum RESERVATION__STATUS_ALIAS {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+model Account {
+  id String @id @default(cuid())
+
+  createdAt DateTime            @default(now())
+  phone     String              @unique
+  password  String
+  role      ACCOUNT__ROLE_ALIAS @default(USER)
+
+  authTokens AuthToken[]
+  user       User?
+}
+
+model AuthToken {
+  id String @id @default(cuid())
+
+  createdAt    DateTime @default(now())
+  refreshToken String
+
+  account   Account @relation(fields: [accountId], references: [id])
+  accountId String
+}
+
+model User {
+  id String @id @default(cuid())
+
+  firstName   String
+  lastName    String
+  email       String?
+  gender      USER__GENDER_ALIAS @default(PRIVATE)
+  dateOfBirth DateTime?
+  avatarUrl   String?
+  accountId   String
+  parkingLot  ParkingLot[]
+  vehicle     Vehicle[]
+
+  account        Account         @relation(fields: [accountId], references: [id])
+  reservations   Reservation[]
+  parkingRecords ParkingRecord[]
+  paymentRecords PaymentRecord[]
+
+  @@unique([accountId])
+}
+
+model Vehicle {
+  id String @id @default(cuid())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  type      VEHICLE__TYPE_ALIAS
+  plate     String
+  brand     String
+  model     String
+  color     String
+  imageUrls String[]
+  ownerId   String
+
+  user          User            @relation(fields: [ownerId], references: [id])
+  Reservation   Reservation[]
+  ParkingRecord ParkingRecord[]
+}
+
+model ParkingLot {
+  id String @id @default(cuid())
+
+  name      String
+  latitude  Float
+  longitude Float
+  imageUrls String[]
+  status    String
+  ownerId   String
+  userId    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  owner              User                @relation(fields: [ownerId], references: [id])
+  parkingSpots       ParkingSpot[]
+  parkingLotServices ParkingLotService[]
+}
+
+model ParkingLotService {
+  id String @id @default(cuid())
+
+  parkingLotId String
+  name         String
+  description  String
+  price        Float
+
+  parkingLot ParkingLot @relation(fields: [parkingLotId], references: [id])
+}
+
+model ParkingSpot {
+  id String @id @default(cuid())
+
+  isAvailable  Boolean
+  Reservation  Reservation[]
+  parkingLotId String
+
+  parkingLot    ParkingLot      @relation(fields: [parkingLotId], references: [id])
+  parkingRecord ParkingRecord[]
+}
+
+model Reservation {
+  id String @id @default(cuid())
+
+  userId     String
+  spotId     String
+  vehicleId  String
+  status     String
+  checkInAt  DateTime?
+  checkOutAt DateTime?
+  totalPrice Float?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  user           User            @relation(fields: [userId], references: [id])
+  spot           ParkingSpot     @relation(fields: [spotId], references: [id])
+  vehicle        Vehicle         @relation(fields: [vehicleId], references: [id])
+  parkingRecords ParkingRecord[]
+  paymentRecords PaymentRecord[]
+}
+
+model ParkingRecord {
+  id String @id @default(cuid())
+
+  userId        String
+  spotId        String
+  vehicleId     String
+  reservationId String?
+  status        String
+  checkInAt     DateTime?
+  checkOutAt    DateTime?
+  totalPrice    Float?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  user        User         @relation(fields: [userId], references: [id])
+  spot        ParkingSpot  @relation(fields: [spotId], references: [id])
+  vehicle     Vehicle      @relation(fields: [vehicleId], references: [id])
+  reservation Reservation? @relation(fields: [reservationId], references: [id])
+}
+
+model PaymentRecord {
+  id String @id @default(cuid())
+
+  userId        String
+  plotId        String
+  reservationId String?
+  status        String
+  amount        Float
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user        User         @relation(fields: [userId], references: [id])
+  reservation Reservation? @relation(fields: [reservationId], references: [id])
+}
