@@ -10,8 +10,7 @@
   },
   "exports": {
     "./trpc": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "types": "./src/index.ts"
     }
   },
   "dependencies": {
