@@ -1,4 +1,4 @@
-import { ACCOUNT__ROLE_ALIAS } from '@prisma/client';
+import { ACCOUNT__ROLE_ALIAS } from "@prisma/client";
 
 export type AccessToken = {
   id: string;
@@ -9,3 +9,10 @@ export type AccessToken = {
 export type RefreshToken = {
   id: string;
 };
+
+export enum ERoles {
+  Admin = "ADMIN",
+  User = "User",
+  LotOwner = "LOT_OWNER",
+  SupportAgent = "SUPPORT_AGENT",
+}

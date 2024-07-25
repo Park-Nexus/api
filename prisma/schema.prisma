@@ -7,27 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum ACCOUNT__ROLE_ALIAS {
-  ADMIN
-  USER
-  LOT_OWNER
-  SUPPORT_AGENT
-}
-
-enum USER__STATUS_ALIAS {
-  ACTIVE
-  INACTIVE
-  SUSPENDED
-  DELETED
-}
-
-enum USER__GENDER_ALIAS {
-  MALE
-  FEMALE
-  OTHER
-  PRIVATE
-}
-
 enum VEHICLE__TYPE_ALIAS {
   MOTORCYCLE
   CAR
@@ -55,49 +34,6 @@ enum RESERVATION__STATUS_ALIAS {
   COMPLETED
 }
 
-model Account {
-  id String @id @default(cuid())
-
-  createdAt DateTime            @default(now())
-  phone     String              @unique
-  password  String
-  role      ACCOUNT__ROLE_ALIAS @default(USER)
-
-  authTokens AuthToken[]
-  user       User?
-}
-
-model AuthToken {
-  id String @id @default(cuid())
-
-  createdAt    DateTime @default(now())
-  refreshToken String
-
-  account   Account @relation(fields: [accountId], references: [id])
-  accountId String
-}
-
-model User {
-  id String @id @default(cuid())
-
-  firstName   String
-  lastName    String
-  email       String?
-  gender      USER__GENDER_ALIAS @default(PRIVATE)
-  dateOfBirth DateTime?
-  avatarUrl   String?
-  accountId   String
-  parkingLot  ParkingLot[]
-  vehicle     Vehicle[]
-
-  account        Account         @relation(fields: [accountId], references: [id])
-  reservations   Reservation[]
-  parkingRecords ParkingRecord[]
-  paymentRecords PaymentRecord[]
-
-  @@unique([accountId])
-}
-
 model Vehicle {
   id String @id @default(cuid())
 
@@ -112,7 +48,6 @@ model Vehicle {
   imageUrls String[]
   ownerId   String
 
-  user          User            @relation(fields: [ownerId], references: [id])
   Reservation   Reservation[]
   ParkingRecord ParkingRecord[]
 }
@@ -130,7 +65,6 @@ model ParkingLot {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  owner              User                @relation(fields: [ownerId], references: [id])
   parkingSpots       ParkingSpot[]
   parkingLotServices ParkingLotService[]
 }
@@ -170,7 +104,6 @@ model Reservation {
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
 
-  user           User            @relation(fields: [userId], references: [id])
   spot           ParkingSpot     @relation(fields: [spotId], references: [id])
   vehicle        Vehicle         @relation(fields: [vehicleId], references: [id])
   parkingRecords ParkingRecord[]
@@ -191,7 +124,6 @@ model ParkingRecord {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  user        User         @relation(fields: [userId], references: [id])
   spot        ParkingSpot  @relation(fields: [spotId], references: [id])
   vehicle     Vehicle      @relation(fields: [vehicleId], references: [id])
   reservation Reservation? @relation(fields: [reservationId], references: [id])
@@ -208,6 +140,5 @@ model PaymentRecord {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  user        User         @relation(fields: [userId], references: [id])
   reservation Reservation? @relation(fields: [reservationId], references: [id])
 }
