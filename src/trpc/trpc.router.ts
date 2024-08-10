@@ -1,6 +1,7 @@
 import { procedure, trpcInstance } from ".";
 import { authMiddleware } from "../auth/auth.middleware";
 import { authRouter } from "../auth/routers";
+import { userRouter } from "../routers/user";
 
 export const trpcRouter = trpcInstance.router({
   home: {
@@ -10,4 +11,5 @@ export const trpcRouter = trpcInstance.router({
       .query(({ ctx }) => `Hello user id ${ctx.account.id}`),
   },
   auth: authRouter,
+  user: userRouter,
 });

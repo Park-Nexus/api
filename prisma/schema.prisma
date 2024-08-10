@@ -83,7 +83,6 @@ model User {
 
   firstName String
   lastName  String
-  adderss   String
   phone     String
   avatarUrl String?
   gender    USER__GENDER_ALIAS

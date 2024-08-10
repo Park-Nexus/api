@@ -21,9 +21,9 @@ export const registerRouter = procedure
 
     const hash = await hashPassword(password);
 
-    const newUser = await prisma.account.create({
+    const newAccount = await prisma.account.create({
       data: { email, password: hash, role: ACCOUNT__ROLE_ALIAS.ADMIN },
     });
 
-    return newUser;
+    return newAccount;
   });
