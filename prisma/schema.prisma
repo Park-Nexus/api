@@ -41,9 +41,8 @@ enum PARKING_SPOT__STATUS_ALIAS {
 
 enum RESERVATION__STATUS_ALIAS {
   PENDING
-  CONFIRMED
-  CANCELLED
   COMPLETED
+  EXPIRED
 }
 
 enum PARKING_RECORD__STATUS_ALIAS {
@@ -51,14 +50,18 @@ enum PARKING_RECORD__STATUS_ALIAS {
   COMPLETED
 }
 
+enum PAYMENT_RECORD__METHOD_ALIAS {
+  CASH
+}
+
 model Account {
   id String @id @default(cuid())
 
   email     String              @unique
   password  String
+  role      ACCOUNT__ROLE_ALIAS
   createdAt DateTime            @default(now())
   updatedAt DateTime            @updatedAt
-  role      ACCOUNT__ROLE_ALIAS
 
   user User?
 }
@@ -72,12 +75,13 @@ model User {
   phone     String
   avatarUrl String?
   gender    USER__GENDER_ALIAS
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
 
   vehicles          Vehicle[]
   parkingLotReviews ParkingLotReview[]
   parkingLots       ParkingLot[]
   paymentRecords    PaymentRecord[]
-  reservations      Reservation[]
   userNotifications UserNotification[]
 
   accountId String  @unique
@@ -100,6 +104,7 @@ model UserNotification {
 model Vehicle {
   id String @id @default(cuid())
 
+  type      VEHICLE__TYPE_ALIAS
   plate     String
   brand     String
   model     String
@@ -107,13 +112,12 @@ model Vehicle {
   imageUrls String[]
   createdAt DateTime            @default(now())
   updatedAt DateTime            @updatedAt
-  type      VEHICLE__TYPE_ALIAS
 
   reservations   Reservation[]
   parkingRecords ParkingRecord[]
 
   ownerId String
-  user    User   @relation(fields: [ownerId], references: [id])
+  owner   User   @relation(fields: [ownerId], references: [id])
 }
 
 model ParkingLot {
@@ -123,17 +127,16 @@ model ParkingLot {
   latitude  Float
   longitude Float
   mediaUrls String[]
-  ownerId   String
+  status    PARKING_LOT__STATUS_ALIAS
   createdAt DateTime                  @default(now())
   updatedAt DateTime                  @updatedAt
-  status    PARKING_LOT__STATUS_ALIAS
 
   parkingSpots       ParkingSpot[]
   parkingLotServices ParkingLotService[]
   parkingLotReviews  ParkingLotReview[]
 
-  user   User?   @relation(fields: [userId], references: [id])
-  userId String?
+  ownerId String?
+  owner   User?   @relation(fields: [ownerId], references: [id])
 }
 
 model ParkingLotReview {
@@ -141,6 +144,7 @@ model ParkingLotReview {
 
   rating    Int
   comment   String
+  mediaUrls String[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -156,8 +160,11 @@ model ParkingLotService {
 
   name         String
   description  String
+  mediaUrls    String[]
   price        Float
   vehicleTypes VEHICLE__TYPE_ALIAS[]
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
 
   parkingLotId String
   parkingLot   ParkingLot @relation(fields: [parkingLotId], references: [id])
@@ -168,6 +175,8 @@ model ParkingSpot {
 
   isAvailable Boolean
   vehicleType VEHICLE__TYPE_ALIAS
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
 
   reservations   Reservation[]
   parkingRecords ParkingRecord[]
@@ -179,59 +188,53 @@ model ParkingSpot {
 model Reservation {
   id String @id @default(cuid())
 
-  checkInAt  DateTime?
-  checkOutAt DateTime?
-  totalPrice Float?
-  createdAt  DateTime                  @default(now())
-  updatedAt  DateTime                  @updatedAt
-  status     RESERVATION__STATUS_ALIAS
+  checkInAt DateTime
+  status    RESERVATION__STATUS_ALIAS
+  createdAt DateTime                  @default(now())
+  updatedAt DateTime                  @updatedAt
 
   parkingRecord ParkingRecord?
-  paymentRecord PaymentRecord?
 
   parkingSpotId String
   parkingSpot   ParkingSpot @relation(fields: [parkingSpotId], references: [id])
 
   vehicleId String
   vehicle   Vehicle @relation(fields: [vehicleId], references: [id])
-
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
 }
 
 model ParkingRecord {
   id String @id @default(cuid())
 
-  checkInAt  DateTime?
+  checkInAt  DateTime
   checkOutAt DateTime?
   totalPrice Float?
+  status     PARKING_RECORD__STATUS_ALIAS
   createdAt  DateTime                     @default(now())
   updatedAt  DateTime                     @updatedAt
-  status     PARKING_RECORD__STATUS_ALIAS
 
-  userId String
+  vehicleId String?
+  vehicle   Vehicle? @relation(fields: [vehicleId], references: [id])
 
-  vehicleId String
-  vehicle   Vehicle @relation(fields: [vehicleId], references: [id])
+  parkingSpotId String?
+  parkingSpot   ParkingSpot? @relation(fields: [parkingSpotId], references: [id])
 
-  parkingSpotId String
-  parkingSpot   ParkingSpot @relation(fields: [parkingSpotId], references: [id])
+  reservationId String?      @unique
+  reservation   Reservation? @relation(fields: [reservationId], references: [id])
 
-  reservation   Reservation @relation(fields: [reservationId], references: [id])
-  reservationId String      @unique
+  paymentRecord PaymentRecord?
 }
 
 model PaymentRecord {
   id String @id @default(cuid())
 
-  status    String
+  method    PAYMENT_RECORD__METHOD_ALIAS
   amount    Float
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime                     @default(now())
+  updatedAt DateTime                     @updatedAt
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
 
-  reservation   Reservation @relation(fields: [reservationId], references: [id])
-  reservationId String      @unique
+  parkingRecordId String        @unique
+  parkingRecord   ParkingRecord @relation(fields: [parkingRecordId], references: [id])
 }
