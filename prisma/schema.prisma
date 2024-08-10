@@ -7,6 +7,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum ACCOUNT__ROLE_ALIAS {
+  ADMIN
+  USER
+  PLOT_OWNER
+}
+
+enum USER__GENDER_ALIAS {
+  MALE
+  FEMALE
+  OTHER
+}
+
 enum VEHICLE__TYPE_ALIAS {
   MOTORCYCLE
   CAR
@@ -39,22 +51,69 @@ enum PARKING_RECORD__STATUS_ALIAS {
   COMPLETED
 }
 
-model Vehicle {
+model Account {
   id String @id @default(cuid())
 
+  email     String              @unique
+  password  String
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+  role      ACCOUNT__ROLE_ALIAS
+
+  user User?
+}
+
+model User {
+  id String @id @default(cuid())
+
+  firstName String
+  lastName  String
+  adderss   String
+  phone     String
+  avatarUrl String?
+  gender    USER__GENDER_ALIAS
+
+  vehicles          Vehicle[]
+  parkingLotReviews ParkingLotReview[]
+  parkingLots       ParkingLot[]
+  paymentRecords    PaymentRecord[]
+  reservations      Reservation[]
+  userNotifications UserNotification[]
+
+  accountId String  @unique
+  account   Account @relation(fields: [accountId], references: [id])
+}
+
+model UserNotification {
+  id String @id @default(cuid())
+
+  title     String
+  message   String
+  read      Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  type      VEHICLE__TYPE_ALIAS
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model Vehicle {
+  id String @id @default(cuid())
+
   plate     String
   brand     String
   model     String
   color     String
   imageUrls String[]
-  ownerId   String
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+  type      VEHICLE__TYPE_ALIAS
 
-  Reservation   Reservation[]
-  ParkingRecord ParkingRecord[]
+  reservations   Reservation[]
+  parkingRecords ParkingRecord[]
+
+  ownerId String
+  user    User   @relation(fields: [ownerId], references: [id])
 }
 
 model ParkingLot {
@@ -63,86 +122,116 @@ model ParkingLot {
   name      String
   latitude  Float
   longitude Float
-  imageUrls String[]
-  status    String
+  mediaUrls String[]
   ownerId   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime                  @default(now())
+  updatedAt DateTime                  @updatedAt
+  status    PARKING_LOT__STATUS_ALIAS
 
   parkingSpots       ParkingSpot[]
   parkingLotServices ParkingLotService[]
+  parkingLotReviews  ParkingLotReview[]
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
+}
+
+model ParkingLotReview {
+  id String @id @default(cuid())
+
+  rating    Int
+  comment   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  parkingLotId String
+  parkingLot   ParkingLot @relation(fields: [parkingLotId], references: [id])
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 }
 
 model ParkingLotService {
   id String @id @default(cuid())
 
-  parkingLotId String
   name         String
   description  String
   price        Float
+  vehicleTypes VEHICLE__TYPE_ALIAS[]
 
-  parkingLot ParkingLot @relation(fields: [parkingLotId], references: [id])
+  parkingLotId String
+  parkingLot   ParkingLot @relation(fields: [parkingLotId], references: [id])
 }
 
 model ParkingSpot {
   id String @id @default(cuid())
 
-  isAvailable  Boolean
-  Reservation  Reservation[]
-  parkingLotId String
+  isAvailable Boolean
+  vehicleType VEHICLE__TYPE_ALIAS
 
-  parkingLot    ParkingLot      @relation(fields: [parkingLotId], references: [id])
-  parkingRecord ParkingRecord[]
+  reservations   Reservation[]
+  parkingRecords ParkingRecord[]
+
+  parkingLotId String
+  parkingLot   ParkingLot @relation(fields: [parkingLotId], references: [id])
 }
 
 model Reservation {
   id String @id @default(cuid())
 
-  userId     String
-  spotId     String
-  vehicleId  String
-  status     String
   checkInAt  DateTime?
   checkOutAt DateTime?
   totalPrice Float?
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
+  createdAt  DateTime                  @default(now())
+  updatedAt  DateTime                  @updatedAt
+  status     RESERVATION__STATUS_ALIAS
 
-  spot           ParkingSpot     @relation(fields: [spotId], references: [id])
-  vehicle        Vehicle         @relation(fields: [vehicleId], references: [id])
-  parkingRecords ParkingRecord[]
-  paymentRecords PaymentRecord[]
+  parkingRecord ParkingRecord?
+  paymentRecord PaymentRecord?
+
+  parkingSpotId String
+  parkingSpot   ParkingSpot @relation(fields: [parkingSpotId], references: [id])
+
+  vehicleId String
+  vehicle   Vehicle @relation(fields: [vehicleId], references: [id])
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
 }
 
 model ParkingRecord {
   id String @id @default(cuid())
 
-  userId        String
-  spotId        String
-  vehicleId     String
-  reservationId String?
-  status        String
-  checkInAt     DateTime?
-  checkOutAt    DateTime?
-  totalPrice    Float?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  checkInAt  DateTime?
+  checkOutAt DateTime?
+  totalPrice Float?
+  createdAt  DateTime                     @default(now())
+  updatedAt  DateTime                     @updatedAt
+  status     PARKING_RECORD__STATUS_ALIAS
 
-  spot        ParkingSpot  @relation(fields: [spotId], references: [id])
-  vehicle     Vehicle      @relation(fields: [vehicleId], references: [id])
-  reservation Reservation? @relation(fields: [reservationId], references: [id])
+  userId String
+
+  vehicleId String
+  vehicle   Vehicle @relation(fields: [vehicleId], references: [id])
+
+  parkingSpotId String
+  parkingSpot   ParkingSpot @relation(fields: [parkingSpotId], references: [id])
+
+  reservation   Reservation @relation(fields: [reservationId], references: [id])
+  reservationId String      @unique
 }
 
 model PaymentRecord {
   id String @id @default(cuid())
 
-  userId        String
-  plotId        String
-  reservationId String?
-  status        String
-  amount        Float
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  status    String
+  amount    Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  reservation Reservation? @relation(fields: [reservationId], references: [id])
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  reservation   Reservation @relation(fields: [reservationId], references: [id])
+  reservationId String      @unique
 }
