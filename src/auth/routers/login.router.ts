@@ -1,33 +1,38 @@
-import { TRPCError } from '@trpc/server';
-import { prisma } from '../../db';
-import { procedure } from '../../trpc';
-import * as z from 'zod';
-import { genAccessToken, genRefreshToken } from '../utils/jwt.utils';
-import { comparePassword } from '../utils/password.utils';
+import { TRPCError } from "@trpc/server";
+import { prisma } from "../../db";
+import { procedure } from "../../trpc";
+import * as z from "zod";
+import { genAccessToken, genRefreshToken } from "../utils/jwt.utils";
+import { comparePassword } from "../utils/password.utils";
 
 const inputSchema = z.object({
-  phone: z.string().regex(/^\d+$/, 'Phone must be a number'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
+  email: z
+    .string()
+    .regex(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      "Invalid email format"
+    ),
+  password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
 export const loginRouter = procedure
   .input(inputSchema)
   .mutation(async ({ input }) => {
-    const { phone, password } = input;
+    const { email, password } = input;
     const account = await prisma.account.findUnique({
-      where: { phone },
+      where: { email },
     });
 
     if (!account) {
-      throw new TRPCError({ code: 'NOT_FOUND', message: 'User not found' });
+      throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
     }
 
     const hash = account.password;
     const isPasswordValid = await comparePassword(password, hash);
     if (!isPasswordValid) {
       throw new TRPCError({
-        code: 'UNAUTHORIZED',
-        message: 'Invalid password',
+        code: "UNAUTHORIZED",
+        message: "Invalid password",
       });
     }
 
@@ -37,13 +42,12 @@ export const loginRouter = procedure
     const accessToken = genAccessToken({
       id: account.id,
       role: account.role,
-      phone: account.phone,
     });
 
-    await prisma.authToken.create({
+    await prisma.accountToken.create({
       data: {
-        refreshToken,
-        account: { connect: { id: account.id } },
+        token: refreshToken,
+        accountId: account.id,
       },
     });
 

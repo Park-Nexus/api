@@ -55,7 +55,7 @@ enum PAYMENT_RECORD__METHOD_ALIAS {
 }
 
 model Account {
-  id String @id @default(cuid())
+  id BigInt @id @default(autoincrement())
 
   email     String              @unique
   password  String
@@ -68,19 +68,18 @@ model Account {
 }
 
 model AccountToken {
-  id String @id @default(cuid())
+  id BigInt @id @default(autoincrement())
 
   token     String
-  expiredAt DateTime
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  accountId String
+  accountId BigInt
   account   Account @relation(fields: [accountId], references: [id])
 }
 
 model User {
-  id String @id @default(cuid())
+  id BigInt @id @default(autoincrement())
 
   firstName String
   lastName  String
@@ -97,12 +96,12 @@ model User {
   paymentRecords    PaymentRecord[]
   userNotifications UserNotification[]
 
-  accountId String  @unique
+  accountId BigInt  @unique
   account   Account @relation(fields: [accountId], references: [id])
 }
 
 model UserNotification {
-  id String @id @default(cuid())
+  id BigInt @id @default(autoincrement())
 
   title     String
   message   String
@@ -110,12 +109,12 @@ model UserNotification {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  userId String
+  userId BigInt
   user   User   @relation(fields: [userId], references: [id])
 }
 
 model Vehicle {
-  id String @id @default(cuid())
+  id BigInt @id @default(autoincrement())
 
   type      VEHICLE__TYPE_ALIAS
   plate     String
@@ -129,12 +128,12 @@ model Vehicle {
   reservations   Reservation[]
   parkingRecords ParkingRecord[]
 
-  ownerId String
+  ownerId BigInt
   owner   User   @relation(fields: [ownerId], references: [id])
 }
 
 model ParkingLot {
-  id String @id @default(cuid())
+  id BigInt @id @default(autoincrement())
 
   name      String
   latitude  Float
@@ -148,12 +147,12 @@ model ParkingLot {
   parkingLotServices ParkingLotService[]
   parkingLotReviews  ParkingLotReview[]
 
-  ownerId String
+  ownerId BigInt
   owner   User   @relation(fields: [ownerId], references: [id])
 }
 
 model ParkingLotReview {
-  id String @id @default(cuid())
+  id BigInt @id @default(autoincrement())
 
   rating    Int
   comment   String
@@ -161,15 +160,15 @@ model ParkingLotReview {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  parkingLotId String
+  parkingLotId BigInt
   parkingLot   ParkingLot @relation(fields: [parkingLotId], references: [id])
 
-  userId String
+  userId BigInt
   user   User   @relation(fields: [userId], references: [id])
 }
 
 model ParkingLotService {
-  id String @id @default(cuid())
+  id BigInt @id @default(autoincrement())
 
   name         String
   description  String
@@ -179,12 +178,12 @@ model ParkingLotService {
   createdAt    DateTime              @default(now())
   updatedAt    DateTime              @updatedAt
 
-  parkingLotId String
+  parkingLotId BigInt
   parkingLot   ParkingLot @relation(fields: [parkingLotId], references: [id])
 }
 
 model ParkingSpot {
-  id String @id @default(cuid())
+  id BigInt @id @default(autoincrement())
 
   isAvailable Boolean
   vehicleType VEHICLE__TYPE_ALIAS
@@ -194,12 +193,12 @@ model ParkingSpot {
   reservations   Reservation[]
   parkingRecords ParkingRecord[]
 
-  parkingLotId String
+  parkingLotId BigInt
   parkingLot   ParkingLot @relation(fields: [parkingLotId], references: [id])
 }
 
 model Reservation {
-  id String @id @default(cuid())
+  id BigInt @id @default(autoincrement())
 
   checkInAt DateTime
   status    RESERVATION__STATUS_ALIAS
@@ -208,15 +207,15 @@ model Reservation {
 
   parkingRecord ParkingRecord?
 
-  parkingSpotId String
+  parkingSpotId BigInt
   parkingSpot   ParkingSpot @relation(fields: [parkingSpotId], references: [id])
 
-  vehicleId String
+  vehicleId BigInt
   vehicle   Vehicle @relation(fields: [vehicleId], references: [id])
 }
 
 model ParkingRecord {
-  id String @id @default(cuid())
+  id BigInt @id @default(autoincrement())
 
   checkInAt  DateTime
   checkOutAt DateTime?
@@ -225,29 +224,29 @@ model ParkingRecord {
   createdAt  DateTime                     @default(now())
   updatedAt  DateTime                     @updatedAt
 
-  vehicleId String?
+  vehicleId BigInt?
   vehicle   Vehicle? @relation(fields: [vehicleId], references: [id])
 
-  parkingSpotId String?
+  parkingSpotId BigInt?
   parkingSpot   ParkingSpot? @relation(fields: [parkingSpotId], references: [id])
 
-  reservationId String?      @unique
+  reservationId BigInt?      @unique
   reservation   Reservation? @relation(fields: [reservationId], references: [id])
 
   paymentRecord PaymentRecord?
 }
 
 model PaymentRecord {
-  id String @id @default(cuid())
+  id BigInt @id @default(autoincrement())
 
   method    PAYMENT_RECORD__METHOD_ALIAS
   amount    Float
   createdAt DateTime                     @default(now())
   updatedAt DateTime                     @updatedAt
 
-  userId String
+  userId BigInt
   user   User   @relation(fields: [userId], references: [id])
 
-  parkingRecordId String        @unique
+  parkingRecordId BigInt        @unique
   parkingRecord   ParkingRecord @relation(fields: [parkingRecordId], references: [id])
 }
