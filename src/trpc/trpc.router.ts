@@ -1,7 +1,7 @@
 import { procedure, trpcInstance } from ".";
 import { authMiddleware } from "../auth/auth.middleware";
 import { authRouter } from "../auth/routers";
-import { userRouter } from "../routers";
+import { parkingRouter, userRouter } from "../routers";
 
 export const trpcRouter = trpcInstance.router({
   home: {
@@ -12,4 +12,5 @@ export const trpcRouter = trpcInstance.router({
   },
   auth: authRouter,
   user: userRouter,
+  parking: parkingRouter,
 });
