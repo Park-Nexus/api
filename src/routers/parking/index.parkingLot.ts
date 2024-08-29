@@ -13,7 +13,7 @@ const submitSchema = z.object({
   mediaUrls: z.array(z.string()),
 });
 export const submit = procedure
-  .use(authMiddleware(["PLOT_OWNER"]))
+  .use(authMiddleware(["PARKING_LOT_OWNER"]))
   .input(submitSchema)
   .mutation(async ({ input, ctx }) => {
     const { name, latitude, longitude, mediaUrls } = input;
@@ -21,7 +21,7 @@ export const submit = procedure
       account: { id },
     } = ctx;
 
-    const { id: plotOwnerId } = await prisma.user.findUnique({ where: { accountId: id } });
+    const { id: ownerId } = await prisma.user.findUnique({ where: { accountId: id } });
 
     await prisma.parkingLot.create({
       data: {
@@ -29,8 +29,8 @@ export const submit = procedure
         latitude,
         longitude,
         mediaUrls,
-        ownerId: plotOwnerId,
         status: "INACTIVE",
+        ownerId: ownerId,
       },
     });
   });

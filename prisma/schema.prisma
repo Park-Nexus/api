@@ -140,7 +140,7 @@ model ParkingLot {
   mediaUrls  String[]
   status     PARKING_LOT__STATUS_ALIAS
   isApproved Boolean                   @default(false)
-  approvedAt DateTime
+  approvedAt DateTime?
   createdAt  DateTime                  @default(now())
   updatedAt  DateTime                  @updatedAt
 
