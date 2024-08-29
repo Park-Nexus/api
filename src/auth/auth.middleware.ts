@@ -15,10 +15,7 @@ export const authMiddleware = (allowedRoles?: ACCOUNT__ROLE_ALIAS[]) =>
     try {
       account = verifyAccessToken(accessToken);
     } catch {
-      throw new TRPCError({
-        code: "UNAUTHORIZED",
-        message: "Invalid access token",
-      });
+      throw new TRPCError({ code: "UNAUTHORIZED", message: "Invalid access token" });
     }
 
     if (allowedRoles && !allowedRoles.includes(account.role)) {
