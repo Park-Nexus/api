@@ -4,40 +4,36 @@ import * as z from "zod";
 import { hashPassword } from "../utils/password.utils";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { TRPCError } from "@trpc/server";
+import { ACCOUNT__ROLE_ALIAS } from "@prisma/client";
 
 const inputSchema = z.object({
   email: z
     .string()
-    .regex(
-      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-      "Invalid email format"
-    ),
+    .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Invalid email format"),
   password: z.string().min(8, "Password must be at least 8 characters"),
-  role: z.enum(["PLOT_OWNER", "USER"]),
+  role: z.enum([ACCOUNT__ROLE_ALIAS.PARKING_LOT_OWNER, ACCOUNT__ROLE_ALIAS.USER]),
 });
 
-export const registerRouter = procedure
-  .input(inputSchema)
-  .mutation(async ({ input }) => {
-    const { email, password, role } = input;
+export const registerRouter = procedure.input(inputSchema).mutation(async ({ input }) => {
+  const { email, password, role } = input;
 
-    const hash = await hashPassword(password);
+  const hash = await hashPassword(password);
 
-    let newAccount;
-    try {
-      await prisma.account.create({
-        data: { email, password: hash, role },
+  let newAccount;
+  try {
+    await prisma.account.create({
+      data: { email, password: hash, role },
+    });
+  } catch (error) {
+    if (error instanceof PrismaClientKnownRequestError) {
+      throw new TRPCError({
+        code: "CONFLICT",
+        message: "User already exists",
       });
-    } catch (error) {
-      if (error instanceof PrismaClientKnownRequestError) {
-        throw new TRPCError({
-          code: "CONFLICT",
-          message: "User already exists",
-        });
-      }
-
-      throw error;
     }
 
-    return newAccount;
-  });
+    throw error;
+  }
+
+  return newAccount;
+});
