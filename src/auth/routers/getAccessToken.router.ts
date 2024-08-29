@@ -13,7 +13,7 @@ export const getAccessTokenRouter = procedure
   .mutation(async ({ input }) => {
     const { refreshToken } = input;
 
-    let accountId: bigint;
+    let accountId: string;
     try {
       const payload = verifyRefreshToken(refreshToken);
       accountId = payload.id;

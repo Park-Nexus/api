@@ -2,7 +2,8 @@ import { prisma } from "../../db";
 import { procedure } from "../../trpc";
 import * as z from "zod";
 import { hashPassword } from "../utils/password.utils";
-import { ACCOUNT__ROLE_ALIAS } from "@prisma/client";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
+import { TRPCError } from "@trpc/server";
 
 const inputSchema = z.object({
   email: z
@@ -12,18 +13,31 @@ const inputSchema = z.object({
       "Invalid email format"
     ),
   password: z.string().min(8, "Password must be at least 8 characters"),
+  role: z.enum(["PLOT_OWNER", "USER"]),
 });
 
 export const registerRouter = procedure
   .input(inputSchema)
   .mutation(async ({ input }) => {
-    const { email, password } = input;
+    const { email, password, role } = input;
 
     const hash = await hashPassword(password);
 
-    const newAccount = await prisma.account.create({
-      data: { email, password: hash, role: ACCOUNT__ROLE_ALIAS.ADMIN },
-    });
+    let newAccount;
+    try {
+      await prisma.account.create({
+        data: { email, password: hash, role },
+      });
+    } catch (error) {
+      if (error instanceof PrismaClientKnownRequestError) {
+        throw new TRPCError({
+          code: "CONFLICT",
+          message: "User already exists",
+        });
+      }
+
+      throw error;
+    }
 
     return newAccount;
   });
