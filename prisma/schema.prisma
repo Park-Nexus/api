@@ -120,7 +120,7 @@ model Vehicle {
   brand     String
   model     String
   color     String
-  imageUrls String[]
+  imageUrl  String
   createdAt DateTime            @default(now())
   updatedAt DateTime            @updatedAt
 

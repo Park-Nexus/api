@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { TRPCError } from "@trpc/server";
 
 import { authMiddleware } from "../../auth";
 import { prisma } from "../../db";
@@ -30,7 +29,7 @@ export const submit = procedure
         longitude,
         mediaUrls,
         status: "INACTIVE",
-        ownerId: ownerId,
+        ownerId,
       },
     });
   });

@@ -1,8 +1,9 @@
 import { trpcInstance } from "../../trpc";
-import { submit } from "./index.parkingLot";
+
+import * as lot from "./index.parkingLot";
 
 export const parkingRouter = trpcInstance.router({
-  plot: { submit },
+  lot: { submit: lot.submit },
   spot: {},
   record: {},
 });

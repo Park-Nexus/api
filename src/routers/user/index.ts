@@ -1,10 +1,21 @@
 import { trpcInstance } from "../../trpc";
-import { create, getMany, getSingle, update } from "./index.profile";
+
+import * as profile from "./index.profile";
+import * as vehicle from "./index.vehicle";
 
 export const userRouter = trpcInstance.router({
   profile: {
-    create,
-    get: { single: getSingle, many: getMany },
-    update,
+    create: profile.create,
+    get: {
+      single: profile.getSingle,
+      many: profile.getMany,
+    },
+    update: profile.update,
+  },
+  vehicle: {
+    add: vehicle.add,
+    get: {
+      many: vehicle.getMany,
+    },
   },
 });

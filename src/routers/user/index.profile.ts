@@ -39,23 +39,23 @@ export const create = procedure
 
 // Get single profile -------------------------------------------------------------------------
 const getSingleSchema = z.object({
-  profileId: z.number().optional(),
+  userId: z.number().optional(),
 });
 export const getSingle = procedure
   .use(authMiddleware())
   .input(getSingleSchema)
   .query(async ({ input, ctx }) => {
-    const { profileId } = input;
+    const { userId } = input;
     const {
       account: { id, role },
     } = ctx;
 
     let user: User;
 
-    if (role !== "ADMIN" && profileId) throw new TRPCError({ code: "FORBIDDEN" });
+    if (role !== "ADMIN" && userId) throw new TRPCError({ code: "FORBIDDEN" });
 
-    if (profileId) {
-      user = await prisma.user.findUnique({ where: { id: profileId } });
+    if (userId) {
+      user = await prisma.user.findUnique({ where: { id: userId } });
     } else {
       await prisma.user.findUnique({ where: { accountId: id } });
     }
@@ -75,7 +75,7 @@ export const getMany = procedure
 
 // Update current profile ------------------------------------------------------------------
 const updateSchema = z.object({
-  profileId: z.number().optional(),
+  userId: z.number().optional(),
 
   firstName: z.string().optional(),
   lastName: z.string().optional(),
@@ -87,17 +87,17 @@ export const update = procedure
   .use(authMiddleware())
   .input(updateSchema)
   .mutation(async ({ input, ctx }) => {
-    const { profileId } = input;
+    const { userId, firstName, lastName, phone, avatarUrl, gender } = input;
     const {
       account: { id, role },
     } = ctx;
 
-    if (role !== "ADMIN" && profileId) throw new TRPCError({ code: "FORBIDDEN" });
+    if (role !== "ADMIN" && userId) throw new TRPCError({ code: "FORBIDDEN" });
 
     let user: User;
 
-    if (profileId) {
-      user = await prisma.user.findUnique({ where: { id: profileId } });
+    if (userId) {
+      user = await prisma.user.findUnique({ where: { id: userId } });
     } else {
       user = await prisma.user.findUnique({ where: { accountId: id } });
     }
@@ -106,5 +106,14 @@ export const update = procedure
       throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
     }
 
-    await prisma.user.update({ where: { id: user.id }, data: input });
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        firstName,
+        lastName,
+        phone,
+        avatarUrl,
+        gender,
+      },
+    });
   });
