@@ -1,3 +1,7 @@
+## API
+
+1. To start the dev server on port 4000, run `yarn dev`.
+
 ## Database
 
 1. Setup
