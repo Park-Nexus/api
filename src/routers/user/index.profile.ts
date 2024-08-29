@@ -3,8 +3,8 @@ import { TRPCError } from "@trpc/server";
 import { USER__GENDER_ALIAS } from "@prisma/client";
 
 import { authMiddleware } from "../../auth";
-import { procedure } from "../../trpc";
 import { prisma } from "../../db";
+import { procedure } from "../../trpc";
 
 // Create a new user profile --------------------------------------------------------------
 const createSchema = z.object({
@@ -15,7 +15,7 @@ const createSchema = z.object({
     .string()
     .regex(
       /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/,
-      "Avatar URL must be a valid URL"
+      "Avatar URL must be a valid URL",
     )
     .optional(),
   gender: z.nativeEnum(USER__GENDER_ALIAS),
@@ -28,28 +28,17 @@ export const create = procedure
       account: { id },
     } = ctx;
 
-    const user = await prisma.user.findUnique({
-      where: { accountId: id },
-    });
+    const user = await prisma.user.findUnique({ where: { accountId: id } });
 
-    if (user) {
-      throw new TRPCError({ code: "CONFLICT", message: "User already exists" });
-    }
+    if (user) throw new TRPCError({ code: "CONFLICT", message: "User already exists" });
 
     const { firstName, lastName, phone, avatarUrl, gender } = input;
     await prisma.user.create({
-      data: {
-        firstName,
-        lastName,
-        phone,
-        avatarUrl,
-        gender,
-        accountId: id,
-      },
+      data: { firstName, lastName, phone, avatarUrl, gender, accountId: id },
     });
   });
 
-// Get profile --------------------------------------------------------------------------------
+// Get profile ------------------------------------------------------------------------------
 const getSchema = z.object({
   profileId: number().optional(),
 });
@@ -59,14 +48,17 @@ export const get = procedure
   .query(async ({ input, ctx }) => {
     const { profileId } = input;
     const {
-      account: { id },
+      account: { id, role },
     } = ctx;
 
     let user;
-    if (!profileId) {
-      user = await prisma.user.findUnique({
-        where: { accountId: id },
-      });
+
+    if (role !== "ADMIN" && profileId) throw new TRPCError({ code: "UNAUTHORIZED" });
+
+    if (role === "ADMIN" && profileId) {
+      user = await prisma.user.findUnique({ where: { id: profileId } });
+    } else {
+      await prisma.user.findUnique({ where: { accountId: id } });
     }
 
     return user;
@@ -88,16 +80,9 @@ export const update = procedure
       account: { id },
     } = ctx;
 
-    const user = await prisma.user.findUnique({
-      where: { accountId: id },
-    });
+    const user = await prisma.user.findUnique({ where: { accountId: id } });
 
-    if (!user) {
-      throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
-    }
+    if (!user) throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
 
-    await prisma.user.update({
-      where: { accountId: id },
-      data: input,
-    });
+    await prisma.user.update({ where: { accountId: id }, data: input });
   });
