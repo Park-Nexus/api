@@ -10,7 +10,7 @@ datasource db {
 enum ACCOUNT__ROLE_ALIAS {
   ADMIN
   USER
-  PLOT_OWNER
+  PARKING_LOT_OWNER
 }
 
 enum USER__GENDER_ALIAS {
@@ -134,13 +134,15 @@ model Vehicle {
 model ParkingLot {
   id Int @id @default(autoincrement())
 
-  name      String
-  latitude  Float
-  longitude Float
-  mediaUrls String[]
-  status    PARKING_LOT__STATUS_ALIAS
-  createdAt DateTime                  @default(now())
-  updatedAt DateTime                  @updatedAt
+  name       String
+  latitude   Float
+  longitude  Float
+  mediaUrls  String[]
+  status     PARKING_LOT__STATUS_ALIAS
+  isApproved Boolean                   @default(false)
+  approvedAt DateTime
+  createdAt  DateTime                  @default(now())
+  updatedAt  DateTime                  @updatedAt
 
   parkingSpots       ParkingSpot[]
   parkingLotServices ParkingLotService[]

@@ -1,9 +1,10 @@
-import { z } from "zod";
-import { authMiddleware } from "../../auth/auth.middleware";
-import { procedure } from "../../trpc";
-import { USER__GENDER_ALIAS } from "@prisma/client";
-import { prisma } from "../../db";
+import { number, z } from "zod";
 import { TRPCError } from "@trpc/server";
+import { USER__GENDER_ALIAS } from "@prisma/client";
+
+import { authMiddleware } from "../../auth";
+import { procedure } from "../../trpc";
+import { prisma } from "../../db";
 
 // Create a new user profile --------------------------------------------------------------
 const createSchema = z.object({
@@ -48,18 +49,28 @@ export const create = procedure
     });
   });
 
-// Get current profile ---------------------------------------------------------------------
-export const get = procedure.use(authMiddleware()).query(async ({ ctx }) => {
-  const {
-    account: { id },
-  } = ctx;
-
-  const user = await prisma.user.findUnique({
-    where: { accountId: id },
-  });
-
-  return user;
+// Get profile --------------------------------------------------------------------------------
+const getSchema = z.object({
+  profileId: number().optional(),
 });
+export const get = procedure
+  .use(authMiddleware())
+  .input(getSchema)
+  .query(async ({ input, ctx }) => {
+    const { profileId } = input;
+    const {
+      account: { id },
+    } = ctx;
+
+    let user;
+    if (!profileId) {
+      user = await prisma.user.findUnique({
+        where: { accountId: id },
+      });
+    }
+
+    return user;
+  });
 
 // Update current profile ------------------------------------------------------------------
 const updateSchema = z.object({
