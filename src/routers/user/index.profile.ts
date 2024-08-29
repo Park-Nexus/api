@@ -1,4 +1,4 @@
-import { number, z } from "zod";
+import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 import { User, USER__GENDER_ALIAS } from "@prisma/client";
 
@@ -37,13 +37,13 @@ export const create = procedure
     });
   });
 
-// Get profile ------------------------------------------------------------------------------
-const getSchema = z.object({
-  profileId: number().optional(),
+// Get single profile -------------------------------------------------------------------------
+const getSingleSchema = z.object({
+  profileId: z.number().optional(),
 });
-export const get = procedure
+export const getSingle = procedure
   .use(authMiddleware())
-  .input(getSchema)
+  .input(getSingleSchema)
   .query(async ({ input, ctx }) => {
     const { profileId } = input;
     const {
@@ -61,6 +61,16 @@ export const get = procedure
     }
 
     return user;
+  });
+
+// Get many profiles ---------------------------------------------------------------------------
+const getManySchema = z.object({});
+export const getMany = procedure
+  .use(authMiddleware(["ADMIN"]))
+  .input(getManySchema)
+  .query(async () => {
+    const users = await prisma.user.findMany();
+    return users;
   });
 
 // Update current profile ------------------------------------------------------------------
