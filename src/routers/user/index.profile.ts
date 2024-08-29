@@ -9,8 +9,14 @@ import { TRPCError } from "@trpc/server";
 const createSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
-  phone: z.string(),
-  avatarUrl: z.string().optional(),
+  phone: z.string().regex(/^\d+$/, "Phone must be a number"),
+  avatarUrl: z
+    .string()
+    .regex(
+      /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/,
+      "Avatar URL must be a valid URL"
+    )
+    .optional(),
   gender: z.nativeEnum(USER__GENDER_ALIAS),
 });
 export const create = procedure
