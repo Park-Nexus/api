@@ -1,6 +1,6 @@
 import { number, z } from "zod";
 import { TRPCError } from "@trpc/server";
-import { USER__GENDER_ALIAS } from "@prisma/client";
+import { User, USER__GENDER_ALIAS } from "@prisma/client";
 
 import { authMiddleware } from "../../auth";
 import { prisma } from "../../db";
@@ -29,7 +29,6 @@ export const create = procedure
     } = ctx;
 
     const user = await prisma.user.findUnique({ where: { accountId: id } });
-
     if (user) throw new TRPCError({ code: "CONFLICT", message: "User already exists" });
 
     const { firstName, lastName, phone, avatarUrl, gender } = input;
@@ -51,11 +50,11 @@ export const get = procedure
       account: { id, role },
     } = ctx;
 
-    let user;
+    let user: User;
 
-    if (role !== "ADMIN" && profileId) throw new TRPCError({ code: "UNAUTHORIZED" });
+    if (role !== "ADMIN" && profileId) throw new TRPCError({ code: "FORBIDDEN" });
 
-    if (role === "ADMIN" && profileId) {
+    if (profileId) {
       user = await prisma.user.findUnique({ where: { id: profileId } });
     } else {
       await prisma.user.findUnique({ where: { accountId: id } });
@@ -66,6 +65,8 @@ export const get = procedure
 
 // Update current profile ------------------------------------------------------------------
 const updateSchema = z.object({
+  profileId: z.number().optional(),
+
   firstName: z.string().optional(),
   lastName: z.string().optional(),
   phone: z.string().optional(),
@@ -76,13 +77,24 @@ export const update = procedure
   .use(authMiddleware())
   .input(updateSchema)
   .mutation(async ({ input, ctx }) => {
+    const { profileId } = input;
     const {
-      account: { id },
+      account: { id, role },
     } = ctx;
 
-    const user = await prisma.user.findUnique({ where: { accountId: id } });
+    if (role !== "ADMIN" && profileId) throw new TRPCError({ code: "FORBIDDEN" });
 
-    if (!user) throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
+    let user: User;
 
-    await prisma.user.update({ where: { accountId: id }, data: input });
+    if (profileId) {
+      user = await prisma.user.findUnique({ where: { id: profileId } });
+    } else {
+      user = await prisma.user.findUnique({ where: { accountId: id } });
+    }
+
+    if (!user) {
+      throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
+    }
+
+    await prisma.user.update({ where: { id: user.id }, data: input });
   });
