@@ -7,3 +7,5 @@ export const trpcRouter = trpcInstance.router({
   user: userRouter,
   parking: parkingRouter,
 });
+
+console.info("TRPC routes: ", Object.keys(trpcRouter._def.procedures));
