@@ -13,7 +13,7 @@
       "types": "./src/index.d.ts"
     },
     "./db": {
-      "types": "./src/db/prismaClient/index.d.ts"
+      "types": "./prisma/client/index.d.ts"
     }
   },
   "dependencies": {
