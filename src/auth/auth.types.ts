@@ -1,4 +1,4 @@
-import { ACCOUNT__ROLE_ALIAS } from "@prisma/client";
+import { ACCOUNT__ROLE_ALIAS } from "../db";
 
 export type AccessToken = {
   // Account info

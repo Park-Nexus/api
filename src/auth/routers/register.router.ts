@@ -1,10 +1,9 @@
-import { prisma } from "../../db";
+import { ACCOUNT__ROLE_ALIAS, prisma } from "../../db";
 import { procedure } from "../../trpc";
 import * as z from "zod";
 import { hashPassword } from "../utils/password.utils";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { TRPCError } from "@trpc/server";
-import { ACCOUNT__ROLE_ALIAS } from "@prisma/client";
 
 const inputSchema = z.object({
   email: z

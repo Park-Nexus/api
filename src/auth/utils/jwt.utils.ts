@@ -1,5 +1,4 @@
 import { AccessToken, RefreshToken } from "../auth.types";
-import { authConfig } from "../../configs/auth.config";
 import jwt from "jsonwebtoken";
 
 // Access Token ---------------------------------------------------------

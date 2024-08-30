@@ -1,9 +1,9 @@
-import { ACCOUNT__ROLE_ALIAS } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 
 import { AccessToken } from "./auth.types";
 import { trpcInstance } from "../trpc";
 import { verifyAccessToken } from "./utils/jwt.utils";
+import { ACCOUNT__ROLE_ALIAS } from "../db";
 
 export const authMiddleware = (allowedRoles?: ACCOUNT__ROLE_ALIAS[]) =>
   trpcInstance.middleware(async ({ ctx, next }) => {

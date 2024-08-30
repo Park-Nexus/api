@@ -1,9 +1,8 @@
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
-import { User, USER__GENDER_ALIAS } from "@prisma/client";
 
 import { authMiddleware } from "../../auth";
-import { prisma } from "../../db";
+import { prisma, User, USER__GENDER_ALIAS } from "../../db";
 import { procedure } from "../../trpc";
 
 // Create a new user profile --------------------------------------------------------------

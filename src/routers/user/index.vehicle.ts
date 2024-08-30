@@ -1,8 +1,7 @@
 import { z } from "zod";
-import { Vehicle, VEHICLE__TYPE_ALIAS } from "@prisma/client";
 
 import { authMiddleware } from "../../auth";
-import { prisma } from "../../db";
+import { prisma, Vehicle, VEHICLE__TYPE_ALIAS } from "../../db";
 import { procedure } from "../../trpc";
 import { TRPCError } from "@trpc/server";
 
