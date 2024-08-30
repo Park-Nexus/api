@@ -10,7 +10,10 @@
   },
   "exports": {
     ".": {
-      "types": "./src/index.ts"
+      "types": [
+        "./src/index.d.ts",
+        "./src/db/prismaClient/index.d.ts"
+      ]
     }
   },
   "dependencies": {

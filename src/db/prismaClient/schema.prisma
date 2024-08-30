@@ -1,0 +1,254 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/db/prismaClient"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ACCOUNT__ROLE_ALIAS {
+  ADMIN
+  USER
+  PARKING_LOT_OWNER
+}
+
+enum USER__GENDER_ALIAS {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum VEHICLE__TYPE_ALIAS {
+  MOTORCYCLE
+  CAR
+  TRUCK
+}
+
+enum PARKING_LOT__STATUS_ALIAS {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  DELETED
+}
+
+enum PARKING_SPOT__STATUS_ALIAS {
+  AVAILABLE
+  OCCUPIED
+  RESERVED
+  MAINTENANCE
+}
+
+enum RESERVATION__STATUS_ALIAS {
+  PENDING
+  COMPLETED
+  EXPIRED
+}
+
+enum PARKING_RECORD__STATUS_ALIAS {
+  ON_GOING
+  COMPLETED
+}
+
+enum PAYMENT_RECORD__METHOD_ALIAS {
+  CASH
+}
+
+model Account {
+  id String @id @default(uuid())
+
+  email     String              @unique
+  password  String
+  role      ACCOUNT__ROLE_ALIAS
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+
+  user         User?
+  AccountToken AccountToken[]
+}
+
+model AccountToken {
+  id Int @id @default(autoincrement())
+
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  accountId String
+  account   Account @relation(fields: [accountId], references: [id])
+}
+
+model User {
+  id Int @id @default(autoincrement())
+
+  firstName String
+  lastName  String
+  phone     String
+  avatarUrl String?
+  gender    USER__GENDER_ALIAS
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+
+  vehicles          Vehicle[]
+  parkingLotReviews ParkingLotReview[]
+  parkingLots       ParkingLot[]
+  paymentRecords    PaymentRecord[]
+  userNotifications UserNotification[]
+
+  accountId String  @unique
+  account   Account @relation(fields: [accountId], references: [id])
+}
+
+model UserNotification {
+  id Int @id @default(autoincrement())
+
+  title     String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+}
+
+model Vehicle {
+  id Int @id @default(autoincrement())
+
+  type      VEHICLE__TYPE_ALIAS
+  plate     String
+  brand     String
+  model     String
+  color     String
+  imageUrl  String
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+
+  reservations   Reservation[]
+  parkingRecords ParkingRecord[]
+
+  ownerId Int
+  owner   User @relation(fields: [ownerId], references: [id])
+}
+
+model ParkingLot {
+  id Int @id @default(autoincrement())
+
+  name       String
+  latitude   Float
+  longitude  Float
+  mediaUrls  String[]
+  status     PARKING_LOT__STATUS_ALIAS
+  isApproved Boolean                   @default(false)
+  approvedAt DateTime?
+  createdAt  DateTime                  @default(now())
+  updatedAt  DateTime                  @updatedAt
+
+  parkingSpots       ParkingSpot[]
+  parkingLotServices ParkingLotService[]
+  parkingLotReviews  ParkingLotReview[]
+
+  ownerId Int
+  owner   User @relation(fields: [ownerId], references: [id])
+}
+
+model ParkingLotReview {
+  id Int @id @default(autoincrement())
+
+  rating    Int
+  comment   String
+  mediaUrls String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  parkingLotId Int
+  parkingLot   ParkingLot @relation(fields: [parkingLotId], references: [id])
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+}
+
+model ParkingLotService {
+  id Int @id @default(autoincrement())
+
+  name         String
+  description  String
+  mediaUrls    String[]
+  price        Float
+  vehicleTypes VEHICLE__TYPE_ALIAS[]
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+
+  parkingLotId Int
+  parkingLot   ParkingLot @relation(fields: [parkingLotId], references: [id])
+}
+
+model ParkingSpot {
+  id Int @id @default(autoincrement())
+
+  isAvailable Boolean
+  vehicleType VEHICLE__TYPE_ALIAS
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  reservations   Reservation[]
+  parkingRecords ParkingRecord[]
+
+  parkingLotId Int
+  parkingLot   ParkingLot @relation(fields: [parkingLotId], references: [id])
+}
+
+model Reservation {
+  id Int @id @default(autoincrement())
+
+  checkInAt DateTime
+  status    RESERVATION__STATUS_ALIAS
+  createdAt DateTime                  @default(now())
+  updatedAt DateTime                  @updatedAt
+
+  parkingRecord ParkingRecord?
+
+  parkingSpotId Int
+  parkingSpot   ParkingSpot @relation(fields: [parkingSpotId], references: [id])
+
+  vehicleId Int
+  vehicle   Vehicle @relation(fields: [vehicleId], references: [id])
+}
+
+model ParkingRecord {
+  id Int @id @default(autoincrement())
+
+  checkInAt  DateTime
+  checkOutAt DateTime?
+  totalPrice Float?
+  status     PARKING_RECORD__STATUS_ALIAS
+  createdAt  DateTime                     @default(now())
+  updatedAt  DateTime                     @updatedAt
+
+  vehicleId Int?
+  vehicle   Vehicle? @relation(fields: [vehicleId], references: [id])
+
+  parkingSpotId Int?
+  parkingSpot   ParkingSpot? @relation(fields: [parkingSpotId], references: [id])
+
+  reservationId Int?         @unique
+  reservation   Reservation? @relation(fields: [reservationId], references: [id])
+
+  paymentRecord PaymentRecord?
+}
+
+model PaymentRecord {
+  id Int @id @default(autoincrement())
+
+  method    PAYMENT_RECORD__METHOD_ALIAS
+  amount    Float
+  createdAt DateTime                     @default(now())
+  updatedAt DateTime                     @updatedAt
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  parkingRecordId Int           @unique
+  parkingRecord   ParkingRecord @relation(fields: [parkingRecordId], references: [id])
+}

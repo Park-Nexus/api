@@ -38,14 +38,16 @@ export const create = procedure
   });
 
 // Get single profile -------------------------------------------------------------------------
-const getSingleSchema = z.object({
-  userId: z.number().optional(),
-});
+const getSingleSchema = z
+  .object({
+    userId: z.number(),
+  })
+  .optional();
 export const getSingle = procedure
   .use(authMiddleware())
   .input(getSingleSchema)
   .query(async ({ input, ctx }) => {
-    const { userId } = input;
+    const { userId } = input || {};
     const {
       account: { id, role },
     } = ctx;
@@ -57,14 +59,14 @@ export const getSingle = procedure
     if (userId) {
       user = await prisma.user.findUnique({ where: { id: userId } });
     } else {
-      await prisma.user.findUnique({ where: { accountId: id } });
+      user = await prisma.user.findUnique({ where: { accountId: id } });
     }
 
     return user;
   });
 
 // Get many profiles ---------------------------------------------------------------------------
-const getManySchema = z.object({});
+const getManySchema = z.object({}).optional();
 export const getMany = procedure
   .use(authMiddleware(["ADMIN"]))
   .input(getManySchema)
