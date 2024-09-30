@@ -15,3 +15,13 @@
 2. Usage
    1. To migrate the database, run `npx prisma migrate dev --name <migration name>`.
    2. To generate the Prisma client, run `npx prisma generate`.
+
+## ENV File
+
+- The env file must contain the following variables:
+  1. `API_PORT`
+  2. `DATABASE_URL`
+  3. `JWT_SECRET`
+  4. `JWT_REFRESH_EXPIRES`
+  5. `JWT_ACCESS_EXPIRES`
+  6. `PASSWORD_ROUNDS`
