@@ -51,7 +51,7 @@ export const getMany = procedure
   .query(async ({ input }) => {
     const { name, latitude, longitude, radiusInKm, status, isApproved } = input;
 
-    let parkingLots: ParkingLot[];
+    let parkingLots: Partial<ParkingLot>[];
 
     if (!latitude || !longitude || !radiusInKm) {
       parkingLots = await prisma.parkingLot.findMany({
@@ -60,23 +60,35 @@ export const getMany = procedure
           status,
           isApproved,
         },
+        select: {
+          id: true,
+          name: true,
+          latitude: true,
+          longitude: true,
+          status: true,
+          ownerId: true,
+          isApproved: true,
+          createdAt: true,
+          updatedAt: true,
+          approvedAt: true,
+        },
       });
     } else {
       parkingLots = await prisma.$queryRaw(
         Prisma.sql`
-          SELECT *, 
-            (${EARTH_RADIUS_IN_KM} * acos(
-                cos(radians(${latitude})) * 
-                cos(radians(latitude)) * 
-                cos(radians(longitude) - radians(${longitude})) + 
-                sin(radians(${latitude})) * 
-                sin(radians(latitude))
-            )) AS distance
+          SELECT id, name, latitude, longitude, status, ownerId, isApproved, createdAt, updatedAt, approvedAt,
+        (${EARTH_RADIUS_IN_KM} * acos(
+            cos(radians(${latitude})) * 
+            cos(radians(latitude)) * 
+            cos(radians(longitude) - radians(${longitude})) + 
+            sin(radians(${latitude})) * 
+            sin(radians(latitude))
+        )) AS distance
           FROM "ParkingLot"
           WHERE 
-            "isApproved" = COALESCE(${isApproved}, "isApproved") 
-            AND "status" = COALESCE(${status}, "status")
-            AND "name" = COALESCE(${name}, "name")
+        "isApproved" = COALESCE(${isApproved}, "isApproved") 
+        AND "status" = COALESCE(${status}, "status")
+        AND "name" = COALESCE(${name}, "name")
           HAVING distance < ${radiusInKm}
           ORDER BY distance ASC;
         `,
