@@ -74,7 +74,7 @@ export const getMany = procedure
     return users;
   });
 
-// Update current profile ------------------------------------------------------------------
+// Update current profile -----------------------------------------------------------------------
 const updateSchema = z.object({
   userId: z.number().optional(),
 

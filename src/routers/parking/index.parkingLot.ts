@@ -51,7 +51,7 @@ export const getMany = procedure
   .query(async ({ input }) => {
     const { name, latitude, longitude, radiusInKm, status, isApproved } = input;
 
-    let parkingLots: Partial<ParkingLot>[];
+    let parkingLots: Omit<ParkingLot, "mediaUrls">[];
 
     if (!latitude || !longitude || !radiusInKm) {
       parkingLots = await prisma.parkingLot.findMany({
