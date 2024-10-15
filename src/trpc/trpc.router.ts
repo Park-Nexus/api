@@ -8,4 +8,13 @@ export const trpcRouter = trpcInstance.router({
   parking: parkingRouter,
 });
 
-console.info("TRPC routes: ", Object.keys(trpcRouter._def.procedures));
+const separator = "------------------------------";
+const getPrefix = (str: string) => str.split(".").slice(0, 2).join(".");
+const routers = Object.keys(trpcRouter._def.procedures).reduce((acc, current) => {
+  if (acc.length === 0) return [current];
+  const last = acc[acc.length - 1];
+  if (getPrefix(current) !== getPrefix(last)) return [...acc, separator, current];
+  return [...acc, current];
+}, [] as string[]);
+
+console.info("TRPC routes: ", routers);

@@ -146,17 +146,19 @@ export const updatePrice = procedure
   .input(updatePriceSchema)
   .mutation(async ({ ctx, input }) => {
     const {
-      account: { id: ownerId },
+      account: { id: ownerAccountId },
     } = ctx;
     const { parkingLotId, price, vehicleType } = input;
+
+    const owner = await prisma.user.findUnique({ where: { accountId: ownerAccountId } });
+    if (!owner) throw new Error("User not found");
 
     const parkingLot = await prisma.parkingLot.findFirst({
       where: {
         id: parkingLotId,
-        ownerId: Number(ownerId),
+        ownerId: owner.id,
       },
     });
-
     if (!parkingLot) throw new Error("Parking lot not found");
 
     await prisma.parkingLotPrice.upsert({
