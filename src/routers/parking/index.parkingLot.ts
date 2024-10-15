@@ -104,7 +104,7 @@ export const getMany = procedure
     return parkingLots;
   });
 
-// Get parking lot by id -----------------------------------------------------------------------
+// Get single parking lot ----------------------------------------------------------------------
 const getSingleSchema = z.object({
   id: z.number(),
 });
