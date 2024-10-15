@@ -185,6 +185,12 @@ exports.Prisma.ParkingLotScalarFieldEnum = {
   ownerId: 'ownerId'
 };
 
+exports.Prisma.ParkingLotPriceScalarFieldEnum = {
+  vehicleType: 'vehicleType',
+  price: 'price',
+  parkingLotId: 'parkingLotId'
+};
+
 exports.Prisma.ParkingLotReviewScalarFieldEnum = {
   id: 'id',
   rating: 'rating',
@@ -199,6 +205,7 @@ exports.Prisma.ParkingLotReviewScalarFieldEnum = {
 exports.Prisma.ParkingLotServiceScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  type: 'type',
   description: 'description',
   mediaUrls: 'mediaUrls',
   price: 'price',
@@ -289,6 +296,14 @@ exports.PARKING_LOT__STATUS_ALIAS = exports.$Enums.PARKING_LOT__STATUS_ALIAS = {
   DELETED: 'DELETED'
 };
 
+exports.PARKING_LOT_SERVICE__TYPE_ALIAS = exports.$Enums.PARKING_LOT_SERVICE__TYPE_ALIAS = {
+  CAR_WASH: 'CAR_WASH',
+  CAR_REPAIR: 'CAR_REPAIR',
+  TIRE_REPAIR: 'TIRE_REPAIR',
+  OIL_CHANGE: 'OIL_CHANGE',
+  CHARGING: 'CHARGING'
+};
+
 exports.RESERVATION__STATUS_ALIAS = exports.$Enums.RESERVATION__STATUS_ALIAS = {
   PENDING: 'PENDING',
   COMPLETED: 'COMPLETED',
@@ -311,6 +326,7 @@ exports.Prisma.ModelName = {
   UserNotification: 'UserNotification',
   Vehicle: 'Vehicle',
   ParkingLot: 'ParkingLot',
+  ParkingLotPrice: 'ParkingLotPrice',
   ParkingLotReview: 'ParkingLotReview',
   ParkingLotService: 'ParkingLotService',
   ParkingSpot: 'ParkingSpot',

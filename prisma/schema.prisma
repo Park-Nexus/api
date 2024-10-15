@@ -33,6 +33,14 @@ enum PARKING_LOT__STATUS_ALIAS {
   DELETED
 }
 
+enum PARKING_LOT_SERVICE__TYPE_ALIAS {
+  CAR_WASH
+  CAR_REPAIR
+  TIRE_REPAIR
+  OIL_CHANGE
+  CHARGING
+}
+
 enum PARKING_SPOT__STATUS_ALIAS {
   AVAILABLE
   OCCUPIED
@@ -148,9 +156,20 @@ model ParkingLot {
   parkingSpots       ParkingSpot[]
   parkingLotServices ParkingLotService[]
   parkingLotReviews  ParkingLotReview[]
+  parkingLotPrices   ParkingLotPrice[]
 
   ownerId Int
   owner   User @relation(fields: [ownerId], references: [id])
+}
+
+model ParkingLotPrice {
+  vehicleType VEHICLE__TYPE_ALIAS
+  price       Float
+
+  parkingLotId Int
+  parkingLot   ParkingLot @relation(fields: [parkingLotId], references: [id])
+
+  @@id([vehicleType, parkingLotId])
 }
 
 model ParkingLotReview {
@@ -173,12 +192,13 @@ model ParkingLotService {
   id Int @id @default(autoincrement())
 
   name         String
+  type         PARKING_LOT_SERVICE__TYPE_ALIAS
   description  String
   mediaUrls    String[]
   price        Float
   vehicleTypes VEHICLE__TYPE_ALIAS[]
-  createdAt    DateTime              @default(now())
-  updatedAt    DateTime              @updatedAt
+  createdAt    DateTime                        @default(now())
+  updatedAt    DateTime                        @updatedAt
 
   parkingLotId Int
   parkingLot   ParkingLot @relation(fields: [parkingLotId], references: [id])

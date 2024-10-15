@@ -44,6 +44,11 @@ export type Vehicle = $Result.DefaultSelection<Prisma.$VehiclePayload>
  */
 export type ParkingLot = $Result.DefaultSelection<Prisma.$ParkingLotPayload>
 /**
+ * Model ParkingLotPrice
+ * 
+ */
+export type ParkingLotPrice = $Result.DefaultSelection<Prisma.$ParkingLotPricePayload>
+/**
  * Model ParkingLotReview
  * 
  */
@@ -115,6 +120,17 @@ export const PARKING_LOT__STATUS_ALIAS: {
 export type PARKING_LOT__STATUS_ALIAS = (typeof PARKING_LOT__STATUS_ALIAS)[keyof typeof PARKING_LOT__STATUS_ALIAS]
 
 
+export const PARKING_LOT_SERVICE__TYPE_ALIAS: {
+  CAR_WASH: 'CAR_WASH',
+  CAR_REPAIR: 'CAR_REPAIR',
+  TIRE_REPAIR: 'TIRE_REPAIR',
+  OIL_CHANGE: 'OIL_CHANGE',
+  CHARGING: 'CHARGING'
+};
+
+export type PARKING_LOT_SERVICE__TYPE_ALIAS = (typeof PARKING_LOT_SERVICE__TYPE_ALIAS)[keyof typeof PARKING_LOT_SERVICE__TYPE_ALIAS]
+
+
 export const RESERVATION__STATUS_ALIAS: {
   PENDING: 'PENDING',
   COMPLETED: 'COMPLETED',
@@ -155,6 +171,10 @@ export const VEHICLE__TYPE_ALIAS: typeof $Enums.VEHICLE__TYPE_ALIAS
 export type PARKING_LOT__STATUS_ALIAS = $Enums.PARKING_LOT__STATUS_ALIAS
 
 export const PARKING_LOT__STATUS_ALIAS: typeof $Enums.PARKING_LOT__STATUS_ALIAS
+
+export type PARKING_LOT_SERVICE__TYPE_ALIAS = $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
+
+export const PARKING_LOT_SERVICE__TYPE_ALIAS: typeof $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
 
 export type RESERVATION__STATUS_ALIAS = $Enums.RESERVATION__STATUS_ALIAS
 
@@ -350,6 +370,16 @@ export class PrismaClient<
     * ```
     */
   get parkingLot(): Prisma.ParkingLotDelegate<ExtArgs>;
+
+  /**
+   * `prisma.parkingLotPrice`: Exposes CRUD operations for the **ParkingLotPrice** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ParkingLotPrices
+    * const parkingLotPrices = await prisma.parkingLotPrice.findMany()
+    * ```
+    */
+  get parkingLotPrice(): Prisma.ParkingLotPriceDelegate<ExtArgs>;
 
   /**
    * `prisma.parkingLotReview`: Exposes CRUD operations for the **ParkingLotReview** model.
@@ -855,6 +885,7 @@ export namespace Prisma {
     UserNotification: 'UserNotification',
     Vehicle: 'Vehicle',
     ParkingLot: 'ParkingLot',
+    ParkingLotPrice: 'ParkingLotPrice',
     ParkingLotReview: 'ParkingLotReview',
     ParkingLotService: 'ParkingLotService',
     ParkingSpot: 'ParkingSpot',
@@ -876,7 +907,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "account" | "accountToken" | "user" | "userNotification" | "vehicle" | "parkingLot" | "parkingLotReview" | "parkingLotService" | "parkingSpot" | "reservation" | "parkingRecord" | "paymentRecord"
+      modelProps: "account" | "accountToken" | "user" | "userNotification" | "vehicle" | "parkingLot" | "parkingLotPrice" | "parkingLotReview" | "parkingLotService" | "parkingSpot" | "reservation" | "parkingRecord" | "paymentRecord"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1297,6 +1328,76 @@ export namespace Prisma {
           count: {
             args: Prisma.ParkingLotCountArgs<ExtArgs>
             result: $Utils.Optional<ParkingLotCountAggregateOutputType> | number
+          }
+        }
+      }
+      ParkingLotPrice: {
+        payload: Prisma.$ParkingLotPricePayload<ExtArgs>
+        fields: Prisma.ParkingLotPriceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ParkingLotPriceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParkingLotPricePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ParkingLotPriceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParkingLotPricePayload>
+          }
+          findFirst: {
+            args: Prisma.ParkingLotPriceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParkingLotPricePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ParkingLotPriceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParkingLotPricePayload>
+          }
+          findMany: {
+            args: Prisma.ParkingLotPriceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParkingLotPricePayload>[]
+          }
+          create: {
+            args: Prisma.ParkingLotPriceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParkingLotPricePayload>
+          }
+          createMany: {
+            args: Prisma.ParkingLotPriceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ParkingLotPriceCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParkingLotPricePayload>[]
+          }
+          delete: {
+            args: Prisma.ParkingLotPriceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParkingLotPricePayload>
+          }
+          update: {
+            args: Prisma.ParkingLotPriceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParkingLotPricePayload>
+          }
+          deleteMany: {
+            args: Prisma.ParkingLotPriceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ParkingLotPriceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ParkingLotPriceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ParkingLotPricePayload>
+          }
+          aggregate: {
+            args: Prisma.ParkingLotPriceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateParkingLotPrice>
+          }
+          groupBy: {
+            args: Prisma.ParkingLotPriceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ParkingLotPriceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ParkingLotPriceCountArgs<ExtArgs>
+            result: $Utils.Optional<ParkingLotPriceCountAggregateOutputType> | number
           }
         }
       }
@@ -2022,12 +2123,14 @@ export namespace Prisma {
     parkingSpots: number
     parkingLotServices: number
     parkingLotReviews: number
+    parkingLotPrices: number
   }
 
   export type ParkingLotCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     parkingSpots?: boolean | ParkingLotCountOutputTypeCountParkingSpotsArgs
     parkingLotServices?: boolean | ParkingLotCountOutputTypeCountParkingLotServicesArgs
     parkingLotReviews?: boolean | ParkingLotCountOutputTypeCountParkingLotReviewsArgs
+    parkingLotPrices?: boolean | ParkingLotCountOutputTypeCountParkingLotPricesArgs
   }
 
   // Custom InputTypes
@@ -2060,6 +2163,13 @@ export namespace Prisma {
    */
   export type ParkingLotCountOutputTypeCountParkingLotReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ParkingLotReviewWhereInput
+  }
+
+  /**
+   * ParkingLotCountOutputType without action
+   */
+  export type ParkingLotCountOutputTypeCountParkingLotPricesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ParkingLotPriceWhereInput
   }
 
 
@@ -7523,6 +7633,7 @@ export namespace Prisma {
     parkingSpots?: boolean | ParkingLot$parkingSpotsArgs<ExtArgs>
     parkingLotServices?: boolean | ParkingLot$parkingLotServicesArgs<ExtArgs>
     parkingLotReviews?: boolean | ParkingLot$parkingLotReviewsArgs<ExtArgs>
+    parkingLotPrices?: boolean | ParkingLot$parkingLotPricesArgs<ExtArgs>
     owner?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | ParkingLotCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["parkingLot"]>
@@ -7560,6 +7671,7 @@ export namespace Prisma {
     parkingSpots?: boolean | ParkingLot$parkingSpotsArgs<ExtArgs>
     parkingLotServices?: boolean | ParkingLot$parkingLotServicesArgs<ExtArgs>
     parkingLotReviews?: boolean | ParkingLot$parkingLotReviewsArgs<ExtArgs>
+    parkingLotPrices?: boolean | ParkingLot$parkingLotPricesArgs<ExtArgs>
     owner?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | ParkingLotCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -7573,6 +7685,7 @@ export namespace Prisma {
       parkingSpots: Prisma.$ParkingSpotPayload<ExtArgs>[]
       parkingLotServices: Prisma.$ParkingLotServicePayload<ExtArgs>[]
       parkingLotReviews: Prisma.$ParkingLotReviewPayload<ExtArgs>[]
+      parkingLotPrices: Prisma.$ParkingLotPricePayload<ExtArgs>[]
       owner: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -7954,6 +8067,7 @@ export namespace Prisma {
     parkingSpots<T extends ParkingLot$parkingSpotsArgs<ExtArgs> = {}>(args?: Subset<T, ParkingLot$parkingSpotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParkingSpotPayload<ExtArgs>, T, "findMany"> | Null>
     parkingLotServices<T extends ParkingLot$parkingLotServicesArgs<ExtArgs> = {}>(args?: Subset<T, ParkingLot$parkingLotServicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParkingLotServicePayload<ExtArgs>, T, "findMany"> | Null>
     parkingLotReviews<T extends ParkingLot$parkingLotReviewsArgs<ExtArgs> = {}>(args?: Subset<T, ParkingLot$parkingLotReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParkingLotReviewPayload<ExtArgs>, T, "findMany"> | Null>
+    parkingLotPrices<T extends ParkingLot$parkingLotPricesArgs<ExtArgs> = {}>(args?: Subset<T, ParkingLot$parkingLotPricesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParkingLotPricePayload<ExtArgs>, T, "findMany"> | Null>
     owner<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -8373,6 +8487,26 @@ export namespace Prisma {
   }
 
   /**
+   * ParkingLot.parkingLotPrices
+   */
+  export type ParkingLot$parkingLotPricesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParkingLotPrice
+     */
+    select?: ParkingLotPriceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParkingLotPriceInclude<ExtArgs> | null
+    where?: ParkingLotPriceWhereInput
+    orderBy?: ParkingLotPriceOrderByWithRelationInput | ParkingLotPriceOrderByWithRelationInput[]
+    cursor?: ParkingLotPriceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ParkingLotPriceScalarFieldEnum | ParkingLotPriceScalarFieldEnum[]
+  }
+
+  /**
    * ParkingLot without action
    */
   export type ParkingLotDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8384,6 +8518,953 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ParkingLotInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ParkingLotPrice
+   */
+
+  export type AggregateParkingLotPrice = {
+    _count: ParkingLotPriceCountAggregateOutputType | null
+    _avg: ParkingLotPriceAvgAggregateOutputType | null
+    _sum: ParkingLotPriceSumAggregateOutputType | null
+    _min: ParkingLotPriceMinAggregateOutputType | null
+    _max: ParkingLotPriceMaxAggregateOutputType | null
+  }
+
+  export type ParkingLotPriceAvgAggregateOutputType = {
+    price: number | null
+    parkingLotId: number | null
+  }
+
+  export type ParkingLotPriceSumAggregateOutputType = {
+    price: number | null
+    parkingLotId: number | null
+  }
+
+  export type ParkingLotPriceMinAggregateOutputType = {
+    vehicleType: $Enums.VEHICLE__TYPE_ALIAS | null
+    price: number | null
+    parkingLotId: number | null
+  }
+
+  export type ParkingLotPriceMaxAggregateOutputType = {
+    vehicleType: $Enums.VEHICLE__TYPE_ALIAS | null
+    price: number | null
+    parkingLotId: number | null
+  }
+
+  export type ParkingLotPriceCountAggregateOutputType = {
+    vehicleType: number
+    price: number
+    parkingLotId: number
+    _all: number
+  }
+
+
+  export type ParkingLotPriceAvgAggregateInputType = {
+    price?: true
+    parkingLotId?: true
+  }
+
+  export type ParkingLotPriceSumAggregateInputType = {
+    price?: true
+    parkingLotId?: true
+  }
+
+  export type ParkingLotPriceMinAggregateInputType = {
+    vehicleType?: true
+    price?: true
+    parkingLotId?: true
+  }
+
+  export type ParkingLotPriceMaxAggregateInputType = {
+    vehicleType?: true
+    price?: true
+    parkingLotId?: true
+  }
+
+  export type ParkingLotPriceCountAggregateInputType = {
+    vehicleType?: true
+    price?: true
+    parkingLotId?: true
+    _all?: true
+  }
+
+  export type ParkingLotPriceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ParkingLotPrice to aggregate.
+     */
+    where?: ParkingLotPriceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ParkingLotPrices to fetch.
+     */
+    orderBy?: ParkingLotPriceOrderByWithRelationInput | ParkingLotPriceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ParkingLotPriceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ParkingLotPrices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ParkingLotPrices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ParkingLotPrices
+    **/
+    _count?: true | ParkingLotPriceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ParkingLotPriceAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ParkingLotPriceSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ParkingLotPriceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ParkingLotPriceMaxAggregateInputType
+  }
+
+  export type GetParkingLotPriceAggregateType<T extends ParkingLotPriceAggregateArgs> = {
+        [P in keyof T & keyof AggregateParkingLotPrice]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateParkingLotPrice[P]>
+      : GetScalarType<T[P], AggregateParkingLotPrice[P]>
+  }
+
+
+
+
+  export type ParkingLotPriceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ParkingLotPriceWhereInput
+    orderBy?: ParkingLotPriceOrderByWithAggregationInput | ParkingLotPriceOrderByWithAggregationInput[]
+    by: ParkingLotPriceScalarFieldEnum[] | ParkingLotPriceScalarFieldEnum
+    having?: ParkingLotPriceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ParkingLotPriceCountAggregateInputType | true
+    _avg?: ParkingLotPriceAvgAggregateInputType
+    _sum?: ParkingLotPriceSumAggregateInputType
+    _min?: ParkingLotPriceMinAggregateInputType
+    _max?: ParkingLotPriceMaxAggregateInputType
+  }
+
+  export type ParkingLotPriceGroupByOutputType = {
+    vehicleType: $Enums.VEHICLE__TYPE_ALIAS
+    price: number
+    parkingLotId: number
+    _count: ParkingLotPriceCountAggregateOutputType | null
+    _avg: ParkingLotPriceAvgAggregateOutputType | null
+    _sum: ParkingLotPriceSumAggregateOutputType | null
+    _min: ParkingLotPriceMinAggregateOutputType | null
+    _max: ParkingLotPriceMaxAggregateOutputType | null
+  }
+
+  type GetParkingLotPriceGroupByPayload<T extends ParkingLotPriceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ParkingLotPriceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ParkingLotPriceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ParkingLotPriceGroupByOutputType[P]>
+            : GetScalarType<T[P], ParkingLotPriceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ParkingLotPriceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    vehicleType?: boolean
+    price?: boolean
+    parkingLotId?: boolean
+    parkingLot?: boolean | ParkingLotDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["parkingLotPrice"]>
+
+  export type ParkingLotPriceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    vehicleType?: boolean
+    price?: boolean
+    parkingLotId?: boolean
+    parkingLot?: boolean | ParkingLotDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["parkingLotPrice"]>
+
+  export type ParkingLotPriceSelectScalar = {
+    vehicleType?: boolean
+    price?: boolean
+    parkingLotId?: boolean
+  }
+
+  export type ParkingLotPriceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    parkingLot?: boolean | ParkingLotDefaultArgs<ExtArgs>
+  }
+  export type ParkingLotPriceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    parkingLot?: boolean | ParkingLotDefaultArgs<ExtArgs>
+  }
+
+  export type $ParkingLotPricePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ParkingLotPrice"
+    objects: {
+      parkingLot: Prisma.$ParkingLotPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      vehicleType: $Enums.VEHICLE__TYPE_ALIAS
+      price: number
+      parkingLotId: number
+    }, ExtArgs["result"]["parkingLotPrice"]>
+    composites: {}
+  }
+
+  type ParkingLotPriceGetPayload<S extends boolean | null | undefined | ParkingLotPriceDefaultArgs> = $Result.GetResult<Prisma.$ParkingLotPricePayload, S>
+
+  type ParkingLotPriceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<ParkingLotPriceFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: ParkingLotPriceCountAggregateInputType | true
+    }
+
+  export interface ParkingLotPriceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ParkingLotPrice'], meta: { name: 'ParkingLotPrice' } }
+    /**
+     * Find zero or one ParkingLotPrice that matches the filter.
+     * @param {ParkingLotPriceFindUniqueArgs} args - Arguments to find a ParkingLotPrice
+     * @example
+     * // Get one ParkingLotPrice
+     * const parkingLotPrice = await prisma.parkingLotPrice.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ParkingLotPriceFindUniqueArgs>(args: SelectSubset<T, ParkingLotPriceFindUniqueArgs<ExtArgs>>): Prisma__ParkingLotPriceClient<$Result.GetResult<Prisma.$ParkingLotPricePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one ParkingLotPrice that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {ParkingLotPriceFindUniqueOrThrowArgs} args - Arguments to find a ParkingLotPrice
+     * @example
+     * // Get one ParkingLotPrice
+     * const parkingLotPrice = await prisma.parkingLotPrice.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ParkingLotPriceFindUniqueOrThrowArgs>(args: SelectSubset<T, ParkingLotPriceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ParkingLotPriceClient<$Result.GetResult<Prisma.$ParkingLotPricePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first ParkingLotPrice that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ParkingLotPriceFindFirstArgs} args - Arguments to find a ParkingLotPrice
+     * @example
+     * // Get one ParkingLotPrice
+     * const parkingLotPrice = await prisma.parkingLotPrice.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ParkingLotPriceFindFirstArgs>(args?: SelectSubset<T, ParkingLotPriceFindFirstArgs<ExtArgs>>): Prisma__ParkingLotPriceClient<$Result.GetResult<Prisma.$ParkingLotPricePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first ParkingLotPrice that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ParkingLotPriceFindFirstOrThrowArgs} args - Arguments to find a ParkingLotPrice
+     * @example
+     * // Get one ParkingLotPrice
+     * const parkingLotPrice = await prisma.parkingLotPrice.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ParkingLotPriceFindFirstOrThrowArgs>(args?: SelectSubset<T, ParkingLotPriceFindFirstOrThrowArgs<ExtArgs>>): Prisma__ParkingLotPriceClient<$Result.GetResult<Prisma.$ParkingLotPricePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more ParkingLotPrices that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ParkingLotPriceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ParkingLotPrices
+     * const parkingLotPrices = await prisma.parkingLotPrice.findMany()
+     * 
+     * // Get first 10 ParkingLotPrices
+     * const parkingLotPrices = await prisma.parkingLotPrice.findMany({ take: 10 })
+     * 
+     * // Only select the `price`
+     * const parkingLotPriceWithPriceOnly = await prisma.parkingLotPrice.findMany({ select: { price: true } })
+     * 
+     */
+    findMany<T extends ParkingLotPriceFindManyArgs>(args?: SelectSubset<T, ParkingLotPriceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParkingLotPricePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a ParkingLotPrice.
+     * @param {ParkingLotPriceCreateArgs} args - Arguments to create a ParkingLotPrice.
+     * @example
+     * // Create one ParkingLotPrice
+     * const ParkingLotPrice = await prisma.parkingLotPrice.create({
+     *   data: {
+     *     // ... data to create a ParkingLotPrice
+     *   }
+     * })
+     * 
+     */
+    create<T extends ParkingLotPriceCreateArgs>(args: SelectSubset<T, ParkingLotPriceCreateArgs<ExtArgs>>): Prisma__ParkingLotPriceClient<$Result.GetResult<Prisma.$ParkingLotPricePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many ParkingLotPrices.
+     * @param {ParkingLotPriceCreateManyArgs} args - Arguments to create many ParkingLotPrices.
+     * @example
+     * // Create many ParkingLotPrices
+     * const parkingLotPrice = await prisma.parkingLotPrice.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ParkingLotPriceCreateManyArgs>(args?: SelectSubset<T, ParkingLotPriceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ParkingLotPrices and returns the data saved in the database.
+     * @param {ParkingLotPriceCreateManyAndReturnArgs} args - Arguments to create many ParkingLotPrices.
+     * @example
+     * // Create many ParkingLotPrices
+     * const parkingLotPrice = await prisma.parkingLotPrice.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ParkingLotPrices and only return the `price`
+     * const parkingLotPriceWithPriceOnly = await prisma.parkingLotPrice.createManyAndReturn({ 
+     *   select: { price: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ParkingLotPriceCreateManyAndReturnArgs>(args?: SelectSubset<T, ParkingLotPriceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParkingLotPricePayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a ParkingLotPrice.
+     * @param {ParkingLotPriceDeleteArgs} args - Arguments to delete one ParkingLotPrice.
+     * @example
+     * // Delete one ParkingLotPrice
+     * const ParkingLotPrice = await prisma.parkingLotPrice.delete({
+     *   where: {
+     *     // ... filter to delete one ParkingLotPrice
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ParkingLotPriceDeleteArgs>(args: SelectSubset<T, ParkingLotPriceDeleteArgs<ExtArgs>>): Prisma__ParkingLotPriceClient<$Result.GetResult<Prisma.$ParkingLotPricePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one ParkingLotPrice.
+     * @param {ParkingLotPriceUpdateArgs} args - Arguments to update one ParkingLotPrice.
+     * @example
+     * // Update one ParkingLotPrice
+     * const parkingLotPrice = await prisma.parkingLotPrice.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ParkingLotPriceUpdateArgs>(args: SelectSubset<T, ParkingLotPriceUpdateArgs<ExtArgs>>): Prisma__ParkingLotPriceClient<$Result.GetResult<Prisma.$ParkingLotPricePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more ParkingLotPrices.
+     * @param {ParkingLotPriceDeleteManyArgs} args - Arguments to filter ParkingLotPrices to delete.
+     * @example
+     * // Delete a few ParkingLotPrices
+     * const { count } = await prisma.parkingLotPrice.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ParkingLotPriceDeleteManyArgs>(args?: SelectSubset<T, ParkingLotPriceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ParkingLotPrices.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ParkingLotPriceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ParkingLotPrices
+     * const parkingLotPrice = await prisma.parkingLotPrice.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ParkingLotPriceUpdateManyArgs>(args: SelectSubset<T, ParkingLotPriceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ParkingLotPrice.
+     * @param {ParkingLotPriceUpsertArgs} args - Arguments to update or create a ParkingLotPrice.
+     * @example
+     * // Update or create a ParkingLotPrice
+     * const parkingLotPrice = await prisma.parkingLotPrice.upsert({
+     *   create: {
+     *     // ... data to create a ParkingLotPrice
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ParkingLotPrice we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ParkingLotPriceUpsertArgs>(args: SelectSubset<T, ParkingLotPriceUpsertArgs<ExtArgs>>): Prisma__ParkingLotPriceClient<$Result.GetResult<Prisma.$ParkingLotPricePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of ParkingLotPrices.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ParkingLotPriceCountArgs} args - Arguments to filter ParkingLotPrices to count.
+     * @example
+     * // Count the number of ParkingLotPrices
+     * const count = await prisma.parkingLotPrice.count({
+     *   where: {
+     *     // ... the filter for the ParkingLotPrices we want to count
+     *   }
+     * })
+    **/
+    count<T extends ParkingLotPriceCountArgs>(
+      args?: Subset<T, ParkingLotPriceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ParkingLotPriceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ParkingLotPrice.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ParkingLotPriceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ParkingLotPriceAggregateArgs>(args: Subset<T, ParkingLotPriceAggregateArgs>): Prisma.PrismaPromise<GetParkingLotPriceAggregateType<T>>
+
+    /**
+     * Group by ParkingLotPrice.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ParkingLotPriceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ParkingLotPriceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ParkingLotPriceGroupByArgs['orderBy'] }
+        : { orderBy?: ParkingLotPriceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ParkingLotPriceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetParkingLotPriceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ParkingLotPrice model
+   */
+  readonly fields: ParkingLotPriceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ParkingLotPrice.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ParkingLotPriceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    parkingLot<T extends ParkingLotDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ParkingLotDefaultArgs<ExtArgs>>): Prisma__ParkingLotClient<$Result.GetResult<Prisma.$ParkingLotPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ParkingLotPrice model
+   */ 
+  interface ParkingLotPriceFieldRefs {
+    readonly vehicleType: FieldRef<"ParkingLotPrice", 'VEHICLE__TYPE_ALIAS'>
+    readonly price: FieldRef<"ParkingLotPrice", 'Float'>
+    readonly parkingLotId: FieldRef<"ParkingLotPrice", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ParkingLotPrice findUnique
+   */
+  export type ParkingLotPriceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParkingLotPrice
+     */
+    select?: ParkingLotPriceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParkingLotPriceInclude<ExtArgs> | null
+    /**
+     * Filter, which ParkingLotPrice to fetch.
+     */
+    where: ParkingLotPriceWhereUniqueInput
+  }
+
+  /**
+   * ParkingLotPrice findUniqueOrThrow
+   */
+  export type ParkingLotPriceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParkingLotPrice
+     */
+    select?: ParkingLotPriceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParkingLotPriceInclude<ExtArgs> | null
+    /**
+     * Filter, which ParkingLotPrice to fetch.
+     */
+    where: ParkingLotPriceWhereUniqueInput
+  }
+
+  /**
+   * ParkingLotPrice findFirst
+   */
+  export type ParkingLotPriceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParkingLotPrice
+     */
+    select?: ParkingLotPriceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParkingLotPriceInclude<ExtArgs> | null
+    /**
+     * Filter, which ParkingLotPrice to fetch.
+     */
+    where?: ParkingLotPriceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ParkingLotPrices to fetch.
+     */
+    orderBy?: ParkingLotPriceOrderByWithRelationInput | ParkingLotPriceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ParkingLotPrices.
+     */
+    cursor?: ParkingLotPriceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ParkingLotPrices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ParkingLotPrices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ParkingLotPrices.
+     */
+    distinct?: ParkingLotPriceScalarFieldEnum | ParkingLotPriceScalarFieldEnum[]
+  }
+
+  /**
+   * ParkingLotPrice findFirstOrThrow
+   */
+  export type ParkingLotPriceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParkingLotPrice
+     */
+    select?: ParkingLotPriceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParkingLotPriceInclude<ExtArgs> | null
+    /**
+     * Filter, which ParkingLotPrice to fetch.
+     */
+    where?: ParkingLotPriceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ParkingLotPrices to fetch.
+     */
+    orderBy?: ParkingLotPriceOrderByWithRelationInput | ParkingLotPriceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ParkingLotPrices.
+     */
+    cursor?: ParkingLotPriceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ParkingLotPrices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ParkingLotPrices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ParkingLotPrices.
+     */
+    distinct?: ParkingLotPriceScalarFieldEnum | ParkingLotPriceScalarFieldEnum[]
+  }
+
+  /**
+   * ParkingLotPrice findMany
+   */
+  export type ParkingLotPriceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParkingLotPrice
+     */
+    select?: ParkingLotPriceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParkingLotPriceInclude<ExtArgs> | null
+    /**
+     * Filter, which ParkingLotPrices to fetch.
+     */
+    where?: ParkingLotPriceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ParkingLotPrices to fetch.
+     */
+    orderBy?: ParkingLotPriceOrderByWithRelationInput | ParkingLotPriceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ParkingLotPrices.
+     */
+    cursor?: ParkingLotPriceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ParkingLotPrices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ParkingLotPrices.
+     */
+    skip?: number
+    distinct?: ParkingLotPriceScalarFieldEnum | ParkingLotPriceScalarFieldEnum[]
+  }
+
+  /**
+   * ParkingLotPrice create
+   */
+  export type ParkingLotPriceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParkingLotPrice
+     */
+    select?: ParkingLotPriceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParkingLotPriceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ParkingLotPrice.
+     */
+    data: XOR<ParkingLotPriceCreateInput, ParkingLotPriceUncheckedCreateInput>
+  }
+
+  /**
+   * ParkingLotPrice createMany
+   */
+  export type ParkingLotPriceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ParkingLotPrices.
+     */
+    data: ParkingLotPriceCreateManyInput | ParkingLotPriceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ParkingLotPrice createManyAndReturn
+   */
+  export type ParkingLotPriceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParkingLotPrice
+     */
+    select?: ParkingLotPriceSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many ParkingLotPrices.
+     */
+    data: ParkingLotPriceCreateManyInput | ParkingLotPriceCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParkingLotPriceIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ParkingLotPrice update
+   */
+  export type ParkingLotPriceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParkingLotPrice
+     */
+    select?: ParkingLotPriceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParkingLotPriceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ParkingLotPrice.
+     */
+    data: XOR<ParkingLotPriceUpdateInput, ParkingLotPriceUncheckedUpdateInput>
+    /**
+     * Choose, which ParkingLotPrice to update.
+     */
+    where: ParkingLotPriceWhereUniqueInput
+  }
+
+  /**
+   * ParkingLotPrice updateMany
+   */
+  export type ParkingLotPriceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ParkingLotPrices.
+     */
+    data: XOR<ParkingLotPriceUpdateManyMutationInput, ParkingLotPriceUncheckedUpdateManyInput>
+    /**
+     * Filter which ParkingLotPrices to update
+     */
+    where?: ParkingLotPriceWhereInput
+  }
+
+  /**
+   * ParkingLotPrice upsert
+   */
+  export type ParkingLotPriceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParkingLotPrice
+     */
+    select?: ParkingLotPriceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParkingLotPriceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ParkingLotPrice to update in case it exists.
+     */
+    where: ParkingLotPriceWhereUniqueInput
+    /**
+     * In case the ParkingLotPrice found by the `where` argument doesn't exist, create a new ParkingLotPrice with this data.
+     */
+    create: XOR<ParkingLotPriceCreateInput, ParkingLotPriceUncheckedCreateInput>
+    /**
+     * In case the ParkingLotPrice was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ParkingLotPriceUpdateInput, ParkingLotPriceUncheckedUpdateInput>
+  }
+
+  /**
+   * ParkingLotPrice delete
+   */
+  export type ParkingLotPriceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParkingLotPrice
+     */
+    select?: ParkingLotPriceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParkingLotPriceInclude<ExtArgs> | null
+    /**
+     * Filter which ParkingLotPrice to delete.
+     */
+    where: ParkingLotPriceWhereUniqueInput
+  }
+
+  /**
+   * ParkingLotPrice deleteMany
+   */
+  export type ParkingLotPriceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ParkingLotPrices to delete
+     */
+    where?: ParkingLotPriceWhereInput
+  }
+
+  /**
+   * ParkingLotPrice without action
+   */
+  export type ParkingLotPriceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ParkingLotPrice
+     */
+    select?: ParkingLotPriceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ParkingLotPriceInclude<ExtArgs> | null
   }
 
 
@@ -9431,6 +10512,7 @@ export namespace Prisma {
   export type ParkingLotServiceMinAggregateOutputType = {
     id: number | null
     name: string | null
+    type: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS | null
     description: string | null
     price: number | null
     createdAt: Date | null
@@ -9441,6 +10523,7 @@ export namespace Prisma {
   export type ParkingLotServiceMaxAggregateOutputType = {
     id: number | null
     name: string | null
+    type: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS | null
     description: string | null
     price: number | null
     createdAt: Date | null
@@ -9451,6 +10534,7 @@ export namespace Prisma {
   export type ParkingLotServiceCountAggregateOutputType = {
     id: number
     name: number
+    type: number
     description: number
     mediaUrls: number
     price: number
@@ -9477,6 +10561,7 @@ export namespace Prisma {
   export type ParkingLotServiceMinAggregateInputType = {
     id?: true
     name?: true
+    type?: true
     description?: true
     price?: true
     createdAt?: true
@@ -9487,6 +10572,7 @@ export namespace Prisma {
   export type ParkingLotServiceMaxAggregateInputType = {
     id?: true
     name?: true
+    type?: true
     description?: true
     price?: true
     createdAt?: true
@@ -9497,6 +10583,7 @@ export namespace Prisma {
   export type ParkingLotServiceCountAggregateInputType = {
     id?: true
     name?: true
+    type?: true
     description?: true
     mediaUrls?: true
     price?: true
@@ -9596,6 +10683,7 @@ export namespace Prisma {
   export type ParkingLotServiceGroupByOutputType = {
     id: number
     name: string
+    type: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
     description: string
     mediaUrls: string[]
     price: number
@@ -9627,6 +10715,7 @@ export namespace Prisma {
   export type ParkingLotServiceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    type?: boolean
     description?: boolean
     mediaUrls?: boolean
     price?: boolean
@@ -9640,6 +10729,7 @@ export namespace Prisma {
   export type ParkingLotServiceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    type?: boolean
     description?: boolean
     mediaUrls?: boolean
     price?: boolean
@@ -9653,6 +10743,7 @@ export namespace Prisma {
   export type ParkingLotServiceSelectScalar = {
     id?: boolean
     name?: boolean
+    type?: boolean
     description?: boolean
     mediaUrls?: boolean
     price?: boolean
@@ -9677,6 +10768,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
+      type: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
       description: string
       mediaUrls: string[]
       price: number
@@ -10080,6 +11172,7 @@ export namespace Prisma {
   interface ParkingLotServiceFieldRefs {
     readonly id: FieldRef<"ParkingLotService", 'Int'>
     readonly name: FieldRef<"ParkingLotService", 'String'>
+    readonly type: FieldRef<"ParkingLotService", 'PARKING_LOT_SERVICE__TYPE_ALIAS'>
     readonly description: FieldRef<"ParkingLotService", 'String'>
     readonly mediaUrls: FieldRef<"ParkingLotService", 'String[]'>
     readonly price: FieldRef<"ParkingLotService", 'Float'>
@@ -14702,6 +15795,15 @@ export namespace Prisma {
   export type ParkingLotScalarFieldEnum = (typeof ParkingLotScalarFieldEnum)[keyof typeof ParkingLotScalarFieldEnum]
 
 
+  export const ParkingLotPriceScalarFieldEnum: {
+    vehicleType: 'vehicleType',
+    price: 'price',
+    parkingLotId: 'parkingLotId'
+  };
+
+  export type ParkingLotPriceScalarFieldEnum = (typeof ParkingLotPriceScalarFieldEnum)[keyof typeof ParkingLotPriceScalarFieldEnum]
+
+
   export const ParkingLotReviewScalarFieldEnum: {
     id: 'id',
     rating: 'rating',
@@ -14719,6 +15821,7 @@ export namespace Prisma {
   export const ParkingLotServiceScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    type: 'type',
     description: 'description',
     mediaUrls: 'mediaUrls',
     price: 'price',
@@ -14930,6 +16033,20 @@ export namespace Prisma {
    * Reference to a field of type 'PARKING_LOT__STATUS_ALIAS[]'
    */
   export type ListEnumPARKING_LOT__STATUS_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PARKING_LOT__STATUS_ALIAS[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PARKING_LOT_SERVICE__TYPE_ALIAS'
+   */
+  export type EnumPARKING_LOT_SERVICE__TYPE_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PARKING_LOT_SERVICE__TYPE_ALIAS'>
+    
+
+
+  /**
+   * Reference to a field of type 'PARKING_LOT_SERVICE__TYPE_ALIAS[]'
+   */
+  export type ListEnumPARKING_LOT_SERVICE__TYPE_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PARKING_LOT_SERVICE__TYPE_ALIAS[]'>
     
 
 
@@ -15363,6 +16480,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotListRelationFilter
     parkingLotServices?: ParkingLotServiceListRelationFilter
     parkingLotReviews?: ParkingLotReviewListRelationFilter
+    parkingLotPrices?: ParkingLotPriceListRelationFilter
     owner?: XOR<UserRelationFilter, UserWhereInput>
   }
 
@@ -15381,6 +16499,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotOrderByRelationAggregateInput
     parkingLotServices?: ParkingLotServiceOrderByRelationAggregateInput
     parkingLotReviews?: ParkingLotReviewOrderByRelationAggregateInput
+    parkingLotPrices?: ParkingLotPriceOrderByRelationAggregateInput
     owner?: UserOrderByWithRelationInput
   }
 
@@ -15402,6 +16521,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotListRelationFilter
     parkingLotServices?: ParkingLotServiceListRelationFilter
     parkingLotReviews?: ParkingLotReviewListRelationFilter
+    parkingLotPrices?: ParkingLotPriceListRelationFilter
     owner?: XOR<UserRelationFilter, UserWhereInput>
   }, "id">
 
@@ -15439,6 +16559,54 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"ParkingLot"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ParkingLot"> | Date | string
     ownerId?: IntWithAggregatesFilter<"ParkingLot"> | number
+  }
+
+  export type ParkingLotPriceWhereInput = {
+    AND?: ParkingLotPriceWhereInput | ParkingLotPriceWhereInput[]
+    OR?: ParkingLotPriceWhereInput[]
+    NOT?: ParkingLotPriceWhereInput | ParkingLotPriceWhereInput[]
+    vehicleType?: EnumVEHICLE__TYPE_ALIASFilter<"ParkingLotPrice"> | $Enums.VEHICLE__TYPE_ALIAS
+    price?: FloatFilter<"ParkingLotPrice"> | number
+    parkingLotId?: IntFilter<"ParkingLotPrice"> | number
+    parkingLot?: XOR<ParkingLotRelationFilter, ParkingLotWhereInput>
+  }
+
+  export type ParkingLotPriceOrderByWithRelationInput = {
+    vehicleType?: SortOrder
+    price?: SortOrder
+    parkingLotId?: SortOrder
+    parkingLot?: ParkingLotOrderByWithRelationInput
+  }
+
+  export type ParkingLotPriceWhereUniqueInput = Prisma.AtLeast<{
+    vehicleType_parkingLotId?: ParkingLotPriceVehicleTypeParkingLotIdCompoundUniqueInput
+    AND?: ParkingLotPriceWhereInput | ParkingLotPriceWhereInput[]
+    OR?: ParkingLotPriceWhereInput[]
+    NOT?: ParkingLotPriceWhereInput | ParkingLotPriceWhereInput[]
+    vehicleType?: EnumVEHICLE__TYPE_ALIASFilter<"ParkingLotPrice"> | $Enums.VEHICLE__TYPE_ALIAS
+    price?: FloatFilter<"ParkingLotPrice"> | number
+    parkingLotId?: IntFilter<"ParkingLotPrice"> | number
+    parkingLot?: XOR<ParkingLotRelationFilter, ParkingLotWhereInput>
+  }, "vehicleType_parkingLotId">
+
+  export type ParkingLotPriceOrderByWithAggregationInput = {
+    vehicleType?: SortOrder
+    price?: SortOrder
+    parkingLotId?: SortOrder
+    _count?: ParkingLotPriceCountOrderByAggregateInput
+    _avg?: ParkingLotPriceAvgOrderByAggregateInput
+    _max?: ParkingLotPriceMaxOrderByAggregateInput
+    _min?: ParkingLotPriceMinOrderByAggregateInput
+    _sum?: ParkingLotPriceSumOrderByAggregateInput
+  }
+
+  export type ParkingLotPriceScalarWhereWithAggregatesInput = {
+    AND?: ParkingLotPriceScalarWhereWithAggregatesInput | ParkingLotPriceScalarWhereWithAggregatesInput[]
+    OR?: ParkingLotPriceScalarWhereWithAggregatesInput[]
+    NOT?: ParkingLotPriceScalarWhereWithAggregatesInput | ParkingLotPriceScalarWhereWithAggregatesInput[]
+    vehicleType?: EnumVEHICLE__TYPE_ALIASWithAggregatesFilter<"ParkingLotPrice"> | $Enums.VEHICLE__TYPE_ALIAS
+    price?: FloatWithAggregatesFilter<"ParkingLotPrice"> | number
+    parkingLotId?: IntWithAggregatesFilter<"ParkingLotPrice"> | number
   }
 
   export type ParkingLotReviewWhereInput = {
@@ -15522,6 +16690,7 @@ export namespace Prisma {
     NOT?: ParkingLotServiceWhereInput | ParkingLotServiceWhereInput[]
     id?: IntFilter<"ParkingLotService"> | number
     name?: StringFilter<"ParkingLotService"> | string
+    type?: EnumPARKING_LOT_SERVICE__TYPE_ALIASFilter<"ParkingLotService"> | $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
     description?: StringFilter<"ParkingLotService"> | string
     mediaUrls?: StringNullableListFilter<"ParkingLotService">
     price?: FloatFilter<"ParkingLotService"> | number
@@ -15535,6 +16704,7 @@ export namespace Prisma {
   export type ParkingLotServiceOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    type?: SortOrder
     description?: SortOrder
     mediaUrls?: SortOrder
     price?: SortOrder
@@ -15551,6 +16721,7 @@ export namespace Prisma {
     OR?: ParkingLotServiceWhereInput[]
     NOT?: ParkingLotServiceWhereInput | ParkingLotServiceWhereInput[]
     name?: StringFilter<"ParkingLotService"> | string
+    type?: EnumPARKING_LOT_SERVICE__TYPE_ALIASFilter<"ParkingLotService"> | $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
     description?: StringFilter<"ParkingLotService"> | string
     mediaUrls?: StringNullableListFilter<"ParkingLotService">
     price?: FloatFilter<"ParkingLotService"> | number
@@ -15564,6 +16735,7 @@ export namespace Prisma {
   export type ParkingLotServiceOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    type?: SortOrder
     description?: SortOrder
     mediaUrls?: SortOrder
     price?: SortOrder
@@ -15584,6 +16756,7 @@ export namespace Prisma {
     NOT?: ParkingLotServiceScalarWhereWithAggregatesInput | ParkingLotServiceScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"ParkingLotService"> | number
     name?: StringWithAggregatesFilter<"ParkingLotService"> | string
+    type?: EnumPARKING_LOT_SERVICE__TYPE_ALIASWithAggregatesFilter<"ParkingLotService"> | $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
     description?: StringWithAggregatesFilter<"ParkingLotService"> | string
     mediaUrls?: StringNullableListFilter<"ParkingLotService">
     price?: FloatWithAggregatesFilter<"ParkingLotService"> | number
@@ -16292,6 +17465,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotCreateNestedManyWithoutParkingLotInput
     parkingLotServices?: ParkingLotServiceCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
+    parkingLotPrices?: ParkingLotPriceCreateNestedManyWithoutParkingLotInput
     owner: UserCreateNestedOneWithoutParkingLotsInput
   }
 
@@ -16310,6 +17484,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutParkingLotInput
+    parkingLotPrices?: ParkingLotPriceUncheckedCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotUpdateInput = {
@@ -16325,6 +17500,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotUpdateManyWithoutParkingLotNestedInput
     parkingLotServices?: ParkingLotServiceUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
+    parkingLotPrices?: ParkingLotPriceUpdateManyWithoutParkingLotNestedInput
     owner?: UserUpdateOneRequiredWithoutParkingLotsNestedInput
   }
 
@@ -16343,6 +17519,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutParkingLotNestedInput
+    parkingLotPrices?: ParkingLotPriceUncheckedUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotCreateManyInput = {
@@ -16383,6 +17560,47 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ParkingLotPriceCreateInput = {
+    vehicleType: $Enums.VEHICLE__TYPE_ALIAS
+    price: number
+    parkingLot: ParkingLotCreateNestedOneWithoutParkingLotPricesInput
+  }
+
+  export type ParkingLotPriceUncheckedCreateInput = {
+    vehicleType: $Enums.VEHICLE__TYPE_ALIAS
+    price: number
+    parkingLotId: number
+  }
+
+  export type ParkingLotPriceUpdateInput = {
+    vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
+    price?: FloatFieldUpdateOperationsInput | number
+    parkingLot?: ParkingLotUpdateOneRequiredWithoutParkingLotPricesNestedInput
+  }
+
+  export type ParkingLotPriceUncheckedUpdateInput = {
+    vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
+    price?: FloatFieldUpdateOperationsInput | number
+    parkingLotId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ParkingLotPriceCreateManyInput = {
+    vehicleType: $Enums.VEHICLE__TYPE_ALIAS
+    price: number
+    parkingLotId: number
+  }
+
+  export type ParkingLotPriceUpdateManyMutationInput = {
+    vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
+    price?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type ParkingLotPriceUncheckedUpdateManyInput = {
+    vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
+    price?: FloatFieldUpdateOperationsInput | number
+    parkingLotId?: IntFieldUpdateOperationsInput | number
   }
 
   export type ParkingLotReviewCreateInput = {
@@ -16459,6 +17677,7 @@ export namespace Prisma {
 
   export type ParkingLotServiceCreateInput = {
     name: string
+    type: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
     description: string
     mediaUrls?: ParkingLotServiceCreatemediaUrlsInput | string[]
     price: number
@@ -16471,6 +17690,7 @@ export namespace Prisma {
   export type ParkingLotServiceUncheckedCreateInput = {
     id?: number
     name: string
+    type: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
     description: string
     mediaUrls?: ParkingLotServiceCreatemediaUrlsInput | string[]
     price: number
@@ -16482,6 +17702,7 @@ export namespace Prisma {
 
   export type ParkingLotServiceUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
+    type?: EnumPARKING_LOT_SERVICE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
     description?: StringFieldUpdateOperationsInput | string
     mediaUrls?: ParkingLotServiceUpdatemediaUrlsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
@@ -16494,6 +17715,7 @@ export namespace Prisma {
   export type ParkingLotServiceUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    type?: EnumPARKING_LOT_SERVICE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
     description?: StringFieldUpdateOperationsInput | string
     mediaUrls?: ParkingLotServiceUpdatemediaUrlsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
@@ -16506,6 +17728,7 @@ export namespace Prisma {
   export type ParkingLotServiceCreateManyInput = {
     id?: number
     name: string
+    type: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
     description: string
     mediaUrls?: ParkingLotServiceCreatemediaUrlsInput | string[]
     price: number
@@ -16517,6 +17740,7 @@ export namespace Prisma {
 
   export type ParkingLotServiceUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
+    type?: EnumPARKING_LOT_SERVICE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
     description?: StringFieldUpdateOperationsInput | string
     mediaUrls?: ParkingLotServiceUpdatemediaUrlsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
@@ -16528,6 +17752,7 @@ export namespace Prisma {
   export type ParkingLotServiceUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    type?: EnumPARKING_LOT_SERVICE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
     description?: StringFieldUpdateOperationsInput | string
     mediaUrls?: ParkingLotServiceUpdatemediaUrlsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
@@ -17350,11 +18575,21 @@ export namespace Prisma {
     none?: ParkingLotServiceWhereInput
   }
 
+  export type ParkingLotPriceListRelationFilter = {
+    every?: ParkingLotPriceWhereInput
+    some?: ParkingLotPriceWhereInput
+    none?: ParkingLotPriceWhereInput
+  }
+
   export type ParkingSpotOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type ParkingLotServiceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ParkingLotPriceOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -17457,6 +18692,39 @@ export namespace Prisma {
     isNot?: ParkingLotWhereInput
   }
 
+  export type ParkingLotPriceVehicleTypeParkingLotIdCompoundUniqueInput = {
+    vehicleType: $Enums.VEHICLE__TYPE_ALIAS
+    parkingLotId: number
+  }
+
+  export type ParkingLotPriceCountOrderByAggregateInput = {
+    vehicleType?: SortOrder
+    price?: SortOrder
+    parkingLotId?: SortOrder
+  }
+
+  export type ParkingLotPriceAvgOrderByAggregateInput = {
+    price?: SortOrder
+    parkingLotId?: SortOrder
+  }
+
+  export type ParkingLotPriceMaxOrderByAggregateInput = {
+    vehicleType?: SortOrder
+    price?: SortOrder
+    parkingLotId?: SortOrder
+  }
+
+  export type ParkingLotPriceMinOrderByAggregateInput = {
+    vehicleType?: SortOrder
+    price?: SortOrder
+    parkingLotId?: SortOrder
+  }
+
+  export type ParkingLotPriceSumOrderByAggregateInput = {
+    price?: SortOrder
+    parkingLotId?: SortOrder
+  }
+
   export type ParkingLotReviewCountOrderByAggregateInput = {
     id?: SortOrder
     rating?: SortOrder
@@ -17502,6 +18770,13 @@ export namespace Prisma {
     userId?: SortOrder
   }
 
+  export type EnumPARKING_LOT_SERVICE__TYPE_ALIASFilter<$PrismaModel = never> = {
+    equals?: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS | EnumPARKING_LOT_SERVICE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS[] | ListEnumPARKING_LOT_SERVICE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS[] | ListEnumPARKING_LOT_SERVICE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumPARKING_LOT_SERVICE__TYPE_ALIASFilter<$PrismaModel> | $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
+  }
+
   export type EnumVEHICLE__TYPE_ALIASNullableListFilter<$PrismaModel = never> = {
     equals?: $Enums.VEHICLE__TYPE_ALIAS[] | ListEnumVEHICLE__TYPE_ALIASFieldRefInput<$PrismaModel> | null
     has?: $Enums.VEHICLE__TYPE_ALIAS | EnumVEHICLE__TYPE_ALIASFieldRefInput<$PrismaModel> | null
@@ -17513,6 +18788,7 @@ export namespace Prisma {
   export type ParkingLotServiceCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    type?: SortOrder
     description?: SortOrder
     mediaUrls?: SortOrder
     price?: SortOrder
@@ -17531,6 +18807,7 @@ export namespace Prisma {
   export type ParkingLotServiceMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    type?: SortOrder
     description?: SortOrder
     price?: SortOrder
     createdAt?: SortOrder
@@ -17541,6 +18818,7 @@ export namespace Prisma {
   export type ParkingLotServiceMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    type?: SortOrder
     description?: SortOrder
     price?: SortOrder
     createdAt?: SortOrder
@@ -17552,6 +18830,16 @@ export namespace Prisma {
     id?: SortOrder
     price?: SortOrder
     parkingLotId?: SortOrder
+  }
+
+  export type EnumPARKING_LOT_SERVICE__TYPE_ALIASWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS | EnumPARKING_LOT_SERVICE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS[] | ListEnumPARKING_LOT_SERVICE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS[] | ListEnumPARKING_LOT_SERVICE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumPARKING_LOT_SERVICE__TYPE_ALIASWithAggregatesFilter<$PrismaModel> | $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPARKING_LOT_SERVICE__TYPE_ALIASFilter<$PrismaModel>
+    _max?: NestedEnumPARKING_LOT_SERVICE__TYPE_ALIASFilter<$PrismaModel>
   }
 
   export type ParkingSpotCountOrderByAggregateInput = {
@@ -18362,6 +19650,13 @@ export namespace Prisma {
     connect?: ParkingLotReviewWhereUniqueInput | ParkingLotReviewWhereUniqueInput[]
   }
 
+  export type ParkingLotPriceCreateNestedManyWithoutParkingLotInput = {
+    create?: XOR<ParkingLotPriceCreateWithoutParkingLotInput, ParkingLotPriceUncheckedCreateWithoutParkingLotInput> | ParkingLotPriceCreateWithoutParkingLotInput[] | ParkingLotPriceUncheckedCreateWithoutParkingLotInput[]
+    connectOrCreate?: ParkingLotPriceCreateOrConnectWithoutParkingLotInput | ParkingLotPriceCreateOrConnectWithoutParkingLotInput[]
+    createMany?: ParkingLotPriceCreateManyParkingLotInputEnvelope
+    connect?: ParkingLotPriceWhereUniqueInput | ParkingLotPriceWhereUniqueInput[]
+  }
+
   export type UserCreateNestedOneWithoutParkingLotsInput = {
     create?: XOR<UserCreateWithoutParkingLotsInput, UserUncheckedCreateWithoutParkingLotsInput>
     connectOrCreate?: UserCreateOrConnectWithoutParkingLotsInput
@@ -18387,6 +19682,13 @@ export namespace Prisma {
     connectOrCreate?: ParkingLotReviewCreateOrConnectWithoutParkingLotInput | ParkingLotReviewCreateOrConnectWithoutParkingLotInput[]
     createMany?: ParkingLotReviewCreateManyParkingLotInputEnvelope
     connect?: ParkingLotReviewWhereUniqueInput | ParkingLotReviewWhereUniqueInput[]
+  }
+
+  export type ParkingLotPriceUncheckedCreateNestedManyWithoutParkingLotInput = {
+    create?: XOR<ParkingLotPriceCreateWithoutParkingLotInput, ParkingLotPriceUncheckedCreateWithoutParkingLotInput> | ParkingLotPriceCreateWithoutParkingLotInput[] | ParkingLotPriceUncheckedCreateWithoutParkingLotInput[]
+    connectOrCreate?: ParkingLotPriceCreateOrConnectWithoutParkingLotInput | ParkingLotPriceCreateOrConnectWithoutParkingLotInput[]
+    createMany?: ParkingLotPriceCreateManyParkingLotInputEnvelope
+    connect?: ParkingLotPriceWhereUniqueInput | ParkingLotPriceWhereUniqueInput[]
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -18452,6 +19754,20 @@ export namespace Prisma {
     deleteMany?: ParkingLotReviewScalarWhereInput | ParkingLotReviewScalarWhereInput[]
   }
 
+  export type ParkingLotPriceUpdateManyWithoutParkingLotNestedInput = {
+    create?: XOR<ParkingLotPriceCreateWithoutParkingLotInput, ParkingLotPriceUncheckedCreateWithoutParkingLotInput> | ParkingLotPriceCreateWithoutParkingLotInput[] | ParkingLotPriceUncheckedCreateWithoutParkingLotInput[]
+    connectOrCreate?: ParkingLotPriceCreateOrConnectWithoutParkingLotInput | ParkingLotPriceCreateOrConnectWithoutParkingLotInput[]
+    upsert?: ParkingLotPriceUpsertWithWhereUniqueWithoutParkingLotInput | ParkingLotPriceUpsertWithWhereUniqueWithoutParkingLotInput[]
+    createMany?: ParkingLotPriceCreateManyParkingLotInputEnvelope
+    set?: ParkingLotPriceWhereUniqueInput | ParkingLotPriceWhereUniqueInput[]
+    disconnect?: ParkingLotPriceWhereUniqueInput | ParkingLotPriceWhereUniqueInput[]
+    delete?: ParkingLotPriceWhereUniqueInput | ParkingLotPriceWhereUniqueInput[]
+    connect?: ParkingLotPriceWhereUniqueInput | ParkingLotPriceWhereUniqueInput[]
+    update?: ParkingLotPriceUpdateWithWhereUniqueWithoutParkingLotInput | ParkingLotPriceUpdateWithWhereUniqueWithoutParkingLotInput[]
+    updateMany?: ParkingLotPriceUpdateManyWithWhereWithoutParkingLotInput | ParkingLotPriceUpdateManyWithWhereWithoutParkingLotInput[]
+    deleteMany?: ParkingLotPriceScalarWhereInput | ParkingLotPriceScalarWhereInput[]
+  }
+
   export type UserUpdateOneRequiredWithoutParkingLotsNestedInput = {
     create?: XOR<UserCreateWithoutParkingLotsInput, UserUncheckedCreateWithoutParkingLotsInput>
     connectOrCreate?: UserCreateOrConnectWithoutParkingLotsInput
@@ -18500,6 +19816,34 @@ export namespace Prisma {
     update?: ParkingLotReviewUpdateWithWhereUniqueWithoutParkingLotInput | ParkingLotReviewUpdateWithWhereUniqueWithoutParkingLotInput[]
     updateMany?: ParkingLotReviewUpdateManyWithWhereWithoutParkingLotInput | ParkingLotReviewUpdateManyWithWhereWithoutParkingLotInput[]
     deleteMany?: ParkingLotReviewScalarWhereInput | ParkingLotReviewScalarWhereInput[]
+  }
+
+  export type ParkingLotPriceUncheckedUpdateManyWithoutParkingLotNestedInput = {
+    create?: XOR<ParkingLotPriceCreateWithoutParkingLotInput, ParkingLotPriceUncheckedCreateWithoutParkingLotInput> | ParkingLotPriceCreateWithoutParkingLotInput[] | ParkingLotPriceUncheckedCreateWithoutParkingLotInput[]
+    connectOrCreate?: ParkingLotPriceCreateOrConnectWithoutParkingLotInput | ParkingLotPriceCreateOrConnectWithoutParkingLotInput[]
+    upsert?: ParkingLotPriceUpsertWithWhereUniqueWithoutParkingLotInput | ParkingLotPriceUpsertWithWhereUniqueWithoutParkingLotInput[]
+    createMany?: ParkingLotPriceCreateManyParkingLotInputEnvelope
+    set?: ParkingLotPriceWhereUniqueInput | ParkingLotPriceWhereUniqueInput[]
+    disconnect?: ParkingLotPriceWhereUniqueInput | ParkingLotPriceWhereUniqueInput[]
+    delete?: ParkingLotPriceWhereUniqueInput | ParkingLotPriceWhereUniqueInput[]
+    connect?: ParkingLotPriceWhereUniqueInput | ParkingLotPriceWhereUniqueInput[]
+    update?: ParkingLotPriceUpdateWithWhereUniqueWithoutParkingLotInput | ParkingLotPriceUpdateWithWhereUniqueWithoutParkingLotInput[]
+    updateMany?: ParkingLotPriceUpdateManyWithWhereWithoutParkingLotInput | ParkingLotPriceUpdateManyWithWhereWithoutParkingLotInput[]
+    deleteMany?: ParkingLotPriceScalarWhereInput | ParkingLotPriceScalarWhereInput[]
+  }
+
+  export type ParkingLotCreateNestedOneWithoutParkingLotPricesInput = {
+    create?: XOR<ParkingLotCreateWithoutParkingLotPricesInput, ParkingLotUncheckedCreateWithoutParkingLotPricesInput>
+    connectOrCreate?: ParkingLotCreateOrConnectWithoutParkingLotPricesInput
+    connect?: ParkingLotWhereUniqueInput
+  }
+
+  export type ParkingLotUpdateOneRequiredWithoutParkingLotPricesNestedInput = {
+    create?: XOR<ParkingLotCreateWithoutParkingLotPricesInput, ParkingLotUncheckedCreateWithoutParkingLotPricesInput>
+    connectOrCreate?: ParkingLotCreateOrConnectWithoutParkingLotPricesInput
+    upsert?: ParkingLotUpsertWithoutParkingLotPricesInput
+    connect?: ParkingLotWhereUniqueInput
+    update?: XOR<XOR<ParkingLotUpdateToOneWithWhereWithoutParkingLotPricesInput, ParkingLotUpdateWithoutParkingLotPricesInput>, ParkingLotUncheckedUpdateWithoutParkingLotPricesInput>
   }
 
   export type ParkingLotReviewCreatemediaUrlsInput = {
@@ -18551,6 +19895,10 @@ export namespace Prisma {
     create?: XOR<ParkingLotCreateWithoutParkingLotServicesInput, ParkingLotUncheckedCreateWithoutParkingLotServicesInput>
     connectOrCreate?: ParkingLotCreateOrConnectWithoutParkingLotServicesInput
     connect?: ParkingLotWhereUniqueInput
+  }
+
+  export type EnumPARKING_LOT_SERVICE__TYPE_ALIASFieldUpdateOperationsInput = {
+    set?: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
   }
 
   export type ParkingLotServiceUpdatemediaUrlsInput = {
@@ -19123,6 +20471,23 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type NestedEnumPARKING_LOT_SERVICE__TYPE_ALIASFilter<$PrismaModel = never> = {
+    equals?: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS | EnumPARKING_LOT_SERVICE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS[] | ListEnumPARKING_LOT_SERVICE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS[] | ListEnumPARKING_LOT_SERVICE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumPARKING_LOT_SERVICE__TYPE_ALIASFilter<$PrismaModel> | $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
+  }
+
+  export type NestedEnumPARKING_LOT_SERVICE__TYPE_ALIASWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS | EnumPARKING_LOT_SERVICE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS[] | ListEnumPARKING_LOT_SERVICE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS[] | ListEnumPARKING_LOT_SERVICE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumPARKING_LOT_SERVICE__TYPE_ALIASWithAggregatesFilter<$PrismaModel> | $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPARKING_LOT_SERVICE__TYPE_ALIASFilter<$PrismaModel>
+    _max?: NestedEnumPARKING_LOT_SERVICE__TYPE_ALIASFilter<$PrismaModel>
+  }
+
   export type NestedEnumRESERVATION__STATUS_ALIASFilter<$PrismaModel = never> = {
     equals?: $Enums.RESERVATION__STATUS_ALIAS | EnumRESERVATION__STATUS_ALIASFieldRefInput<$PrismaModel>
     in?: $Enums.RESERVATION__STATUS_ALIAS[] | ListEnumRESERVATION__STATUS_ALIASFieldRefInput<$PrismaModel>
@@ -19480,6 +20845,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotCreateNestedManyWithoutParkingLotInput
     parkingLotServices?: ParkingLotServiceCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
+    parkingLotPrices?: ParkingLotPriceCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotUncheckedCreateWithoutOwnerInput = {
@@ -19496,6 +20862,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutParkingLotInput
+    parkingLotPrices?: ParkingLotPriceUncheckedCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotCreateOrConnectWithoutOwnerInput = {
@@ -20083,6 +21450,7 @@ export namespace Prisma {
 
   export type ParkingLotServiceCreateWithoutParkingLotInput = {
     name: string
+    type: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
     description: string
     mediaUrls?: ParkingLotServiceCreatemediaUrlsInput | string[]
     price: number
@@ -20094,6 +21462,7 @@ export namespace Prisma {
   export type ParkingLotServiceUncheckedCreateWithoutParkingLotInput = {
     id?: number
     name: string
+    type: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
     description: string
     mediaUrls?: ParkingLotServiceCreatemediaUrlsInput | string[]
     price: number
@@ -20138,6 +21507,26 @@ export namespace Prisma {
 
   export type ParkingLotReviewCreateManyParkingLotInputEnvelope = {
     data: ParkingLotReviewCreateManyParkingLotInput | ParkingLotReviewCreateManyParkingLotInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ParkingLotPriceCreateWithoutParkingLotInput = {
+    vehicleType: $Enums.VEHICLE__TYPE_ALIAS
+    price: number
+  }
+
+  export type ParkingLotPriceUncheckedCreateWithoutParkingLotInput = {
+    vehicleType: $Enums.VEHICLE__TYPE_ALIAS
+    price: number
+  }
+
+  export type ParkingLotPriceCreateOrConnectWithoutParkingLotInput = {
+    where: ParkingLotPriceWhereUniqueInput
+    create: XOR<ParkingLotPriceCreateWithoutParkingLotInput, ParkingLotPriceUncheckedCreateWithoutParkingLotInput>
+  }
+
+  export type ParkingLotPriceCreateManyParkingLotInputEnvelope = {
+    data: ParkingLotPriceCreateManyParkingLotInput | ParkingLotPriceCreateManyParkingLotInput[]
     skipDuplicates?: boolean
   }
 
@@ -20227,6 +21616,7 @@ export namespace Prisma {
     NOT?: ParkingLotServiceScalarWhereInput | ParkingLotServiceScalarWhereInput[]
     id?: IntFilter<"ParkingLotService"> | number
     name?: StringFilter<"ParkingLotService"> | string
+    type?: EnumPARKING_LOT_SERVICE__TYPE_ALIASFilter<"ParkingLotService"> | $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
     description?: StringFilter<"ParkingLotService"> | string
     mediaUrls?: StringNullableListFilter<"ParkingLotService">
     price?: FloatFilter<"ParkingLotService"> | number
@@ -20250,6 +21640,31 @@ export namespace Prisma {
   export type ParkingLotReviewUpdateManyWithWhereWithoutParkingLotInput = {
     where: ParkingLotReviewScalarWhereInput
     data: XOR<ParkingLotReviewUpdateManyMutationInput, ParkingLotReviewUncheckedUpdateManyWithoutParkingLotInput>
+  }
+
+  export type ParkingLotPriceUpsertWithWhereUniqueWithoutParkingLotInput = {
+    where: ParkingLotPriceWhereUniqueInput
+    update: XOR<ParkingLotPriceUpdateWithoutParkingLotInput, ParkingLotPriceUncheckedUpdateWithoutParkingLotInput>
+    create: XOR<ParkingLotPriceCreateWithoutParkingLotInput, ParkingLotPriceUncheckedCreateWithoutParkingLotInput>
+  }
+
+  export type ParkingLotPriceUpdateWithWhereUniqueWithoutParkingLotInput = {
+    where: ParkingLotPriceWhereUniqueInput
+    data: XOR<ParkingLotPriceUpdateWithoutParkingLotInput, ParkingLotPriceUncheckedUpdateWithoutParkingLotInput>
+  }
+
+  export type ParkingLotPriceUpdateManyWithWhereWithoutParkingLotInput = {
+    where: ParkingLotPriceScalarWhereInput
+    data: XOR<ParkingLotPriceUpdateManyMutationInput, ParkingLotPriceUncheckedUpdateManyWithoutParkingLotInput>
+  }
+
+  export type ParkingLotPriceScalarWhereInput = {
+    AND?: ParkingLotPriceScalarWhereInput | ParkingLotPriceScalarWhereInput[]
+    OR?: ParkingLotPriceScalarWhereInput[]
+    NOT?: ParkingLotPriceScalarWhereInput | ParkingLotPriceScalarWhereInput[]
+    vehicleType?: EnumVEHICLE__TYPE_ALIASFilter<"ParkingLotPrice"> | $Enums.VEHICLE__TYPE_ALIAS
+    price?: FloatFilter<"ParkingLotPrice"> | number
+    parkingLotId?: IntFilter<"ParkingLotPrice"> | number
   }
 
   export type UserUpsertWithoutParkingLotsInput = {
@@ -20294,6 +21709,88 @@ export namespace Prisma {
     userNotifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type ParkingLotCreateWithoutParkingLotPricesInput = {
+    name: string
+    latitude: number
+    longitude: number
+    mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
+    status: $Enums.PARKING_LOT__STATUS_ALIAS
+    isApproved?: boolean
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    parkingSpots?: ParkingSpotCreateNestedManyWithoutParkingLotInput
+    parkingLotServices?: ParkingLotServiceCreateNestedManyWithoutParkingLotInput
+    parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
+    owner: UserCreateNestedOneWithoutParkingLotsInput
+  }
+
+  export type ParkingLotUncheckedCreateWithoutParkingLotPricesInput = {
+    id?: number
+    name: string
+    latitude: number
+    longitude: number
+    mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
+    status: $Enums.PARKING_LOT__STATUS_ALIAS
+    isApproved?: boolean
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ownerId: number
+    parkingSpots?: ParkingSpotUncheckedCreateNestedManyWithoutParkingLotInput
+    parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
+    parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutParkingLotInput
+  }
+
+  export type ParkingLotCreateOrConnectWithoutParkingLotPricesInput = {
+    where: ParkingLotWhereUniqueInput
+    create: XOR<ParkingLotCreateWithoutParkingLotPricesInput, ParkingLotUncheckedCreateWithoutParkingLotPricesInput>
+  }
+
+  export type ParkingLotUpsertWithoutParkingLotPricesInput = {
+    update: XOR<ParkingLotUpdateWithoutParkingLotPricesInput, ParkingLotUncheckedUpdateWithoutParkingLotPricesInput>
+    create: XOR<ParkingLotCreateWithoutParkingLotPricesInput, ParkingLotUncheckedCreateWithoutParkingLotPricesInput>
+    where?: ParkingLotWhereInput
+  }
+
+  export type ParkingLotUpdateToOneWithWhereWithoutParkingLotPricesInput = {
+    where?: ParkingLotWhereInput
+    data: XOR<ParkingLotUpdateWithoutParkingLotPricesInput, ParkingLotUncheckedUpdateWithoutParkingLotPricesInput>
+  }
+
+  export type ParkingLotUpdateWithoutParkingLotPricesInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
+    status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    parkingSpots?: ParkingSpotUpdateManyWithoutParkingLotNestedInput
+    parkingLotServices?: ParkingLotServiceUpdateManyWithoutParkingLotNestedInput
+    parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
+    owner?: UserUpdateOneRequiredWithoutParkingLotsNestedInput
+  }
+
+  export type ParkingLotUncheckedUpdateWithoutParkingLotPricesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
+    status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ownerId?: IntFieldUpdateOperationsInput | number
+    parkingSpots?: ParkingSpotUncheckedUpdateManyWithoutParkingLotNestedInput
+    parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
+    parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutParkingLotNestedInput
+  }
+
   export type ParkingLotCreateWithoutParkingLotReviewsInput = {
     name: string
     latitude: number
@@ -20306,6 +21803,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     parkingSpots?: ParkingSpotCreateNestedManyWithoutParkingLotInput
     parkingLotServices?: ParkingLotServiceCreateNestedManyWithoutParkingLotInput
+    parkingLotPrices?: ParkingLotPriceCreateNestedManyWithoutParkingLotInput
     owner: UserCreateNestedOneWithoutParkingLotsInput
   }
 
@@ -20323,6 +21821,7 @@ export namespace Prisma {
     ownerId: number
     parkingSpots?: ParkingSpotUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
+    parkingLotPrices?: ParkingLotPriceUncheckedCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotCreateOrConnectWithoutParkingLotReviewsInput = {
@@ -20389,6 +21888,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingSpots?: ParkingSpotUpdateManyWithoutParkingLotNestedInput
     parkingLotServices?: ParkingLotServiceUpdateManyWithoutParkingLotNestedInput
+    parkingLotPrices?: ParkingLotPriceUpdateManyWithoutParkingLotNestedInput
     owner?: UserUpdateOneRequiredWithoutParkingLotsNestedInput
   }
 
@@ -20406,6 +21906,7 @@ export namespace Prisma {
     ownerId?: IntFieldUpdateOperationsInput | number
     parkingSpots?: ParkingSpotUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
+    parkingLotPrices?: ParkingLotPriceUncheckedUpdateManyWithoutParkingLotNestedInput
   }
 
   export type UserUpsertWithoutParkingLotReviewsInput = {
@@ -20462,6 +21963,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     parkingSpots?: ParkingSpotCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
+    parkingLotPrices?: ParkingLotPriceCreateNestedManyWithoutParkingLotInput
     owner: UserCreateNestedOneWithoutParkingLotsInput
   }
 
@@ -20479,6 +21981,7 @@ export namespace Prisma {
     ownerId: number
     parkingSpots?: ParkingSpotUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutParkingLotInput
+    parkingLotPrices?: ParkingLotPriceUncheckedCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotCreateOrConnectWithoutParkingLotServicesInput = {
@@ -20509,6 +22012,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingSpots?: ParkingSpotUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
+    parkingLotPrices?: ParkingLotPriceUpdateManyWithoutParkingLotNestedInput
     owner?: UserUpdateOneRequiredWithoutParkingLotsNestedInput
   }
 
@@ -20526,6 +22030,7 @@ export namespace Prisma {
     ownerId?: IntFieldUpdateOperationsInput | number
     parkingSpots?: ParkingSpotUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutParkingLotNestedInput
+    parkingLotPrices?: ParkingLotPriceUncheckedUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ReservationCreateWithoutParkingSpotInput = {
@@ -20604,6 +22109,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     parkingLotServices?: ParkingLotServiceCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
+    parkingLotPrices?: ParkingLotPriceCreateNestedManyWithoutParkingLotInput
     owner: UserCreateNestedOneWithoutParkingLotsInput
   }
 
@@ -20621,6 +22127,7 @@ export namespace Prisma {
     ownerId: number
     parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutParkingLotInput
+    parkingLotPrices?: ParkingLotPriceUncheckedCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotCreateOrConnectWithoutParkingSpotsInput = {
@@ -20683,6 +22190,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingLotServices?: ParkingLotServiceUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
+    parkingLotPrices?: ParkingLotPriceUpdateManyWithoutParkingLotNestedInput
     owner?: UserUpdateOneRequiredWithoutParkingLotsNestedInput
   }
 
@@ -20700,6 +22208,7 @@ export namespace Prisma {
     ownerId?: IntFieldUpdateOperationsInput | number
     parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutParkingLotNestedInput
+    parkingLotPrices?: ParkingLotPriceUncheckedUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingRecordCreateWithoutReservationInput = {
@@ -21425,6 +22934,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotUpdateManyWithoutParkingLotNestedInput
     parkingLotServices?: ParkingLotServiceUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
+    parkingLotPrices?: ParkingLotPriceUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotUncheckedUpdateWithoutOwnerInput = {
@@ -21441,6 +22951,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutParkingLotNestedInput
+    parkingLotPrices?: ParkingLotPriceUncheckedUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotUncheckedUpdateManyWithoutOwnerInput = {
@@ -21605,6 +23116,7 @@ export namespace Prisma {
   export type ParkingLotServiceCreateManyParkingLotInput = {
     id?: number
     name: string
+    type: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
     description: string
     mediaUrls?: ParkingLotServiceCreatemediaUrlsInput | string[]
     price: number
@@ -21621,6 +23133,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: number
+  }
+
+  export type ParkingLotPriceCreateManyParkingLotInput = {
+    vehicleType: $Enums.VEHICLE__TYPE_ALIAS
+    price: number
   }
 
   export type ParkingSpotUpdateWithoutParkingLotInput = {
@@ -21652,6 +23169,7 @@ export namespace Prisma {
 
   export type ParkingLotServiceUpdateWithoutParkingLotInput = {
     name?: StringFieldUpdateOperationsInput | string
+    type?: EnumPARKING_LOT_SERVICE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
     description?: StringFieldUpdateOperationsInput | string
     mediaUrls?: ParkingLotServiceUpdatemediaUrlsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
@@ -21663,6 +23181,7 @@ export namespace Prisma {
   export type ParkingLotServiceUncheckedUpdateWithoutParkingLotInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    type?: EnumPARKING_LOT_SERVICE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
     description?: StringFieldUpdateOperationsInput | string
     mediaUrls?: ParkingLotServiceUpdatemediaUrlsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
@@ -21674,6 +23193,7 @@ export namespace Prisma {
   export type ParkingLotServiceUncheckedUpdateManyWithoutParkingLotInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    type?: EnumPARKING_LOT_SERVICE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
     description?: StringFieldUpdateOperationsInput | string
     mediaUrls?: ParkingLotServiceUpdatemediaUrlsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
@@ -21709,6 +23229,21 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ParkingLotPriceUpdateWithoutParkingLotInput = {
+    vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
+    price?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type ParkingLotPriceUncheckedUpdateWithoutParkingLotInput = {
+    vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
+    price?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type ParkingLotPriceUncheckedUpdateManyWithoutParkingLotInput = {
+    vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
+    price?: FloatFieldUpdateOperationsInput | number
   }
 
   export type ReservationCreateManyParkingSpotInput = {
@@ -21846,6 +23381,10 @@ export namespace Prisma {
      * @deprecated Use ParkingLotDefaultArgs instead
      */
     export type ParkingLotArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ParkingLotDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ParkingLotPriceDefaultArgs instead
+     */
+    export type ParkingLotPriceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ParkingLotPriceDefaultArgs<ExtArgs>
     /**
      * @deprecated Use ParkingLotReviewDefaultArgs instead
      */
