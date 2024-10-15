@@ -62,7 +62,7 @@ export const getMany = procedure
     if (!latitude || !longitude || !radiusInKm) {
       parkingLots = await prisma.parkingLot.findMany({
         where: {
-          name,
+          name: { contains: name },
           status,
           isApproved,
         },
