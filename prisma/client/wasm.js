@@ -217,6 +217,7 @@ exports.Prisma.ParkingLotServiceScalarFieldEnum = {
 
 exports.Prisma.ParkingSpotScalarFieldEnum = {
   id: 'id',
+  name: 'name',
   isAvailable: 'isAvailable',
   vehicleType: 'vehicleType',
   createdAt: 'createdAt',

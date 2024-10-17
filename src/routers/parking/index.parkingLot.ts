@@ -3,6 +3,7 @@ import { z } from "zod";
 import { authMiddleware } from "../../auth";
 import {
   PARKING_LOT__STATUS_ALIAS,
+  PARKING_LOT_SERVICE__TYPE_ALIAS,
   ParkingLot,
   Prisma,
   prisma,
@@ -129,6 +130,8 @@ export const getSingle = procedure
         approvedAt: true,
         mediaUrls: true,
         parkingLotPrices: true,
+        parkingSpots: true,
+        parkingLotServices: true,
       },
     });
 
@@ -179,4 +182,129 @@ export const updatePrice = procedure
     });
 
     return;
+  });
+
+// Add parking spot ----------------------------------------------------------------------------
+const addSpotSchema = z.object({
+  parkingLotId: z.number(),
+  name: z.string(),
+  vehicleType: z.nativeEnum(VEHICLE__TYPE_ALIAS),
+});
+export const addSpot = procedure
+  .use(authMiddleware(["PARKING_LOT_OWNER"]))
+  .input(addSpotSchema)
+  .mutation(async ({ ctx, input }) => {
+    const {
+      account: { id: ownerAccountId },
+    } = ctx;
+
+    const owner = await prisma.user.findUnique({ where: { accountId: ownerAccountId } });
+    if (!owner) throw new Error("User not found");
+
+    const parkingLot = await prisma.parkingLot.findFirst({
+      where: {
+        id: input.parkingLotId,
+        ownerId: owner.id,
+      },
+    });
+    if (!parkingLot) throw new Error("Parking lot not found");
+
+    await prisma.parkingSpot.create({
+      data: {
+        name: input.name,
+        vehicleType: input.vehicleType,
+        parkingLotId: parkingLot.id,
+      },
+    });
+
+    return;
+  });
+
+// Update parking spot ------------------------------------------------------------------------
+const updateSpotSchema = z.object({
+  spotId: z.number(),
+  name: z.string().optional(),
+  vehicleType: z.nativeEnum(VEHICLE__TYPE_ALIAS).optional(),
+});
+export const updateSpot = procedure
+  .use(authMiddleware(["PARKING_LOT_OWNER"]))
+  .input(updateSpotSchema)
+  .mutation(async ({ ctx, input }) => {
+    const {
+      account: { id: ownerAccountId },
+    } = ctx;
+    const { spotId, name, vehicleType } = input;
+
+    const owner = await prisma.user.findUnique({ where: { accountId: ownerAccountId } });
+    if (!owner) throw new Error("User not found");
+
+    const spot = await prisma.parkingSpot.findFirst({
+      where: {
+        id: spotId,
+        parkingLot: {
+          ownerId: owner.id,
+        },
+      },
+    });
+    if (!spot) throw new Error("Parking spot not found");
+
+    await prisma.parkingSpot.update({
+      where: { id: spotId },
+      data: {
+        name,
+        vehicleType,
+      },
+    });
+
+    return;
+  });
+
+// Remove parking spot ------------------------------------------------------------------------
+const removeSpotSchema = z.object({
+  spotId: z.number(),
+});
+export const removeSpot = procedure
+  .use(authMiddleware(["PARKING_LOT_OWNER"]))
+  .input(removeSpotSchema)
+  .mutation(async ({ ctx, input }) => {
+    const {
+      account: { id: ownerAccountId },
+    } = ctx;
+    const { spotId } = input;
+
+    const owner = await prisma.user.findUnique({ where: { accountId: ownerAccountId } });
+    if (!owner) throw new Error("User not found");
+
+    const spot = await prisma.parkingSpot.findFirst({
+      where: {
+        id: spotId,
+        parkingLot: {
+          ownerId: owner.id,
+        },
+      },
+    });
+    if (!spot) throw new Error("Parking spot not found");
+
+    await prisma.parkingSpot.delete({ where: { id: spotId } });
+
+    return;
+  });
+
+// Add parking lot service --------------------------------------------------------------------
+const addServiceSchema = z.object({
+  parkingLotId: z.number(),
+  name: z.string(),
+  type: z.nativeEnum(PARKING_LOT_SERVICE__TYPE_ALIAS),
+  description: z.string(),
+  mediaUrls: z.array(z.string()),
+  price: z.number(),
+  vehicleTypes: z.array(z.nativeEnum(VEHICLE__TYPE_ALIAS)),
+});
+export const addService = procedure
+  .use(authMiddleware(["PARKING_LOT_OWNER"]))
+  .input(addServiceSchema)
+  .mutation(async ({ ctx, input }) => {
+    const {
+      account: { id },
+    } = ctx;
   });

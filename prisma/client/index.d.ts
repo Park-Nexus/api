@@ -11536,6 +11536,7 @@ export namespace Prisma {
 
   export type ParkingSpotMinAggregateOutputType = {
     id: number | null
+    name: string | null
     isAvailable: boolean | null
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS | null
     createdAt: Date | null
@@ -11545,6 +11546,7 @@ export namespace Prisma {
 
   export type ParkingSpotMaxAggregateOutputType = {
     id: number | null
+    name: string | null
     isAvailable: boolean | null
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS | null
     createdAt: Date | null
@@ -11554,6 +11556,7 @@ export namespace Prisma {
 
   export type ParkingSpotCountAggregateOutputType = {
     id: number
+    name: number
     isAvailable: number
     vehicleType: number
     createdAt: number
@@ -11575,6 +11578,7 @@ export namespace Prisma {
 
   export type ParkingSpotMinAggregateInputType = {
     id?: true
+    name?: true
     isAvailable?: true
     vehicleType?: true
     createdAt?: true
@@ -11584,6 +11588,7 @@ export namespace Prisma {
 
   export type ParkingSpotMaxAggregateInputType = {
     id?: true
+    name?: true
     isAvailable?: true
     vehicleType?: true
     createdAt?: true
@@ -11593,6 +11598,7 @@ export namespace Prisma {
 
   export type ParkingSpotCountAggregateInputType = {
     id?: true
+    name?: true
     isAvailable?: true
     vehicleType?: true
     createdAt?: true
@@ -11689,6 +11695,7 @@ export namespace Prisma {
 
   export type ParkingSpotGroupByOutputType = {
     id: number
+    name: string
     isAvailable: boolean
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     createdAt: Date
@@ -11717,6 +11724,7 @@ export namespace Prisma {
 
   export type ParkingSpotSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    name?: boolean
     isAvailable?: boolean
     vehicleType?: boolean
     createdAt?: boolean
@@ -11730,6 +11738,7 @@ export namespace Prisma {
 
   export type ParkingSpotSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    name?: boolean
     isAvailable?: boolean
     vehicleType?: boolean
     createdAt?: boolean
@@ -11740,6 +11749,7 @@ export namespace Prisma {
 
   export type ParkingSpotSelectScalar = {
     id?: boolean
+    name?: boolean
     isAvailable?: boolean
     vehicleType?: boolean
     createdAt?: boolean
@@ -11766,6 +11776,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      name: string
       isAvailable: boolean
       vehicleType: $Enums.VEHICLE__TYPE_ALIAS
       createdAt: Date
@@ -12168,6 +12179,7 @@ export namespace Prisma {
    */ 
   interface ParkingSpotFieldRefs {
     readonly id: FieldRef<"ParkingSpot", 'Int'>
+    readonly name: FieldRef<"ParkingSpot", 'String'>
     readonly isAvailable: FieldRef<"ParkingSpot", 'Boolean'>
     readonly vehicleType: FieldRef<"ParkingSpot", 'VEHICLE__TYPE_ALIAS'>
     readonly createdAt: FieldRef<"ParkingSpot", 'DateTime'>
@@ -15836,6 +15848,7 @@ export namespace Prisma {
 
   export const ParkingSpotScalarFieldEnum: {
     id: 'id',
+    name: 'name',
     isAvailable: 'isAvailable',
     vehicleType: 'vehicleType',
     createdAt: 'createdAt',
@@ -16771,6 +16784,7 @@ export namespace Prisma {
     OR?: ParkingSpotWhereInput[]
     NOT?: ParkingSpotWhereInput | ParkingSpotWhereInput[]
     id?: IntFilter<"ParkingSpot"> | number
+    name?: StringFilter<"ParkingSpot"> | string
     isAvailable?: BoolFilter<"ParkingSpot"> | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFilter<"ParkingSpot"> | $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: DateTimeFilter<"ParkingSpot"> | Date | string
@@ -16783,6 +16797,7 @@ export namespace Prisma {
 
   export type ParkingSpotOrderByWithRelationInput = {
     id?: SortOrder
+    name?: SortOrder
     isAvailable?: SortOrder
     vehicleType?: SortOrder
     createdAt?: SortOrder
@@ -16798,6 +16813,7 @@ export namespace Prisma {
     AND?: ParkingSpotWhereInput | ParkingSpotWhereInput[]
     OR?: ParkingSpotWhereInput[]
     NOT?: ParkingSpotWhereInput | ParkingSpotWhereInput[]
+    name?: StringFilter<"ParkingSpot"> | string
     isAvailable?: BoolFilter<"ParkingSpot"> | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFilter<"ParkingSpot"> | $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: DateTimeFilter<"ParkingSpot"> | Date | string
@@ -16810,6 +16826,7 @@ export namespace Prisma {
 
   export type ParkingSpotOrderByWithAggregationInput = {
     id?: SortOrder
+    name?: SortOrder
     isAvailable?: SortOrder
     vehicleType?: SortOrder
     createdAt?: SortOrder
@@ -16827,6 +16844,7 @@ export namespace Prisma {
     OR?: ParkingSpotScalarWhereWithAggregatesInput[]
     NOT?: ParkingSpotScalarWhereWithAggregatesInput | ParkingSpotScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"ParkingSpot"> | number
+    name?: StringWithAggregatesFilter<"ParkingSpot"> | string
     isAvailable?: BoolWithAggregatesFilter<"ParkingSpot"> | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASWithAggregatesFilter<"ParkingSpot"> | $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: DateTimeWithAggregatesFilter<"ParkingSpot"> | Date | string
@@ -17763,7 +17781,8 @@ export namespace Prisma {
   }
 
   export type ParkingSpotCreateInput = {
-    isAvailable: boolean
+    name: string
+    isAvailable?: boolean
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -17774,7 +17793,8 @@ export namespace Prisma {
 
   export type ParkingSpotUncheckedCreateInput = {
     id?: number
-    isAvailable: boolean
+    name: string
+    isAvailable?: boolean
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -17784,6 +17804,7 @@ export namespace Prisma {
   }
 
   export type ParkingSpotUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17795,6 +17816,7 @@ export namespace Prisma {
 
   export type ParkingSpotUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17806,7 +17828,8 @@ export namespace Prisma {
 
   export type ParkingSpotCreateManyInput = {
     id?: number
-    isAvailable: boolean
+    name: string
+    isAvailable?: boolean
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -17814,6 +17837,7 @@ export namespace Prisma {
   }
 
   export type ParkingSpotUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17822,6 +17846,7 @@ export namespace Prisma {
 
   export type ParkingSpotUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18844,6 +18869,7 @@ export namespace Prisma {
 
   export type ParkingSpotCountOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     isAvailable?: SortOrder
     vehicleType?: SortOrder
     createdAt?: SortOrder
@@ -18858,6 +18884,7 @@ export namespace Prisma {
 
   export type ParkingSpotMaxOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     isAvailable?: SortOrder
     vehicleType?: SortOrder
     createdAt?: SortOrder
@@ -18867,6 +18894,7 @@ export namespace Prisma {
 
   export type ParkingSpotMinOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     isAvailable?: SortOrder
     vehicleType?: SortOrder
     createdAt?: SortOrder
@@ -21420,7 +21448,8 @@ export namespace Prisma {
   }
 
   export type ParkingSpotCreateWithoutParkingLotInput = {
-    isAvailable: boolean
+    name: string
+    isAvailable?: boolean
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21430,7 +21459,8 @@ export namespace Prisma {
 
   export type ParkingSpotUncheckedCreateWithoutParkingLotInput = {
     id?: number
-    isAvailable: boolean
+    name: string
+    isAvailable?: boolean
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21587,6 +21617,7 @@ export namespace Prisma {
     OR?: ParkingSpotScalarWhereInput[]
     NOT?: ParkingSpotScalarWhereInput | ParkingSpotScalarWhereInput[]
     id?: IntFilter<"ParkingSpot"> | number
+    name?: StringFilter<"ParkingSpot"> | string
     isAvailable?: BoolFilter<"ParkingSpot"> | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFilter<"ParkingSpot"> | $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: DateTimeFilter<"ParkingSpot"> | Date | string
@@ -22242,7 +22273,8 @@ export namespace Prisma {
   }
 
   export type ParkingSpotCreateWithoutReservationsInput = {
-    isAvailable: boolean
+    name: string
+    isAvailable?: boolean
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -22252,7 +22284,8 @@ export namespace Prisma {
 
   export type ParkingSpotUncheckedCreateWithoutReservationsInput = {
     id?: number
-    isAvailable: boolean
+    name: string
+    isAvailable?: boolean
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -22345,6 +22378,7 @@ export namespace Prisma {
   }
 
   export type ParkingSpotUpdateWithoutReservationsInput = {
+    name?: StringFieldUpdateOperationsInput | string
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22355,6 +22389,7 @@ export namespace Prisma {
 
   export type ParkingSpotUncheckedUpdateWithoutReservationsInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22434,7 +22469,8 @@ export namespace Prisma {
   }
 
   export type ParkingSpotCreateWithoutParkingRecordsInput = {
-    isAvailable: boolean
+    name: string
+    isAvailable?: boolean
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -22444,7 +22480,8 @@ export namespace Prisma {
 
   export type ParkingSpotUncheckedCreateWithoutParkingRecordsInput = {
     id?: number
-    isAvailable: boolean
+    name: string
+    isAvailable?: boolean
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -22553,6 +22590,7 @@ export namespace Prisma {
   }
 
   export type ParkingSpotUpdateWithoutParkingRecordsInput = {
+    name?: StringFieldUpdateOperationsInput | string
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22563,6 +22601,7 @@ export namespace Prisma {
 
   export type ParkingSpotUncheckedUpdateWithoutParkingRecordsInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23107,7 +23146,8 @@ export namespace Prisma {
 
   export type ParkingSpotCreateManyParkingLotInput = {
     id?: number
-    isAvailable: boolean
+    name: string
+    isAvailable?: boolean
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -23141,6 +23181,7 @@ export namespace Prisma {
   }
 
   export type ParkingSpotUpdateWithoutParkingLotInput = {
+    name?: StringFieldUpdateOperationsInput | string
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23151,6 +23192,7 @@ export namespace Prisma {
 
   export type ParkingSpotUncheckedUpdateWithoutParkingLotInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23161,6 +23203,7 @@ export namespace Prisma {
 
   export type ParkingSpotUncheckedUpdateManyWithoutParkingLotInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

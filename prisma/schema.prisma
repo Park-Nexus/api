@@ -207,7 +207,8 @@ model ParkingLotService {
 model ParkingSpot {
   id Int @id @default(autoincrement())
 
-  isAvailable Boolean
+  name        String
+  isAvailable Boolean             @default(true)
   vehicleType VEHICLE__TYPE_ALIAS
   createdAt   DateTime            @default(now())
   updatedAt   DateTime            @updatedAt
