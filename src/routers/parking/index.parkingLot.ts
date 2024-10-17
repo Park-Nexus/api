@@ -305,6 +305,109 @@ export const addService = procedure
   .input(addServiceSchema)
   .mutation(async ({ ctx, input }) => {
     const {
-      account: { id },
+      account: { id: ownerAccountId },
     } = ctx;
+
+    const owner = await prisma.user.findUnique({ where: { accountId: ownerAccountId } });
+    if (!owner) throw new Error("User not found");
+
+    const parkingLot = await prisma.parkingLot.findFirst({
+      where: {
+        id: input.parkingLotId,
+        ownerId: owner.id,
+      },
+    });
+    if (!parkingLot) throw new Error("Parking lot not found");
+
+    await prisma.parkingLotService.create({
+      data: {
+        name: input.name,
+        type: input.type,
+        description: input.description,
+        mediaUrls: input.mediaUrls,
+        price: input.price,
+        parkingLotId: parkingLot.id,
+        vehicleTypes: input.vehicleTypes,
+      },
+    });
+
+    return;
+  });
+
+// Update parking lot service ----------------------------------------------------------------
+const updateServiceSchema = z.object({
+  serviceId: z.number(),
+  name: z.string().optional(),
+  type: z.nativeEnum(PARKING_LOT_SERVICE__TYPE_ALIAS).optional(),
+  description: z.string().optional(),
+  mediaUrls: z.array(z.string()).optional(),
+  price: z.number().optional(),
+  vehicleTypes: z.array(z.nativeEnum(VEHICLE__TYPE_ALIAS)).optional(),
+});
+export const updateService = procedure
+  .use(authMiddleware(["PARKING_LOT_OWNER"]))
+  .input(updateServiceSchema)
+  .mutation(async ({ ctx, input }) => {
+    const {
+      account: { id: ownerAccountId },
+    } = ctx;
+    const { serviceId, name, type, description, mediaUrls, price, vehicleTypes } = input;
+
+    const owner = await prisma.user.findUnique({ where: { accountId: ownerAccountId } });
+    if (!owner) throw new Error("User not found");
+
+    const service = await prisma.parkingLotService.findFirst({
+      where: {
+        id: serviceId,
+        parkingLot: {
+          ownerId: owner.id,
+        },
+      },
+    });
+    if (!service) throw new Error("Parking lot service not found");
+
+    await prisma.parkingLotService.update({
+      where: { id: serviceId },
+      data: {
+        name,
+        type,
+        description,
+        mediaUrls,
+        price,
+        vehicleTypes,
+      },
+    });
+
+    return;
+  });
+
+// Remove parking lot service ------------------------------------------------------------------
+const removeServiceSchema = z.object({
+  serviceId: z.number(),
+});
+export const removeService = procedure
+  .use(authMiddleware(["PARKING_LOT_OWNER"]))
+  .input(removeServiceSchema)
+  .mutation(async ({ ctx, input }) => {
+    const {
+      account: { id: ownerAccountId },
+    } = ctx;
+    const { serviceId } = input;
+
+    const owner = await prisma.user.findUnique({ where: { accountId: ownerAccountId } });
+    if (!owner) throw new Error("User not found");
+
+    const service = await prisma.parkingLotService.findFirst({
+      where: {
+        id: serviceId,
+        parkingLot: {
+          ownerId: owner.id,
+        },
+      },
+    });
+    if (!service) throw new Error("Parking lot service not found");
+
+    await prisma.parkingLotService.delete({ where: { id: serviceId } });
+
+    return;
   });
