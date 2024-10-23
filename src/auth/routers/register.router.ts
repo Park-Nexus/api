@@ -10,18 +10,17 @@ const inputSchema = z.object({
     .string()
     .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Invalid email format"),
   password: z.string().min(8, "Password must be at least 8 characters"),
-  role: z.enum([ACCOUNT__ROLE_ALIAS.PARKING_LOT_OWNER, ACCOUNT__ROLE_ALIAS.USER]),
 });
 
 export const registerRouter = procedure.input(inputSchema).mutation(async ({ input }) => {
-  const { email, password, role } = input;
+  const { email, password } = input;
 
   const hash = await hashPassword(password);
 
   let newAccount;
   try {
     await prisma.account.create({
-      data: { email, password: hash, role },
+      data: { email, password: hash, role: ACCOUNT__ROLE_ALIAS.USER },
     });
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError) {

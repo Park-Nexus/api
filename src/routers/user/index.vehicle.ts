@@ -25,8 +25,8 @@ export const add = procedure
 
     const { id: ownerId } = await prisma.user.findUnique({ where: { accountId: id } });
 
-    const exsitingVehicles = await prisma.vehicle.findMany({ where: { plate, ownerId } });
-    if (exsitingVehicles.length > 0) {
+    const existingVehicles = await prisma.vehicle.findMany({ where: { plate, ownerId } });
+    if (existingVehicles.length > 0) {
       throw new TRPCError({ code: "CONFLICT", message: "Vehicle already exists" });
     }
 
