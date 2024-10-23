@@ -131,6 +131,10 @@ export const getSingle = procedure
       select: {
         id: true,
         name: true,
+        description: true,
+        phone: true,
+        openAt: true,
+        closeAt: true,
         latitude: true,
         longitude: true,
         status: true,
