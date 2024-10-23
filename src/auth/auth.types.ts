@@ -1,4 +1,4 @@
-import { ACCOUNT__ROLE_ALIAS } from "../db";
+import { ACCOUNT__ROLE_ALIAS } from "@src/db";
 
 export type AccessToken = {
   // Account info

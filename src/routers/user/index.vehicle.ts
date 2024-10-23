@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-import { authMiddleware } from "../../auth";
-import { prisma, Vehicle, VEHICLE__TYPE_ALIAS } from "../../db";
-import { procedure } from "../../trpc";
+import { authMiddleware } from "@src/auth";
+import { prisma, Vehicle, VEHICLE__TYPE_ALIAS } from "@src/db";
+import { procedure } from "@src/trpc";
 import { TRPCError } from "@trpc/server";
 
 // Add a new vehicle ------------------------------------------------------------------------

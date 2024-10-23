@@ -1,9 +1,9 @@
 import { TRPCError } from "@trpc/server";
 
 import { AccessToken } from "./auth.types";
-import { trpcInstance } from "../trpc";
+import { trpcInstance } from "@src/trpc";
 import { verifyAccessToken } from "./utils/jwt.utils";
-import { ACCOUNT__ROLE_ALIAS } from "../db";
+import { ACCOUNT__ROLE_ALIAS } from "@src/db";
 
 export const authMiddleware = (allowedRoles?: ACCOUNT__ROLE_ALIAS[]) =>
   trpcInstance.middleware(async ({ ctx, next }) => {

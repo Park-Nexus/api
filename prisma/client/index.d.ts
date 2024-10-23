@@ -85,8 +85,7 @@ export type PaymentRecord = $Result.DefaultSelection<Prisma.$PaymentRecordPayloa
 export namespace $Enums {
   export const ACCOUNT__ROLE_ALIAS: {
   ADMIN: 'ADMIN',
-  USER: 'USER',
-  PARKING_LOT_OWNER: 'PARKING_LOT_OWNER'
+  USER: 'USER'
 };
 
 export type ACCOUNT__ROLE_ALIAS = (typeof ACCOUNT__ROLE_ALIAS)[keyof typeof ACCOUNT__ROLE_ALIAS]
