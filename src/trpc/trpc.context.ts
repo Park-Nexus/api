@@ -1,8 +1,8 @@
-import { CreateExpressContextOptions } from "@trpc/server/adapters/express";
-import { AccessToken } from "@src/auth/auth.types";
+import { CreateExpressContextOptions } from '@trpc/server/adapters/express';
+import { AccessToken } from '../auth/auth.types';
 
 export const createContext = ({ req, res }: CreateExpressContextOptions) => {
-  const accessToken = req.headers["authorization"]?.split("Bearer ")[1] || null;
+  const accessToken = req.headers['authorization']?.split('Bearer ')[1] || null;
   const account: AccessToken | null = null;
 
   return {

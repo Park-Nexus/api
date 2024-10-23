@@ -274,7 +274,8 @@ exports.Prisma.NullsOrder = {
 };
 exports.ACCOUNT__ROLE_ALIAS = exports.$Enums.ACCOUNT__ROLE_ALIAS = {
   ADMIN: 'ADMIN',
-  USER: 'USER'
+  USER: 'USER',
+  PARKING_LOT_OWNER: 'PARKING_LOT_OWNER'
 };
 
 exports.USER__GENDER_ALIAS = exports.$Enums.USER__GENDER_ALIAS = {

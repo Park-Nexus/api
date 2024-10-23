@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { authMiddleware } from "@src/auth";
+import { authMiddleware } from "../../auth";
 import {
   PARKING_LOT__STATUS_ALIAS,
   PARKING_LOT_SERVICE__TYPE_ALIAS,
@@ -8,8 +8,8 @@ import {
   Prisma,
   prisma,
   VEHICLE__TYPE_ALIAS,
-} from "@src/db";
-import { procedure } from "@src/trpc";
+} from "../../db";
+import { procedure } from "../../trpc";
 
 const EARTH_RADIUS_IN_KM = 6371;
 
@@ -21,15 +21,13 @@ const submitSchema = z.object({
   mediaUrls: z.array(z.string()),
 });
 export const submit = procedure
-  .use(authMiddleware(["USER"]))
+  .use(authMiddleware(["PARKING_LOT_OWNER"]))
   .input(submitSchema)
   .mutation(async ({ input, ctx }) => {
     const { name, latitude, longitude, mediaUrls } = input;
     const {
       account: { id },
     } = ctx;
-
-    console.log(ctx);
 
     const { id: ownerId } = await prisma.user.findUnique({ where: { accountId: id } });
 
@@ -147,7 +145,7 @@ const updatePriceSchema = z.object({
   vehicleType: z.nativeEnum(VEHICLE__TYPE_ALIAS),
 });
 export const updatePrice = procedure
-  .use(authMiddleware(["USER"]))
+  .use(authMiddleware(["PARKING_LOT_OWNER"]))
   .input(updatePriceSchema)
   .mutation(async ({ ctx, input }) => {
     const {
@@ -193,7 +191,7 @@ const addSpotSchema = z.object({
   vehicleType: z.nativeEnum(VEHICLE__TYPE_ALIAS),
 });
 export const addSpot = procedure
-  .use(authMiddleware(["USER"]))
+  .use(authMiddleware(["PARKING_LOT_OWNER"]))
   .input(addSpotSchema)
   .mutation(async ({ ctx, input }) => {
     const {
@@ -229,7 +227,7 @@ const updateSpotSchema = z.object({
   vehicleType: z.nativeEnum(VEHICLE__TYPE_ALIAS).optional(),
 });
 export const updateSpot = procedure
-  .use(authMiddleware(["USER"]))
+  .use(authMiddleware(["PARKING_LOT_OWNER"]))
   .input(updateSpotSchema)
   .mutation(async ({ ctx, input }) => {
     const {
@@ -266,7 +264,7 @@ const removeSpotSchema = z.object({
   spotId: z.number(),
 });
 export const removeSpot = procedure
-  .use(authMiddleware(["USER"]))
+  .use(authMiddleware(["PARKING_LOT_OWNER"]))
   .input(removeSpotSchema)
   .mutation(async ({ ctx, input }) => {
     const {
@@ -303,7 +301,7 @@ const addServiceSchema = z.object({
   vehicleTypes: z.array(z.nativeEnum(VEHICLE__TYPE_ALIAS)),
 });
 export const addService = procedure
-  .use(authMiddleware(["USER"]))
+  .use(authMiddleware(["PARKING_LOT_OWNER"]))
   .input(addServiceSchema)
   .mutation(async ({ ctx, input }) => {
     const {
@@ -347,7 +345,7 @@ const updateServiceSchema = z.object({
   vehicleTypes: z.array(z.nativeEnum(VEHICLE__TYPE_ALIAS)).optional(),
 });
 export const updateService = procedure
-  .use(authMiddleware(["USER"]))
+  .use(authMiddleware(["PARKING_LOT_OWNER"]))
   .input(updateServiceSchema)
   .mutation(async ({ ctx, input }) => {
     const {
@@ -388,7 +386,7 @@ const removeServiceSchema = z.object({
   serviceId: z.number(),
 });
 export const removeService = procedure
-  .use(authMiddleware(["USER"]))
+  .use(authMiddleware(["PARKING_LOT_OWNER"]))
   .input(removeServiceSchema)
   .mutation(async ({ ctx, input }) => {
     const {

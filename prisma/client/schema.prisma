@@ -11,6 +11,7 @@ datasource db {
 enum ACCOUNT__ROLE_ALIAS {
   ADMIN
   USER
+  PARKING_LOT_OWNER
 }
 
 enum USER__GENDER_ALIAS {

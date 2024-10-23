@@ -1,4 +1,4 @@
-import { trpcInstance } from "@src/trpc";
+import { trpcInstance } from "../../trpc";
 import * as lot from "./index.parkingLot";
 
 export const parkingRouter = trpcInstance.router({

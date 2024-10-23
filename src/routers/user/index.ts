@@ -1,4 +1,4 @@
-import { trpcInstance } from "@src/trpc";
+import { trpcInstance } from "../../trpc";
 
 import * as profile from "./index.profile";
 import * as vehicle from "./index.vehicle";

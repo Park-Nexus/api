@@ -1,6 +1,6 @@
 import { trpcInstance } from ".";
-import { authRouter } from "@src/auth/routers";
-import { parkingRouter, userRouter } from "@src/routers";
+import { authRouter } from "../auth/routers";
+import { parkingRouter, userRouter } from "../routers";
 
 export const trpcRouter = trpcInstance.router({
   auth: authRouter,
