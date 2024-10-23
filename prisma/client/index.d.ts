@@ -470,6 +470,8 @@ export namespace Prisma {
   export import raw = runtime.raw
   export import Sql = runtime.Sql
 
+
+
   /**
    * Decimal.js
    */
@@ -496,7 +498,7 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 5.19.0
+   * Prisma Client JS version: 5.21.1
    * Query Engine version: bf0e5e8a04cada8225617067eaa03d041e2bba36
    */
   export type PrismaVersion = {
@@ -7391,6 +7393,7 @@ export namespace Prisma {
     id: number | null
     latitude: number | null
     longitude: number | null
+    ratings: number | null
     ownerId: number | null
   }
 
@@ -7398,14 +7401,20 @@ export namespace Prisma {
     id: number | null
     latitude: number | null
     longitude: number | null
+    ratings: number | null
     ownerId: number | null
   }
 
   export type ParkingLotMinAggregateOutputType = {
     id: number | null
     name: string | null
+    description: string | null
     latitude: number | null
     longitude: number | null
+    ratings: number | null
+    phone: string | null
+    openAt: Date | null
+    closeAt: Date | null
     status: $Enums.PARKING_LOT__STATUS_ALIAS | null
     isApproved: boolean | null
     approvedAt: Date | null
@@ -7417,8 +7426,13 @@ export namespace Prisma {
   export type ParkingLotMaxAggregateOutputType = {
     id: number | null
     name: string | null
+    description: string | null
     latitude: number | null
     longitude: number | null
+    ratings: number | null
+    phone: string | null
+    openAt: Date | null
+    closeAt: Date | null
     status: $Enums.PARKING_LOT__STATUS_ALIAS | null
     isApproved: boolean | null
     approvedAt: Date | null
@@ -7430,9 +7444,14 @@ export namespace Prisma {
   export type ParkingLotCountAggregateOutputType = {
     id: number
     name: number
+    description: number
     latitude: number
     longitude: number
     mediaUrls: number
+    ratings: number
+    phone: number
+    openAt: number
+    closeAt: number
     status: number
     isApproved: number
     approvedAt: number
@@ -7447,6 +7466,7 @@ export namespace Prisma {
     id?: true
     latitude?: true
     longitude?: true
+    ratings?: true
     ownerId?: true
   }
 
@@ -7454,14 +7474,20 @@ export namespace Prisma {
     id?: true
     latitude?: true
     longitude?: true
+    ratings?: true
     ownerId?: true
   }
 
   export type ParkingLotMinAggregateInputType = {
     id?: true
     name?: true
+    description?: true
     latitude?: true
     longitude?: true
+    ratings?: true
+    phone?: true
+    openAt?: true
+    closeAt?: true
     status?: true
     isApproved?: true
     approvedAt?: true
@@ -7473,8 +7499,13 @@ export namespace Prisma {
   export type ParkingLotMaxAggregateInputType = {
     id?: true
     name?: true
+    description?: true
     latitude?: true
     longitude?: true
+    ratings?: true
+    phone?: true
+    openAt?: true
+    closeAt?: true
     status?: true
     isApproved?: true
     approvedAt?: true
@@ -7486,9 +7517,14 @@ export namespace Prisma {
   export type ParkingLotCountAggregateInputType = {
     id?: true
     name?: true
+    description?: true
     latitude?: true
     longitude?: true
     mediaUrls?: true
+    ratings?: true
+    phone?: true
+    openAt?: true
+    closeAt?: true
     status?: true
     isApproved?: true
     approvedAt?: true
@@ -7587,9 +7623,14 @@ export namespace Prisma {
   export type ParkingLotGroupByOutputType = {
     id: number
     name: string
+    description: string
     latitude: number
     longitude: number
     mediaUrls: string[]
+    ratings: number
+    phone: string
+    openAt: Date
+    closeAt: Date
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved: boolean
     approvedAt: Date | null
@@ -7620,9 +7661,14 @@ export namespace Prisma {
   export type ParkingLotSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    description?: boolean
     latitude?: boolean
     longitude?: boolean
     mediaUrls?: boolean
+    ratings?: boolean
+    phone?: boolean
+    openAt?: boolean
+    closeAt?: boolean
     status?: boolean
     isApproved?: boolean
     approvedAt?: boolean
@@ -7640,9 +7686,14 @@ export namespace Prisma {
   export type ParkingLotSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    description?: boolean
     latitude?: boolean
     longitude?: boolean
     mediaUrls?: boolean
+    ratings?: boolean
+    phone?: boolean
+    openAt?: boolean
+    closeAt?: boolean
     status?: boolean
     isApproved?: boolean
     approvedAt?: boolean
@@ -7655,9 +7706,14 @@ export namespace Prisma {
   export type ParkingLotSelectScalar = {
     id?: boolean
     name?: boolean
+    description?: boolean
     latitude?: boolean
     longitude?: boolean
     mediaUrls?: boolean
+    ratings?: boolean
+    phone?: boolean
+    openAt?: boolean
+    closeAt?: boolean
     status?: boolean
     isApproved?: boolean
     approvedAt?: boolean
@@ -7690,9 +7746,14 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
+      description: string
       latitude: number
       longitude: number
       mediaUrls: string[]
+      ratings: number
+      phone: string
+      openAt: Date
+      closeAt: Date
       status: $Enums.PARKING_LOT__STATUS_ALIAS
       isApproved: boolean
       approvedAt: Date | null
@@ -8099,9 +8160,14 @@ export namespace Prisma {
   interface ParkingLotFieldRefs {
     readonly id: FieldRef<"ParkingLot", 'Int'>
     readonly name: FieldRef<"ParkingLot", 'String'>
+    readonly description: FieldRef<"ParkingLot", 'String'>
     readonly latitude: FieldRef<"ParkingLot", 'Float'>
     readonly longitude: FieldRef<"ParkingLot", 'Float'>
     readonly mediaUrls: FieldRef<"ParkingLot", 'String[]'>
+    readonly ratings: FieldRef<"ParkingLot", 'Float'>
+    readonly phone: FieldRef<"ParkingLot", 'String'>
+    readonly openAt: FieldRef<"ParkingLot", 'DateTime'>
+    readonly closeAt: FieldRef<"ParkingLot", 'DateTime'>
     readonly status: FieldRef<"ParkingLot", 'PARKING_LOT__STATUS_ALIAS'>
     readonly isApproved: FieldRef<"ParkingLot", 'Boolean'>
     readonly approvedAt: FieldRef<"ParkingLot", 'DateTime'>
@@ -15792,9 +15858,14 @@ export namespace Prisma {
   export const ParkingLotScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    description: 'description',
     latitude: 'latitude',
     longitude: 'longitude',
     mediaUrls: 'mediaUrls',
+    ratings: 'ratings',
+    phone: 'phone',
+    openAt: 'openAt',
+    closeAt: 'closeAt',
     status: 'status',
     isApproved: 'isApproved',
     approvedAt: 'approvedAt',
@@ -16480,9 +16551,14 @@ export namespace Prisma {
     NOT?: ParkingLotWhereInput | ParkingLotWhereInput[]
     id?: IntFilter<"ParkingLot"> | number
     name?: StringFilter<"ParkingLot"> | string
+    description?: StringFilter<"ParkingLot"> | string
     latitude?: FloatFilter<"ParkingLot"> | number
     longitude?: FloatFilter<"ParkingLot"> | number
     mediaUrls?: StringNullableListFilter<"ParkingLot">
+    ratings?: FloatFilter<"ParkingLot"> | number
+    phone?: StringFilter<"ParkingLot"> | string
+    openAt?: DateTimeFilter<"ParkingLot"> | Date | string
+    closeAt?: DateTimeFilter<"ParkingLot"> | Date | string
     status?: EnumPARKING_LOT__STATUS_ALIASFilter<"ParkingLot"> | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFilter<"ParkingLot"> | boolean
     approvedAt?: DateTimeNullableFilter<"ParkingLot"> | Date | string | null
@@ -16499,9 +16575,14 @@ export namespace Prisma {
   export type ParkingLotOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    description?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
     mediaUrls?: SortOrder
+    ratings?: SortOrder
+    phone?: SortOrder
+    openAt?: SortOrder
+    closeAt?: SortOrder
     status?: SortOrder
     isApproved?: SortOrder
     approvedAt?: SortOrderInput | SortOrder
@@ -16521,9 +16602,14 @@ export namespace Prisma {
     OR?: ParkingLotWhereInput[]
     NOT?: ParkingLotWhereInput | ParkingLotWhereInput[]
     name?: StringFilter<"ParkingLot"> | string
+    description?: StringFilter<"ParkingLot"> | string
     latitude?: FloatFilter<"ParkingLot"> | number
     longitude?: FloatFilter<"ParkingLot"> | number
     mediaUrls?: StringNullableListFilter<"ParkingLot">
+    ratings?: FloatFilter<"ParkingLot"> | number
+    phone?: StringFilter<"ParkingLot"> | string
+    openAt?: DateTimeFilter<"ParkingLot"> | Date | string
+    closeAt?: DateTimeFilter<"ParkingLot"> | Date | string
     status?: EnumPARKING_LOT__STATUS_ALIASFilter<"ParkingLot"> | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFilter<"ParkingLot"> | boolean
     approvedAt?: DateTimeNullableFilter<"ParkingLot"> | Date | string | null
@@ -16540,9 +16626,14 @@ export namespace Prisma {
   export type ParkingLotOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    description?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
     mediaUrls?: SortOrder
+    ratings?: SortOrder
+    phone?: SortOrder
+    openAt?: SortOrder
+    closeAt?: SortOrder
     status?: SortOrder
     isApproved?: SortOrder
     approvedAt?: SortOrderInput | SortOrder
@@ -16562,9 +16653,14 @@ export namespace Prisma {
     NOT?: ParkingLotScalarWhereWithAggregatesInput | ParkingLotScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"ParkingLot"> | number
     name?: StringWithAggregatesFilter<"ParkingLot"> | string
+    description?: StringWithAggregatesFilter<"ParkingLot"> | string
     latitude?: FloatWithAggregatesFilter<"ParkingLot"> | number
     longitude?: FloatWithAggregatesFilter<"ParkingLot"> | number
     mediaUrls?: StringNullableListFilter<"ParkingLot">
+    ratings?: FloatWithAggregatesFilter<"ParkingLot"> | number
+    phone?: StringWithAggregatesFilter<"ParkingLot"> | string
+    openAt?: DateTimeWithAggregatesFilter<"ParkingLot"> | Date | string
+    closeAt?: DateTimeWithAggregatesFilter<"ParkingLot"> | Date | string
     status?: EnumPARKING_LOT__STATUS_ALIASWithAggregatesFilter<"ParkingLot"> | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolWithAggregatesFilter<"ParkingLot"> | boolean
     approvedAt?: DateTimeNullableWithAggregatesFilter<"ParkingLot"> | Date | string | null
@@ -17471,9 +17567,14 @@ export namespace Prisma {
 
   export type ParkingLotCreateInput = {
     name: string
+    description?: string
     latitude: number
     longitude: number
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
+    ratings?: number
+    phone: string
+    openAt: Date | string
+    closeAt: Date | string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -17489,9 +17590,14 @@ export namespace Prisma {
   export type ParkingLotUncheckedCreateInput = {
     id?: number
     name: string
+    description?: string
     latitude: number
     longitude: number
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
+    ratings?: number
+    phone: string
+    openAt: Date | string
+    closeAt: Date | string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -17506,9 +17612,14 @@ export namespace Prisma {
 
   export type ParkingLotUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
+    ratings?: FloatFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17524,9 +17635,14 @@ export namespace Prisma {
   export type ParkingLotUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
+    ratings?: FloatFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17542,9 +17658,14 @@ export namespace Prisma {
   export type ParkingLotCreateManyInput = {
     id?: number
     name: string
+    description?: string
     latitude: number
     longitude: number
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
+    ratings?: number
+    phone: string
+    openAt: Date | string
+    closeAt: Date | string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -17555,9 +17676,14 @@ export namespace Prisma {
 
   export type ParkingLotUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
+    ratings?: FloatFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17568,9 +17694,14 @@ export namespace Prisma {
   export type ParkingLotUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
+    ratings?: FloatFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -18620,9 +18751,14 @@ export namespace Prisma {
   export type ParkingLotCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    description?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
     mediaUrls?: SortOrder
+    ratings?: SortOrder
+    phone?: SortOrder
+    openAt?: SortOrder
+    closeAt?: SortOrder
     status?: SortOrder
     isApproved?: SortOrder
     approvedAt?: SortOrder
@@ -18635,14 +18771,20 @@ export namespace Prisma {
     id?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
+    ratings?: SortOrder
     ownerId?: SortOrder
   }
 
   export type ParkingLotMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    description?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
+    ratings?: SortOrder
+    phone?: SortOrder
+    openAt?: SortOrder
+    closeAt?: SortOrder
     status?: SortOrder
     isApproved?: SortOrder
     approvedAt?: SortOrder
@@ -18654,8 +18796,13 @@ export namespace Prisma {
   export type ParkingLotMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    description?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
+    ratings?: SortOrder
+    phone?: SortOrder
+    openAt?: SortOrder
+    closeAt?: SortOrder
     status?: SortOrder
     isApproved?: SortOrder
     approvedAt?: SortOrder
@@ -18668,6 +18815,7 @@ export namespace Prisma {
     id?: SortOrder
     latitude?: SortOrder
     longitude?: SortOrder
+    ratings?: SortOrder
     ownerId?: SortOrder
   }
 
@@ -20861,9 +21009,14 @@ export namespace Prisma {
 
   export type ParkingLotCreateWithoutOwnerInput = {
     name: string
+    description?: string
     latitude: number
     longitude: number
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
+    ratings?: number
+    phone: string
+    openAt: Date | string
+    closeAt: Date | string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -20878,9 +21031,14 @@ export namespace Prisma {
   export type ParkingLotUncheckedCreateWithoutOwnerInput = {
     id?: number
     name: string
+    description?: string
     latitude: number
     longitude: number
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
+    ratings?: number
+    phone: string
+    openAt: Date | string
+    closeAt: Date | string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -21065,9 +21223,14 @@ export namespace Prisma {
     NOT?: ParkingLotScalarWhereInput | ParkingLotScalarWhereInput[]
     id?: IntFilter<"ParkingLot"> | number
     name?: StringFilter<"ParkingLot"> | string
+    description?: StringFilter<"ParkingLot"> | string
     latitude?: FloatFilter<"ParkingLot"> | number
     longitude?: FloatFilter<"ParkingLot"> | number
     mediaUrls?: StringNullableListFilter<"ParkingLot">
+    ratings?: FloatFilter<"ParkingLot"> | number
+    phone?: StringFilter<"ParkingLot"> | string
+    openAt?: DateTimeFilter<"ParkingLot"> | Date | string
+    closeAt?: DateTimeFilter<"ParkingLot"> | Date | string
     status?: EnumPARKING_LOT__STATUS_ALIASFilter<"ParkingLot"> | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFilter<"ParkingLot"> | boolean
     approvedAt?: DateTimeNullableFilter<"ParkingLot"> | Date | string | null
@@ -21741,9 +21904,14 @@ export namespace Prisma {
 
   export type ParkingLotCreateWithoutParkingLotPricesInput = {
     name: string
+    description?: string
     latitude: number
     longitude: number
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
+    ratings?: number
+    phone: string
+    openAt: Date | string
+    closeAt: Date | string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -21758,9 +21926,14 @@ export namespace Prisma {
   export type ParkingLotUncheckedCreateWithoutParkingLotPricesInput = {
     id?: number
     name: string
+    description?: string
     latitude: number
     longitude: number
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
+    ratings?: number
+    phone: string
+    openAt: Date | string
+    closeAt: Date | string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -21790,9 +21963,14 @@ export namespace Prisma {
 
   export type ParkingLotUpdateWithoutParkingLotPricesInput = {
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
+    ratings?: FloatFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -21807,9 +21985,14 @@ export namespace Prisma {
   export type ParkingLotUncheckedUpdateWithoutParkingLotPricesInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
+    ratings?: FloatFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -21823,9 +22006,14 @@ export namespace Prisma {
 
   export type ParkingLotCreateWithoutParkingLotReviewsInput = {
     name: string
+    description?: string
     latitude: number
     longitude: number
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
+    ratings?: number
+    phone: string
+    openAt: Date | string
+    closeAt: Date | string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -21840,9 +22028,14 @@ export namespace Prisma {
   export type ParkingLotUncheckedCreateWithoutParkingLotReviewsInput = {
     id?: number
     name: string
+    description?: string
     latitude: number
     longitude: number
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
+    ratings?: number
+    phone: string
+    openAt: Date | string
+    closeAt: Date | string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -21908,9 +22101,14 @@ export namespace Prisma {
 
   export type ParkingLotUpdateWithoutParkingLotReviewsInput = {
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
+    ratings?: FloatFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -21925,9 +22123,14 @@ export namespace Prisma {
   export type ParkingLotUncheckedUpdateWithoutParkingLotReviewsInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
+    ratings?: FloatFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -21983,9 +22186,14 @@ export namespace Prisma {
 
   export type ParkingLotCreateWithoutParkingLotServicesInput = {
     name: string
+    description?: string
     latitude: number
     longitude: number
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
+    ratings?: number
+    phone: string
+    openAt: Date | string
+    closeAt: Date | string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -22000,9 +22208,14 @@ export namespace Prisma {
   export type ParkingLotUncheckedCreateWithoutParkingLotServicesInput = {
     id?: number
     name: string
+    description?: string
     latitude: number
     longitude: number
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
+    ratings?: number
+    phone: string
+    openAt: Date | string
+    closeAt: Date | string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -22032,9 +22245,14 @@ export namespace Prisma {
 
   export type ParkingLotUpdateWithoutParkingLotServicesInput = {
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
+    ratings?: FloatFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22049,9 +22267,14 @@ export namespace Prisma {
   export type ParkingLotUncheckedUpdateWithoutParkingLotServicesInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
+    ratings?: FloatFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22129,9 +22352,14 @@ export namespace Prisma {
 
   export type ParkingLotCreateWithoutParkingSpotsInput = {
     name: string
+    description?: string
     latitude: number
     longitude: number
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
+    ratings?: number
+    phone: string
+    openAt: Date | string
+    closeAt: Date | string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -22146,9 +22374,14 @@ export namespace Prisma {
   export type ParkingLotUncheckedCreateWithoutParkingSpotsInput = {
     id?: number
     name: string
+    description?: string
     latitude: number
     longitude: number
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
+    ratings?: number
+    phone: string
+    openAt: Date | string
+    closeAt: Date | string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -22210,9 +22443,14 @@ export namespace Prisma {
 
   export type ParkingLotUpdateWithoutParkingSpotsInput = {
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
+    ratings?: FloatFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22227,9 +22465,14 @@ export namespace Prisma {
   export type ParkingLotUncheckedUpdateWithoutParkingSpotsInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
+    ratings?: FloatFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22863,9 +23106,14 @@ export namespace Prisma {
   export type ParkingLotCreateManyOwnerInput = {
     id?: number
     name: string
+    description?: string
     latitude: number
     longitude: number
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
+    ratings?: number
+    phone: string
+    openAt: Date | string
+    closeAt: Date | string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -22961,9 +23209,14 @@ export namespace Prisma {
 
   export type ParkingLotUpdateWithoutOwnerInput = {
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
+    ratings?: FloatFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22978,9 +23231,14 @@ export namespace Prisma {
   export type ParkingLotUncheckedUpdateWithoutOwnerInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
+    ratings?: FloatFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22995,9 +23253,14 @@ export namespace Prisma {
   export type ParkingLotUncheckedUpdateManyWithoutOwnerInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
     longitude?: FloatFieldUpdateOperationsInput | number
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
+    ratings?: FloatFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null

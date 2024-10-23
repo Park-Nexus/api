@@ -142,15 +142,20 @@ model Vehicle {
 model ParkingLot {
   id Int @id @default(autoincrement())
 
-  name       String
-  latitude   Float
-  longitude  Float
-  mediaUrls  String[]
-  status     PARKING_LOT__STATUS_ALIAS
-  isApproved Boolean                   @default(false)
-  approvedAt DateTime?
-  createdAt  DateTime                  @default(now())
-  updatedAt  DateTime                  @updatedAt
+  name        String
+  description String                    @default("")
+  latitude    Float
+  longitude   Float
+  mediaUrls   String[]
+  ratings     Float                     @default(0)
+  phone       String
+  openAt      DateTime
+  closeAt     DateTime
+  status      PARKING_LOT__STATUS_ALIAS
+  isApproved  Boolean                   @default(false)
+  approvedAt  DateTime?
+  createdAt   DateTime                  @default(now())
+  updatedAt   DateTime                  @updatedAt
 
   parkingSpots       ParkingSpot[]
   parkingLotServices ParkingLotService[]

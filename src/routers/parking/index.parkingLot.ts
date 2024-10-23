@@ -16,6 +16,10 @@ const EARTH_RADIUS_IN_KM = 6371;
 // Submit new parking lot for approval --------------------------------------------------------
 const submitSchema = z.object({
   name: z.string(),
+  description: z.string().optional(),
+  phone: z.string(),
+  openAt: z.date(),
+  closeAt: z.date(),
   latitude: z.number(),
   longitude: z.number(),
   mediaUrls: z.array(z.string()),
@@ -24,7 +28,7 @@ export const submit = procedure
   .use(authMiddleware(["USER"]))
   .input(submitSchema)
   .mutation(async ({ input, ctx }) => {
-    const { name, latitude, longitude, mediaUrls } = input;
+    const { name, latitude, longitude, mediaUrls, description, phone, openAt, closeAt } = input;
     const {
       account: { id },
     } = ctx;
@@ -39,6 +43,10 @@ export const submit = procedure
         mediaUrls,
         status: "INACTIVE",
         ownerId,
+        phone,
+        openAt,
+        closeAt,
+        description,
       },
     });
   });
@@ -58,7 +66,10 @@ export const getMany = procedure
   .query(async ({ input }) => {
     const { name, latitude, longitude, radiusInKm, status, isApproved } = input;
 
-    let parkingLots: Omit<ParkingLot, "mediaUrls">[];
+    let parkingLots: Omit<
+      ParkingLot,
+      "mediaUrls" | "description" | "phone" | "ratings" | "openAt" | "closeAt"
+    >[];
 
     if (!latitude || !longitude || !radiusInKm) {
       parkingLots = await prisma.parkingLot.findMany({

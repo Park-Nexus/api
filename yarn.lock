@@ -144,10 +144,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@prisma/client@5.19.0":
-  version "5.19.0"
-  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-5.19.0.tgz#db0b4a5b536aeda7f91126e83685e6663c1d2ed1"
-  integrity sha512-CzOpau+q1kEWQyoQMvlnXIHqPvwmWbh48xZ4n8KWbAql0p8PC0BIgSTYW5ncxXa4JSEff0tcoxSZB874wDstdg==
+"@prisma/client@5.21.1":
+  version "5.21.1"
+  resolved "https://registry.yarnpkg.com/@prisma/client/-/client-5.21.1.tgz#ad51ef220eb80173f882e859960d81e626b73898"
+  integrity sha512-3n+GgbAZYjaS/k0M03yQsQfR1APbr411r74foknnsGpmhNKBG49VuUkxIU6jORgvJPChoD4WC4PqoHImN1FP0w==
 
 "@prisma/debug@5.21.1":
   version "5.21.1"
@@ -1671,7 +1671,7 @@ prettier@3.3.3:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.3.3.tgz#30c54fe0be0d8d12e6ae61dbb10109ea00d53105"
   integrity sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==
 
-prisma@^5.16.2:
+prisma@5.21.1:
   version "5.21.1"
   resolved "https://registry.yarnpkg.com/prisma/-/prisma-5.21.1.tgz#3ffe4f4b60ea8df2e6d5f24f0cea090bcc5c0bd6"
   integrity sha512-PB+Iqzld/uQBPaaw2UVIk84kb0ITsLajzsxzsadxxl54eaU5Gyl2/L02ysivHxK89t7YrfQJm+Ggk37uvM70oQ==
