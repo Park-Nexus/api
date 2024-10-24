@@ -1,7 +1,7 @@
 services:
-  parkNexus-db-postgres:
+  postgres-database:
     image: postgres
-    container_name: "parkNexus.db"
+    container_name: "postgres"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
