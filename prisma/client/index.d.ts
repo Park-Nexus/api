@@ -7413,8 +7413,8 @@ export namespace Prisma {
     longitude: number | null
     ratings: number | null
     phone: string | null
-    openAt: Date | null
-    closeAt: Date | null
+    openAt: string | null
+    closeAt: string | null
     status: $Enums.PARKING_LOT__STATUS_ALIAS | null
     isApproved: boolean | null
     approvedAt: Date | null
@@ -7431,8 +7431,8 @@ export namespace Prisma {
     longitude: number | null
     ratings: number | null
     phone: string | null
-    openAt: Date | null
-    closeAt: Date | null
+    openAt: string | null
+    closeAt: string | null
     status: $Enums.PARKING_LOT__STATUS_ALIAS | null
     isApproved: boolean | null
     approvedAt: Date | null
@@ -7629,8 +7629,8 @@ export namespace Prisma {
     mediaUrls: string[]
     ratings: number
     phone: string
-    openAt: Date
-    closeAt: Date
+    openAt: string
+    closeAt: string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved: boolean
     approvedAt: Date | null
@@ -7752,8 +7752,8 @@ export namespace Prisma {
       mediaUrls: string[]
       ratings: number
       phone: string
-      openAt: Date
-      closeAt: Date
+      openAt: string
+      closeAt: string
       status: $Enums.PARKING_LOT__STATUS_ALIAS
       isApproved: boolean
       approvedAt: Date | null
@@ -8166,8 +8166,8 @@ export namespace Prisma {
     readonly mediaUrls: FieldRef<"ParkingLot", 'String[]'>
     readonly ratings: FieldRef<"ParkingLot", 'Float'>
     readonly phone: FieldRef<"ParkingLot", 'String'>
-    readonly openAt: FieldRef<"ParkingLot", 'DateTime'>
-    readonly closeAt: FieldRef<"ParkingLot", 'DateTime'>
+    readonly openAt: FieldRef<"ParkingLot", 'String'>
+    readonly closeAt: FieldRef<"ParkingLot", 'String'>
     readonly status: FieldRef<"ParkingLot", 'PARKING_LOT__STATUS_ALIAS'>
     readonly isApproved: FieldRef<"ParkingLot", 'Boolean'>
     readonly approvedAt: FieldRef<"ParkingLot", 'DateTime'>
@@ -16557,8 +16557,8 @@ export namespace Prisma {
     mediaUrls?: StringNullableListFilter<"ParkingLot">
     ratings?: FloatFilter<"ParkingLot"> | number
     phone?: StringFilter<"ParkingLot"> | string
-    openAt?: DateTimeFilter<"ParkingLot"> | Date | string
-    closeAt?: DateTimeFilter<"ParkingLot"> | Date | string
+    openAt?: StringFilter<"ParkingLot"> | string
+    closeAt?: StringFilter<"ParkingLot"> | string
     status?: EnumPARKING_LOT__STATUS_ALIASFilter<"ParkingLot"> | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFilter<"ParkingLot"> | boolean
     approvedAt?: DateTimeNullableFilter<"ParkingLot"> | Date | string | null
@@ -16608,8 +16608,8 @@ export namespace Prisma {
     mediaUrls?: StringNullableListFilter<"ParkingLot">
     ratings?: FloatFilter<"ParkingLot"> | number
     phone?: StringFilter<"ParkingLot"> | string
-    openAt?: DateTimeFilter<"ParkingLot"> | Date | string
-    closeAt?: DateTimeFilter<"ParkingLot"> | Date | string
+    openAt?: StringFilter<"ParkingLot"> | string
+    closeAt?: StringFilter<"ParkingLot"> | string
     status?: EnumPARKING_LOT__STATUS_ALIASFilter<"ParkingLot"> | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFilter<"ParkingLot"> | boolean
     approvedAt?: DateTimeNullableFilter<"ParkingLot"> | Date | string | null
@@ -16659,8 +16659,8 @@ export namespace Prisma {
     mediaUrls?: StringNullableListFilter<"ParkingLot">
     ratings?: FloatWithAggregatesFilter<"ParkingLot"> | number
     phone?: StringWithAggregatesFilter<"ParkingLot"> | string
-    openAt?: DateTimeWithAggregatesFilter<"ParkingLot"> | Date | string
-    closeAt?: DateTimeWithAggregatesFilter<"ParkingLot"> | Date | string
+    openAt?: StringWithAggregatesFilter<"ParkingLot"> | string
+    closeAt?: StringWithAggregatesFilter<"ParkingLot"> | string
     status?: EnumPARKING_LOT__STATUS_ALIASWithAggregatesFilter<"ParkingLot"> | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolWithAggregatesFilter<"ParkingLot"> | boolean
     approvedAt?: DateTimeNullableWithAggregatesFilter<"ParkingLot"> | Date | string | null
@@ -17573,8 +17573,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
     ratings?: number
     phone: string
-    openAt: Date | string
-    closeAt: Date | string
+    openAt: string
+    closeAt: string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -17596,8 +17596,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
     ratings?: number
     phone: string
-    openAt: Date | string
-    closeAt: Date | string
+    openAt: string
+    closeAt: string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -17618,8 +17618,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
     ratings?: FloatFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
-    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    openAt?: StringFieldUpdateOperationsInput | string
+    closeAt?: StringFieldUpdateOperationsInput | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17641,8 +17641,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
     ratings?: FloatFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
-    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    openAt?: StringFieldUpdateOperationsInput | string
+    closeAt?: StringFieldUpdateOperationsInput | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17664,8 +17664,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
     ratings?: number
     phone: string
-    openAt: Date | string
-    closeAt: Date | string
+    openAt: string
+    closeAt: string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -17682,8 +17682,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
     ratings?: FloatFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
-    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    openAt?: StringFieldUpdateOperationsInput | string
+    closeAt?: StringFieldUpdateOperationsInput | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17700,8 +17700,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
     ratings?: FloatFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
-    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    openAt?: StringFieldUpdateOperationsInput | string
+    closeAt?: StringFieldUpdateOperationsInput | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -21015,8 +21015,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
     ratings?: number
     phone: string
-    openAt: Date | string
-    closeAt: Date | string
+    openAt: string
+    closeAt: string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -21037,8 +21037,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
     ratings?: number
     phone: string
-    openAt: Date | string
-    closeAt: Date | string
+    openAt: string
+    closeAt: string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -21229,8 +21229,8 @@ export namespace Prisma {
     mediaUrls?: StringNullableListFilter<"ParkingLot">
     ratings?: FloatFilter<"ParkingLot"> | number
     phone?: StringFilter<"ParkingLot"> | string
-    openAt?: DateTimeFilter<"ParkingLot"> | Date | string
-    closeAt?: DateTimeFilter<"ParkingLot"> | Date | string
+    openAt?: StringFilter<"ParkingLot"> | string
+    closeAt?: StringFilter<"ParkingLot"> | string
     status?: EnumPARKING_LOT__STATUS_ALIASFilter<"ParkingLot"> | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFilter<"ParkingLot"> | boolean
     approvedAt?: DateTimeNullableFilter<"ParkingLot"> | Date | string | null
@@ -21910,8 +21910,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
     ratings?: number
     phone: string
-    openAt: Date | string
-    closeAt: Date | string
+    openAt: string
+    closeAt: string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -21932,8 +21932,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
     ratings?: number
     phone: string
-    openAt: Date | string
-    closeAt: Date | string
+    openAt: string
+    closeAt: string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -21969,8 +21969,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
     ratings?: FloatFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
-    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    openAt?: StringFieldUpdateOperationsInput | string
+    closeAt?: StringFieldUpdateOperationsInput | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -21991,8 +21991,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
     ratings?: FloatFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
-    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    openAt?: StringFieldUpdateOperationsInput | string
+    closeAt?: StringFieldUpdateOperationsInput | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22012,8 +22012,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
     ratings?: number
     phone: string
-    openAt: Date | string
-    closeAt: Date | string
+    openAt: string
+    closeAt: string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -22034,8 +22034,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
     ratings?: number
     phone: string
-    openAt: Date | string
-    closeAt: Date | string
+    openAt: string
+    closeAt: string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -22107,8 +22107,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
     ratings?: FloatFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
-    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    openAt?: StringFieldUpdateOperationsInput | string
+    closeAt?: StringFieldUpdateOperationsInput | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22129,8 +22129,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
     ratings?: FloatFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
-    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    openAt?: StringFieldUpdateOperationsInput | string
+    closeAt?: StringFieldUpdateOperationsInput | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22192,8 +22192,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
     ratings?: number
     phone: string
-    openAt: Date | string
-    closeAt: Date | string
+    openAt: string
+    closeAt: string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -22214,8 +22214,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
     ratings?: number
     phone: string
-    openAt: Date | string
-    closeAt: Date | string
+    openAt: string
+    closeAt: string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -22251,8 +22251,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
     ratings?: FloatFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
-    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    openAt?: StringFieldUpdateOperationsInput | string
+    closeAt?: StringFieldUpdateOperationsInput | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22273,8 +22273,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
     ratings?: FloatFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
-    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    openAt?: StringFieldUpdateOperationsInput | string
+    closeAt?: StringFieldUpdateOperationsInput | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22358,8 +22358,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
     ratings?: number
     phone: string
-    openAt: Date | string
-    closeAt: Date | string
+    openAt: string
+    closeAt: string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -22380,8 +22380,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
     ratings?: number
     phone: string
-    openAt: Date | string
-    closeAt: Date | string
+    openAt: string
+    closeAt: string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -22449,8 +22449,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
     ratings?: FloatFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
-    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    openAt?: StringFieldUpdateOperationsInput | string
+    closeAt?: StringFieldUpdateOperationsInput | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -22471,8 +22471,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
     ratings?: FloatFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
-    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    openAt?: StringFieldUpdateOperationsInput | string
+    closeAt?: StringFieldUpdateOperationsInput | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23112,8 +23112,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
     ratings?: number
     phone: string
-    openAt: Date | string
-    closeAt: Date | string
+    openAt: string
+    closeAt: string
     status: $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: boolean
     approvedAt?: Date | string | null
@@ -23215,8 +23215,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
     ratings?: FloatFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
-    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    openAt?: StringFieldUpdateOperationsInput | string
+    closeAt?: StringFieldUpdateOperationsInput | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23237,8 +23237,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
     ratings?: FloatFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
-    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    openAt?: StringFieldUpdateOperationsInput | string
+    closeAt?: StringFieldUpdateOperationsInput | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -23259,8 +23259,8 @@ export namespace Prisma {
     mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
     ratings?: FloatFieldUpdateOperationsInput | number
     phone?: StringFieldUpdateOperationsInput | string
-    openAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    closeAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    openAt?: StringFieldUpdateOperationsInput | string
+    closeAt?: StringFieldUpdateOperationsInput | string
     status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
     isApproved?: BoolFieldUpdateOperationsInput | boolean
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null

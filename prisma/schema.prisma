@@ -149,8 +149,8 @@ model ParkingLot {
   mediaUrls   String[]
   ratings     Float                     @default(0)
   phone       String
-  openAt      DateTime
-  closeAt     DateTime
+  openAt      String // HH:mm
+  closeAt     String // HH:mm
   status      PARKING_LOT__STATUS_ALIAS
   isApproved  Boolean                   @default(false)
   approvedAt  DateTime?

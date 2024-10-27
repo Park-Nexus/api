@@ -14,12 +14,13 @@ import { procedure } from "../../trpc";
 const EARTH_RADIUS_IN_KM = 6371;
 
 // Submit new parking lot for approval --------------------------------------------------------
+const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/; // hh:mm
 const submitSchema = z.object({
   name: z.string(),
   description: z.string().optional(),
   phone: z.string(),
-  openAt: z.date(),
-  closeAt: z.date(),
+  openAt: z.string().regex(timeRegex, "Open time must be in hh:mm format"),
+  closeAt: z.string().regex(timeRegex, "Close time must be in hh:mm format"),
   latitude: z.number(),
   longitude: z.number(),
   mediaUrls: z.array(z.string()),
