@@ -154,6 +154,49 @@ export const getSingle = procedure
     return parkingLot;
   });
 
+// Update parking lot --------------------------------------------------------------------------
+const updateSchema = z.object({
+  id: z.number(),
+  name: z.string().optional(),
+  description: z.string().optional(),
+  phone: z.string().regex(/^\d+$/, "Phone must be a number").optional(),
+  openAt: z.string().regex(timeRegex, "Open time must be in hh:mm format").optional(),
+  closeAt: z.string().regex(timeRegex, "Close time must be in hh:mm format").optional(),
+});
+export const update = procedure
+  .use(authMiddleware(["USER"]))
+  .input(updateSchema)
+  .mutation(async ({ ctx, input }) => {
+    const {
+      account: { id: ownerAccountId },
+    } = ctx;
+    const { id, name, description, phone, openAt, closeAt } = input;
+
+    const owner = await prisma.user.findUnique({ where: { accountId: ownerAccountId } });
+    if (!owner) throw new Error("User not found");
+
+    const parkingLot = await prisma.parkingLot.findFirst({
+      where: {
+        id,
+        ownerId: owner.id,
+      },
+    });
+    if (!parkingLot) throw new Error("Parking lot not found");
+
+    await prisma.parkingLot.update({
+      where: { id },
+      data: {
+        name,
+        description,
+        phone,
+        openAt,
+        closeAt,
+      },
+    });
+
+    return;
+  });
+
 // Update parking lot price --------------------------------------------------------------------
 const updatePriceSchema = z.object({
   parkingLotId: z.number(),
