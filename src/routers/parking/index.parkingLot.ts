@@ -60,12 +60,19 @@ const getManySchema = z.object({
   radiusInKm: z.number().optional(),
   status: z.nativeEnum(PARKING_LOT__STATUS_ALIAS).optional(),
   isApproved: z.boolean().optional(),
+  isMine: z.boolean().optional(),
 });
 export const getMany = procedure
   .use(authMiddleware())
   .input(getManySchema)
-  .query(async ({ input }) => {
+  .query(async ({ input, ctx }) => {
+    const {
+      account: { id },
+    } = ctx;
     const { name, latitude, longitude, radiusInKm, status, isApproved } = input;
+
+    const user = await prisma.user.findUnique({ where: { accountId: id } });
+    if (!user) throw new Error("User not found");
 
     let parkingLots: Omit<
       ParkingLot,
@@ -78,6 +85,7 @@ export const getMany = procedure
           name: { contains: name },
           status,
           isApproved,
+          ownerId: input.isMine ? { equals: user.id } : {},
         },
         select: {
           id: true,
