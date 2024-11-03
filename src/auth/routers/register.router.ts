@@ -10,10 +10,18 @@ const inputSchema = z.object({
     .string()
     .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Invalid email format"),
   password: z.string().min(8, "Password must be at least 8 characters"),
+  passwordRetype: z.string(),
 });
 
 export const registerRouter = procedure.input(inputSchema).mutation(async ({ input }) => {
-  const { email, password } = input;
+  const { email, password, passwordRetype } = input;
+
+  if (password !== passwordRetype) {
+    throw new TRPCError({
+      code: "BAD_REQUEST",
+      message: "Passwords do not match",
+    });
+  }
 
   const hash = await hashPassword(password);
 
