@@ -51,14 +51,20 @@ export const getSingle = procedure
       account: { id, role },
     } = ctx;
 
-    let user: User;
+    let user: User & { account: { email: string } };
 
     if (role !== "ADMIN" && userId) throw new TRPCError({ code: "FORBIDDEN" });
 
     if (userId) {
-      user = await prisma.user.findUnique({ where: { id: userId } });
+      user = await prisma.user.findUnique({
+        where: { id: userId },
+        include: { account: { select: { email: true } } },
+      });
     } else {
-      user = await prisma.user.findUnique({ where: { accountId: id } });
+      user = await prisma.user.findUnique({
+        where: { accountId: id },
+        include: { account: { select: { email: true } } },
+      });
     }
 
     return user;
