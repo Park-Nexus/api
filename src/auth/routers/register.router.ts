@@ -23,6 +23,14 @@ export const registerRouter = procedure.input(inputSchema).mutation(async ({ inp
     });
   }
 
+  const currentAccount = await prisma.account.findUnique({ where: { email } });
+  if (currentAccount) {
+    throw new TRPCError({
+      code: "CONFLICT",
+      message: "User already exists, please login",
+    });
+  }
+
   const hash = await hashPassword(password);
 
   let newAccount;
