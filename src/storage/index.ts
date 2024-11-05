@@ -1,8 +1,10 @@
 import { Storage } from "@google-cloud/storage";
 import { v4 as uuidv4 } from "uuid";
 import { BUCKET_NAME, SIGNED_URL_EXPIRATION } from "./index.types";
+import path from "path";
 
-const storage = new Storage({ keyFile: "../../gc-storage-key.json" });
+const storage = new Storage({ keyFilename: path.join(__dirname, "../../gc-storage-key.json") });
+console.log(path.join(__dirname, "../../gc-storage-key.json"));
 
 // Upload file --------------------------------------------------------------------
 type TUploadFileParams = {
@@ -14,7 +16,7 @@ export async function uploadFile(params: TUploadFileParams) {
   const fileName = `${uuidv4()}-${file.originalname}`;
 
   await storage.bucket(BUCKET_NAME).file(`${folder}/${fileName}`).save(file.buffer);
-  return fileName;
+  return `${folder}/${fileName}`;
 }
 
 // Get file signed url --------------------------------------------------------------
