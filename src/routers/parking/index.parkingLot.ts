@@ -177,6 +177,8 @@ const updateSchema = z.object({
   id: z.number(),
   name: z.string().optional(),
   description: z.string().optional(),
+  latitude: z.number().optional(),
+  longitude: z.number().optional(),
   phone: z.string().regex(/^\d+$/, "Phone must be a number").optional(),
   openAt: z.string().regex(timeRegex, "Open time must be in hh:mm format").optional(),
   closeAt: z.string().regex(timeRegex, "Close time must be in hh:mm format").optional(),
@@ -190,8 +192,18 @@ export const update = procedure
     const {
       account: { id: ownerAccountId },
     } = ctx;
-    const { id, name, description, phone, openAt, closeAt, additionalMediaUrls, removalMediaUrls } =
-      input;
+    const {
+      id,
+      name,
+      description,
+      latitude,
+      longitude,
+      phone,
+      openAt,
+      closeAt,
+      additionalMediaUrls,
+      removalMediaUrls,
+    } = input;
 
     const owner = await prisma.user.findUnique({ where: { accountId: ownerAccountId } });
     if (!owner) throw new Error("User not found");
@@ -215,6 +227,8 @@ export const update = procedure
         name,
         description,
         phone,
+        latitude,
+        longitude,
         openAt,
         closeAt,
         mediaUrls: newMediaUrls,
