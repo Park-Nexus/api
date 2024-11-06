@@ -9,11 +9,9 @@ const upload = multer({
 
 // User avatar upload ------------------------------------------------------------------
 uploadRouter.post("/avatar", upload.single("file"), async (req, res) => {
-  console.log(req.file);
   const file = req.file;
 
   if (!file) return res.sendStatus(400);
-
   const savedPath = await uploadFile({ file, folder: "avatars" });
 
   return res.status(200).json({ path: savedPath }).send();
@@ -24,7 +22,8 @@ uploadRouter.post("/", upload.array("files"), (req, res) => {
   return res.sendStatus(200);
 });
 
-uploadRouter.get("/:filepath", (req, res) => {
+// Get file signed url ------------------------------------------------------------------
+uploadRouter.get("/signedUrl/:filepath", (req, res) => {
   console.log(req.params.filepath);
   return res.sendStatus(200);
 });
