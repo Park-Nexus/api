@@ -22,6 +22,21 @@ uploadRouter.post("/", upload.array("files"), (req, res) => {
   return res.sendStatus(200);
 });
 
+// Parking lot media upload ------------------------------------------------------------------
+uploadRouter.post("/parkingLot/media", upload.array("files"), async (req, res) => {
+  const files = req.files as Express.Multer.File[];
+
+  if (!files || files?.length === 0) return res.sendStatus(400);
+  const savedPaths = await Promise.all(
+    files.map(async (file) => {
+      const savedPath = await uploadFile({ file, folder: "parkingLots" });
+      return savedPath;
+    }),
+  );
+
+  return res.status(200).json({ paths: savedPaths }).send();
+});
+
 // Get file signed url ------------------------------------------------------------------
 uploadRouter.get("/signedUrl/:filepath", (req, res) => {
   console.log(req.params.filepath);

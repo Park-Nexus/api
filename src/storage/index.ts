@@ -37,3 +37,13 @@ export async function getFileSignedUrl(params: TGetFileSignedUrlParams) {
 
   return url;
 }
+
+// Delete file --------------------------------------------------------------------
+type TDeleteFileParams = {
+  path: string;
+};
+export async function deleteFile(params: TDeleteFileParams) {
+  const { path } = params;
+
+  await storage.bucket(BUCKET_NAME).file(path).delete();
+}
