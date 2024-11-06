@@ -4,6 +4,7 @@ import { TRPCError } from "@trpc/server";
 import { authMiddleware } from "../../auth";
 import { prisma, User, USER__GENDER_ALIAS } from "../../db";
 import { procedure } from "../../trpc";
+import { getFileSignedUrl } from "../../storage";
 
 // Create a new user profile --------------------------------------------------------------
 const createSchema = z.object({
@@ -60,6 +61,11 @@ export const getSingle = procedure
         include: { account: { select: { email: true } } },
       });
     }
+
+    user = {
+      ...user,
+      avatarUrl: user.avatarUrl ? await getFileSignedUrl({ path: user.avatarUrl }) : "",
+    };
 
     return user;
   });
