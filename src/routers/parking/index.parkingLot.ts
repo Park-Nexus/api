@@ -10,6 +10,7 @@ import {
   VEHICLE__TYPE_ALIAS,
 } from "../../db";
 import { procedure } from "../../trpc";
+import { deleteFile, getFileSignedUrl } from "../../storage";
 
 const EARTH_RADIUS_IN_KM = 6371;
 
@@ -158,6 +159,15 @@ export const getSingle = procedure
         parkingLotServices: true,
       },
     });
+    if (!parkingLot) throw new Error("Parking lot not found");
+
+    const mediaSignedUrls = await Promise.all(
+      parkingLot.mediaUrls.map(async (url) => {
+        const signedUrl = await getFileSignedUrl({ path: url });
+        return signedUrl;
+      }),
+    );
+    parkingLot.mediaUrls = mediaSignedUrls;
 
     return parkingLot;
   });
@@ -170,6 +180,8 @@ const updateSchema = z.object({
   phone: z.string().regex(/^\d+$/, "Phone must be a number").optional(),
   openAt: z.string().regex(timeRegex, "Open time must be in hh:mm format").optional(),
   closeAt: z.string().regex(timeRegex, "Close time must be in hh:mm format").optional(),
+  additionalMediaUrls: z.array(z.string()).optional(),
+  removalMediaUrls: z.array(z.string()).optional(),
 });
 export const update = procedure
   .use(authMiddleware(["USER"]))
@@ -178,7 +190,8 @@ export const update = procedure
     const {
       account: { id: ownerAccountId },
     } = ctx;
-    const { id, name, description, phone, openAt, closeAt } = input;
+    const { id, name, description, phone, openAt, closeAt, additionalMediaUrls, removalMediaUrls } =
+      input;
 
     const owner = await prisma.user.findUnique({ where: { accountId: ownerAccountId } });
     if (!owner) throw new Error("User not found");
@@ -191,6 +204,11 @@ export const update = procedure
     });
     if (!parkingLot) throw new Error("Parking lot not found");
 
+    await Promise.all(removalMediaUrls?.map(async (url) => deleteFile({ path: url })));
+    const newMediaUrls = parkingLot.mediaUrls
+      .filter((url) => !removalMediaUrls?.includes(url))
+      .concat(additionalMediaUrls || []);
+
     await prisma.parkingLot.update({
       where: { id },
       data: {
@@ -199,6 +217,7 @@ export const update = procedure
         phone,
         openAt,
         closeAt,
+        mediaUrls: newMediaUrls,
       },
     });
 
