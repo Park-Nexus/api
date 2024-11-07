@@ -513,3 +513,30 @@ export const removeService = procedure
 
     return;
   });
+
+// Get single parking lot service ------------------------------------------------------------------
+const getSingleServiceSchema = z.object({
+  serviceId: z.number(),
+});
+export const getSingleService = procedure
+  .use(authMiddleware(["USER"]))
+  .input(getSingleServiceSchema)
+  .query(async ({ input }) => {
+    const { serviceId } = input;
+
+    const service = await prisma.parkingLotService.findFirst({
+      where: {
+        id: serviceId,
+      },
+    });
+    if (!service) throw new Error("Parking lot service not found");
+
+    const mediaUrls = await Promise.all(
+      service.mediaUrls.map(async (mediaUrl) => {
+        return await getFileSignedUrl({ path: mediaUrl });
+      }),
+    );
+    service.mediaUrls = mediaUrls;
+
+    return service;
+  });
