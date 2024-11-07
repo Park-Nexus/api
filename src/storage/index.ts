@@ -47,3 +47,12 @@ export async function deleteFile(params: TDeleteFileParams) {
 
   await storage.bucket(BUCKET_NAME).file(path).delete();
 }
+
+// Extract path from URL -----------------------------------------------------------
+export function extractPathFromURL(url: string): string {
+  // convert signed url to google-cloud bucket path
+  const urlParts = url.split("?")[0];
+  const pathParts = urlParts.split(BUCKET_NAME)[1].replace("/", "");
+
+  return pathParts;
+}

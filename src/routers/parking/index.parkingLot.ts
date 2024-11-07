@@ -10,7 +10,7 @@ import {
   VEHICLE__TYPE_ALIAS,
 } from "../../db";
 import { procedure } from "../../trpc";
-import { deleteFile, getFileSignedUrl } from "../../storage";
+import { deleteFile, extractPathFromURL, getFileSignedUrl } from "../../storage";
 
 const EARTH_RADIUS_IN_KM = 6371;
 
@@ -51,6 +51,74 @@ export const submit = procedure
         description,
       },
     });
+  });
+
+// Update parking lot --------------------------------------------------------------------------
+const updateSchema = z.object({
+  id: z.number(),
+  name: z.string().optional(),
+  description: z.string().optional(),
+  latitude: z.number().optional(),
+  longitude: z.number().optional(),
+  phone: z.string().regex(/^\d+$/, "Phone must be a number").optional(),
+  openAt: z.string().regex(timeRegex, "Open time must be in hh:mm format").optional(),
+  closeAt: z.string().regex(timeRegex, "Close time must be in hh:mm format").optional(),
+  additionalMediaUrls: z.array(z.string()).optional(),
+  removalMediaUrls: z.array(z.string()).optional(),
+});
+export const update = procedure
+  .use(authMiddleware(["USER"]))
+  .input(updateSchema)
+  .mutation(async ({ ctx, input }) => {
+    const {
+      account: { id: ownerAccountId },
+    } = ctx;
+    const {
+      id,
+      name,
+      description,
+      latitude,
+      longitude,
+      phone,
+      openAt,
+      closeAt,
+      additionalMediaUrls,
+      removalMediaUrls,
+    } = input;
+
+    const owner = await prisma.user.findUnique({ where: { accountId: ownerAccountId } });
+    if (!owner) throw new Error("User not found");
+
+    const parkingLot = await prisma.parkingLot.findFirst({
+      where: {
+        id,
+        ownerId: owner.id,
+      },
+    });
+    if (!parkingLot) throw new Error("Parking lot not found");
+
+    await Promise.all(
+      removalMediaUrls?.map(async (url) => deleteFile({ path: extractPathFromURL(url) })),
+    );
+    const newMediaUrls = parkingLot.mediaUrls
+      .filter((url) => !removalMediaUrls?.map((u) => extractPathFromURL(u)).includes(url))
+      .concat(additionalMediaUrls || []);
+
+    await prisma.parkingLot.update({
+      where: { id },
+      data: {
+        name,
+        description,
+        phone,
+        latitude,
+        longitude,
+        openAt,
+        closeAt,
+        mediaUrls: newMediaUrls,
+      },
+    });
+
+    return;
   });
 
 // Get parking lots ---------------------------------------------------------------------------
@@ -170,72 +238,6 @@ export const getSingle = procedure
     parkingLot.mediaUrls = mediaSignedUrls;
 
     return parkingLot;
-  });
-
-// Update parking lot --------------------------------------------------------------------------
-const updateSchema = z.object({
-  id: z.number(),
-  name: z.string().optional(),
-  description: z.string().optional(),
-  latitude: z.number().optional(),
-  longitude: z.number().optional(),
-  phone: z.string().regex(/^\d+$/, "Phone must be a number").optional(),
-  openAt: z.string().regex(timeRegex, "Open time must be in hh:mm format").optional(),
-  closeAt: z.string().regex(timeRegex, "Close time must be in hh:mm format").optional(),
-  additionalMediaUrls: z.array(z.string()).optional(),
-  removalMediaUrls: z.array(z.string()).optional(),
-});
-export const update = procedure
-  .use(authMiddleware(["USER"]))
-  .input(updateSchema)
-  .mutation(async ({ ctx, input }) => {
-    const {
-      account: { id: ownerAccountId },
-    } = ctx;
-    const {
-      id,
-      name,
-      description,
-      latitude,
-      longitude,
-      phone,
-      openAt,
-      closeAt,
-      additionalMediaUrls,
-      removalMediaUrls,
-    } = input;
-
-    const owner = await prisma.user.findUnique({ where: { accountId: ownerAccountId } });
-    if (!owner) throw new Error("User not found");
-
-    const parkingLot = await prisma.parkingLot.findFirst({
-      where: {
-        id,
-        ownerId: owner.id,
-      },
-    });
-    if (!parkingLot) throw new Error("Parking lot not found");
-
-    await Promise.all(removalMediaUrls?.map(async (url) => deleteFile({ path: url })));
-    const newMediaUrls = parkingLot.mediaUrls
-      .filter((url) => !removalMediaUrls?.includes(url))
-      .concat(additionalMediaUrls || []);
-
-    await prisma.parkingLot.update({
-      where: { id },
-      data: {
-        name,
-        description,
-        phone,
-        latitude,
-        longitude,
-        openAt,
-        closeAt,
-        mediaUrls: newMediaUrls,
-      },
-    });
-
-    return;
   });
 
 // Update parking lot price --------------------------------------------------------------------
