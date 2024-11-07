@@ -15,6 +15,5 @@ export const parkingRouter = trpcInstance.router({
       remove: lot.removeService,
     },
   },
-  spot: {},
   record: {},
 });
