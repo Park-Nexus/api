@@ -8,7 +8,12 @@ export const parkingRouter = trpcInstance.router({
     get: { many: lot.getMany, single: lot.getSingle },
     price: { update: lot.updatePrice },
     spot: { add: lot.addSpot, update: lot.updateSpot, remove: lot.removeSpot },
-    service: { add: lot.addService, update: lot.updateService, remove: lot.removeService },
+    service: {
+      get: { single: lot.getSingleService },
+      add: lot.addService,
+      update: lot.updateService,
+      remove: lot.removeService,
+    },
   },
   spot: {},
   record: {},
