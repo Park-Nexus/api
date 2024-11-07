@@ -444,7 +444,6 @@ const updateServiceSchema = z.object({
   description: z.string().optional(),
   price: z.number().optional(),
   vehicleTypes: z.array(z.nativeEnum(VEHICLE__TYPE_ALIAS)).optional(),
-
   additionalMediaUrls: z.array(z.string()).optional(),
   removalMediaUrls: z.array(z.string()).optional(),
 });
