@@ -17,9 +17,14 @@ uploadRouter.post("/avatar", upload.single("file"), async (req, res) => {
   return res.status(200).json({ path: savedPath }).send();
 });
 
-uploadRouter.post("/", upload.array("files"), (req, res) => {
-  console.log(req.files);
-  return res.sendStatus(200);
+// User Vehicle Image upload -----------------------------------------------------------------
+uploadRouter.post("/vehicle/image", upload.single("file"), async (req, res) => {
+  const file = req.file;
+
+  if (!file) return res.sendStatus(400);
+  const savedPath = await uploadFile({ file, folder: "vehicles" });
+
+  return res.status(200).json({ path: savedPath }).send();
 });
 
 // Parking lot media upload ------------------------------------------------------------------
