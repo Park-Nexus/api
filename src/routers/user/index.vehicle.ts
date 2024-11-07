@@ -4,6 +4,7 @@ import { authMiddleware } from "../../auth";
 import { prisma, Vehicle, VEHICLE__TYPE_ALIAS } from "../../db";
 import { procedure } from "../../trpc";
 import { TRPCError } from "@trpc/server";
+import { deleteFile, getFileSignedUrl } from "../../storage";
 
 // Add a new vehicle ------------------------------------------------------------------------
 const addSchema = z.object({
@@ -43,6 +44,46 @@ export const add = procedure
     });
   });
 
+// Update a vehicle ------------------------------------------------------------------------
+const updateSchema = z.object({
+  id: z.number(),
+  type: z.nativeEnum(VEHICLE__TYPE_ALIAS).optional(),
+  plate: z.string().optional(),
+  brand: z.string().optional(),
+  model: z.string().optional(),
+  color: z.string().optional(),
+  imageUrl: z.string().optional(),
+});
+export const update = procedure
+  .use(authMiddleware(["USER"]))
+  .input(updateSchema)
+  .mutation(async ({ input, ctx }) => {
+    const { id, type, plate, brand, model, color, imageUrl } = input;
+    const {
+      account: { id: accountId },
+    } = ctx;
+
+    const user = await prisma.user.findUnique({ where: { accountId } });
+    if (!user) throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
+
+    const vehicle = await prisma.vehicle.findUnique({ where: { id, ownerId: user.id } });
+    if (!vehicle) throw new TRPCError({ code: "NOT_FOUND", message: "Vehicle not found" });
+
+    if (imageUrl && vehicle.imageUrl) await deleteFile({ path: vehicle.imageUrl });
+
+    await prisma.vehicle.update({
+      where: { id },
+      data: {
+        type,
+        plate,
+        brand,
+        model,
+        color,
+        imageUrl,
+      },
+    });
+  });
+
 // Get many vehicles -----------------------------------------------------------------------
 const getManySchema = z.object({
   userId: z.number().optional(),
@@ -68,6 +109,16 @@ export const getMany = procedure
       });
       vehicles = await prisma.vehicle.findMany({ where: { ownerId } });
     }
+
+    vehicles = await Promise.all(
+      vehicles.map(async (vehicle) => {
+        if (!vehicle.imageUrl) return vehicle;
+        return {
+          ...vehicle,
+          imageUrl: await getFileSignedUrl({ path: vehicle.imageUrl }),
+        };
+      }),
+    );
 
     return vehicles;
   });

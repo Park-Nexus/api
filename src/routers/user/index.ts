@@ -14,6 +14,7 @@ export const userRouter = trpcInstance.router({
   },
   vehicle: {
     add: vehicle.add,
+    update: vehicle.update,
     get: {
       many: vehicle.getMany,
     },
