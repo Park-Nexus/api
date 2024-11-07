@@ -442,9 +442,11 @@ const updateServiceSchema = z.object({
   name: z.string().optional(),
   type: z.nativeEnum(PARKING_LOT_SERVICE__TYPE_ALIAS).optional(),
   description: z.string().optional(),
-  mediaUrls: z.array(z.string()).optional(),
   price: z.number().optional(),
   vehicleTypes: z.array(z.nativeEnum(VEHICLE__TYPE_ALIAS)).optional(),
+
+  additionalMediaUrls: z.array(z.string()).optional(),
+  removalMediaUrls: z.array(z.string()).optional(),
 });
 export const updateService = procedure
   .use(authMiddleware(["USER"]))
@@ -453,7 +455,16 @@ export const updateService = procedure
     const {
       account: { id: ownerAccountId },
     } = ctx;
-    const { serviceId, name, type, description, mediaUrls, price, vehicleTypes } = input;
+    const {
+      serviceId,
+      name,
+      type,
+      description,
+      additionalMediaUrls,
+      removalMediaUrls,
+      price,
+      vehicleTypes,
+    } = input;
 
     const owner = await prisma.user.findUnique({ where: { accountId: ownerAccountId } });
     if (!owner) throw new Error("User not found");
@@ -468,13 +479,23 @@ export const updateService = procedure
     });
     if (!service) throw new Error("Parking lot service not found");
 
+    await Promise.all(
+      removalMediaUrls?.map((mediaUrl) => {
+        deleteFile({ path: extractPathFromURL(mediaUrl) });
+      }),
+    );
+
+    const newMediaUrls = service.mediaUrls
+      .filter((url) => !removalMediaUrls.map((u) => extractPathFromURL(u)).includes(url))
+      .concat(additionalMediaUrls || []);
+
     await prisma.parkingLotService.update({
       where: { id: serviceId },
       data: {
         name,
         type,
         description,
-        mediaUrls,
+        mediaUrls: newMediaUrls,
         price,
         vehicleTypes,
       },
