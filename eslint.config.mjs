@@ -10,6 +10,7 @@ export default [
   {
     rules: {
       "no-useless-escape": "off",
+      "@typescript-eslint/no-namespace": "off",
     },
   },
 ];

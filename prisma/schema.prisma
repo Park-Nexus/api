@@ -102,6 +102,7 @@ model User {
   parkingLots       ParkingLot[]
   paymentRecords    PaymentRecord[]
   userNotifications UserNotification[]
+  reservations      Reservation[]
 
   accountId String  @unique
   account   Account @relation(fields: [accountId], references: [id])
@@ -206,6 +207,8 @@ model ParkingLotService {
 
   parkingLotId Int
   parkingLot   ParkingLot @relation(fields: [parkingLotId], references: [id])
+
+  reservations Reservation[]
 }
 
 model ParkingSpot {
@@ -229,11 +232,15 @@ model Reservation {
 
   code      String
   status    RESERVATION__STATUS_ALIAS @default(PENDING)
-  dateTime  DateTime
+  startTime DateTime
   createdAt DateTime                  @default(now())
   updatedAt DateTime                  @updatedAt
 
   parkingRecord ParkingRecord?
+  services      ParkingLotService[]
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
 
   parkingSpotId Int
   parkingSpot   ParkingSpot @relation(fields: [parkingSpotId], references: [id])
