@@ -1,4 +1,5 @@
 import { z } from "zod";
+import dayjs from "dayjs";
 
 import { authMiddleware } from "../../auth";
 import {
@@ -11,6 +12,7 @@ import {
 } from "../../db";
 import { procedure } from "../../trpc";
 import { deleteFile, extractPathFromURL, getFileSignedUrl } from "../../storage";
+import { EXPIRATION_TIME_IN_HOURS } from "../index.rules";
 
 const EARTH_RADIUS_IN_KM = 6371;
 
@@ -559,4 +561,51 @@ export const getSingleService = procedure
     service.mediaUrls = mediaUrls;
 
     return service;
+  });
+
+// Get parking lot availability ----------------------------------------------------------------------
+const getAvailabilitySchema = z.object({
+  lotId: z.number(),
+  startTime: z.string(),
+});
+export const getAvailability = procedure
+  .use(authMiddleware(["USER"]))
+  .input(getAvailabilitySchema)
+  .query(async ({ input }) => {
+    const { lotId, startTime } = input;
+
+    const parkingLot = await prisma.parkingLot.findUnique({
+      where: { id: lotId },
+      include: { parkingSpots: true },
+    });
+    if (!parkingLot) throw new Error("Parking lot not found");
+
+    const startTimeObj = dayjs(startTime).subtract(15, "minutes");
+    const endTimeObj = dayjs(startTime).add(EXPIRATION_TIME_IN_HOURS, "hours").add(15, "minutes");
+
+    const reservations = await prisma.reservation.findMany({
+      where: {
+        parkingSpot: {
+          parkingLotId: lotId,
+        },
+        startTime: {
+          gte: startTimeObj.toDate(),
+          lte: endTimeObj.toDate(),
+        },
+      },
+    });
+
+    const reservedParkingSpots = reservations.map((reservation) => reservation.parkingSpotId);
+    const availableParkingSpots = parkingLot.parkingSpots.filter(
+      (spot) => !reservedParkingSpots.includes(spot.id),
+    );
+
+    const availableVehicleTypes = new Set<VEHICLE__TYPE_ALIAS>();
+    availableParkingSpots.forEach((spot) => {
+      availableVehicleTypes.add(spot.vehicleType);
+    });
+
+    return {
+      availableVehicleTypes: Array.from(availableVehicleTypes),
+    };
   });

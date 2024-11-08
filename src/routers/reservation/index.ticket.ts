@@ -7,10 +7,11 @@ import { prisma } from "../../db";
 import { TRPCError } from "@trpc/server";
 import cron from "node-cron";
 import { DateUtils } from "../../utils/date";
-
-const MAX_ALLOWED_RESERVATIONS = 2;
-const MAX_TIME_ALLOWED_IN_HOURS = 48;
-const EXPIRATION_TIME_IN_HOURS = 1;
+import {
+  EXPIRATION_TIME_IN_HOURS,
+  MAX_ALLOWED_RESERVATIONS,
+  MAX_TIME_ALLOWED_IN_HOURS,
+} from "../index.rules";
 
 // Create a new ticket ------------------------------------------------------------------------------
 const createSchema = z.object({
