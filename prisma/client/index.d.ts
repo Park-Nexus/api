@@ -12650,6 +12650,7 @@ export namespace Prisma {
     id: number | null
     code: string | null
     status: $Enums.RESERVATION__STATUS_ALIAS | null
+    dateTime: Date | null
     createdAt: Date | null
     updatedAt: Date | null
     parkingSpotId: number | null
@@ -12660,6 +12661,7 @@ export namespace Prisma {
     id: number | null
     code: string | null
     status: $Enums.RESERVATION__STATUS_ALIAS | null
+    dateTime: Date | null
     createdAt: Date | null
     updatedAt: Date | null
     parkingSpotId: number | null
@@ -12670,6 +12672,7 @@ export namespace Prisma {
     id: number
     code: number
     status: number
+    dateTime: number
     createdAt: number
     updatedAt: number
     parkingSpotId: number
@@ -12694,6 +12697,7 @@ export namespace Prisma {
     id?: true
     code?: true
     status?: true
+    dateTime?: true
     createdAt?: true
     updatedAt?: true
     parkingSpotId?: true
@@ -12704,6 +12708,7 @@ export namespace Prisma {
     id?: true
     code?: true
     status?: true
+    dateTime?: true
     createdAt?: true
     updatedAt?: true
     parkingSpotId?: true
@@ -12714,6 +12719,7 @@ export namespace Prisma {
     id?: true
     code?: true
     status?: true
+    dateTime?: true
     createdAt?: true
     updatedAt?: true
     parkingSpotId?: true
@@ -12811,6 +12817,7 @@ export namespace Prisma {
     id: number
     code: string
     status: $Enums.RESERVATION__STATUS_ALIAS
+    dateTime: Date
     createdAt: Date
     updatedAt: Date
     parkingSpotId: number
@@ -12840,6 +12847,7 @@ export namespace Prisma {
     id?: boolean
     code?: boolean
     status?: boolean
+    dateTime?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     parkingSpotId?: boolean
@@ -12853,6 +12861,7 @@ export namespace Prisma {
     id?: boolean
     code?: boolean
     status?: boolean
+    dateTime?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     parkingSpotId?: boolean
@@ -12865,6 +12874,7 @@ export namespace Prisma {
     id?: boolean
     code?: boolean
     status?: boolean
+    dateTime?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     parkingSpotId?: boolean
@@ -12892,6 +12902,7 @@ export namespace Prisma {
       id: number
       code: string
       status: $Enums.RESERVATION__STATUS_ALIAS
+      dateTime: Date
       createdAt: Date
       updatedAt: Date
       parkingSpotId: number
@@ -13295,6 +13306,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Reservation", 'Int'>
     readonly code: FieldRef<"Reservation", 'String'>
     readonly status: FieldRef<"Reservation", 'RESERVATION__STATUS_ALIAS'>
+    readonly dateTime: FieldRef<"Reservation", 'DateTime'>
     readonly createdAt: FieldRef<"Reservation", 'DateTime'>
     readonly updatedAt: FieldRef<"Reservation", 'DateTime'>
     readonly parkingSpotId: FieldRef<"Reservation", 'Int'>
@@ -15933,6 +15945,7 @@ export namespace Prisma {
     id: 'id',
     code: 'code',
     status: 'status',
+    dateTime: 'dateTime',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     parkingSpotId: 'parkingSpotId',
@@ -16954,6 +16967,7 @@ export namespace Prisma {
     id?: IntFilter<"Reservation"> | number
     code?: StringFilter<"Reservation"> | string
     status?: EnumRESERVATION__STATUS_ALIASFilter<"Reservation"> | $Enums.RESERVATION__STATUS_ALIAS
+    dateTime?: DateTimeFilter<"Reservation"> | Date | string
     createdAt?: DateTimeFilter<"Reservation"> | Date | string
     updatedAt?: DateTimeFilter<"Reservation"> | Date | string
     parkingSpotId?: IntFilter<"Reservation"> | number
@@ -16967,6 +16981,7 @@ export namespace Prisma {
     id?: SortOrder
     code?: SortOrder
     status?: SortOrder
+    dateTime?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parkingSpotId?: SortOrder
@@ -16983,6 +16998,7 @@ export namespace Prisma {
     NOT?: ReservationWhereInput | ReservationWhereInput[]
     code?: StringFilter<"Reservation"> | string
     status?: EnumRESERVATION__STATUS_ALIASFilter<"Reservation"> | $Enums.RESERVATION__STATUS_ALIAS
+    dateTime?: DateTimeFilter<"Reservation"> | Date | string
     createdAt?: DateTimeFilter<"Reservation"> | Date | string
     updatedAt?: DateTimeFilter<"Reservation"> | Date | string
     parkingSpotId?: IntFilter<"Reservation"> | number
@@ -16996,6 +17012,7 @@ export namespace Prisma {
     id?: SortOrder
     code?: SortOrder
     status?: SortOrder
+    dateTime?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parkingSpotId?: SortOrder
@@ -17014,6 +17031,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Reservation"> | number
     code?: StringWithAggregatesFilter<"Reservation"> | string
     status?: EnumRESERVATION__STATUS_ALIASWithAggregatesFilter<"Reservation"> | $Enums.RESERVATION__STATUS_ALIAS
+    dateTime?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
     parkingSpotId?: IntWithAggregatesFilter<"Reservation"> | number
@@ -17986,7 +18004,8 @@ export namespace Prisma {
 
   export type ReservationCreateInput = {
     code: string
-    status: $Enums.RESERVATION__STATUS_ALIAS
+    status?: $Enums.RESERVATION__STATUS_ALIAS
+    dateTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingRecord?: ParkingRecordCreateNestedOneWithoutReservationInput
@@ -17997,7 +18016,8 @@ export namespace Prisma {
   export type ReservationUncheckedCreateInput = {
     id?: number
     code: string
-    status: $Enums.RESERVATION__STATUS_ALIAS
+    status?: $Enums.RESERVATION__STATUS_ALIAS
+    dateTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingSpotId: number
@@ -18008,6 +18028,7 @@ export namespace Prisma {
   export type ReservationUpdateInput = {
     code?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
+    dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingRecord?: ParkingRecordUpdateOneWithoutReservationNestedInput
@@ -18019,6 +18040,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     code?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
+    dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingSpotId?: IntFieldUpdateOperationsInput | number
@@ -18029,7 +18051,8 @@ export namespace Prisma {
   export type ReservationCreateManyInput = {
     id?: number
     code: string
-    status: $Enums.RESERVATION__STATUS_ALIAS
+    status?: $Enums.RESERVATION__STATUS_ALIAS
+    dateTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingSpotId: number
@@ -18039,6 +18062,7 @@ export namespace Prisma {
   export type ReservationUpdateManyMutationInput = {
     code?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
+    dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -18047,6 +18071,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     code?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
+    dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingSpotId?: IntFieldUpdateOperationsInput | number
@@ -19080,6 +19105,7 @@ export namespace Prisma {
     id?: SortOrder
     code?: SortOrder
     status?: SortOrder
+    dateTime?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parkingSpotId?: SortOrder
@@ -19096,6 +19122,7 @@ export namespace Prisma {
     id?: SortOrder
     code?: SortOrder
     status?: SortOrder
+    dateTime?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parkingSpotId?: SortOrder
@@ -19106,6 +19133,7 @@ export namespace Prisma {
     id?: SortOrder
     code?: SortOrder
     status?: SortOrder
+    dateTime?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parkingSpotId?: SortOrder
@@ -21408,7 +21436,8 @@ export namespace Prisma {
 
   export type ReservationCreateWithoutVehicleInput = {
     code: string
-    status: $Enums.RESERVATION__STATUS_ALIAS
+    status?: $Enums.RESERVATION__STATUS_ALIAS
+    dateTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingRecord?: ParkingRecordCreateNestedOneWithoutReservationInput
@@ -21418,7 +21447,8 @@ export namespace Prisma {
   export type ReservationUncheckedCreateWithoutVehicleInput = {
     id?: number
     code: string
-    status: $Enums.RESERVATION__STATUS_ALIAS
+    status?: $Enums.RESERVATION__STATUS_ALIAS
+    dateTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingSpotId: number
@@ -21529,6 +21559,7 @@ export namespace Prisma {
     id?: IntFilter<"Reservation"> | number
     code?: StringFilter<"Reservation"> | string
     status?: EnumRESERVATION__STATUS_ALIASFilter<"Reservation"> | $Enums.RESERVATION__STATUS_ALIAS
+    dateTime?: DateTimeFilter<"Reservation"> | Date | string
     createdAt?: DateTimeFilter<"Reservation"> | Date | string
     updatedAt?: DateTimeFilter<"Reservation"> | Date | string
     parkingSpotId?: IntFilter<"Reservation"> | number
@@ -22288,7 +22319,8 @@ export namespace Prisma {
 
   export type ReservationCreateWithoutParkingSpotInput = {
     code: string
-    status: $Enums.RESERVATION__STATUS_ALIAS
+    status?: $Enums.RESERVATION__STATUS_ALIAS
+    dateTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingRecord?: ParkingRecordCreateNestedOneWithoutReservationInput
@@ -22298,7 +22330,8 @@ export namespace Prisma {
   export type ReservationUncheckedCreateWithoutParkingSpotInput = {
     id?: number
     code: string
-    status: $Enums.RESERVATION__STATUS_ALIAS
+    status?: $Enums.RESERVATION__STATUS_ALIAS
+    dateTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     vehicleId: number
@@ -22738,7 +22771,8 @@ export namespace Prisma {
 
   export type ReservationCreateWithoutParkingRecordInput = {
     code: string
-    status: $Enums.RESERVATION__STATUS_ALIAS
+    status?: $Enums.RESERVATION__STATUS_ALIAS
+    dateTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingSpot: ParkingSpotCreateNestedOneWithoutReservationsInput
@@ -22748,7 +22782,8 @@ export namespace Prisma {
   export type ReservationUncheckedCreateWithoutParkingRecordInput = {
     id?: number
     code: string
-    status: $Enums.RESERVATION__STATUS_ALIAS
+    status?: $Enums.RESERVATION__STATUS_ALIAS
+    dateTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingSpotId: number
@@ -22866,6 +22901,7 @@ export namespace Prisma {
   export type ReservationUpdateWithoutParkingRecordInput = {
     code?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
+    dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingSpot?: ParkingSpotUpdateOneRequiredWithoutReservationsNestedInput
@@ -22876,6 +22912,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     code?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
+    dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingSpotId?: IntFieldUpdateOperationsInput | number
@@ -23323,7 +23360,8 @@ export namespace Prisma {
   export type ReservationCreateManyVehicleInput = {
     id?: number
     code: string
-    status: $Enums.RESERVATION__STATUS_ALIAS
+    status?: $Enums.RESERVATION__STATUS_ALIAS
+    dateTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingSpotId: number
@@ -23344,6 +23382,7 @@ export namespace Prisma {
   export type ReservationUpdateWithoutVehicleInput = {
     code?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
+    dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingRecord?: ParkingRecordUpdateOneWithoutReservationNestedInput
@@ -23354,6 +23393,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     code?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
+    dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingSpotId?: IntFieldUpdateOperationsInput | number
@@ -23364,6 +23404,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     code?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
+    dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingSpotId?: IntFieldUpdateOperationsInput | number
@@ -23554,7 +23595,8 @@ export namespace Prisma {
   export type ReservationCreateManyParkingSpotInput = {
     id?: number
     code: string
-    status: $Enums.RESERVATION__STATUS_ALIAS
+    status?: $Enums.RESERVATION__STATUS_ALIAS
+    dateTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
     vehicleId: number
@@ -23575,6 +23617,7 @@ export namespace Prisma {
   export type ReservationUpdateWithoutParkingSpotInput = {
     code?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
+    dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingRecord?: ParkingRecordUpdateOneWithoutReservationNestedInput
@@ -23585,6 +23628,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     code?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
+    dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     vehicleId?: IntFieldUpdateOperationsInput | number
@@ -23595,6 +23639,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     code?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
+    dateTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     vehicleId?: IntFieldUpdateOperationsInput | number

@@ -237,6 +237,7 @@ exports.Prisma.ReservationScalarFieldEnum = {
   id: 'id',
   code: 'code',
   status: 'status',
+  dateTime: 'dateTime',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   parkingSpotId: 'parkingSpotId',
