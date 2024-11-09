@@ -5,6 +5,7 @@ import { authMiddleware } from "../../auth";
 import { prisma, User, USER__GENDER_ALIAS } from "../../db";
 import { procedure } from "../../trpc";
 import { getFileSignedUrl } from "../../storage";
+import { StripeUtils } from "../../stripe";
 
 // Create a new user profile --------------------------------------------------------------
 const createSchema = z.object({
@@ -22,12 +23,33 @@ export const create = procedure
       account: { id },
     } = ctx;
 
+    const account = await prisma.account.findUnique({ where: { id } });
+    if (!account) throw new TRPCError({ code: "NOT_FOUND", message: "Account not found" });
+
     const user = await prisma.user.findUnique({ where: { accountId: id } });
     if (user) throw new TRPCError({ code: "CONFLICT", message: "User already exists" });
 
+    const stripeCustomer = await StripeUtils.createCustomer({
+      name: `${input.firstName} ${input.lastName}`,
+      email: account.email,
+      phone: input.phone,
+    });
+
+    if (!stripeCustomer) {
+      throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "There was an error" });
+    }
+
     const { firstName, lastName, phone, avatarUrl, gender } = input;
     await prisma.user.create({
-      data: { firstName, lastName, phone, avatarUrl, gender, accountId: id, stripeCustomerId: "" },
+      data: {
+        firstName,
+        lastName,
+        phone,
+        avatarUrl,
+        gender,
+        accountId: id,
+        stripeCustomerId: stripeCustomer.id,
+      },
     });
   });
 

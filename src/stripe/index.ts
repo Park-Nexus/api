@@ -34,6 +34,14 @@ export namespace StripeUtils {
     });
   };
 
+  // Remove payment method -----------------------------------------------------------------
+  type TRemovePaymentMethodParams = {
+    paymentMethodId: string;
+  };
+  export const removePaymentMethod = async ({ paymentMethodId }: TRemovePaymentMethodParams) => {
+    await stripe.paymentMethods.detach(paymentMethodId);
+  };
+
   // Retrieve payment methods ---------------------------------------------------------------
   type TRetrievePaymentMethodsParams = {
     customerId: string;
