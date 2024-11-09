@@ -389,7 +389,12 @@ export const removeSpot = procedure
     });
     if (!spot) throw new Error("Parking spot not found");
 
-    await prisma.parkingSpot.delete({ where: { id: spotId } });
+    await prisma.parkingSpot.update({
+      where: { id: spotId },
+      data: {
+        deletedAt: new Date(),
+      },
+    });
 
     return;
   });
@@ -531,7 +536,12 @@ export const removeService = procedure
     });
     if (!service) throw new Error("Parking lot service not found");
 
-    await prisma.parkingLotService.delete({ where: { id: serviceId } });
+    await prisma.parkingLotService.update({
+      where: { id: serviceId },
+      data: {
+        deletedAt: new Date(),
+      },
+    });
 
     return;
   });
@@ -584,6 +594,7 @@ export const getAvailability = procedure
     const startTimeObj = dayjs(startTime).subtract(MAXIMUM_OVERSTAYING_DURATION_IN_HOURS, "hours");
     const endTimeObj = dayjs(endTime).add(MAXIMUM_OVERSTAYING_DURATION_IN_HOURS, "hours");
 
+    // Find overlapping reservations
     const reservations = await prisma.reservation.findMany({
       where: {
         parkingSpot: {
@@ -601,15 +612,30 @@ export const getAvailability = procedure
       },
     });
 
+    // Find available parking spots
     const reservedParkingSpots = reservations.map((reservation) => reservation.parkingSpotId);
     const availableParkingSpots = parkingLot.parkingSpots.filter(
       (spot) => !reservedParkingSpots.includes(spot.id),
     );
 
+    // Find available vehicle types
     const availableVehicleTypes = new Set<VEHICLE__TYPE_ALIAS>();
     availableParkingSpots.forEach((spot) => {
       availableVehicleTypes.add(spot.vehicleType);
     });
+
+    // Check if vehicle types have price
+    await Promise.all(
+      Array.from(availableVehicleTypes).map(async (vehicleType) => {
+        const price = await prisma.parkingLotPrice.findFirst({
+          where: {
+            vehicleType: vehicleType,
+            parkingLotId: lotId,
+          },
+        });
+        if (!price) availableVehicleTypes.delete(vehicleType);
+      }),
+    );
 
     return {
       availableVehicleTypes: Array.from(availableVehicleTypes),

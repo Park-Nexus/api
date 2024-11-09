@@ -59,6 +59,12 @@ export const create = procedure
         message: `Start time must be less than ${MAX_AHEAD_TIME_ALLOWED_IN_HOURS} hours from now`,
       });
     }
+    if (endTimeObj.diff(startTimeObj, "hours") < MINIMUM_DURATION_IN_HOURS) {
+      throw new TRPCError({
+        code: "BAD_REQUEST",
+        message: `Parking must be at least ${MINIMUM_DURATION_IN_HOURS} hours`,
+      });
+    }
 
     // check if parking lot exists, check if owned by user
     const parkingLot = await prisma.parkingLot.findUnique({ where: { id: parkingLotId } });
@@ -67,12 +73,6 @@ export const create = procedure
       throw new TRPCError({
         code: "BAD_REQUEST",
         message: "You cannot reserve your own parking lot",
-      });
-    }
-    if (startTimeObj.diff(endTimeObj, "hours") < MINIMUM_DURATION_IN_HOURS) {
-      throw new TRPCError({
-        code: "BAD_REQUEST",
-        message: `Parking must be at least ${MINIMUM_DURATION_IN_HOURS} hours`,
       });
     }
 

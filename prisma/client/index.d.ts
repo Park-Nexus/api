@@ -69,11 +69,6 @@ export type ParkingSpot = $Result.DefaultSelection<Prisma.$ParkingSpotPayload>
  */
 export type Reservation = $Result.DefaultSelection<Prisma.$ReservationPayload>
 /**
- * Model ParkingRecord
- * 
- */
-export type ParkingRecord = $Result.DefaultSelection<Prisma.$ParkingRecordPayload>
-/**
  * Model PaymentRecord
  * 
  */
@@ -142,12 +137,12 @@ export const RESERVATION__STATUS_ALIAS: {
 export type RESERVATION__STATUS_ALIAS = (typeof RESERVATION__STATUS_ALIAS)[keyof typeof RESERVATION__STATUS_ALIAS]
 
 
-export const PARKING_RECORD__STATUS_ALIAS: {
-  ON_GOING: 'ON_GOING',
-  COMPLETED: 'COMPLETED'
+export const PAYMENT_RECORD__STATUS_ALIAS: {
+  AWAITING: 'AWAITING',
+  PAID: 'PAID'
 };
 
-export type PARKING_RECORD__STATUS_ALIAS = (typeof PARKING_RECORD__STATUS_ALIAS)[keyof typeof PARKING_RECORD__STATUS_ALIAS]
+export type PAYMENT_RECORD__STATUS_ALIAS = (typeof PAYMENT_RECORD__STATUS_ALIAS)[keyof typeof PAYMENT_RECORD__STATUS_ALIAS]
 
 
 export const PAYMENT_RECORD__METHOD_ALIAS: {
@@ -182,9 +177,9 @@ export type RESERVATION__STATUS_ALIAS = $Enums.RESERVATION__STATUS_ALIAS
 
 export const RESERVATION__STATUS_ALIAS: typeof $Enums.RESERVATION__STATUS_ALIAS
 
-export type PARKING_RECORD__STATUS_ALIAS = $Enums.PARKING_RECORD__STATUS_ALIAS
+export type PAYMENT_RECORD__STATUS_ALIAS = $Enums.PAYMENT_RECORD__STATUS_ALIAS
 
-export const PARKING_RECORD__STATUS_ALIAS: typeof $Enums.PARKING_RECORD__STATUS_ALIAS
+export const PAYMENT_RECORD__STATUS_ALIAS: typeof $Enums.PAYMENT_RECORD__STATUS_ALIAS
 
 export type PAYMENT_RECORD__METHOD_ALIAS = $Enums.PAYMENT_RECORD__METHOD_ALIAS
 
@@ -422,16 +417,6 @@ export class PrismaClient<
     * ```
     */
   get reservation(): Prisma.ReservationDelegate<ExtArgs>;
-
-  /**
-   * `prisma.parkingRecord`: Exposes CRUD operations for the **ParkingRecord** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more ParkingRecords
-    * const parkingRecords = await prisma.parkingRecord.findMany()
-    * ```
-    */
-  get parkingRecord(): Prisma.ParkingRecordDelegate<ExtArgs>;
 
   /**
    * `prisma.paymentRecord`: Exposes CRUD operations for the **PaymentRecord** model.
@@ -894,7 +879,6 @@ export namespace Prisma {
     ParkingLotService: 'ParkingLotService',
     ParkingSpot: 'ParkingSpot',
     Reservation: 'Reservation',
-    ParkingRecord: 'ParkingRecord',
     PaymentRecord: 'PaymentRecord'
   };
 
@@ -911,7 +895,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "account" | "accountToken" | "user" | "userNotification" | "vehicle" | "parkingLot" | "parkingLotPrice" | "parkingLotReview" | "parkingLotService" | "parkingSpot" | "reservation" | "parkingRecord" | "paymentRecord"
+      modelProps: "account" | "accountToken" | "user" | "userNotification" | "vehicle" | "parkingLot" | "parkingLotPrice" | "parkingLotReview" | "parkingLotService" | "parkingSpot" | "reservation" | "paymentRecord"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1685,76 +1669,6 @@ export namespace Prisma {
           }
         }
       }
-      ParkingRecord: {
-        payload: Prisma.$ParkingRecordPayload<ExtArgs>
-        fields: Prisma.ParkingRecordFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.ParkingRecordFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ParkingRecordPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.ParkingRecordFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ParkingRecordPayload>
-          }
-          findFirst: {
-            args: Prisma.ParkingRecordFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ParkingRecordPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.ParkingRecordFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ParkingRecordPayload>
-          }
-          findMany: {
-            args: Prisma.ParkingRecordFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ParkingRecordPayload>[]
-          }
-          create: {
-            args: Prisma.ParkingRecordCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ParkingRecordPayload>
-          }
-          createMany: {
-            args: Prisma.ParkingRecordCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.ParkingRecordCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ParkingRecordPayload>[]
-          }
-          delete: {
-            args: Prisma.ParkingRecordDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ParkingRecordPayload>
-          }
-          update: {
-            args: Prisma.ParkingRecordUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ParkingRecordPayload>
-          }
-          deleteMany: {
-            args: Prisma.ParkingRecordDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.ParkingRecordUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.ParkingRecordUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ParkingRecordPayload>
-          }
-          aggregate: {
-            args: Prisma.ParkingRecordAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateParkingRecord>
-          }
-          groupBy: {
-            args: Prisma.ParkingRecordGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ParkingRecordGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.ParkingRecordCountArgs<ExtArgs>
-            result: $Utils.Optional<ParkingRecordCountAggregateOutputType> | number
-          }
-        }
-      }
       PaymentRecord: {
         payload: Prisma.$PaymentRecordPayload<ExtArgs>
         fields: Prisma.PaymentRecordFieldRefs
@@ -2094,12 +2008,10 @@ export namespace Prisma {
 
   export type VehicleCountOutputType = {
     reservations: number
-    parkingRecords: number
   }
 
   export type VehicleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     reservations?: boolean | VehicleCountOutputTypeCountReservationsArgs
-    parkingRecords?: boolean | VehicleCountOutputTypeCountParkingRecordsArgs
   }
 
   // Custom InputTypes
@@ -2118,13 +2030,6 @@ export namespace Prisma {
    */
   export type VehicleCountOutputTypeCountReservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReservationWhereInput
-  }
-
-  /**
-   * VehicleCountOutputType without action
-   */
-  export type VehicleCountOutputTypeCountParkingRecordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ParkingRecordWhereInput
   }
 
 
@@ -2223,12 +2128,10 @@ export namespace Prisma {
 
   export type ParkingSpotCountOutputType = {
     reservations: number
-    parkingRecords: number
   }
 
   export type ParkingSpotCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     reservations?: boolean | ParkingSpotCountOutputTypeCountReservationsArgs
-    parkingRecords?: boolean | ParkingSpotCountOutputTypeCountParkingRecordsArgs
   }
 
   // Custom InputTypes
@@ -2247,13 +2150,6 @@ export namespace Prisma {
    */
   export type ParkingSpotCountOutputTypeCountReservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReservationWhereInput
-  }
-
-  /**
-   * ParkingSpotCountOutputType without action
-   */
-  export type ParkingSpotCountOutputTypeCountParkingRecordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ParkingRecordWhereInput
   }
 
 
@@ -6424,6 +6320,7 @@ export namespace Prisma {
     model: string | null
     color: string | null
     imageUrl: string | null
+    deleteAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
     ownerId: number | null
@@ -6437,6 +6334,7 @@ export namespace Prisma {
     model: string | null
     color: string | null
     imageUrl: string | null
+    deleteAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
     ownerId: number | null
@@ -6450,6 +6348,7 @@ export namespace Prisma {
     model: number
     color: number
     imageUrl: number
+    deleteAt: number
     createdAt: number
     updatedAt: number
     ownerId: number
@@ -6475,6 +6374,7 @@ export namespace Prisma {
     model?: true
     color?: true
     imageUrl?: true
+    deleteAt?: true
     createdAt?: true
     updatedAt?: true
     ownerId?: true
@@ -6488,6 +6388,7 @@ export namespace Prisma {
     model?: true
     color?: true
     imageUrl?: true
+    deleteAt?: true
     createdAt?: true
     updatedAt?: true
     ownerId?: true
@@ -6501,6 +6402,7 @@ export namespace Prisma {
     model?: true
     color?: true
     imageUrl?: true
+    deleteAt?: true
     createdAt?: true
     updatedAt?: true
     ownerId?: true
@@ -6601,6 +6503,7 @@ export namespace Prisma {
     model: string
     color: string
     imageUrl: string
+    deleteAt: Date | null
     createdAt: Date
     updatedAt: Date
     ownerId: number
@@ -6633,11 +6536,11 @@ export namespace Prisma {
     model?: boolean
     color?: boolean
     imageUrl?: boolean
+    deleteAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     ownerId?: boolean
     reservations?: boolean | Vehicle$reservationsArgs<ExtArgs>
-    parkingRecords?: boolean | Vehicle$parkingRecordsArgs<ExtArgs>
     owner?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | VehicleCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["vehicle"]>
@@ -6650,6 +6553,7 @@ export namespace Prisma {
     model?: boolean
     color?: boolean
     imageUrl?: boolean
+    deleteAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     ownerId?: boolean
@@ -6664,6 +6568,7 @@ export namespace Prisma {
     model?: boolean
     color?: boolean
     imageUrl?: boolean
+    deleteAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     ownerId?: boolean
@@ -6671,7 +6576,6 @@ export namespace Prisma {
 
   export type VehicleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     reservations?: boolean | Vehicle$reservationsArgs<ExtArgs>
-    parkingRecords?: boolean | Vehicle$parkingRecordsArgs<ExtArgs>
     owner?: boolean | UserDefaultArgs<ExtArgs>
     _count?: boolean | VehicleCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -6683,7 +6587,6 @@ export namespace Prisma {
     name: "Vehicle"
     objects: {
       reservations: Prisma.$ReservationPayload<ExtArgs>[]
-      parkingRecords: Prisma.$ParkingRecordPayload<ExtArgs>[]
       owner: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -6694,6 +6597,7 @@ export namespace Prisma {
       model: string
       color: string
       imageUrl: string
+      deleteAt: Date | null
       createdAt: Date
       updatedAt: Date
       ownerId: number
@@ -7062,7 +6966,6 @@ export namespace Prisma {
   export interface Prisma__VehicleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     reservations<T extends Vehicle$reservationsArgs<ExtArgs> = {}>(args?: Subset<T, Vehicle$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany"> | Null>
-    parkingRecords<T extends Vehicle$parkingRecordsArgs<ExtArgs> = {}>(args?: Subset<T, Vehicle$parkingRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParkingRecordPayload<ExtArgs>, T, "findMany"> | Null>
     owner<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -7100,6 +7003,7 @@ export namespace Prisma {
     readonly model: FieldRef<"Vehicle", 'String'>
     readonly color: FieldRef<"Vehicle", 'String'>
     readonly imageUrl: FieldRef<"Vehicle", 'String'>
+    readonly deleteAt: FieldRef<"Vehicle", 'DateTime'>
     readonly createdAt: FieldRef<"Vehicle", 'DateTime'>
     readonly updatedAt: FieldRef<"Vehicle", 'DateTime'>
     readonly ownerId: FieldRef<"Vehicle", 'Int'>
@@ -7438,26 +7342,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReservationScalarFieldEnum | ReservationScalarFieldEnum[]
-  }
-
-  /**
-   * Vehicle.parkingRecords
-   */
-  export type Vehicle$parkingRecordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ParkingRecord
-     */
-    select?: ParkingRecordSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParkingRecordInclude<ExtArgs> | null
-    where?: ParkingRecordWhereInput
-    orderBy?: ParkingRecordOrderByWithRelationInput | ParkingRecordOrderByWithRelationInput[]
-    cursor?: ParkingRecordWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ParkingRecordScalarFieldEnum | ParkingRecordScalarFieldEnum[]
   }
 
   /**
@@ -10678,6 +10562,7 @@ export namespace Prisma {
     type: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS | null
     description: string | null
     price: number | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
     parkingLotId: number | null
@@ -10689,6 +10574,7 @@ export namespace Prisma {
     type: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS | null
     description: string | null
     price: number | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
     parkingLotId: number | null
@@ -10702,6 +10588,7 @@ export namespace Prisma {
     mediaUrls: number
     price: number
     vehicleTypes: number
+    deletedAt: number
     createdAt: number
     updatedAt: number
     parkingLotId: number
@@ -10727,6 +10614,7 @@ export namespace Prisma {
     type?: true
     description?: true
     price?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     parkingLotId?: true
@@ -10738,6 +10626,7 @@ export namespace Prisma {
     type?: true
     description?: true
     price?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     parkingLotId?: true
@@ -10751,6 +10640,7 @@ export namespace Prisma {
     mediaUrls?: true
     price?: true
     vehicleTypes?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     parkingLotId?: true
@@ -10851,6 +10741,7 @@ export namespace Prisma {
     mediaUrls: string[]
     price: number
     vehicleTypes: $Enums.VEHICLE__TYPE_ALIAS[]
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
     parkingLotId: number
@@ -10883,6 +10774,7 @@ export namespace Prisma {
     mediaUrls?: boolean
     price?: boolean
     vehicleTypes?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     parkingLotId?: boolean
@@ -10899,6 +10791,7 @@ export namespace Prisma {
     mediaUrls?: boolean
     price?: boolean
     vehicleTypes?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     parkingLotId?: boolean
@@ -10913,6 +10806,7 @@ export namespace Prisma {
     mediaUrls?: boolean
     price?: boolean
     vehicleTypes?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     parkingLotId?: boolean
@@ -10941,6 +10835,7 @@ export namespace Prisma {
       mediaUrls: string[]
       price: number
       vehicleTypes: $Enums.VEHICLE__TYPE_ALIAS[]
+      deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
       parkingLotId: number
@@ -11346,6 +11241,7 @@ export namespace Prisma {
     readonly mediaUrls: FieldRef<"ParkingLotService", 'String[]'>
     readonly price: FieldRef<"ParkingLotService", 'Float'>
     readonly vehicleTypes: FieldRef<"ParkingLotService", 'VEHICLE__TYPE_ALIAS[]'>
+    readonly deletedAt: FieldRef<"ParkingLotService", 'DateTime'>
     readonly createdAt: FieldRef<"ParkingLotService", 'DateTime'>
     readonly updatedAt: FieldRef<"ParkingLotService", 'DateTime'>
     readonly parkingLotId: FieldRef<"ParkingLotService", 'Int'>
@@ -11728,6 +11624,7 @@ export namespace Prisma {
     name: string | null
     isAvailable: boolean | null
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
     parkingLotId: number | null
@@ -11738,6 +11635,7 @@ export namespace Prisma {
     name: string | null
     isAvailable: boolean | null
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
     parkingLotId: number | null
@@ -11748,6 +11646,7 @@ export namespace Prisma {
     name: number
     isAvailable: number
     vehicleType: number
+    deletedAt: number
     createdAt: number
     updatedAt: number
     parkingLotId: number
@@ -11770,6 +11669,7 @@ export namespace Prisma {
     name?: true
     isAvailable?: true
     vehicleType?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     parkingLotId?: true
@@ -11780,6 +11680,7 @@ export namespace Prisma {
     name?: true
     isAvailable?: true
     vehicleType?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     parkingLotId?: true
@@ -11790,6 +11691,7 @@ export namespace Prisma {
     name?: true
     isAvailable?: true
     vehicleType?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     parkingLotId?: true
@@ -11887,6 +11789,7 @@ export namespace Prisma {
     name: string
     isAvailable: boolean
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
     parkingLotId: number
@@ -11916,11 +11819,11 @@ export namespace Prisma {
     name?: boolean
     isAvailable?: boolean
     vehicleType?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     parkingLotId?: boolean
     reservations?: boolean | ParkingSpot$reservationsArgs<ExtArgs>
-    parkingRecords?: boolean | ParkingSpot$parkingRecordsArgs<ExtArgs>
     parkingLot?: boolean | ParkingLotDefaultArgs<ExtArgs>
     _count?: boolean | ParkingSpotCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["parkingSpot"]>
@@ -11930,6 +11833,7 @@ export namespace Prisma {
     name?: boolean
     isAvailable?: boolean
     vehicleType?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     parkingLotId?: boolean
@@ -11941,6 +11845,7 @@ export namespace Prisma {
     name?: boolean
     isAvailable?: boolean
     vehicleType?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     parkingLotId?: boolean
@@ -11948,7 +11853,6 @@ export namespace Prisma {
 
   export type ParkingSpotInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     reservations?: boolean | ParkingSpot$reservationsArgs<ExtArgs>
-    parkingRecords?: boolean | ParkingSpot$parkingRecordsArgs<ExtArgs>
     parkingLot?: boolean | ParkingLotDefaultArgs<ExtArgs>
     _count?: boolean | ParkingSpotCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -11960,7 +11864,6 @@ export namespace Prisma {
     name: "ParkingSpot"
     objects: {
       reservations: Prisma.$ReservationPayload<ExtArgs>[]
-      parkingRecords: Prisma.$ParkingRecordPayload<ExtArgs>[]
       parkingLot: Prisma.$ParkingLotPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -11968,6 +11871,7 @@ export namespace Prisma {
       name: string
       isAvailable: boolean
       vehicleType: $Enums.VEHICLE__TYPE_ALIAS
+      deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
       parkingLotId: number
@@ -12336,7 +12240,6 @@ export namespace Prisma {
   export interface Prisma__ParkingSpotClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     reservations<T extends ParkingSpot$reservationsArgs<ExtArgs> = {}>(args?: Subset<T, ParkingSpot$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany"> | Null>
-    parkingRecords<T extends ParkingSpot$parkingRecordsArgs<ExtArgs> = {}>(args?: Subset<T, ParkingSpot$parkingRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParkingRecordPayload<ExtArgs>, T, "findMany"> | Null>
     parkingLot<T extends ParkingLotDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ParkingLotDefaultArgs<ExtArgs>>): Prisma__ParkingLotClient<$Result.GetResult<Prisma.$ParkingLotPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -12371,6 +12274,7 @@ export namespace Prisma {
     readonly name: FieldRef<"ParkingSpot", 'String'>
     readonly isAvailable: FieldRef<"ParkingSpot", 'Boolean'>
     readonly vehicleType: FieldRef<"ParkingSpot", 'VEHICLE__TYPE_ALIAS'>
+    readonly deletedAt: FieldRef<"ParkingSpot", 'DateTime'>
     readonly createdAt: FieldRef<"ParkingSpot", 'DateTime'>
     readonly updatedAt: FieldRef<"ParkingSpot", 'DateTime'>
     readonly parkingLotId: FieldRef<"ParkingSpot", 'Int'>
@@ -12712,26 +12616,6 @@ export namespace Prisma {
   }
 
   /**
-   * ParkingSpot.parkingRecords
-   */
-  export type ParkingSpot$parkingRecordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ParkingRecord
-     */
-    select?: ParkingRecordSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParkingRecordInclude<ExtArgs> | null
-    where?: ParkingRecordWhereInput
-    orderBy?: ParkingRecordOrderByWithRelationInput | ParkingRecordOrderByWithRelationInput[]
-    cursor?: ParkingRecordWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ParkingRecordScalarFieldEnum | ParkingRecordScalarFieldEnum[]
-  }
-
-  /**
    * ParkingSpot without action
    */
   export type ParkingSpotDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12996,11 +12880,11 @@ export namespace Prisma {
     userId?: boolean
     parkingSpotId?: boolean
     vehicleId?: boolean
-    parkingRecord?: boolean | Reservation$parkingRecordArgs<ExtArgs>
     services?: boolean | Reservation$servicesArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     parkingSpot?: boolean | ParkingSpotDefaultArgs<ExtArgs>
     vehicle?: boolean | VehicleDefaultArgs<ExtArgs>
+    PaymentRecord?: boolean | Reservation$PaymentRecordArgs<ExtArgs>
     _count?: boolean | ReservationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["reservation"]>
 
@@ -13034,11 +12918,11 @@ export namespace Prisma {
   }
 
   export type ReservationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    parkingRecord?: boolean | Reservation$parkingRecordArgs<ExtArgs>
     services?: boolean | Reservation$servicesArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
     parkingSpot?: boolean | ParkingSpotDefaultArgs<ExtArgs>
     vehicle?: boolean | VehicleDefaultArgs<ExtArgs>
+    PaymentRecord?: boolean | Reservation$PaymentRecordArgs<ExtArgs>
     _count?: boolean | ReservationCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ReservationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13050,11 +12934,11 @@ export namespace Prisma {
   export type $ReservationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Reservation"
     objects: {
-      parkingRecord: Prisma.$ParkingRecordPayload<ExtArgs> | null
       services: Prisma.$ParkingLotServicePayload<ExtArgs>[]
       user: Prisma.$UserPayload<ExtArgs>
       parkingSpot: Prisma.$ParkingSpotPayload<ExtArgs>
       vehicle: Prisma.$VehiclePayload<ExtArgs>
+      PaymentRecord: Prisma.$PaymentRecordPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -13431,11 +13315,11 @@ export namespace Prisma {
    */
   export interface Prisma__ReservationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    parkingRecord<T extends Reservation$parkingRecordArgs<ExtArgs> = {}>(args?: Subset<T, Reservation$parkingRecordArgs<ExtArgs>>): Prisma__ParkingRecordClient<$Result.GetResult<Prisma.$ParkingRecordPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     services<T extends Reservation$servicesArgs<ExtArgs> = {}>(args?: Subset<T, Reservation$servicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParkingLotServicePayload<ExtArgs>, T, "findMany"> | Null>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     parkingSpot<T extends ParkingSpotDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ParkingSpotDefaultArgs<ExtArgs>>): Prisma__ParkingSpotClient<$Result.GetResult<Prisma.$ParkingSpotPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     vehicle<T extends VehicleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VehicleDefaultArgs<ExtArgs>>): Prisma__VehicleClient<$Result.GetResult<Prisma.$VehiclePayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    PaymentRecord<T extends Reservation$PaymentRecordArgs<ExtArgs> = {}>(args?: Subset<T, Reservation$PaymentRecordArgs<ExtArgs>>): Prisma__PaymentRecordClient<$Result.GetResult<Prisma.$PaymentRecordPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13793,21 +13677,6 @@ export namespace Prisma {
   }
 
   /**
-   * Reservation.parkingRecord
-   */
-  export type Reservation$parkingRecordArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ParkingRecord
-     */
-    select?: ParkingRecordSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParkingRecordInclude<ExtArgs> | null
-    where?: ParkingRecordWhereInput
-  }
-
-  /**
    * Reservation.services
    */
   export type Reservation$servicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13828,1113 +13697,9 @@ export namespace Prisma {
   }
 
   /**
-   * Reservation without action
+   * Reservation.PaymentRecord
    */
-  export type ReservationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reservation
-     */
-    select?: ReservationSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReservationInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model ParkingRecord
-   */
-
-  export type AggregateParkingRecord = {
-    _count: ParkingRecordCountAggregateOutputType | null
-    _avg: ParkingRecordAvgAggregateOutputType | null
-    _sum: ParkingRecordSumAggregateOutputType | null
-    _min: ParkingRecordMinAggregateOutputType | null
-    _max: ParkingRecordMaxAggregateOutputType | null
-  }
-
-  export type ParkingRecordAvgAggregateOutputType = {
-    id: number | null
-    totalPrice: number | null
-    vehicleId: number | null
-    parkingSpotId: number | null
-    reservationId: number | null
-  }
-
-  export type ParkingRecordSumAggregateOutputType = {
-    id: number | null
-    totalPrice: number | null
-    vehicleId: number | null
-    parkingSpotId: number | null
-    reservationId: number | null
-  }
-
-  export type ParkingRecordMinAggregateOutputType = {
-    id: number | null
-    checkInAt: Date | null
-    checkOutAt: Date | null
-    totalPrice: number | null
-    status: $Enums.PARKING_RECORD__STATUS_ALIAS | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    vehicleId: number | null
-    parkingSpotId: number | null
-    reservationId: number | null
-  }
-
-  export type ParkingRecordMaxAggregateOutputType = {
-    id: number | null
-    checkInAt: Date | null
-    checkOutAt: Date | null
-    totalPrice: number | null
-    status: $Enums.PARKING_RECORD__STATUS_ALIAS | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    vehicleId: number | null
-    parkingSpotId: number | null
-    reservationId: number | null
-  }
-
-  export type ParkingRecordCountAggregateOutputType = {
-    id: number
-    checkInAt: number
-    checkOutAt: number
-    totalPrice: number
-    status: number
-    createdAt: number
-    updatedAt: number
-    vehicleId: number
-    parkingSpotId: number
-    reservationId: number
-    _all: number
-  }
-
-
-  export type ParkingRecordAvgAggregateInputType = {
-    id?: true
-    totalPrice?: true
-    vehicleId?: true
-    parkingSpotId?: true
-    reservationId?: true
-  }
-
-  export type ParkingRecordSumAggregateInputType = {
-    id?: true
-    totalPrice?: true
-    vehicleId?: true
-    parkingSpotId?: true
-    reservationId?: true
-  }
-
-  export type ParkingRecordMinAggregateInputType = {
-    id?: true
-    checkInAt?: true
-    checkOutAt?: true
-    totalPrice?: true
-    status?: true
-    createdAt?: true
-    updatedAt?: true
-    vehicleId?: true
-    parkingSpotId?: true
-    reservationId?: true
-  }
-
-  export type ParkingRecordMaxAggregateInputType = {
-    id?: true
-    checkInAt?: true
-    checkOutAt?: true
-    totalPrice?: true
-    status?: true
-    createdAt?: true
-    updatedAt?: true
-    vehicleId?: true
-    parkingSpotId?: true
-    reservationId?: true
-  }
-
-  export type ParkingRecordCountAggregateInputType = {
-    id?: true
-    checkInAt?: true
-    checkOutAt?: true
-    totalPrice?: true
-    status?: true
-    createdAt?: true
-    updatedAt?: true
-    vehicleId?: true
-    parkingSpotId?: true
-    reservationId?: true
-    _all?: true
-  }
-
-  export type ParkingRecordAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which ParkingRecord to aggregate.
-     */
-    where?: ParkingRecordWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ParkingRecords to fetch.
-     */
-    orderBy?: ParkingRecordOrderByWithRelationInput | ParkingRecordOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: ParkingRecordWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ParkingRecords from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ParkingRecords.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned ParkingRecords
-    **/
-    _count?: true | ParkingRecordCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: ParkingRecordAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: ParkingRecordSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: ParkingRecordMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: ParkingRecordMaxAggregateInputType
-  }
-
-  export type GetParkingRecordAggregateType<T extends ParkingRecordAggregateArgs> = {
-        [P in keyof T & keyof AggregateParkingRecord]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateParkingRecord[P]>
-      : GetScalarType<T[P], AggregateParkingRecord[P]>
-  }
-
-
-
-
-  export type ParkingRecordGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ParkingRecordWhereInput
-    orderBy?: ParkingRecordOrderByWithAggregationInput | ParkingRecordOrderByWithAggregationInput[]
-    by: ParkingRecordScalarFieldEnum[] | ParkingRecordScalarFieldEnum
-    having?: ParkingRecordScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: ParkingRecordCountAggregateInputType | true
-    _avg?: ParkingRecordAvgAggregateInputType
-    _sum?: ParkingRecordSumAggregateInputType
-    _min?: ParkingRecordMinAggregateInputType
-    _max?: ParkingRecordMaxAggregateInputType
-  }
-
-  export type ParkingRecordGroupByOutputType = {
-    id: number
-    checkInAt: Date
-    checkOutAt: Date | null
-    totalPrice: number | null
-    status: $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt: Date
-    updatedAt: Date
-    vehicleId: number | null
-    parkingSpotId: number | null
-    reservationId: number | null
-    _count: ParkingRecordCountAggregateOutputType | null
-    _avg: ParkingRecordAvgAggregateOutputType | null
-    _sum: ParkingRecordSumAggregateOutputType | null
-    _min: ParkingRecordMinAggregateOutputType | null
-    _max: ParkingRecordMaxAggregateOutputType | null
-  }
-
-  type GetParkingRecordGroupByPayload<T extends ParkingRecordGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<ParkingRecordGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof ParkingRecordGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ParkingRecordGroupByOutputType[P]>
-            : GetScalarType<T[P], ParkingRecordGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type ParkingRecordSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    checkInAt?: boolean
-    checkOutAt?: boolean
-    totalPrice?: boolean
-    status?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    vehicleId?: boolean
-    parkingSpotId?: boolean
-    reservationId?: boolean
-    vehicle?: boolean | ParkingRecord$vehicleArgs<ExtArgs>
-    parkingSpot?: boolean | ParkingRecord$parkingSpotArgs<ExtArgs>
-    reservation?: boolean | ParkingRecord$reservationArgs<ExtArgs>
-    paymentRecord?: boolean | ParkingRecord$paymentRecordArgs<ExtArgs>
-  }, ExtArgs["result"]["parkingRecord"]>
-
-  export type ParkingRecordSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    checkInAt?: boolean
-    checkOutAt?: boolean
-    totalPrice?: boolean
-    status?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    vehicleId?: boolean
-    parkingSpotId?: boolean
-    reservationId?: boolean
-    vehicle?: boolean | ParkingRecord$vehicleArgs<ExtArgs>
-    parkingSpot?: boolean | ParkingRecord$parkingSpotArgs<ExtArgs>
-    reservation?: boolean | ParkingRecord$reservationArgs<ExtArgs>
-  }, ExtArgs["result"]["parkingRecord"]>
-
-  export type ParkingRecordSelectScalar = {
-    id?: boolean
-    checkInAt?: boolean
-    checkOutAt?: boolean
-    totalPrice?: boolean
-    status?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    vehicleId?: boolean
-    parkingSpotId?: boolean
-    reservationId?: boolean
-  }
-
-  export type ParkingRecordInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    vehicle?: boolean | ParkingRecord$vehicleArgs<ExtArgs>
-    parkingSpot?: boolean | ParkingRecord$parkingSpotArgs<ExtArgs>
-    reservation?: boolean | ParkingRecord$reservationArgs<ExtArgs>
-    paymentRecord?: boolean | ParkingRecord$paymentRecordArgs<ExtArgs>
-  }
-  export type ParkingRecordIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    vehicle?: boolean | ParkingRecord$vehicleArgs<ExtArgs>
-    parkingSpot?: boolean | ParkingRecord$parkingSpotArgs<ExtArgs>
-    reservation?: boolean | ParkingRecord$reservationArgs<ExtArgs>
-  }
-
-  export type $ParkingRecordPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "ParkingRecord"
-    objects: {
-      vehicle: Prisma.$VehiclePayload<ExtArgs> | null
-      parkingSpot: Prisma.$ParkingSpotPayload<ExtArgs> | null
-      reservation: Prisma.$ReservationPayload<ExtArgs> | null
-      paymentRecord: Prisma.$PaymentRecordPayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      checkInAt: Date
-      checkOutAt: Date | null
-      totalPrice: number | null
-      status: $Enums.PARKING_RECORD__STATUS_ALIAS
-      createdAt: Date
-      updatedAt: Date
-      vehicleId: number | null
-      parkingSpotId: number | null
-      reservationId: number | null
-    }, ExtArgs["result"]["parkingRecord"]>
-    composites: {}
-  }
-
-  type ParkingRecordGetPayload<S extends boolean | null | undefined | ParkingRecordDefaultArgs> = $Result.GetResult<Prisma.$ParkingRecordPayload, S>
-
-  type ParkingRecordCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<ParkingRecordFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: ParkingRecordCountAggregateInputType | true
-    }
-
-  export interface ParkingRecordDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ParkingRecord'], meta: { name: 'ParkingRecord' } }
-    /**
-     * Find zero or one ParkingRecord that matches the filter.
-     * @param {ParkingRecordFindUniqueArgs} args - Arguments to find a ParkingRecord
-     * @example
-     * // Get one ParkingRecord
-     * const parkingRecord = await prisma.parkingRecord.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends ParkingRecordFindUniqueArgs>(args: SelectSubset<T, ParkingRecordFindUniqueArgs<ExtArgs>>): Prisma__ParkingRecordClient<$Result.GetResult<Prisma.$ParkingRecordPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
-
-    /**
-     * Find one ParkingRecord that matches the filter or throw an error with `error.code='P2025'` 
-     * if no matches were found.
-     * @param {ParkingRecordFindUniqueOrThrowArgs} args - Arguments to find a ParkingRecord
-     * @example
-     * // Get one ParkingRecord
-     * const parkingRecord = await prisma.parkingRecord.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends ParkingRecordFindUniqueOrThrowArgs>(args: SelectSubset<T, ParkingRecordFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ParkingRecordClient<$Result.GetResult<Prisma.$ParkingRecordPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
-
-    /**
-     * Find the first ParkingRecord that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ParkingRecordFindFirstArgs} args - Arguments to find a ParkingRecord
-     * @example
-     * // Get one ParkingRecord
-     * const parkingRecord = await prisma.parkingRecord.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends ParkingRecordFindFirstArgs>(args?: SelectSubset<T, ParkingRecordFindFirstArgs<ExtArgs>>): Prisma__ParkingRecordClient<$Result.GetResult<Prisma.$ParkingRecordPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
-
-    /**
-     * Find the first ParkingRecord that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ParkingRecordFindFirstOrThrowArgs} args - Arguments to find a ParkingRecord
-     * @example
-     * // Get one ParkingRecord
-     * const parkingRecord = await prisma.parkingRecord.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends ParkingRecordFindFirstOrThrowArgs>(args?: SelectSubset<T, ParkingRecordFindFirstOrThrowArgs<ExtArgs>>): Prisma__ParkingRecordClient<$Result.GetResult<Prisma.$ParkingRecordPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
-
-    /**
-     * Find zero or more ParkingRecords that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ParkingRecordFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all ParkingRecords
-     * const parkingRecords = await prisma.parkingRecord.findMany()
-     * 
-     * // Get first 10 ParkingRecords
-     * const parkingRecords = await prisma.parkingRecord.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const parkingRecordWithIdOnly = await prisma.parkingRecord.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends ParkingRecordFindManyArgs>(args?: SelectSubset<T, ParkingRecordFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParkingRecordPayload<ExtArgs>, T, "findMany">>
-
-    /**
-     * Create a ParkingRecord.
-     * @param {ParkingRecordCreateArgs} args - Arguments to create a ParkingRecord.
-     * @example
-     * // Create one ParkingRecord
-     * const ParkingRecord = await prisma.parkingRecord.create({
-     *   data: {
-     *     // ... data to create a ParkingRecord
-     *   }
-     * })
-     * 
-     */
-    create<T extends ParkingRecordCreateArgs>(args: SelectSubset<T, ParkingRecordCreateArgs<ExtArgs>>): Prisma__ParkingRecordClient<$Result.GetResult<Prisma.$ParkingRecordPayload<ExtArgs>, T, "create">, never, ExtArgs>
-
-    /**
-     * Create many ParkingRecords.
-     * @param {ParkingRecordCreateManyArgs} args - Arguments to create many ParkingRecords.
-     * @example
-     * // Create many ParkingRecords
-     * const parkingRecord = await prisma.parkingRecord.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends ParkingRecordCreateManyArgs>(args?: SelectSubset<T, ParkingRecordCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many ParkingRecords and returns the data saved in the database.
-     * @param {ParkingRecordCreateManyAndReturnArgs} args - Arguments to create many ParkingRecords.
-     * @example
-     * // Create many ParkingRecords
-     * const parkingRecord = await prisma.parkingRecord.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many ParkingRecords and only return the `id`
-     * const parkingRecordWithIdOnly = await prisma.parkingRecord.createManyAndReturn({ 
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends ParkingRecordCreateManyAndReturnArgs>(args?: SelectSubset<T, ParkingRecordCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParkingRecordPayload<ExtArgs>, T, "createManyAndReturn">>
-
-    /**
-     * Delete a ParkingRecord.
-     * @param {ParkingRecordDeleteArgs} args - Arguments to delete one ParkingRecord.
-     * @example
-     * // Delete one ParkingRecord
-     * const ParkingRecord = await prisma.parkingRecord.delete({
-     *   where: {
-     *     // ... filter to delete one ParkingRecord
-     *   }
-     * })
-     * 
-     */
-    delete<T extends ParkingRecordDeleteArgs>(args: SelectSubset<T, ParkingRecordDeleteArgs<ExtArgs>>): Prisma__ParkingRecordClient<$Result.GetResult<Prisma.$ParkingRecordPayload<ExtArgs>, T, "delete">, never, ExtArgs>
-
-    /**
-     * Update one ParkingRecord.
-     * @param {ParkingRecordUpdateArgs} args - Arguments to update one ParkingRecord.
-     * @example
-     * // Update one ParkingRecord
-     * const parkingRecord = await prisma.parkingRecord.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends ParkingRecordUpdateArgs>(args: SelectSubset<T, ParkingRecordUpdateArgs<ExtArgs>>): Prisma__ParkingRecordClient<$Result.GetResult<Prisma.$ParkingRecordPayload<ExtArgs>, T, "update">, never, ExtArgs>
-
-    /**
-     * Delete zero or more ParkingRecords.
-     * @param {ParkingRecordDeleteManyArgs} args - Arguments to filter ParkingRecords to delete.
-     * @example
-     * // Delete a few ParkingRecords
-     * const { count } = await prisma.parkingRecord.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends ParkingRecordDeleteManyArgs>(args?: SelectSubset<T, ParkingRecordDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more ParkingRecords.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ParkingRecordUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many ParkingRecords
-     * const parkingRecord = await prisma.parkingRecord.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends ParkingRecordUpdateManyArgs>(args: SelectSubset<T, ParkingRecordUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one ParkingRecord.
-     * @param {ParkingRecordUpsertArgs} args - Arguments to update or create a ParkingRecord.
-     * @example
-     * // Update or create a ParkingRecord
-     * const parkingRecord = await prisma.parkingRecord.upsert({
-     *   create: {
-     *     // ... data to create a ParkingRecord
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the ParkingRecord we want to update
-     *   }
-     * })
-     */
-    upsert<T extends ParkingRecordUpsertArgs>(args: SelectSubset<T, ParkingRecordUpsertArgs<ExtArgs>>): Prisma__ParkingRecordClient<$Result.GetResult<Prisma.$ParkingRecordPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
-
-
-    /**
-     * Count the number of ParkingRecords.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ParkingRecordCountArgs} args - Arguments to filter ParkingRecords to count.
-     * @example
-     * // Count the number of ParkingRecords
-     * const count = await prisma.parkingRecord.count({
-     *   where: {
-     *     // ... the filter for the ParkingRecords we want to count
-     *   }
-     * })
-    **/
-    count<T extends ParkingRecordCountArgs>(
-      args?: Subset<T, ParkingRecordCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], ParkingRecordCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a ParkingRecord.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ParkingRecordAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends ParkingRecordAggregateArgs>(args: Subset<T, ParkingRecordAggregateArgs>): Prisma.PrismaPromise<GetParkingRecordAggregateType<T>>
-
-    /**
-     * Group by ParkingRecord.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ParkingRecordGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends ParkingRecordGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ParkingRecordGroupByArgs['orderBy'] }
-        : { orderBy?: ParkingRecordGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, ParkingRecordGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetParkingRecordGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the ParkingRecord model
-   */
-  readonly fields: ParkingRecordFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for ParkingRecord.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__ParkingRecordClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    vehicle<T extends ParkingRecord$vehicleArgs<ExtArgs> = {}>(args?: Subset<T, ParkingRecord$vehicleArgs<ExtArgs>>): Prisma__VehicleClient<$Result.GetResult<Prisma.$VehiclePayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
-    parkingSpot<T extends ParkingRecord$parkingSpotArgs<ExtArgs> = {}>(args?: Subset<T, ParkingRecord$parkingSpotArgs<ExtArgs>>): Prisma__ParkingSpotClient<$Result.GetResult<Prisma.$ParkingSpotPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
-    reservation<T extends ParkingRecord$reservationArgs<ExtArgs> = {}>(args?: Subset<T, ParkingRecord$reservationArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
-    paymentRecord<T extends ParkingRecord$paymentRecordArgs<ExtArgs> = {}>(args?: Subset<T, ParkingRecord$paymentRecordArgs<ExtArgs>>): Prisma__PaymentRecordClient<$Result.GetResult<Prisma.$PaymentRecordPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the ParkingRecord model
-   */ 
-  interface ParkingRecordFieldRefs {
-    readonly id: FieldRef<"ParkingRecord", 'Int'>
-    readonly checkInAt: FieldRef<"ParkingRecord", 'DateTime'>
-    readonly checkOutAt: FieldRef<"ParkingRecord", 'DateTime'>
-    readonly totalPrice: FieldRef<"ParkingRecord", 'Float'>
-    readonly status: FieldRef<"ParkingRecord", 'PARKING_RECORD__STATUS_ALIAS'>
-    readonly createdAt: FieldRef<"ParkingRecord", 'DateTime'>
-    readonly updatedAt: FieldRef<"ParkingRecord", 'DateTime'>
-    readonly vehicleId: FieldRef<"ParkingRecord", 'Int'>
-    readonly parkingSpotId: FieldRef<"ParkingRecord", 'Int'>
-    readonly reservationId: FieldRef<"ParkingRecord", 'Int'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * ParkingRecord findUnique
-   */
-  export type ParkingRecordFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ParkingRecord
-     */
-    select?: ParkingRecordSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParkingRecordInclude<ExtArgs> | null
-    /**
-     * Filter, which ParkingRecord to fetch.
-     */
-    where: ParkingRecordWhereUniqueInput
-  }
-
-  /**
-   * ParkingRecord findUniqueOrThrow
-   */
-  export type ParkingRecordFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ParkingRecord
-     */
-    select?: ParkingRecordSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParkingRecordInclude<ExtArgs> | null
-    /**
-     * Filter, which ParkingRecord to fetch.
-     */
-    where: ParkingRecordWhereUniqueInput
-  }
-
-  /**
-   * ParkingRecord findFirst
-   */
-  export type ParkingRecordFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ParkingRecord
-     */
-    select?: ParkingRecordSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParkingRecordInclude<ExtArgs> | null
-    /**
-     * Filter, which ParkingRecord to fetch.
-     */
-    where?: ParkingRecordWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ParkingRecords to fetch.
-     */
-    orderBy?: ParkingRecordOrderByWithRelationInput | ParkingRecordOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for ParkingRecords.
-     */
-    cursor?: ParkingRecordWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ParkingRecords from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ParkingRecords.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of ParkingRecords.
-     */
-    distinct?: ParkingRecordScalarFieldEnum | ParkingRecordScalarFieldEnum[]
-  }
-
-  /**
-   * ParkingRecord findFirstOrThrow
-   */
-  export type ParkingRecordFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ParkingRecord
-     */
-    select?: ParkingRecordSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParkingRecordInclude<ExtArgs> | null
-    /**
-     * Filter, which ParkingRecord to fetch.
-     */
-    where?: ParkingRecordWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ParkingRecords to fetch.
-     */
-    orderBy?: ParkingRecordOrderByWithRelationInput | ParkingRecordOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for ParkingRecords.
-     */
-    cursor?: ParkingRecordWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ParkingRecords from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ParkingRecords.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of ParkingRecords.
-     */
-    distinct?: ParkingRecordScalarFieldEnum | ParkingRecordScalarFieldEnum[]
-  }
-
-  /**
-   * ParkingRecord findMany
-   */
-  export type ParkingRecordFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ParkingRecord
-     */
-    select?: ParkingRecordSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParkingRecordInclude<ExtArgs> | null
-    /**
-     * Filter, which ParkingRecords to fetch.
-     */
-    where?: ParkingRecordWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ParkingRecords to fetch.
-     */
-    orderBy?: ParkingRecordOrderByWithRelationInput | ParkingRecordOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing ParkingRecords.
-     */
-    cursor?: ParkingRecordWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ParkingRecords from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ParkingRecords.
-     */
-    skip?: number
-    distinct?: ParkingRecordScalarFieldEnum | ParkingRecordScalarFieldEnum[]
-  }
-
-  /**
-   * ParkingRecord create
-   */
-  export type ParkingRecordCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ParkingRecord
-     */
-    select?: ParkingRecordSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParkingRecordInclude<ExtArgs> | null
-    /**
-     * The data needed to create a ParkingRecord.
-     */
-    data: XOR<ParkingRecordCreateInput, ParkingRecordUncheckedCreateInput>
-  }
-
-  /**
-   * ParkingRecord createMany
-   */
-  export type ParkingRecordCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many ParkingRecords.
-     */
-    data: ParkingRecordCreateManyInput | ParkingRecordCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * ParkingRecord createManyAndReturn
-   */
-  export type ParkingRecordCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ParkingRecord
-     */
-    select?: ParkingRecordSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * The data used to create many ParkingRecords.
-     */
-    data: ParkingRecordCreateManyInput | ParkingRecordCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParkingRecordIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * ParkingRecord update
-   */
-  export type ParkingRecordUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ParkingRecord
-     */
-    select?: ParkingRecordSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParkingRecordInclude<ExtArgs> | null
-    /**
-     * The data needed to update a ParkingRecord.
-     */
-    data: XOR<ParkingRecordUpdateInput, ParkingRecordUncheckedUpdateInput>
-    /**
-     * Choose, which ParkingRecord to update.
-     */
-    where: ParkingRecordWhereUniqueInput
-  }
-
-  /**
-   * ParkingRecord updateMany
-   */
-  export type ParkingRecordUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update ParkingRecords.
-     */
-    data: XOR<ParkingRecordUpdateManyMutationInput, ParkingRecordUncheckedUpdateManyInput>
-    /**
-     * Filter which ParkingRecords to update
-     */
-    where?: ParkingRecordWhereInput
-  }
-
-  /**
-   * ParkingRecord upsert
-   */
-  export type ParkingRecordUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ParkingRecord
-     */
-    select?: ParkingRecordSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParkingRecordInclude<ExtArgs> | null
-    /**
-     * The filter to search for the ParkingRecord to update in case it exists.
-     */
-    where: ParkingRecordWhereUniqueInput
-    /**
-     * In case the ParkingRecord found by the `where` argument doesn't exist, create a new ParkingRecord with this data.
-     */
-    create: XOR<ParkingRecordCreateInput, ParkingRecordUncheckedCreateInput>
-    /**
-     * In case the ParkingRecord was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<ParkingRecordUpdateInput, ParkingRecordUncheckedUpdateInput>
-  }
-
-  /**
-   * ParkingRecord delete
-   */
-  export type ParkingRecordDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ParkingRecord
-     */
-    select?: ParkingRecordSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParkingRecordInclude<ExtArgs> | null
-    /**
-     * Filter which ParkingRecord to delete.
-     */
-    where: ParkingRecordWhereUniqueInput
-  }
-
-  /**
-   * ParkingRecord deleteMany
-   */
-  export type ParkingRecordDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which ParkingRecords to delete
-     */
-    where?: ParkingRecordWhereInput
-  }
-
-  /**
-   * ParkingRecord.vehicle
-   */
-  export type ParkingRecord$vehicleArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Vehicle
-     */
-    select?: VehicleSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VehicleInclude<ExtArgs> | null
-    where?: VehicleWhereInput
-  }
-
-  /**
-   * ParkingRecord.parkingSpot
-   */
-  export type ParkingRecord$parkingSpotArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ParkingSpot
-     */
-    select?: ParkingSpotSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ParkingSpotInclude<ExtArgs> | null
-    where?: ParkingSpotWhereInput
-  }
-
-  /**
-   * ParkingRecord.reservation
-   */
-  export type ParkingRecord$reservationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Reservation
-     */
-    select?: ReservationSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ReservationInclude<ExtArgs> | null
-    where?: ReservationWhereInput
-  }
-
-  /**
-   * ParkingRecord.paymentRecord
-   */
-  export type ParkingRecord$paymentRecordArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Reservation$PaymentRecordArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the PaymentRecord
      */
@@ -14947,17 +13712,17 @@ export namespace Prisma {
   }
 
   /**
-   * ParkingRecord without action
+   * Reservation without action
    */
-  export type ParkingRecordDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ReservationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the ParkingRecord
+     * Select specific fields to fetch from the Reservation
      */
-    select?: ParkingRecordSelect<ExtArgs> | null
+    select?: ReservationSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: ParkingRecordInclude<ExtArgs> | null
+    include?: ReservationInclude<ExtArgs> | null
   }
 
 
@@ -14977,44 +13742,47 @@ export namespace Prisma {
     id: number | null
     amount: number | null
     userId: number | null
-    parkingRecordId: number | null
+    reservationId: number | null
   }
 
   export type PaymentRecordSumAggregateOutputType = {
     id: number | null
     amount: number | null
     userId: number | null
-    parkingRecordId: number | null
+    reservationId: number | null
   }
 
   export type PaymentRecordMinAggregateOutputType = {
     id: number | null
+    status: $Enums.PAYMENT_RECORD__STATUS_ALIAS | null
     method: $Enums.PAYMENT_RECORD__METHOD_ALIAS | null
     amount: number | null
     createdAt: Date | null
     updatedAt: Date | null
     userId: number | null
-    parkingRecordId: number | null
+    reservationId: number | null
   }
 
   export type PaymentRecordMaxAggregateOutputType = {
     id: number | null
+    status: $Enums.PAYMENT_RECORD__STATUS_ALIAS | null
     method: $Enums.PAYMENT_RECORD__METHOD_ALIAS | null
     amount: number | null
     createdAt: Date | null
     updatedAt: Date | null
     userId: number | null
-    parkingRecordId: number | null
+    reservationId: number | null
   }
 
   export type PaymentRecordCountAggregateOutputType = {
     id: number
+    status: number
     method: number
     amount: number
     createdAt: number
     updatedAt: number
     userId: number
-    parkingRecordId: number
+    reservationId: number
     _all: number
   }
 
@@ -15023,44 +13791,47 @@ export namespace Prisma {
     id?: true
     amount?: true
     userId?: true
-    parkingRecordId?: true
+    reservationId?: true
   }
 
   export type PaymentRecordSumAggregateInputType = {
     id?: true
     amount?: true
     userId?: true
-    parkingRecordId?: true
+    reservationId?: true
   }
 
   export type PaymentRecordMinAggregateInputType = {
     id?: true
+    status?: true
     method?: true
     amount?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
-    parkingRecordId?: true
+    reservationId?: true
   }
 
   export type PaymentRecordMaxAggregateInputType = {
     id?: true
+    status?: true
     method?: true
     amount?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
-    parkingRecordId?: true
+    reservationId?: true
   }
 
   export type PaymentRecordCountAggregateInputType = {
     id?: true
+    status?: true
     method?: true
     amount?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
-    parkingRecordId?: true
+    reservationId?: true
     _all?: true
   }
 
@@ -15152,12 +13923,13 @@ export namespace Prisma {
 
   export type PaymentRecordGroupByOutputType = {
     id: number
+    status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount: number
     createdAt: Date
     updatedAt: Date
     userId: number
-    parkingRecordId: number
+    reservationId: number
     _count: PaymentRecordCountAggregateOutputType | null
     _avg: PaymentRecordAvgAggregateOutputType | null
     _sum: PaymentRecordSumAggregateOutputType | null
@@ -15181,61 +13953,65 @@ export namespace Prisma {
 
   export type PaymentRecordSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    status?: boolean
     method?: boolean
     amount?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
-    parkingRecordId?: boolean
+    reservationId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-    parkingRecord?: boolean | ParkingRecordDefaultArgs<ExtArgs>
+    reservation?: boolean | ReservationDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["paymentRecord"]>
 
   export type PaymentRecordSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    status?: boolean
     method?: boolean
     amount?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
-    parkingRecordId?: boolean
+    reservationId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
-    parkingRecord?: boolean | ParkingRecordDefaultArgs<ExtArgs>
+    reservation?: boolean | ReservationDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["paymentRecord"]>
 
   export type PaymentRecordSelectScalar = {
     id?: boolean
+    status?: boolean
     method?: boolean
     amount?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
-    parkingRecordId?: boolean
+    reservationId?: boolean
   }
 
   export type PaymentRecordInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
-    parkingRecord?: boolean | ParkingRecordDefaultArgs<ExtArgs>
+    reservation?: boolean | ReservationDefaultArgs<ExtArgs>
   }
   export type PaymentRecordIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
-    parkingRecord?: boolean | ParkingRecordDefaultArgs<ExtArgs>
+    reservation?: boolean | ReservationDefaultArgs<ExtArgs>
   }
 
   export type $PaymentRecordPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "PaymentRecord"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
-      parkingRecord: Prisma.$ParkingRecordPayload<ExtArgs>
+      reservation: Prisma.$ReservationPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
       method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
       amount: number
       createdAt: Date
       updatedAt: Date
       userId: number
-      parkingRecordId: number
+      reservationId: number
     }, ExtArgs["result"]["paymentRecord"]>
     composites: {}
   }
@@ -15601,7 +14377,7 @@ export namespace Prisma {
   export interface Prisma__PaymentRecordClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    parkingRecord<T extends ParkingRecordDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ParkingRecordDefaultArgs<ExtArgs>>): Prisma__ParkingRecordClient<$Result.GetResult<Prisma.$ParkingRecordPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    reservation<T extends ReservationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ReservationDefaultArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15632,12 +14408,13 @@ export namespace Prisma {
    */ 
   interface PaymentRecordFieldRefs {
     readonly id: FieldRef<"PaymentRecord", 'Int'>
+    readonly status: FieldRef<"PaymentRecord", 'PAYMENT_RECORD__STATUS_ALIAS'>
     readonly method: FieldRef<"PaymentRecord", 'PAYMENT_RECORD__METHOD_ALIAS'>
     readonly amount: FieldRef<"PaymentRecord", 'Float'>
     readonly createdAt: FieldRef<"PaymentRecord", 'DateTime'>
     readonly updatedAt: FieldRef<"PaymentRecord", 'DateTime'>
     readonly userId: FieldRef<"PaymentRecord", 'Int'>
-    readonly parkingRecordId: FieldRef<"PaymentRecord", 'Int'>
+    readonly reservationId: FieldRef<"PaymentRecord", 'Int'>
   }
     
 
@@ -16043,6 +14820,7 @@ export namespace Prisma {
     model: 'model',
     color: 'color',
     imageUrl: 'imageUrl',
+    deleteAt: 'deleteAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     ownerId: 'ownerId'
@@ -16104,6 +14882,7 @@ export namespace Prisma {
     mediaUrls: 'mediaUrls',
     price: 'price',
     vehicleTypes: 'vehicleTypes',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     parkingLotId: 'parkingLotId'
@@ -16117,6 +14896,7 @@ export namespace Prisma {
     name: 'name',
     isAvailable: 'isAvailable',
     vehicleType: 'vehicleType',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     parkingLotId: 'parkingLotId'
@@ -16141,30 +14921,15 @@ export namespace Prisma {
   export type ReservationScalarFieldEnum = (typeof ReservationScalarFieldEnum)[keyof typeof ReservationScalarFieldEnum]
 
 
-  export const ParkingRecordScalarFieldEnum: {
-    id: 'id',
-    checkInAt: 'checkInAt',
-    checkOutAt: 'checkOutAt',
-    totalPrice: 'totalPrice',
-    status: 'status',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    vehicleId: 'vehicleId',
-    parkingSpotId: 'parkingSpotId',
-    reservationId: 'reservationId'
-  };
-
-  export type ParkingRecordScalarFieldEnum = (typeof ParkingRecordScalarFieldEnum)[keyof typeof ParkingRecordScalarFieldEnum]
-
-
   export const PaymentRecordScalarFieldEnum: {
     id: 'id',
+    status: 'status',
     method: 'method',
     amount: 'amount',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     userId: 'userId',
-    parkingRecordId: 'parkingRecordId'
+    reservationId: 'reservationId'
   };
 
   export type PaymentRecordScalarFieldEnum = (typeof PaymentRecordScalarFieldEnum)[keyof typeof PaymentRecordScalarFieldEnum]
@@ -16347,16 +15112,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'PARKING_RECORD__STATUS_ALIAS'
+   * Reference to a field of type 'PAYMENT_RECORD__STATUS_ALIAS'
    */
-  export type EnumPARKING_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PARKING_RECORD__STATUS_ALIAS'>
+  export type EnumPAYMENT_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PAYMENT_RECORD__STATUS_ALIAS'>
     
 
 
   /**
-   * Reference to a field of type 'PARKING_RECORD__STATUS_ALIAS[]'
+   * Reference to a field of type 'PAYMENT_RECORD__STATUS_ALIAS[]'
    */
-  export type ListEnumPARKING_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PARKING_RECORD__STATUS_ALIAS[]'>
+  export type ListEnumPAYMENT_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PAYMENT_RECORD__STATUS_ALIAS[]'>
     
 
 
@@ -16670,11 +15435,11 @@ export namespace Prisma {
     model?: StringFilter<"Vehicle"> | string
     color?: StringFilter<"Vehicle"> | string
     imageUrl?: StringFilter<"Vehicle"> | string
+    deleteAt?: DateTimeNullableFilter<"Vehicle"> | Date | string | null
     createdAt?: DateTimeFilter<"Vehicle"> | Date | string
     updatedAt?: DateTimeFilter<"Vehicle"> | Date | string
     ownerId?: IntFilter<"Vehicle"> | number
     reservations?: ReservationListRelationFilter
-    parkingRecords?: ParkingRecordListRelationFilter
     owner?: XOR<UserRelationFilter, UserWhereInput>
   }
 
@@ -16686,11 +15451,11 @@ export namespace Prisma {
     model?: SortOrder
     color?: SortOrder
     imageUrl?: SortOrder
+    deleteAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
     reservations?: ReservationOrderByRelationAggregateInput
-    parkingRecords?: ParkingRecordOrderByRelationAggregateInput
     owner?: UserOrderByWithRelationInput
   }
 
@@ -16705,11 +15470,11 @@ export namespace Prisma {
     model?: StringFilter<"Vehicle"> | string
     color?: StringFilter<"Vehicle"> | string
     imageUrl?: StringFilter<"Vehicle"> | string
+    deleteAt?: DateTimeNullableFilter<"Vehicle"> | Date | string | null
     createdAt?: DateTimeFilter<"Vehicle"> | Date | string
     updatedAt?: DateTimeFilter<"Vehicle"> | Date | string
     ownerId?: IntFilter<"Vehicle"> | number
     reservations?: ReservationListRelationFilter
-    parkingRecords?: ParkingRecordListRelationFilter
     owner?: XOR<UserRelationFilter, UserWhereInput>
   }, "id">
 
@@ -16721,6 +15486,7 @@ export namespace Prisma {
     model?: SortOrder
     color?: SortOrder
     imageUrl?: SortOrder
+    deleteAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
@@ -16742,6 +15508,7 @@ export namespace Prisma {
     model?: StringWithAggregatesFilter<"Vehicle"> | string
     color?: StringWithAggregatesFilter<"Vehicle"> | string
     imageUrl?: StringWithAggregatesFilter<"Vehicle"> | string
+    deleteAt?: DateTimeNullableWithAggregatesFilter<"Vehicle"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Vehicle"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Vehicle"> | Date | string
     ownerId?: IntWithAggregatesFilter<"Vehicle"> | number
@@ -17005,6 +15772,7 @@ export namespace Prisma {
     mediaUrls?: StringNullableListFilter<"ParkingLotService">
     price?: FloatFilter<"ParkingLotService"> | number
     vehicleTypes?: EnumVEHICLE__TYPE_ALIASNullableListFilter<"ParkingLotService">
+    deletedAt?: DateTimeNullableFilter<"ParkingLotService"> | Date | string | null
     createdAt?: DateTimeFilter<"ParkingLotService"> | Date | string
     updatedAt?: DateTimeFilter<"ParkingLotService"> | Date | string
     parkingLotId?: IntFilter<"ParkingLotService"> | number
@@ -17020,6 +15788,7 @@ export namespace Prisma {
     mediaUrls?: SortOrder
     price?: SortOrder
     vehicleTypes?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parkingLotId?: SortOrder
@@ -17038,6 +15807,7 @@ export namespace Prisma {
     mediaUrls?: StringNullableListFilter<"ParkingLotService">
     price?: FloatFilter<"ParkingLotService"> | number
     vehicleTypes?: EnumVEHICLE__TYPE_ALIASNullableListFilter<"ParkingLotService">
+    deletedAt?: DateTimeNullableFilter<"ParkingLotService"> | Date | string | null
     createdAt?: DateTimeFilter<"ParkingLotService"> | Date | string
     updatedAt?: DateTimeFilter<"ParkingLotService"> | Date | string
     parkingLotId?: IntFilter<"ParkingLotService"> | number
@@ -17053,6 +15823,7 @@ export namespace Prisma {
     mediaUrls?: SortOrder
     price?: SortOrder
     vehicleTypes?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parkingLotId?: SortOrder
@@ -17074,6 +15845,7 @@ export namespace Prisma {
     mediaUrls?: StringNullableListFilter<"ParkingLotService">
     price?: FloatWithAggregatesFilter<"ParkingLotService"> | number
     vehicleTypes?: EnumVEHICLE__TYPE_ALIASNullableListFilter<"ParkingLotService">
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"ParkingLotService"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"ParkingLotService"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ParkingLotService"> | Date | string
     parkingLotId?: IntWithAggregatesFilter<"ParkingLotService"> | number
@@ -17087,11 +15859,11 @@ export namespace Prisma {
     name?: StringFilter<"ParkingSpot"> | string
     isAvailable?: BoolFilter<"ParkingSpot"> | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFilter<"ParkingSpot"> | $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt?: DateTimeNullableFilter<"ParkingSpot"> | Date | string | null
     createdAt?: DateTimeFilter<"ParkingSpot"> | Date | string
     updatedAt?: DateTimeFilter<"ParkingSpot"> | Date | string
     parkingLotId?: IntFilter<"ParkingSpot"> | number
     reservations?: ReservationListRelationFilter
-    parkingRecords?: ParkingRecordListRelationFilter
     parkingLot?: XOR<ParkingLotRelationFilter, ParkingLotWhereInput>
   }
 
@@ -17100,11 +15872,11 @@ export namespace Prisma {
     name?: SortOrder
     isAvailable?: SortOrder
     vehicleType?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parkingLotId?: SortOrder
     reservations?: ReservationOrderByRelationAggregateInput
-    parkingRecords?: ParkingRecordOrderByRelationAggregateInput
     parkingLot?: ParkingLotOrderByWithRelationInput
   }
 
@@ -17116,11 +15888,11 @@ export namespace Prisma {
     name?: StringFilter<"ParkingSpot"> | string
     isAvailable?: BoolFilter<"ParkingSpot"> | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFilter<"ParkingSpot"> | $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt?: DateTimeNullableFilter<"ParkingSpot"> | Date | string | null
     createdAt?: DateTimeFilter<"ParkingSpot"> | Date | string
     updatedAt?: DateTimeFilter<"ParkingSpot"> | Date | string
     parkingLotId?: IntFilter<"ParkingSpot"> | number
     reservations?: ReservationListRelationFilter
-    parkingRecords?: ParkingRecordListRelationFilter
     parkingLot?: XOR<ParkingLotRelationFilter, ParkingLotWhereInput>
   }, "id">
 
@@ -17129,6 +15901,7 @@ export namespace Prisma {
     name?: SortOrder
     isAvailable?: SortOrder
     vehicleType?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parkingLotId?: SortOrder
@@ -17147,6 +15920,7 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"ParkingSpot"> | string
     isAvailable?: BoolWithAggregatesFilter<"ParkingSpot"> | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASWithAggregatesFilter<"ParkingSpot"> | $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"ParkingSpot"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"ParkingSpot"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ParkingSpot"> | Date | string
     parkingLotId?: IntWithAggregatesFilter<"ParkingSpot"> | number
@@ -17166,11 +15940,11 @@ export namespace Prisma {
     userId?: IntFilter<"Reservation"> | number
     parkingSpotId?: IntFilter<"Reservation"> | number
     vehicleId?: IntFilter<"Reservation"> | number
-    parkingRecord?: XOR<ParkingRecordNullableRelationFilter, ParkingRecordWhereInput> | null
     services?: ParkingLotServiceListRelationFilter
     user?: XOR<UserRelationFilter, UserWhereInput>
     parkingSpot?: XOR<ParkingSpotRelationFilter, ParkingSpotWhereInput>
     vehicle?: XOR<VehicleRelationFilter, VehicleWhereInput>
+    PaymentRecord?: XOR<PaymentRecordNullableRelationFilter, PaymentRecordWhereInput> | null
   }
 
   export type ReservationOrderByWithRelationInput = {
@@ -17184,11 +15958,11 @@ export namespace Prisma {
     userId?: SortOrder
     parkingSpotId?: SortOrder
     vehicleId?: SortOrder
-    parkingRecord?: ParkingRecordOrderByWithRelationInput
     services?: ParkingLotServiceOrderByRelationAggregateInput
     user?: UserOrderByWithRelationInput
     parkingSpot?: ParkingSpotOrderByWithRelationInput
     vehicle?: VehicleOrderByWithRelationInput
+    PaymentRecord?: PaymentRecordOrderByWithRelationInput
   }
 
   export type ReservationWhereUniqueInput = Prisma.AtLeast<{
@@ -17205,11 +15979,11 @@ export namespace Prisma {
     userId?: IntFilter<"Reservation"> | number
     parkingSpotId?: IntFilter<"Reservation"> | number
     vehicleId?: IntFilter<"Reservation"> | number
-    parkingRecord?: XOR<ParkingRecordNullableRelationFilter, ParkingRecordWhereInput> | null
     services?: ParkingLotServiceListRelationFilter
     user?: XOR<UserRelationFilter, UserWhereInput>
     parkingSpot?: XOR<ParkingSpotRelationFilter, ParkingSpotWhereInput>
     vehicle?: XOR<VehicleRelationFilter, VehicleWhereInput>
+    PaymentRecord?: XOR<PaymentRecordNullableRelationFilter, PaymentRecordWhereInput> | null
   }, "id">
 
   export type ReservationOrderByWithAggregationInput = {
@@ -17246,147 +16020,60 @@ export namespace Prisma {
     vehicleId?: IntWithAggregatesFilter<"Reservation"> | number
   }
 
-  export type ParkingRecordWhereInput = {
-    AND?: ParkingRecordWhereInput | ParkingRecordWhereInput[]
-    OR?: ParkingRecordWhereInput[]
-    NOT?: ParkingRecordWhereInput | ParkingRecordWhereInput[]
-    id?: IntFilter<"ParkingRecord"> | number
-    checkInAt?: DateTimeFilter<"ParkingRecord"> | Date | string
-    checkOutAt?: DateTimeNullableFilter<"ParkingRecord"> | Date | string | null
-    totalPrice?: FloatNullableFilter<"ParkingRecord"> | number | null
-    status?: EnumPARKING_RECORD__STATUS_ALIASFilter<"ParkingRecord"> | $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: DateTimeFilter<"ParkingRecord"> | Date | string
-    updatedAt?: DateTimeFilter<"ParkingRecord"> | Date | string
-    vehicleId?: IntNullableFilter<"ParkingRecord"> | number | null
-    parkingSpotId?: IntNullableFilter<"ParkingRecord"> | number | null
-    reservationId?: IntNullableFilter<"ParkingRecord"> | number | null
-    vehicle?: XOR<VehicleNullableRelationFilter, VehicleWhereInput> | null
-    parkingSpot?: XOR<ParkingSpotNullableRelationFilter, ParkingSpotWhereInput> | null
-    reservation?: XOR<ReservationNullableRelationFilter, ReservationWhereInput> | null
-    paymentRecord?: XOR<PaymentRecordNullableRelationFilter, PaymentRecordWhereInput> | null
-  }
-
-  export type ParkingRecordOrderByWithRelationInput = {
-    id?: SortOrder
-    checkInAt?: SortOrder
-    checkOutAt?: SortOrderInput | SortOrder
-    totalPrice?: SortOrderInput | SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    vehicleId?: SortOrderInput | SortOrder
-    parkingSpotId?: SortOrderInput | SortOrder
-    reservationId?: SortOrderInput | SortOrder
-    vehicle?: VehicleOrderByWithRelationInput
-    parkingSpot?: ParkingSpotOrderByWithRelationInput
-    reservation?: ReservationOrderByWithRelationInput
-    paymentRecord?: PaymentRecordOrderByWithRelationInput
-  }
-
-  export type ParkingRecordWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    reservationId?: number
-    AND?: ParkingRecordWhereInput | ParkingRecordWhereInput[]
-    OR?: ParkingRecordWhereInput[]
-    NOT?: ParkingRecordWhereInput | ParkingRecordWhereInput[]
-    checkInAt?: DateTimeFilter<"ParkingRecord"> | Date | string
-    checkOutAt?: DateTimeNullableFilter<"ParkingRecord"> | Date | string | null
-    totalPrice?: FloatNullableFilter<"ParkingRecord"> | number | null
-    status?: EnumPARKING_RECORD__STATUS_ALIASFilter<"ParkingRecord"> | $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: DateTimeFilter<"ParkingRecord"> | Date | string
-    updatedAt?: DateTimeFilter<"ParkingRecord"> | Date | string
-    vehicleId?: IntNullableFilter<"ParkingRecord"> | number | null
-    parkingSpotId?: IntNullableFilter<"ParkingRecord"> | number | null
-    vehicle?: XOR<VehicleNullableRelationFilter, VehicleWhereInput> | null
-    parkingSpot?: XOR<ParkingSpotNullableRelationFilter, ParkingSpotWhereInput> | null
-    reservation?: XOR<ReservationNullableRelationFilter, ReservationWhereInput> | null
-    paymentRecord?: XOR<PaymentRecordNullableRelationFilter, PaymentRecordWhereInput> | null
-  }, "id" | "reservationId">
-
-  export type ParkingRecordOrderByWithAggregationInput = {
-    id?: SortOrder
-    checkInAt?: SortOrder
-    checkOutAt?: SortOrderInput | SortOrder
-    totalPrice?: SortOrderInput | SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    vehicleId?: SortOrderInput | SortOrder
-    parkingSpotId?: SortOrderInput | SortOrder
-    reservationId?: SortOrderInput | SortOrder
-    _count?: ParkingRecordCountOrderByAggregateInput
-    _avg?: ParkingRecordAvgOrderByAggregateInput
-    _max?: ParkingRecordMaxOrderByAggregateInput
-    _min?: ParkingRecordMinOrderByAggregateInput
-    _sum?: ParkingRecordSumOrderByAggregateInput
-  }
-
-  export type ParkingRecordScalarWhereWithAggregatesInput = {
-    AND?: ParkingRecordScalarWhereWithAggregatesInput | ParkingRecordScalarWhereWithAggregatesInput[]
-    OR?: ParkingRecordScalarWhereWithAggregatesInput[]
-    NOT?: ParkingRecordScalarWhereWithAggregatesInput | ParkingRecordScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"ParkingRecord"> | number
-    checkInAt?: DateTimeWithAggregatesFilter<"ParkingRecord"> | Date | string
-    checkOutAt?: DateTimeNullableWithAggregatesFilter<"ParkingRecord"> | Date | string | null
-    totalPrice?: FloatNullableWithAggregatesFilter<"ParkingRecord"> | number | null
-    status?: EnumPARKING_RECORD__STATUS_ALIASWithAggregatesFilter<"ParkingRecord"> | $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: DateTimeWithAggregatesFilter<"ParkingRecord"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"ParkingRecord"> | Date | string
-    vehicleId?: IntNullableWithAggregatesFilter<"ParkingRecord"> | number | null
-    parkingSpotId?: IntNullableWithAggregatesFilter<"ParkingRecord"> | number | null
-    reservationId?: IntNullableWithAggregatesFilter<"ParkingRecord"> | number | null
-  }
-
   export type PaymentRecordWhereInput = {
     AND?: PaymentRecordWhereInput | PaymentRecordWhereInput[]
     OR?: PaymentRecordWhereInput[]
     NOT?: PaymentRecordWhereInput | PaymentRecordWhereInput[]
     id?: IntFilter<"PaymentRecord"> | number
+    status?: EnumPAYMENT_RECORD__STATUS_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     method?: EnumPAYMENT_RECORD__METHOD_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFilter<"PaymentRecord"> | number
     createdAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     userId?: IntFilter<"PaymentRecord"> | number
-    parkingRecordId?: IntFilter<"PaymentRecord"> | number
+    reservationId?: IntFilter<"PaymentRecord"> | number
     user?: XOR<UserRelationFilter, UserWhereInput>
-    parkingRecord?: XOR<ParkingRecordRelationFilter, ParkingRecordWhereInput>
+    reservation?: XOR<ReservationRelationFilter, ReservationWhereInput>
   }
 
   export type PaymentRecordOrderByWithRelationInput = {
     id?: SortOrder
+    status?: SortOrder
     method?: SortOrder
     amount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
-    parkingRecordId?: SortOrder
+    reservationId?: SortOrder
     user?: UserOrderByWithRelationInput
-    parkingRecord?: ParkingRecordOrderByWithRelationInput
+    reservation?: ReservationOrderByWithRelationInput
   }
 
   export type PaymentRecordWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    parkingRecordId?: number
+    reservationId?: number
     AND?: PaymentRecordWhereInput | PaymentRecordWhereInput[]
     OR?: PaymentRecordWhereInput[]
     NOT?: PaymentRecordWhereInput | PaymentRecordWhereInput[]
+    status?: EnumPAYMENT_RECORD__STATUS_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     method?: EnumPAYMENT_RECORD__METHOD_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFilter<"PaymentRecord"> | number
     createdAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     userId?: IntFilter<"PaymentRecord"> | number
     user?: XOR<UserRelationFilter, UserWhereInput>
-    parkingRecord?: XOR<ParkingRecordRelationFilter, ParkingRecordWhereInput>
-  }, "id" | "parkingRecordId">
+    reservation?: XOR<ReservationRelationFilter, ReservationWhereInput>
+  }, "id" | "reservationId">
 
   export type PaymentRecordOrderByWithAggregationInput = {
     id?: SortOrder
+    status?: SortOrder
     method?: SortOrder
     amount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
-    parkingRecordId?: SortOrder
+    reservationId?: SortOrder
     _count?: PaymentRecordCountOrderByAggregateInput
     _avg?: PaymentRecordAvgOrderByAggregateInput
     _max?: PaymentRecordMaxOrderByAggregateInput
@@ -17399,12 +16086,13 @@ export namespace Prisma {
     OR?: PaymentRecordScalarWhereWithAggregatesInput[]
     NOT?: PaymentRecordScalarWhereWithAggregatesInput | PaymentRecordScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"PaymentRecord"> | number
+    status?: EnumPAYMENT_RECORD__STATUS_ALIASWithAggregatesFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     method?: EnumPAYMENT_RECORD__METHOD_ALIASWithAggregatesFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatWithAggregatesFilter<"PaymentRecord"> | number
     createdAt?: DateTimeWithAggregatesFilter<"PaymentRecord"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"PaymentRecord"> | Date | string
     userId?: IntWithAggregatesFilter<"PaymentRecord"> | number
-    parkingRecordId?: IntWithAggregatesFilter<"PaymentRecord"> | number
+    reservationId?: IntWithAggregatesFilter<"PaymentRecord"> | number
   }
 
   export type AccountCreateInput = {
@@ -17707,10 +16395,10 @@ export namespace Prisma {
     model: string
     color: string
     imageUrl: string
+    deleteAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     reservations?: ReservationCreateNestedManyWithoutVehicleInput
-    parkingRecords?: ParkingRecordCreateNestedManyWithoutVehicleInput
     owner: UserCreateNestedOneWithoutVehiclesInput
   }
 
@@ -17722,11 +16410,11 @@ export namespace Prisma {
     model: string
     color: string
     imageUrl: string
+    deleteAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: number
     reservations?: ReservationUncheckedCreateNestedManyWithoutVehicleInput
-    parkingRecords?: ParkingRecordUncheckedCreateNestedManyWithoutVehicleInput
   }
 
   export type VehicleUpdateInput = {
@@ -17736,10 +16424,10 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
+    deleteAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservations?: ReservationUpdateManyWithoutVehicleNestedInput
-    parkingRecords?: ParkingRecordUpdateManyWithoutVehicleNestedInput
     owner?: UserUpdateOneRequiredWithoutVehiclesNestedInput
   }
 
@@ -17751,11 +16439,11 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
+    deleteAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: IntFieldUpdateOperationsInput | number
     reservations?: ReservationUncheckedUpdateManyWithoutVehicleNestedInput
-    parkingRecords?: ParkingRecordUncheckedUpdateManyWithoutVehicleNestedInput
   }
 
   export type VehicleCreateManyInput = {
@@ -17766,6 +16454,7 @@ export namespace Prisma {
     model: string
     color: string
     imageUrl: string
+    deleteAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: number
@@ -17778,6 +16467,7 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
+    deleteAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -17790,6 +16480,7 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
+    deleteAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: IntFieldUpdateOperationsInput | number
@@ -18060,6 +16751,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotServiceCreatemediaUrlsInput | string[]
     price: number
     vehicleTypes?: ParkingLotServiceCreatevehicleTypesInput | $Enums.VEHICLE__TYPE_ALIAS[]
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingLot: ParkingLotCreateNestedOneWithoutParkingLotServicesInput
@@ -18074,6 +16766,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotServiceCreatemediaUrlsInput | string[]
     price: number
     vehicleTypes?: ParkingLotServiceCreatevehicleTypesInput | $Enums.VEHICLE__TYPE_ALIAS[]
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingLotId: number
@@ -18087,6 +16780,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotServiceUpdatemediaUrlsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
     vehicleTypes?: ParkingLotServiceUpdatevehicleTypesInput | $Enums.VEHICLE__TYPE_ALIAS[]
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingLot?: ParkingLotUpdateOneRequiredWithoutParkingLotServicesNestedInput
@@ -18101,6 +16795,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotServiceUpdatemediaUrlsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
     vehicleTypes?: ParkingLotServiceUpdatevehicleTypesInput | $Enums.VEHICLE__TYPE_ALIAS[]
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingLotId?: IntFieldUpdateOperationsInput | number
@@ -18115,6 +16810,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotServiceCreatemediaUrlsInput | string[]
     price: number
     vehicleTypes?: ParkingLotServiceCreatevehicleTypesInput | $Enums.VEHICLE__TYPE_ALIAS[]
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingLotId: number
@@ -18127,6 +16823,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotServiceUpdatemediaUrlsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
     vehicleTypes?: ParkingLotServiceUpdatevehicleTypesInput | $Enums.VEHICLE__TYPE_ALIAS[]
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -18139,6 +16836,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotServiceUpdatemediaUrlsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
     vehicleTypes?: ParkingLotServiceUpdatevehicleTypesInput | $Enums.VEHICLE__TYPE_ALIAS[]
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingLotId?: IntFieldUpdateOperationsInput | number
@@ -18148,10 +16846,10 @@ export namespace Prisma {
     name: string
     isAvailable?: boolean
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     reservations?: ReservationCreateNestedManyWithoutParkingSpotInput
-    parkingRecords?: ParkingRecordCreateNestedManyWithoutParkingSpotInput
     parkingLot: ParkingLotCreateNestedOneWithoutParkingSpotsInput
   }
 
@@ -18160,21 +16858,21 @@ export namespace Prisma {
     name: string
     isAvailable?: boolean
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingLotId: number
     reservations?: ReservationUncheckedCreateNestedManyWithoutParkingSpotInput
-    parkingRecords?: ParkingRecordUncheckedCreateNestedManyWithoutParkingSpotInput
   }
 
   export type ParkingSpotUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservations?: ReservationUpdateManyWithoutParkingSpotNestedInput
-    parkingRecords?: ParkingRecordUpdateManyWithoutParkingSpotNestedInput
     parkingLot?: ParkingLotUpdateOneRequiredWithoutParkingSpotsNestedInput
   }
 
@@ -18183,11 +16881,11 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingLotId?: IntFieldUpdateOperationsInput | number
     reservations?: ReservationUncheckedUpdateManyWithoutParkingSpotNestedInput
-    parkingRecords?: ParkingRecordUncheckedUpdateManyWithoutParkingSpotNestedInput
   }
 
   export type ParkingSpotCreateManyInput = {
@@ -18195,6 +16893,7 @@ export namespace Prisma {
     name: string
     isAvailable?: boolean
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingLotId: number
@@ -18204,6 +16903,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -18213,6 +16913,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingLotId?: IntFieldUpdateOperationsInput | number
@@ -18225,11 +16926,11 @@ export namespace Prisma {
     endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    parkingRecord?: ParkingRecordCreateNestedOneWithoutReservationInput
     services?: ParkingLotServiceCreateNestedManyWithoutReservationsInput
     user: UserCreateNestedOneWithoutReservationsInput
     parkingSpot: ParkingSpotCreateNestedOneWithoutReservationsInput
     vehicle: VehicleCreateNestedOneWithoutReservationsInput
+    PaymentRecord?: PaymentRecordCreateNestedOneWithoutReservationInput
   }
 
   export type ReservationUncheckedCreateInput = {
@@ -18243,8 +16944,8 @@ export namespace Prisma {
     userId: number
     parkingSpotId: number
     vehicleId: number
-    parkingRecord?: ParkingRecordUncheckedCreateNestedOneWithoutReservationInput
     services?: ParkingLotServiceUncheckedCreateNestedManyWithoutReservationsInput
+    PaymentRecord?: PaymentRecordUncheckedCreateNestedOneWithoutReservationInput
   }
 
   export type ReservationUpdateInput = {
@@ -18254,11 +16955,11 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    parkingRecord?: ParkingRecordUpdateOneWithoutReservationNestedInput
     services?: ParkingLotServiceUpdateManyWithoutReservationsNestedInput
     user?: UserUpdateOneRequiredWithoutReservationsNestedInput
     parkingSpot?: ParkingSpotUpdateOneRequiredWithoutReservationsNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutReservationsNestedInput
+    PaymentRecord?: PaymentRecordUpdateOneWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateInput = {
@@ -18272,8 +16973,8 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     parkingSpotId?: IntFieldUpdateOperationsInput | number
     vehicleId?: IntFieldUpdateOperationsInput | number
-    parkingRecord?: ParkingRecordUncheckedUpdateOneWithoutReservationNestedInput
     services?: ParkingLotServiceUncheckedUpdateManyWithoutReservationsNestedInput
+    PaymentRecord?: PaymentRecordUncheckedUpdateOneWithoutReservationNestedInput
   }
 
   export type ReservationCreateManyInput = {
@@ -18311,144 +17012,61 @@ export namespace Prisma {
     vehicleId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type ParkingRecordCreateInput = {
-    checkInAt: Date | string
-    checkOutAt?: Date | string | null
-    totalPrice?: number | null
-    status: $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    vehicle?: VehicleCreateNestedOneWithoutParkingRecordsInput
-    parkingSpot?: ParkingSpotCreateNestedOneWithoutParkingRecordsInput
-    reservation?: ReservationCreateNestedOneWithoutParkingRecordInput
-    paymentRecord?: PaymentRecordCreateNestedOneWithoutParkingRecordInput
-  }
-
-  export type ParkingRecordUncheckedCreateInput = {
-    id?: number
-    checkInAt: Date | string
-    checkOutAt?: Date | string | null
-    totalPrice?: number | null
-    status: $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    vehicleId?: number | null
-    parkingSpotId?: number | null
-    reservationId?: number | null
-    paymentRecord?: PaymentRecordUncheckedCreateNestedOneWithoutParkingRecordInput
-  }
-
-  export type ParkingRecordUpdateInput = {
-    checkInAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    totalPrice?: NullableFloatFieldUpdateOperationsInput | number | null
-    status?: EnumPARKING_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    vehicle?: VehicleUpdateOneWithoutParkingRecordsNestedInput
-    parkingSpot?: ParkingSpotUpdateOneWithoutParkingRecordsNestedInput
-    reservation?: ReservationUpdateOneWithoutParkingRecordNestedInput
-    paymentRecord?: PaymentRecordUpdateOneWithoutParkingRecordNestedInput
-  }
-
-  export type ParkingRecordUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    checkInAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    totalPrice?: NullableFloatFieldUpdateOperationsInput | number | null
-    status?: EnumPARKING_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    vehicleId?: NullableIntFieldUpdateOperationsInput | number | null
-    parkingSpotId?: NullableIntFieldUpdateOperationsInput | number | null
-    reservationId?: NullableIntFieldUpdateOperationsInput | number | null
-    paymentRecord?: PaymentRecordUncheckedUpdateOneWithoutParkingRecordNestedInput
-  }
-
-  export type ParkingRecordCreateManyInput = {
-    id?: number
-    checkInAt: Date | string
-    checkOutAt?: Date | string | null
-    totalPrice?: number | null
-    status: $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    vehicleId?: number | null
-    parkingSpotId?: number | null
-    reservationId?: number | null
-  }
-
-  export type ParkingRecordUpdateManyMutationInput = {
-    checkInAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    totalPrice?: NullableFloatFieldUpdateOperationsInput | number | null
-    status?: EnumPARKING_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ParkingRecordUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    checkInAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    totalPrice?: NullableFloatFieldUpdateOperationsInput | number | null
-    status?: EnumPARKING_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    vehicleId?: NullableIntFieldUpdateOperationsInput | number | null
-    parkingSpotId?: NullableIntFieldUpdateOperationsInput | number | null
-    reservationId?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
   export type PaymentRecordCreateInput = {
+    status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount: number
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutPaymentRecordsInput
-    parkingRecord: ParkingRecordCreateNestedOneWithoutPaymentRecordInput
+    reservation: ReservationCreateNestedOneWithoutPaymentRecordInput
   }
 
   export type PaymentRecordUncheckedCreateInput = {
     id?: number
+    status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount: number
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: number
-    parkingRecordId: number
+    reservationId: number
   }
 
   export type PaymentRecordUpdateInput = {
+    status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     method?: EnumPAYMENT_RECORD__METHOD_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPaymentRecordsNestedInput
-    parkingRecord?: ParkingRecordUpdateOneRequiredWithoutPaymentRecordNestedInput
+    reservation?: ReservationUpdateOneRequiredWithoutPaymentRecordNestedInput
   }
 
   export type PaymentRecordUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     method?: EnumPAYMENT_RECORD__METHOD_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
-    parkingRecordId?: IntFieldUpdateOperationsInput | number
+    reservationId?: IntFieldUpdateOperationsInput | number
   }
 
   export type PaymentRecordCreateManyInput = {
     id?: number
+    status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount: number
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: number
-    parkingRecordId: number
+    reservationId: number
   }
 
   export type PaymentRecordUpdateManyMutationInput = {
+    status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     method?: EnumPAYMENT_RECORD__METHOD_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18457,12 +17075,13 @@ export namespace Prisma {
 
   export type PaymentRecordUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     method?: EnumPAYMENT_RECORD__METHOD_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
-    parkingRecordId?: IntFieldUpdateOperationsInput | number
+    reservationId?: IntFieldUpdateOperationsInput | number
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -18870,14 +17489,15 @@ export namespace Prisma {
     not?: NestedEnumVEHICLE__TYPE_ALIASFilter<$PrismaModel> | $Enums.VEHICLE__TYPE_ALIAS
   }
 
-  export type ParkingRecordListRelationFilter = {
-    every?: ParkingRecordWhereInput
-    some?: ParkingRecordWhereInput
-    none?: ParkingRecordWhereInput
-  }
-
-  export type ParkingRecordOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type VehicleCountOrderByAggregateInput = {
@@ -18888,6 +17508,7 @@ export namespace Prisma {
     model?: SortOrder
     color?: SortOrder
     imageUrl?: SortOrder
+    deleteAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
@@ -18906,6 +17527,7 @@ export namespace Prisma {
     model?: SortOrder
     color?: SortOrder
     imageUrl?: SortOrder
+    deleteAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
@@ -18919,6 +17541,7 @@ export namespace Prisma {
     model?: SortOrder
     color?: SortOrder
     imageUrl?: SortOrder
+    deleteAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
@@ -18937,6 +17560,20 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumVEHICLE__TYPE_ALIASFilter<$PrismaModel>
     _max?: NestedEnumVEHICLE__TYPE_ALIASFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type FloatFilter<$PrismaModel = never> = {
@@ -18963,17 +17600,6 @@ export namespace Prisma {
     in?: $Enums.PARKING_LOT__STATUS_ALIAS[] | ListEnumPARKING_LOT__STATUS_ALIASFieldRefInput<$PrismaModel>
     notIn?: $Enums.PARKING_LOT__STATUS_ALIAS[] | ListEnumPARKING_LOT__STATUS_ALIASFieldRefInput<$PrismaModel>
     not?: NestedEnumPARKING_LOT__STATUS_ALIASFilter<$PrismaModel> | $Enums.PARKING_LOT__STATUS_ALIAS
-  }
-
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type ParkingSpotListRelationFilter = {
@@ -19103,20 +17729,6 @@ export namespace Prisma {
     _max?: NestedEnumPARKING_LOT__STATUS_ALIASFilter<$PrismaModel>
   }
 
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
   export type ParkingLotRelationFilter = {
     is?: ParkingLotWhereInput
     isNot?: ParkingLotWhereInput
@@ -19223,6 +17835,7 @@ export namespace Prisma {
     mediaUrls?: SortOrder
     price?: SortOrder
     vehicleTypes?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parkingLotId?: SortOrder
@@ -19240,6 +17853,7 @@ export namespace Prisma {
     type?: SortOrder
     description?: SortOrder
     price?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parkingLotId?: SortOrder
@@ -19251,6 +17865,7 @@ export namespace Prisma {
     type?: SortOrder
     description?: SortOrder
     price?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parkingLotId?: SortOrder
@@ -19277,6 +17892,7 @@ export namespace Prisma {
     name?: SortOrder
     isAvailable?: SortOrder
     vehicleType?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parkingLotId?: SortOrder
@@ -19292,6 +17908,7 @@ export namespace Prisma {
     name?: SortOrder
     isAvailable?: SortOrder
     vehicleType?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parkingLotId?: SortOrder
@@ -19302,6 +17919,7 @@ export namespace Prisma {
     name?: SortOrder
     isAvailable?: SortOrder
     vehicleType?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parkingLotId?: SortOrder
@@ -19319,11 +17937,6 @@ export namespace Prisma {
     not?: NestedEnumRESERVATION__STATUS_ALIASFilter<$PrismaModel> | $Enums.RESERVATION__STATUS_ALIAS
   }
 
-  export type ParkingRecordNullableRelationFilter = {
-    is?: ParkingRecordWhereInput | null
-    isNot?: ParkingRecordWhereInput | null
-  }
-
   export type ParkingSpotRelationFilter = {
     is?: ParkingSpotWhereInput
     isNot?: ParkingSpotWhereInput
@@ -19332,6 +17945,11 @@ export namespace Prisma {
   export type VehicleRelationFilter = {
     is?: VehicleWhereInput
     isNot?: VehicleWhereInput
+  }
+
+  export type PaymentRecordNullableRelationFilter = {
+    is?: PaymentRecordWhereInput | null
+    isNot?: PaymentRecordWhereInput | null
   }
 
   export type ReservationCountOrderByAggregateInput = {
@@ -19397,150 +18015,11 @@ export namespace Prisma {
     _max?: NestedEnumRESERVATION__STATUS_ALIASFilter<$PrismaModel>
   }
 
-  export type FloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type EnumPARKING_RECORD__STATUS_ALIASFilter<$PrismaModel = never> = {
-    equals?: $Enums.PARKING_RECORD__STATUS_ALIAS | EnumPARKING_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
-    in?: $Enums.PARKING_RECORD__STATUS_ALIAS[] | ListEnumPARKING_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
-    notIn?: $Enums.PARKING_RECORD__STATUS_ALIAS[] | ListEnumPARKING_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
-    not?: NestedEnumPARKING_RECORD__STATUS_ALIASFilter<$PrismaModel> | $Enums.PARKING_RECORD__STATUS_ALIAS
-  }
-
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type VehicleNullableRelationFilter = {
-    is?: VehicleWhereInput | null
-    isNot?: VehicleWhereInput | null
-  }
-
-  export type ParkingSpotNullableRelationFilter = {
-    is?: ParkingSpotWhereInput | null
-    isNot?: ParkingSpotWhereInput | null
-  }
-
-  export type ReservationNullableRelationFilter = {
-    is?: ReservationWhereInput | null
-    isNot?: ReservationWhereInput | null
-  }
-
-  export type PaymentRecordNullableRelationFilter = {
-    is?: PaymentRecordWhereInput | null
-    isNot?: PaymentRecordWhereInput | null
-  }
-
-  export type ParkingRecordCountOrderByAggregateInput = {
-    id?: SortOrder
-    checkInAt?: SortOrder
-    checkOutAt?: SortOrder
-    totalPrice?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    vehicleId?: SortOrder
-    parkingSpotId?: SortOrder
-    reservationId?: SortOrder
-  }
-
-  export type ParkingRecordAvgOrderByAggregateInput = {
-    id?: SortOrder
-    totalPrice?: SortOrder
-    vehicleId?: SortOrder
-    parkingSpotId?: SortOrder
-    reservationId?: SortOrder
-  }
-
-  export type ParkingRecordMaxOrderByAggregateInput = {
-    id?: SortOrder
-    checkInAt?: SortOrder
-    checkOutAt?: SortOrder
-    totalPrice?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    vehicleId?: SortOrder
-    parkingSpotId?: SortOrder
-    reservationId?: SortOrder
-  }
-
-  export type ParkingRecordMinOrderByAggregateInput = {
-    id?: SortOrder
-    checkInAt?: SortOrder
-    checkOutAt?: SortOrder
-    totalPrice?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    vehicleId?: SortOrder
-    parkingSpotId?: SortOrder
-    reservationId?: SortOrder
-  }
-
-  export type ParkingRecordSumOrderByAggregateInput = {
-    id?: SortOrder
-    totalPrice?: SortOrder
-    vehicleId?: SortOrder
-    parkingSpotId?: SortOrder
-    reservationId?: SortOrder
-  }
-
-  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
-  }
-
-  export type EnumPARKING_RECORD__STATUS_ALIASWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.PARKING_RECORD__STATUS_ALIAS | EnumPARKING_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
-    in?: $Enums.PARKING_RECORD__STATUS_ALIAS[] | ListEnumPARKING_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
-    notIn?: $Enums.PARKING_RECORD__STATUS_ALIAS[] | ListEnumPARKING_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
-    not?: NestedEnumPARKING_RECORD__STATUS_ALIASWithAggregatesFilter<$PrismaModel> | $Enums.PARKING_RECORD__STATUS_ALIAS
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumPARKING_RECORD__STATUS_ALIASFilter<$PrismaModel>
-    _max?: NestedEnumPARKING_RECORD__STATUS_ALIASFilter<$PrismaModel>
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
+  export type EnumPAYMENT_RECORD__STATUS_ALIASFilter<$PrismaModel = never> = {
+    equals?: $Enums.PAYMENT_RECORD__STATUS_ALIAS | EnumPAYMENT_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.PAYMENT_RECORD__STATUS_ALIAS[] | ListEnumPAYMENT_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PAYMENT_RECORD__STATUS_ALIAS[] | ListEnumPAYMENT_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumPAYMENT_RECORD__STATUS_ALIASFilter<$PrismaModel> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
   }
 
   export type EnumPAYMENT_RECORD__METHOD_ALIASFilter<$PrismaModel = never> = {
@@ -19550,53 +18029,66 @@ export namespace Prisma {
     not?: NestedEnumPAYMENT_RECORD__METHOD_ALIASFilter<$PrismaModel> | $Enums.PAYMENT_RECORD__METHOD_ALIAS
   }
 
-  export type ParkingRecordRelationFilter = {
-    is?: ParkingRecordWhereInput
-    isNot?: ParkingRecordWhereInput
+  export type ReservationRelationFilter = {
+    is?: ReservationWhereInput
+    isNot?: ReservationWhereInput
   }
 
   export type PaymentRecordCountOrderByAggregateInput = {
     id?: SortOrder
+    status?: SortOrder
     method?: SortOrder
     amount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
-    parkingRecordId?: SortOrder
+    reservationId?: SortOrder
   }
 
   export type PaymentRecordAvgOrderByAggregateInput = {
     id?: SortOrder
     amount?: SortOrder
     userId?: SortOrder
-    parkingRecordId?: SortOrder
+    reservationId?: SortOrder
   }
 
   export type PaymentRecordMaxOrderByAggregateInput = {
     id?: SortOrder
+    status?: SortOrder
     method?: SortOrder
     amount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
-    parkingRecordId?: SortOrder
+    reservationId?: SortOrder
   }
 
   export type PaymentRecordMinOrderByAggregateInput = {
     id?: SortOrder
+    status?: SortOrder
     method?: SortOrder
     amount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
-    parkingRecordId?: SortOrder
+    reservationId?: SortOrder
   }
 
   export type PaymentRecordSumOrderByAggregateInput = {
     id?: SortOrder
     amount?: SortOrder
     userId?: SortOrder
-    parkingRecordId?: SortOrder
+    reservationId?: SortOrder
+  }
+
+  export type EnumPAYMENT_RECORD__STATUS_ALIASWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PAYMENT_RECORD__STATUS_ALIAS | EnumPAYMENT_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.PAYMENT_RECORD__STATUS_ALIAS[] | ListEnumPAYMENT_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PAYMENT_RECORD__STATUS_ALIAS[] | ListEnumPAYMENT_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumPAYMENT_RECORD__STATUS_ALIASWithAggregatesFilter<$PrismaModel> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPAYMENT_RECORD__STATUS_ALIASFilter<$PrismaModel>
+    _max?: NestedEnumPAYMENT_RECORD__STATUS_ALIASFilter<$PrismaModel>
   }
 
   export type EnumPAYMENT_RECORD__METHOD_ALIASWithAggregatesFilter<$PrismaModel = never> = {
@@ -20016,13 +18508,6 @@ export namespace Prisma {
     connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
   }
 
-  export type ParkingRecordCreateNestedManyWithoutVehicleInput = {
-    create?: XOR<ParkingRecordCreateWithoutVehicleInput, ParkingRecordUncheckedCreateWithoutVehicleInput> | ParkingRecordCreateWithoutVehicleInput[] | ParkingRecordUncheckedCreateWithoutVehicleInput[]
-    connectOrCreate?: ParkingRecordCreateOrConnectWithoutVehicleInput | ParkingRecordCreateOrConnectWithoutVehicleInput[]
-    createMany?: ParkingRecordCreateManyVehicleInputEnvelope
-    connect?: ParkingRecordWhereUniqueInput | ParkingRecordWhereUniqueInput[]
-  }
-
   export type UserCreateNestedOneWithoutVehiclesInput = {
     create?: XOR<UserCreateWithoutVehiclesInput, UserUncheckedCreateWithoutVehiclesInput>
     connectOrCreate?: UserCreateOrConnectWithoutVehiclesInput
@@ -20036,15 +18521,12 @@ export namespace Prisma {
     connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
   }
 
-  export type ParkingRecordUncheckedCreateNestedManyWithoutVehicleInput = {
-    create?: XOR<ParkingRecordCreateWithoutVehicleInput, ParkingRecordUncheckedCreateWithoutVehicleInput> | ParkingRecordCreateWithoutVehicleInput[] | ParkingRecordUncheckedCreateWithoutVehicleInput[]
-    connectOrCreate?: ParkingRecordCreateOrConnectWithoutVehicleInput | ParkingRecordCreateOrConnectWithoutVehicleInput[]
-    createMany?: ParkingRecordCreateManyVehicleInputEnvelope
-    connect?: ParkingRecordWhereUniqueInput | ParkingRecordWhereUniqueInput[]
-  }
-
   export type EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput = {
     set?: $Enums.VEHICLE__TYPE_ALIAS
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type ReservationUpdateManyWithoutVehicleNestedInput = {
@@ -20059,20 +18541,6 @@ export namespace Prisma {
     update?: ReservationUpdateWithWhereUniqueWithoutVehicleInput | ReservationUpdateWithWhereUniqueWithoutVehicleInput[]
     updateMany?: ReservationUpdateManyWithWhereWithoutVehicleInput | ReservationUpdateManyWithWhereWithoutVehicleInput[]
     deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
-  }
-
-  export type ParkingRecordUpdateManyWithoutVehicleNestedInput = {
-    create?: XOR<ParkingRecordCreateWithoutVehicleInput, ParkingRecordUncheckedCreateWithoutVehicleInput> | ParkingRecordCreateWithoutVehicleInput[] | ParkingRecordUncheckedCreateWithoutVehicleInput[]
-    connectOrCreate?: ParkingRecordCreateOrConnectWithoutVehicleInput | ParkingRecordCreateOrConnectWithoutVehicleInput[]
-    upsert?: ParkingRecordUpsertWithWhereUniqueWithoutVehicleInput | ParkingRecordUpsertWithWhereUniqueWithoutVehicleInput[]
-    createMany?: ParkingRecordCreateManyVehicleInputEnvelope
-    set?: ParkingRecordWhereUniqueInput | ParkingRecordWhereUniqueInput[]
-    disconnect?: ParkingRecordWhereUniqueInput | ParkingRecordWhereUniqueInput[]
-    delete?: ParkingRecordWhereUniqueInput | ParkingRecordWhereUniqueInput[]
-    connect?: ParkingRecordWhereUniqueInput | ParkingRecordWhereUniqueInput[]
-    update?: ParkingRecordUpdateWithWhereUniqueWithoutVehicleInput | ParkingRecordUpdateWithWhereUniqueWithoutVehicleInput[]
-    updateMany?: ParkingRecordUpdateManyWithWhereWithoutVehicleInput | ParkingRecordUpdateManyWithWhereWithoutVehicleInput[]
-    deleteMany?: ParkingRecordScalarWhereInput | ParkingRecordScalarWhereInput[]
   }
 
   export type UserUpdateOneRequiredWithoutVehiclesNestedInput = {
@@ -20095,20 +18563,6 @@ export namespace Prisma {
     update?: ReservationUpdateWithWhereUniqueWithoutVehicleInput | ReservationUpdateWithWhereUniqueWithoutVehicleInput[]
     updateMany?: ReservationUpdateManyWithWhereWithoutVehicleInput | ReservationUpdateManyWithWhereWithoutVehicleInput[]
     deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
-  }
-
-  export type ParkingRecordUncheckedUpdateManyWithoutVehicleNestedInput = {
-    create?: XOR<ParkingRecordCreateWithoutVehicleInput, ParkingRecordUncheckedCreateWithoutVehicleInput> | ParkingRecordCreateWithoutVehicleInput[] | ParkingRecordUncheckedCreateWithoutVehicleInput[]
-    connectOrCreate?: ParkingRecordCreateOrConnectWithoutVehicleInput | ParkingRecordCreateOrConnectWithoutVehicleInput[]
-    upsert?: ParkingRecordUpsertWithWhereUniqueWithoutVehicleInput | ParkingRecordUpsertWithWhereUniqueWithoutVehicleInput[]
-    createMany?: ParkingRecordCreateManyVehicleInputEnvelope
-    set?: ParkingRecordWhereUniqueInput | ParkingRecordWhereUniqueInput[]
-    disconnect?: ParkingRecordWhereUniqueInput | ParkingRecordWhereUniqueInput[]
-    delete?: ParkingRecordWhereUniqueInput | ParkingRecordWhereUniqueInput[]
-    connect?: ParkingRecordWhereUniqueInput | ParkingRecordWhereUniqueInput[]
-    update?: ParkingRecordUpdateWithWhereUniqueWithoutVehicleInput | ParkingRecordUpdateWithWhereUniqueWithoutVehicleInput[]
-    updateMany?: ParkingRecordUpdateManyWithWhereWithoutVehicleInput | ParkingRecordUpdateManyWithWhereWithoutVehicleInput[]
-    deleteMany?: ParkingRecordScalarWhereInput | ParkingRecordScalarWhereInput[]
   }
 
   export type ParkingLotCreatemediaUrlsInput = {
@@ -20192,10 +18646,6 @@ export namespace Prisma {
 
   export type EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput = {
     set?: $Enums.PARKING_LOT__STATUS_ALIAS
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
   }
 
   export type ParkingSpotUpdateManyWithoutParkingLotNestedInput = {
@@ -20450,13 +18900,6 @@ export namespace Prisma {
     connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
   }
 
-  export type ParkingRecordCreateNestedManyWithoutParkingSpotInput = {
-    create?: XOR<ParkingRecordCreateWithoutParkingSpotInput, ParkingRecordUncheckedCreateWithoutParkingSpotInput> | ParkingRecordCreateWithoutParkingSpotInput[] | ParkingRecordUncheckedCreateWithoutParkingSpotInput[]
-    connectOrCreate?: ParkingRecordCreateOrConnectWithoutParkingSpotInput | ParkingRecordCreateOrConnectWithoutParkingSpotInput[]
-    createMany?: ParkingRecordCreateManyParkingSpotInputEnvelope
-    connect?: ParkingRecordWhereUniqueInput | ParkingRecordWhereUniqueInput[]
-  }
-
   export type ParkingLotCreateNestedOneWithoutParkingSpotsInput = {
     create?: XOR<ParkingLotCreateWithoutParkingSpotsInput, ParkingLotUncheckedCreateWithoutParkingSpotsInput>
     connectOrCreate?: ParkingLotCreateOrConnectWithoutParkingSpotsInput
@@ -20468,13 +18911,6 @@ export namespace Prisma {
     connectOrCreate?: ReservationCreateOrConnectWithoutParkingSpotInput | ReservationCreateOrConnectWithoutParkingSpotInput[]
     createMany?: ReservationCreateManyParkingSpotInputEnvelope
     connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-  }
-
-  export type ParkingRecordUncheckedCreateNestedManyWithoutParkingSpotInput = {
-    create?: XOR<ParkingRecordCreateWithoutParkingSpotInput, ParkingRecordUncheckedCreateWithoutParkingSpotInput> | ParkingRecordCreateWithoutParkingSpotInput[] | ParkingRecordUncheckedCreateWithoutParkingSpotInput[]
-    connectOrCreate?: ParkingRecordCreateOrConnectWithoutParkingSpotInput | ParkingRecordCreateOrConnectWithoutParkingSpotInput[]
-    createMany?: ParkingRecordCreateManyParkingSpotInputEnvelope
-    connect?: ParkingRecordWhereUniqueInput | ParkingRecordWhereUniqueInput[]
   }
 
   export type ReservationUpdateManyWithoutParkingSpotNestedInput = {
@@ -20489,20 +18925,6 @@ export namespace Prisma {
     update?: ReservationUpdateWithWhereUniqueWithoutParkingSpotInput | ReservationUpdateWithWhereUniqueWithoutParkingSpotInput[]
     updateMany?: ReservationUpdateManyWithWhereWithoutParkingSpotInput | ReservationUpdateManyWithWhereWithoutParkingSpotInput[]
     deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
-  }
-
-  export type ParkingRecordUpdateManyWithoutParkingSpotNestedInput = {
-    create?: XOR<ParkingRecordCreateWithoutParkingSpotInput, ParkingRecordUncheckedCreateWithoutParkingSpotInput> | ParkingRecordCreateWithoutParkingSpotInput[] | ParkingRecordUncheckedCreateWithoutParkingSpotInput[]
-    connectOrCreate?: ParkingRecordCreateOrConnectWithoutParkingSpotInput | ParkingRecordCreateOrConnectWithoutParkingSpotInput[]
-    upsert?: ParkingRecordUpsertWithWhereUniqueWithoutParkingSpotInput | ParkingRecordUpsertWithWhereUniqueWithoutParkingSpotInput[]
-    createMany?: ParkingRecordCreateManyParkingSpotInputEnvelope
-    set?: ParkingRecordWhereUniqueInput | ParkingRecordWhereUniqueInput[]
-    disconnect?: ParkingRecordWhereUniqueInput | ParkingRecordWhereUniqueInput[]
-    delete?: ParkingRecordWhereUniqueInput | ParkingRecordWhereUniqueInput[]
-    connect?: ParkingRecordWhereUniqueInput | ParkingRecordWhereUniqueInput[]
-    update?: ParkingRecordUpdateWithWhereUniqueWithoutParkingSpotInput | ParkingRecordUpdateWithWhereUniqueWithoutParkingSpotInput[]
-    updateMany?: ParkingRecordUpdateManyWithWhereWithoutParkingSpotInput | ParkingRecordUpdateManyWithWhereWithoutParkingSpotInput[]
-    deleteMany?: ParkingRecordScalarWhereInput | ParkingRecordScalarWhereInput[]
   }
 
   export type ParkingLotUpdateOneRequiredWithoutParkingSpotsNestedInput = {
@@ -20525,26 +18947,6 @@ export namespace Prisma {
     update?: ReservationUpdateWithWhereUniqueWithoutParkingSpotInput | ReservationUpdateWithWhereUniqueWithoutParkingSpotInput[]
     updateMany?: ReservationUpdateManyWithWhereWithoutParkingSpotInput | ReservationUpdateManyWithWhereWithoutParkingSpotInput[]
     deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
-  }
-
-  export type ParkingRecordUncheckedUpdateManyWithoutParkingSpotNestedInput = {
-    create?: XOR<ParkingRecordCreateWithoutParkingSpotInput, ParkingRecordUncheckedCreateWithoutParkingSpotInput> | ParkingRecordCreateWithoutParkingSpotInput[] | ParkingRecordUncheckedCreateWithoutParkingSpotInput[]
-    connectOrCreate?: ParkingRecordCreateOrConnectWithoutParkingSpotInput | ParkingRecordCreateOrConnectWithoutParkingSpotInput[]
-    upsert?: ParkingRecordUpsertWithWhereUniqueWithoutParkingSpotInput | ParkingRecordUpsertWithWhereUniqueWithoutParkingSpotInput[]
-    createMany?: ParkingRecordCreateManyParkingSpotInputEnvelope
-    set?: ParkingRecordWhereUniqueInput | ParkingRecordWhereUniqueInput[]
-    disconnect?: ParkingRecordWhereUniqueInput | ParkingRecordWhereUniqueInput[]
-    delete?: ParkingRecordWhereUniqueInput | ParkingRecordWhereUniqueInput[]
-    connect?: ParkingRecordWhereUniqueInput | ParkingRecordWhereUniqueInput[]
-    update?: ParkingRecordUpdateWithWhereUniqueWithoutParkingSpotInput | ParkingRecordUpdateWithWhereUniqueWithoutParkingSpotInput[]
-    updateMany?: ParkingRecordUpdateManyWithWhereWithoutParkingSpotInput | ParkingRecordUpdateManyWithWhereWithoutParkingSpotInput[]
-    deleteMany?: ParkingRecordScalarWhereInput | ParkingRecordScalarWhereInput[]
-  }
-
-  export type ParkingRecordCreateNestedOneWithoutReservationInput = {
-    create?: XOR<ParkingRecordCreateWithoutReservationInput, ParkingRecordUncheckedCreateWithoutReservationInput>
-    connectOrCreate?: ParkingRecordCreateOrConnectWithoutReservationInput
-    connect?: ParkingRecordWhereUniqueInput
   }
 
   export type ParkingLotServiceCreateNestedManyWithoutReservationsInput = {
@@ -20571,10 +18973,10 @@ export namespace Prisma {
     connect?: VehicleWhereUniqueInput
   }
 
-  export type ParkingRecordUncheckedCreateNestedOneWithoutReservationInput = {
-    create?: XOR<ParkingRecordCreateWithoutReservationInput, ParkingRecordUncheckedCreateWithoutReservationInput>
-    connectOrCreate?: ParkingRecordCreateOrConnectWithoutReservationInput
-    connect?: ParkingRecordWhereUniqueInput
+  export type PaymentRecordCreateNestedOneWithoutReservationInput = {
+    create?: XOR<PaymentRecordCreateWithoutReservationInput, PaymentRecordUncheckedCreateWithoutReservationInput>
+    connectOrCreate?: PaymentRecordCreateOrConnectWithoutReservationInput
+    connect?: PaymentRecordWhereUniqueInput
   }
 
   export type ParkingLotServiceUncheckedCreateNestedManyWithoutReservationsInput = {
@@ -20583,18 +18985,14 @@ export namespace Prisma {
     connect?: ParkingLotServiceWhereUniqueInput | ParkingLotServiceWhereUniqueInput[]
   }
 
-  export type EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput = {
-    set?: $Enums.RESERVATION__STATUS_ALIAS
+  export type PaymentRecordUncheckedCreateNestedOneWithoutReservationInput = {
+    create?: XOR<PaymentRecordCreateWithoutReservationInput, PaymentRecordUncheckedCreateWithoutReservationInput>
+    connectOrCreate?: PaymentRecordCreateOrConnectWithoutReservationInput
+    connect?: PaymentRecordWhereUniqueInput
   }
 
-  export type ParkingRecordUpdateOneWithoutReservationNestedInput = {
-    create?: XOR<ParkingRecordCreateWithoutReservationInput, ParkingRecordUncheckedCreateWithoutReservationInput>
-    connectOrCreate?: ParkingRecordCreateOrConnectWithoutReservationInput
-    upsert?: ParkingRecordUpsertWithoutReservationInput
-    disconnect?: ParkingRecordWhereInput | boolean
-    delete?: ParkingRecordWhereInput | boolean
-    connect?: ParkingRecordWhereUniqueInput
-    update?: XOR<XOR<ParkingRecordUpdateToOneWithWhereWithoutReservationInput, ParkingRecordUpdateWithoutReservationInput>, ParkingRecordUncheckedUpdateWithoutReservationInput>
+  export type EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput = {
+    set?: $Enums.RESERVATION__STATUS_ALIAS
   }
 
   export type ParkingLotServiceUpdateManyWithoutReservationsNestedInput = {
@@ -20634,14 +19032,14 @@ export namespace Prisma {
     update?: XOR<XOR<VehicleUpdateToOneWithWhereWithoutReservationsInput, VehicleUpdateWithoutReservationsInput>, VehicleUncheckedUpdateWithoutReservationsInput>
   }
 
-  export type ParkingRecordUncheckedUpdateOneWithoutReservationNestedInput = {
-    create?: XOR<ParkingRecordCreateWithoutReservationInput, ParkingRecordUncheckedCreateWithoutReservationInput>
-    connectOrCreate?: ParkingRecordCreateOrConnectWithoutReservationInput
-    upsert?: ParkingRecordUpsertWithoutReservationInput
-    disconnect?: ParkingRecordWhereInput | boolean
-    delete?: ParkingRecordWhereInput | boolean
-    connect?: ParkingRecordWhereUniqueInput
-    update?: XOR<XOR<ParkingRecordUpdateToOneWithWhereWithoutReservationInput, ParkingRecordUpdateWithoutReservationInput>, ParkingRecordUncheckedUpdateWithoutReservationInput>
+  export type PaymentRecordUpdateOneWithoutReservationNestedInput = {
+    create?: XOR<PaymentRecordCreateWithoutReservationInput, PaymentRecordUncheckedCreateWithoutReservationInput>
+    connectOrCreate?: PaymentRecordCreateOrConnectWithoutReservationInput
+    upsert?: PaymentRecordUpsertWithoutReservationInput
+    disconnect?: PaymentRecordWhereInput | boolean
+    delete?: PaymentRecordWhereInput | boolean
+    connect?: PaymentRecordWhereUniqueInput
+    update?: XOR<XOR<PaymentRecordUpdateToOneWithWhereWithoutReservationInput, PaymentRecordUpdateWithoutReservationInput>, PaymentRecordUncheckedUpdateWithoutReservationInput>
   }
 
   export type ParkingLotServiceUncheckedUpdateManyWithoutReservationsNestedInput = {
@@ -20657,104 +19055,14 @@ export namespace Prisma {
     deleteMany?: ParkingLotServiceScalarWhereInput | ParkingLotServiceScalarWhereInput[]
   }
 
-  export type VehicleCreateNestedOneWithoutParkingRecordsInput = {
-    create?: XOR<VehicleCreateWithoutParkingRecordsInput, VehicleUncheckedCreateWithoutParkingRecordsInput>
-    connectOrCreate?: VehicleCreateOrConnectWithoutParkingRecordsInput
-    connect?: VehicleWhereUniqueInput
-  }
-
-  export type ParkingSpotCreateNestedOneWithoutParkingRecordsInput = {
-    create?: XOR<ParkingSpotCreateWithoutParkingRecordsInput, ParkingSpotUncheckedCreateWithoutParkingRecordsInput>
-    connectOrCreate?: ParkingSpotCreateOrConnectWithoutParkingRecordsInput
-    connect?: ParkingSpotWhereUniqueInput
-  }
-
-  export type ReservationCreateNestedOneWithoutParkingRecordInput = {
-    create?: XOR<ReservationCreateWithoutParkingRecordInput, ReservationUncheckedCreateWithoutParkingRecordInput>
-    connectOrCreate?: ReservationCreateOrConnectWithoutParkingRecordInput
-    connect?: ReservationWhereUniqueInput
-  }
-
-  export type PaymentRecordCreateNestedOneWithoutParkingRecordInput = {
-    create?: XOR<PaymentRecordCreateWithoutParkingRecordInput, PaymentRecordUncheckedCreateWithoutParkingRecordInput>
-    connectOrCreate?: PaymentRecordCreateOrConnectWithoutParkingRecordInput
-    connect?: PaymentRecordWhereUniqueInput
-  }
-
-  export type PaymentRecordUncheckedCreateNestedOneWithoutParkingRecordInput = {
-    create?: XOR<PaymentRecordCreateWithoutParkingRecordInput, PaymentRecordUncheckedCreateWithoutParkingRecordInput>
-    connectOrCreate?: PaymentRecordCreateOrConnectWithoutParkingRecordInput
-    connect?: PaymentRecordWhereUniqueInput
-  }
-
-  export type NullableFloatFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type EnumPARKING_RECORD__STATUS_ALIASFieldUpdateOperationsInput = {
-    set?: $Enums.PARKING_RECORD__STATUS_ALIAS
-  }
-
-  export type VehicleUpdateOneWithoutParkingRecordsNestedInput = {
-    create?: XOR<VehicleCreateWithoutParkingRecordsInput, VehicleUncheckedCreateWithoutParkingRecordsInput>
-    connectOrCreate?: VehicleCreateOrConnectWithoutParkingRecordsInput
-    upsert?: VehicleUpsertWithoutParkingRecordsInput
-    disconnect?: VehicleWhereInput | boolean
-    delete?: VehicleWhereInput | boolean
-    connect?: VehicleWhereUniqueInput
-    update?: XOR<XOR<VehicleUpdateToOneWithWhereWithoutParkingRecordsInput, VehicleUpdateWithoutParkingRecordsInput>, VehicleUncheckedUpdateWithoutParkingRecordsInput>
-  }
-
-  export type ParkingSpotUpdateOneWithoutParkingRecordsNestedInput = {
-    create?: XOR<ParkingSpotCreateWithoutParkingRecordsInput, ParkingSpotUncheckedCreateWithoutParkingRecordsInput>
-    connectOrCreate?: ParkingSpotCreateOrConnectWithoutParkingRecordsInput
-    upsert?: ParkingSpotUpsertWithoutParkingRecordsInput
-    disconnect?: ParkingSpotWhereInput | boolean
-    delete?: ParkingSpotWhereInput | boolean
-    connect?: ParkingSpotWhereUniqueInput
-    update?: XOR<XOR<ParkingSpotUpdateToOneWithWhereWithoutParkingRecordsInput, ParkingSpotUpdateWithoutParkingRecordsInput>, ParkingSpotUncheckedUpdateWithoutParkingRecordsInput>
-  }
-
-  export type ReservationUpdateOneWithoutParkingRecordNestedInput = {
-    create?: XOR<ReservationCreateWithoutParkingRecordInput, ReservationUncheckedCreateWithoutParkingRecordInput>
-    connectOrCreate?: ReservationCreateOrConnectWithoutParkingRecordInput
-    upsert?: ReservationUpsertWithoutParkingRecordInput
-    disconnect?: ReservationWhereInput | boolean
-    delete?: ReservationWhereInput | boolean
-    connect?: ReservationWhereUniqueInput
-    update?: XOR<XOR<ReservationUpdateToOneWithWhereWithoutParkingRecordInput, ReservationUpdateWithoutParkingRecordInput>, ReservationUncheckedUpdateWithoutParkingRecordInput>
-  }
-
-  export type PaymentRecordUpdateOneWithoutParkingRecordNestedInput = {
-    create?: XOR<PaymentRecordCreateWithoutParkingRecordInput, PaymentRecordUncheckedCreateWithoutParkingRecordInput>
-    connectOrCreate?: PaymentRecordCreateOrConnectWithoutParkingRecordInput
-    upsert?: PaymentRecordUpsertWithoutParkingRecordInput
+  export type PaymentRecordUncheckedUpdateOneWithoutReservationNestedInput = {
+    create?: XOR<PaymentRecordCreateWithoutReservationInput, PaymentRecordUncheckedCreateWithoutReservationInput>
+    connectOrCreate?: PaymentRecordCreateOrConnectWithoutReservationInput
+    upsert?: PaymentRecordUpsertWithoutReservationInput
     disconnect?: PaymentRecordWhereInput | boolean
     delete?: PaymentRecordWhereInput | boolean
     connect?: PaymentRecordWhereUniqueInput
-    update?: XOR<XOR<PaymentRecordUpdateToOneWithWhereWithoutParkingRecordInput, PaymentRecordUpdateWithoutParkingRecordInput>, PaymentRecordUncheckedUpdateWithoutParkingRecordInput>
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type PaymentRecordUncheckedUpdateOneWithoutParkingRecordNestedInput = {
-    create?: XOR<PaymentRecordCreateWithoutParkingRecordInput, PaymentRecordUncheckedCreateWithoutParkingRecordInput>
-    connectOrCreate?: PaymentRecordCreateOrConnectWithoutParkingRecordInput
-    upsert?: PaymentRecordUpsertWithoutParkingRecordInput
-    disconnect?: PaymentRecordWhereInput | boolean
-    delete?: PaymentRecordWhereInput | boolean
-    connect?: PaymentRecordWhereUniqueInput
-    update?: XOR<XOR<PaymentRecordUpdateToOneWithWhereWithoutParkingRecordInput, PaymentRecordUpdateWithoutParkingRecordInput>, PaymentRecordUncheckedUpdateWithoutParkingRecordInput>
+    update?: XOR<XOR<PaymentRecordUpdateToOneWithWhereWithoutReservationInput, PaymentRecordUpdateWithoutReservationInput>, PaymentRecordUncheckedUpdateWithoutReservationInput>
   }
 
   export type UserCreateNestedOneWithoutPaymentRecordsInput = {
@@ -20763,10 +19071,14 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type ParkingRecordCreateNestedOneWithoutPaymentRecordInput = {
-    create?: XOR<ParkingRecordCreateWithoutPaymentRecordInput, ParkingRecordUncheckedCreateWithoutPaymentRecordInput>
-    connectOrCreate?: ParkingRecordCreateOrConnectWithoutPaymentRecordInput
-    connect?: ParkingRecordWhereUniqueInput
+  export type ReservationCreateNestedOneWithoutPaymentRecordInput = {
+    create?: XOR<ReservationCreateWithoutPaymentRecordInput, ReservationUncheckedCreateWithoutPaymentRecordInput>
+    connectOrCreate?: ReservationCreateOrConnectWithoutPaymentRecordInput
+    connect?: ReservationWhereUniqueInput
+  }
+
+  export type EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput = {
+    set?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
   }
 
   export type EnumPAYMENT_RECORD__METHOD_ALIASFieldUpdateOperationsInput = {
@@ -20781,12 +19093,12 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPaymentRecordsInput, UserUpdateWithoutPaymentRecordsInput>, UserUncheckedUpdateWithoutPaymentRecordsInput>
   }
 
-  export type ParkingRecordUpdateOneRequiredWithoutPaymentRecordNestedInput = {
-    create?: XOR<ParkingRecordCreateWithoutPaymentRecordInput, ParkingRecordUncheckedCreateWithoutPaymentRecordInput>
-    connectOrCreate?: ParkingRecordCreateOrConnectWithoutPaymentRecordInput
-    upsert?: ParkingRecordUpsertWithoutPaymentRecordInput
-    connect?: ParkingRecordWhereUniqueInput
-    update?: XOR<XOR<ParkingRecordUpdateToOneWithWhereWithoutPaymentRecordInput, ParkingRecordUpdateWithoutPaymentRecordInput>, ParkingRecordUncheckedUpdateWithoutPaymentRecordInput>
+  export type ReservationUpdateOneRequiredWithoutPaymentRecordNestedInput = {
+    create?: XOR<ReservationCreateWithoutPaymentRecordInput, ReservationUncheckedCreateWithoutPaymentRecordInput>
+    connectOrCreate?: ReservationCreateOrConnectWithoutPaymentRecordInput
+    upsert?: ReservationUpsertWithoutPaymentRecordInput
+    connect?: ReservationWhereUniqueInput
+    update?: XOR<XOR<ReservationUpdateToOneWithWhereWithoutPaymentRecordInput, ReservationUpdateWithoutPaymentRecordInput>, ReservationUncheckedUpdateWithoutPaymentRecordInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -20979,6 +19291,17 @@ export namespace Prisma {
     not?: NestedEnumVEHICLE__TYPE_ALIASFilter<$PrismaModel> | $Enums.VEHICLE__TYPE_ALIAS
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedEnumVEHICLE__TYPE_ALIASWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.VEHICLE__TYPE_ALIAS | EnumVEHICLE__TYPE_ALIASFieldRefInput<$PrismaModel>
     in?: $Enums.VEHICLE__TYPE_ALIAS[] | ListEnumVEHICLE__TYPE_ALIASFieldRefInput<$PrismaModel>
@@ -20989,14 +19312,7 @@ export namespace Prisma {
     _max?: NestedEnumVEHICLE__TYPE_ALIASFilter<$PrismaModel>
   }
 
-  export type NestedEnumPARKING_LOT__STATUS_ALIASFilter<$PrismaModel = never> = {
-    equals?: $Enums.PARKING_LOT__STATUS_ALIAS | EnumPARKING_LOT__STATUS_ALIASFieldRefInput<$PrismaModel>
-    in?: $Enums.PARKING_LOT__STATUS_ALIAS[] | ListEnumPARKING_LOT__STATUS_ALIASFieldRefInput<$PrismaModel>
-    notIn?: $Enums.PARKING_LOT__STATUS_ALIAS[] | ListEnumPARKING_LOT__STATUS_ALIASFieldRefInput<$PrismaModel>
-    not?: NestedEnumPARKING_LOT__STATUS_ALIASFilter<$PrismaModel> | $Enums.PARKING_LOT__STATUS_ALIAS
-  }
-
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
     notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -21004,7 +19320,17 @@ export namespace Prisma {
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPARKING_LOT__STATUS_ALIASFilter<$PrismaModel = never> = {
+    equals?: $Enums.PARKING_LOT__STATUS_ALIAS | EnumPARKING_LOT__STATUS_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.PARKING_LOT__STATUS_ALIAS[] | ListEnumPARKING_LOT__STATUS_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PARKING_LOT__STATUS_ALIAS[] | ListEnumPARKING_LOT__STATUS_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumPARKING_LOT__STATUS_ALIASFilter<$PrismaModel> | $Enums.PARKING_LOT__STATUS_ALIAS
   }
 
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -21031,20 +19357,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumPARKING_LOT__STATUS_ALIASFilter<$PrismaModel>
     _max?: NestedEnumPARKING_LOT__STATUS_ALIASFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumPARKING_LOT_SERVICE__TYPE_ALIASFilter<$PrismaModel = never> = {
@@ -21081,64 +19393,11 @@ export namespace Prisma {
     _max?: NestedEnumRESERVATION__STATUS_ALIASFilter<$PrismaModel>
   }
 
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedEnumPARKING_RECORD__STATUS_ALIASFilter<$PrismaModel = never> = {
-    equals?: $Enums.PARKING_RECORD__STATUS_ALIAS | EnumPARKING_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
-    in?: $Enums.PARKING_RECORD__STATUS_ALIAS[] | ListEnumPARKING_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
-    notIn?: $Enums.PARKING_RECORD__STATUS_ALIAS[] | ListEnumPARKING_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
-    not?: NestedEnumPARKING_RECORD__STATUS_ALIASFilter<$PrismaModel> | $Enums.PARKING_RECORD__STATUS_ALIAS
-  }
-
-  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
-  }
-
-  export type NestedEnumPARKING_RECORD__STATUS_ALIASWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.PARKING_RECORD__STATUS_ALIAS | EnumPARKING_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
-    in?: $Enums.PARKING_RECORD__STATUS_ALIAS[] | ListEnumPARKING_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
-    notIn?: $Enums.PARKING_RECORD__STATUS_ALIAS[] | ListEnumPARKING_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
-    not?: NestedEnumPARKING_RECORD__STATUS_ALIASWithAggregatesFilter<$PrismaModel> | $Enums.PARKING_RECORD__STATUS_ALIAS
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumPARKING_RECORD__STATUS_ALIASFilter<$PrismaModel>
-    _max?: NestedEnumPARKING_RECORD__STATUS_ALIASFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
+  export type NestedEnumPAYMENT_RECORD__STATUS_ALIASFilter<$PrismaModel = never> = {
+    equals?: $Enums.PAYMENT_RECORD__STATUS_ALIAS | EnumPAYMENT_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.PAYMENT_RECORD__STATUS_ALIAS[] | ListEnumPAYMENT_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PAYMENT_RECORD__STATUS_ALIAS[] | ListEnumPAYMENT_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumPAYMENT_RECORD__STATUS_ALIASFilter<$PrismaModel> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
   }
 
   export type NestedEnumPAYMENT_RECORD__METHOD_ALIASFilter<$PrismaModel = never> = {
@@ -21146,6 +19405,16 @@ export namespace Prisma {
     in?: $Enums.PAYMENT_RECORD__METHOD_ALIAS[] | ListEnumPAYMENT_RECORD__METHOD_ALIASFieldRefInput<$PrismaModel>
     notIn?: $Enums.PAYMENT_RECORD__METHOD_ALIAS[] | ListEnumPAYMENT_RECORD__METHOD_ALIASFieldRefInput<$PrismaModel>
     not?: NestedEnumPAYMENT_RECORD__METHOD_ALIASFilter<$PrismaModel> | $Enums.PAYMENT_RECORD__METHOD_ALIAS
+  }
+
+  export type NestedEnumPAYMENT_RECORD__STATUS_ALIASWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PAYMENT_RECORD__STATUS_ALIAS | EnumPAYMENT_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.PAYMENT_RECORD__STATUS_ALIAS[] | ListEnumPAYMENT_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PAYMENT_RECORD__STATUS_ALIAS[] | ListEnumPAYMENT_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumPAYMENT_RECORD__STATUS_ALIASWithAggregatesFilter<$PrismaModel> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPAYMENT_RECORD__STATUS_ALIASFilter<$PrismaModel>
+    _max?: NestedEnumPAYMENT_RECORD__STATUS_ALIASFilter<$PrismaModel>
   }
 
   export type NestedEnumPAYMENT_RECORD__METHOD_ALIASWithAggregatesFilter<$PrismaModel = never> = {
@@ -21353,10 +19622,10 @@ export namespace Prisma {
     model: string
     color: string
     imageUrl: string
+    deleteAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     reservations?: ReservationCreateNestedManyWithoutVehicleInput
-    parkingRecords?: ParkingRecordCreateNestedManyWithoutVehicleInput
   }
 
   export type VehicleUncheckedCreateWithoutOwnerInput = {
@@ -21367,10 +19636,10 @@ export namespace Prisma {
     model: string
     color: string
     imageUrl: string
+    deleteAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     reservations?: ReservationUncheckedCreateNestedManyWithoutVehicleInput
-    parkingRecords?: ParkingRecordUncheckedCreateNestedManyWithoutVehicleInput
   }
 
   export type VehicleCreateOrConnectWithoutOwnerInput = {
@@ -21466,20 +19735,22 @@ export namespace Prisma {
   }
 
   export type PaymentRecordCreateWithoutUserInput = {
+    status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    parkingRecord: ParkingRecordCreateNestedOneWithoutPaymentRecordInput
+    reservation: ReservationCreateNestedOneWithoutPaymentRecordInput
   }
 
   export type PaymentRecordUncheckedCreateWithoutUserInput = {
     id?: number
+    status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    parkingRecordId: number
+    reservationId: number
   }
 
   export type PaymentRecordCreateOrConnectWithoutUserInput = {
@@ -21526,10 +19797,10 @@ export namespace Prisma {
     endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    parkingRecord?: ParkingRecordCreateNestedOneWithoutReservationInput
     services?: ParkingLotServiceCreateNestedManyWithoutReservationsInput
     parkingSpot: ParkingSpotCreateNestedOneWithoutReservationsInput
     vehicle: VehicleCreateNestedOneWithoutReservationsInput
+    PaymentRecord?: PaymentRecordCreateNestedOneWithoutReservationInput
   }
 
   export type ReservationUncheckedCreateWithoutUserInput = {
@@ -21542,8 +19813,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     parkingSpotId: number
     vehicleId: number
-    parkingRecord?: ParkingRecordUncheckedCreateNestedOneWithoutReservationInput
     services?: ParkingLotServiceUncheckedCreateNestedManyWithoutReservationsInput
+    PaymentRecord?: PaymentRecordUncheckedCreateNestedOneWithoutReservationInput
   }
 
   export type ReservationCreateOrConnectWithoutUserInput = {
@@ -21608,6 +19879,7 @@ export namespace Prisma {
     model?: StringFilter<"Vehicle"> | string
     color?: StringFilter<"Vehicle"> | string
     imageUrl?: StringFilter<"Vehicle"> | string
+    deleteAt?: DateTimeNullableFilter<"Vehicle"> | Date | string | null
     createdAt?: DateTimeFilter<"Vehicle"> | Date | string
     updatedAt?: DateTimeFilter<"Vehicle"> | Date | string
     ownerId?: IntFilter<"Vehicle"> | number
@@ -21702,12 +19974,13 @@ export namespace Prisma {
     OR?: PaymentRecordScalarWhereInput[]
     NOT?: PaymentRecordScalarWhereInput | PaymentRecordScalarWhereInput[]
     id?: IntFilter<"PaymentRecord"> | number
+    status?: EnumPAYMENT_RECORD__STATUS_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     method?: EnumPAYMENT_RECORD__METHOD_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFilter<"PaymentRecord"> | number
     createdAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     userId?: IntFilter<"PaymentRecord"> | number
-    parkingRecordId?: IntFilter<"PaymentRecord"> | number
+    reservationId?: IntFilter<"PaymentRecord"> | number
   }
 
   export type UserNotificationUpsertWithWhereUniqueWithoutUserInput = {
@@ -21891,10 +20164,10 @@ export namespace Prisma {
     endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    parkingRecord?: ParkingRecordCreateNestedOneWithoutReservationInput
     services?: ParkingLotServiceCreateNestedManyWithoutReservationsInput
     user: UserCreateNestedOneWithoutReservationsInput
     parkingSpot: ParkingSpotCreateNestedOneWithoutReservationsInput
+    PaymentRecord?: PaymentRecordCreateNestedOneWithoutReservationInput
   }
 
   export type ReservationUncheckedCreateWithoutVehicleInput = {
@@ -21907,8 +20180,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     userId: number
     parkingSpotId: number
-    parkingRecord?: ParkingRecordUncheckedCreateNestedOneWithoutReservationInput
     services?: ParkingLotServiceUncheckedCreateNestedManyWithoutReservationsInput
+    PaymentRecord?: PaymentRecordUncheckedCreateNestedOneWithoutReservationInput
   }
 
   export type ReservationCreateOrConnectWithoutVehicleInput = {
@@ -21918,41 +20191,6 @@ export namespace Prisma {
 
   export type ReservationCreateManyVehicleInputEnvelope = {
     data: ReservationCreateManyVehicleInput | ReservationCreateManyVehicleInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ParkingRecordCreateWithoutVehicleInput = {
-    checkInAt: Date | string
-    checkOutAt?: Date | string | null
-    totalPrice?: number | null
-    status: $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    parkingSpot?: ParkingSpotCreateNestedOneWithoutParkingRecordsInput
-    reservation?: ReservationCreateNestedOneWithoutParkingRecordInput
-    paymentRecord?: PaymentRecordCreateNestedOneWithoutParkingRecordInput
-  }
-
-  export type ParkingRecordUncheckedCreateWithoutVehicleInput = {
-    id?: number
-    checkInAt: Date | string
-    checkOutAt?: Date | string | null
-    totalPrice?: number | null
-    status: $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    parkingSpotId?: number | null
-    reservationId?: number | null
-    paymentRecord?: PaymentRecordUncheckedCreateNestedOneWithoutParkingRecordInput
-  }
-
-  export type ParkingRecordCreateOrConnectWithoutVehicleInput = {
-    where: ParkingRecordWhereUniqueInput
-    create: XOR<ParkingRecordCreateWithoutVehicleInput, ParkingRecordUncheckedCreateWithoutVehicleInput>
-  }
-
-  export type ParkingRecordCreateManyVehicleInputEnvelope = {
-    data: ParkingRecordCreateManyVehicleInput | ParkingRecordCreateManyVehicleInput[]
     skipDuplicates?: boolean
   }
 
@@ -22010,38 +20248,6 @@ export namespace Prisma {
     data: XOR<ReservationUpdateManyMutationInput, ReservationUncheckedUpdateManyWithoutVehicleInput>
   }
 
-  export type ParkingRecordUpsertWithWhereUniqueWithoutVehicleInput = {
-    where: ParkingRecordWhereUniqueInput
-    update: XOR<ParkingRecordUpdateWithoutVehicleInput, ParkingRecordUncheckedUpdateWithoutVehicleInput>
-    create: XOR<ParkingRecordCreateWithoutVehicleInput, ParkingRecordUncheckedCreateWithoutVehicleInput>
-  }
-
-  export type ParkingRecordUpdateWithWhereUniqueWithoutVehicleInput = {
-    where: ParkingRecordWhereUniqueInput
-    data: XOR<ParkingRecordUpdateWithoutVehicleInput, ParkingRecordUncheckedUpdateWithoutVehicleInput>
-  }
-
-  export type ParkingRecordUpdateManyWithWhereWithoutVehicleInput = {
-    where: ParkingRecordScalarWhereInput
-    data: XOR<ParkingRecordUpdateManyMutationInput, ParkingRecordUncheckedUpdateManyWithoutVehicleInput>
-  }
-
-  export type ParkingRecordScalarWhereInput = {
-    AND?: ParkingRecordScalarWhereInput | ParkingRecordScalarWhereInput[]
-    OR?: ParkingRecordScalarWhereInput[]
-    NOT?: ParkingRecordScalarWhereInput | ParkingRecordScalarWhereInput[]
-    id?: IntFilter<"ParkingRecord"> | number
-    checkInAt?: DateTimeFilter<"ParkingRecord"> | Date | string
-    checkOutAt?: DateTimeNullableFilter<"ParkingRecord"> | Date | string | null
-    totalPrice?: FloatNullableFilter<"ParkingRecord"> | number | null
-    status?: EnumPARKING_RECORD__STATUS_ALIASFilter<"ParkingRecord"> | $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: DateTimeFilter<"ParkingRecord"> | Date | string
-    updatedAt?: DateTimeFilter<"ParkingRecord"> | Date | string
-    vehicleId?: IntNullableFilter<"ParkingRecord"> | number | null
-    parkingSpotId?: IntNullableFilter<"ParkingRecord"> | number | null
-    reservationId?: IntNullableFilter<"ParkingRecord"> | number | null
-  }
-
   export type UserUpsertWithoutVehiclesInput = {
     update: XOR<UserUpdateWithoutVehiclesInput, UserUncheckedUpdateWithoutVehiclesInput>
     create: XOR<UserCreateWithoutVehiclesInput, UserUncheckedCreateWithoutVehiclesInput>
@@ -22090,10 +20296,10 @@ export namespace Prisma {
     name: string
     isAvailable?: boolean
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     reservations?: ReservationCreateNestedManyWithoutParkingSpotInput
-    parkingRecords?: ParkingRecordCreateNestedManyWithoutParkingSpotInput
   }
 
   export type ParkingSpotUncheckedCreateWithoutParkingLotInput = {
@@ -22101,10 +20307,10 @@ export namespace Prisma {
     name: string
     isAvailable?: boolean
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     reservations?: ReservationUncheckedCreateNestedManyWithoutParkingSpotInput
-    parkingRecords?: ParkingRecordUncheckedCreateNestedManyWithoutParkingSpotInput
   }
 
   export type ParkingSpotCreateOrConnectWithoutParkingLotInput = {
@@ -22124,6 +20330,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotServiceCreatemediaUrlsInput | string[]
     price: number
     vehicleTypes?: ParkingLotServiceCreatevehicleTypesInput | $Enums.VEHICLE__TYPE_ALIAS[]
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     reservations?: ReservationCreateNestedManyWithoutServicesInput
@@ -22137,6 +20344,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotServiceCreatemediaUrlsInput | string[]
     price: number
     vehicleTypes?: ParkingLotServiceCreatevehicleTypesInput | $Enums.VEHICLE__TYPE_ALIAS[]
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     reservations?: ReservationUncheckedCreateNestedManyWithoutServicesInput
@@ -22263,6 +20471,7 @@ export namespace Prisma {
     name?: StringFilter<"ParkingSpot"> | string
     isAvailable?: BoolFilter<"ParkingSpot"> | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFilter<"ParkingSpot"> | $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt?: DateTimeNullableFilter<"ParkingSpot"> | Date | string | null
     createdAt?: DateTimeFilter<"ParkingSpot"> | Date | string
     updatedAt?: DateTimeFilter<"ParkingSpot"> | Date | string
     parkingLotId?: IntFilter<"ParkingSpot"> | number
@@ -22295,6 +20504,7 @@ export namespace Prisma {
     mediaUrls?: StringNullableListFilter<"ParkingLotService">
     price?: FloatFilter<"ParkingLotService"> | number
     vehicleTypes?: EnumVEHICLE__TYPE_ALIASNullableListFilter<"ParkingLotService">
+    deletedAt?: DateTimeNullableFilter<"ParkingLotService"> | Date | string | null
     createdAt?: DateTimeFilter<"ParkingLotService"> | Date | string
     updatedAt?: DateTimeFilter<"ParkingLotService"> | Date | string
     parkingLotId?: IntFilter<"ParkingLotService"> | number
@@ -22726,10 +20936,10 @@ export namespace Prisma {
     endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    parkingRecord?: ParkingRecordCreateNestedOneWithoutReservationInput
     user: UserCreateNestedOneWithoutReservationsInput
     parkingSpot: ParkingSpotCreateNestedOneWithoutReservationsInput
     vehicle: VehicleCreateNestedOneWithoutReservationsInput
+    PaymentRecord?: PaymentRecordCreateNestedOneWithoutReservationInput
   }
 
   export type ReservationUncheckedCreateWithoutServicesInput = {
@@ -22743,7 +20953,7 @@ export namespace Prisma {
     userId: number
     parkingSpotId: number
     vehicleId: number
-    parkingRecord?: ParkingRecordUncheckedCreateNestedOneWithoutReservationInput
+    PaymentRecord?: PaymentRecordUncheckedCreateNestedOneWithoutReservationInput
   }
 
   export type ReservationCreateOrConnectWithoutServicesInput = {
@@ -22828,10 +21038,10 @@ export namespace Prisma {
     endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    parkingRecord?: ParkingRecordCreateNestedOneWithoutReservationInput
     services?: ParkingLotServiceCreateNestedManyWithoutReservationsInput
     user: UserCreateNestedOneWithoutReservationsInput
     vehicle: VehicleCreateNestedOneWithoutReservationsInput
+    PaymentRecord?: PaymentRecordCreateNestedOneWithoutReservationInput
   }
 
   export type ReservationUncheckedCreateWithoutParkingSpotInput = {
@@ -22844,8 +21054,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     userId: number
     vehicleId: number
-    parkingRecord?: ParkingRecordUncheckedCreateNestedOneWithoutReservationInput
     services?: ParkingLotServiceUncheckedCreateNestedManyWithoutReservationsInput
+    PaymentRecord?: PaymentRecordUncheckedCreateNestedOneWithoutReservationInput
   }
 
   export type ReservationCreateOrConnectWithoutParkingSpotInput = {
@@ -22855,41 +21065,6 @@ export namespace Prisma {
 
   export type ReservationCreateManyParkingSpotInputEnvelope = {
     data: ReservationCreateManyParkingSpotInput | ReservationCreateManyParkingSpotInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ParkingRecordCreateWithoutParkingSpotInput = {
-    checkInAt: Date | string
-    checkOutAt?: Date | string | null
-    totalPrice?: number | null
-    status: $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    vehicle?: VehicleCreateNestedOneWithoutParkingRecordsInput
-    reservation?: ReservationCreateNestedOneWithoutParkingRecordInput
-    paymentRecord?: PaymentRecordCreateNestedOneWithoutParkingRecordInput
-  }
-
-  export type ParkingRecordUncheckedCreateWithoutParkingSpotInput = {
-    id?: number
-    checkInAt: Date | string
-    checkOutAt?: Date | string | null
-    totalPrice?: number | null
-    status: $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    vehicleId?: number | null
-    reservationId?: number | null
-    paymentRecord?: PaymentRecordUncheckedCreateNestedOneWithoutParkingRecordInput
-  }
-
-  export type ParkingRecordCreateOrConnectWithoutParkingSpotInput = {
-    where: ParkingRecordWhereUniqueInput
-    create: XOR<ParkingRecordCreateWithoutParkingSpotInput, ParkingRecordUncheckedCreateWithoutParkingSpotInput>
-  }
-
-  export type ParkingRecordCreateManyParkingSpotInputEnvelope = {
-    data: ParkingRecordCreateManyParkingSpotInput | ParkingRecordCreateManyParkingSpotInput[]
     skipDuplicates?: boolean
   }
 
@@ -22957,22 +21132,6 @@ export namespace Prisma {
     data: XOR<ReservationUpdateManyMutationInput, ReservationUncheckedUpdateManyWithoutParkingSpotInput>
   }
 
-  export type ParkingRecordUpsertWithWhereUniqueWithoutParkingSpotInput = {
-    where: ParkingRecordWhereUniqueInput
-    update: XOR<ParkingRecordUpdateWithoutParkingSpotInput, ParkingRecordUncheckedUpdateWithoutParkingSpotInput>
-    create: XOR<ParkingRecordCreateWithoutParkingSpotInput, ParkingRecordUncheckedCreateWithoutParkingSpotInput>
-  }
-
-  export type ParkingRecordUpdateWithWhereUniqueWithoutParkingSpotInput = {
-    where: ParkingRecordWhereUniqueInput
-    data: XOR<ParkingRecordUpdateWithoutParkingSpotInput, ParkingRecordUncheckedUpdateWithoutParkingSpotInput>
-  }
-
-  export type ParkingRecordUpdateManyWithWhereWithoutParkingSpotInput = {
-    where: ParkingRecordScalarWhereInput
-    data: XOR<ParkingRecordUpdateManyMutationInput, ParkingRecordUncheckedUpdateManyWithoutParkingSpotInput>
-  }
-
   export type ParkingLotUpsertWithoutParkingSpotsInput = {
     update: XOR<ParkingLotUpdateWithoutParkingSpotsInput, ParkingLotUncheckedUpdateWithoutParkingSpotsInput>
     create: XOR<ParkingLotCreateWithoutParkingSpotsInput, ParkingLotUncheckedCreateWithoutParkingSpotsInput>
@@ -23027,36 +21186,6 @@ export namespace Prisma {
     parkingLotPrices?: ParkingLotPriceUncheckedUpdateManyWithoutParkingLotNestedInput
   }
 
-  export type ParkingRecordCreateWithoutReservationInput = {
-    checkInAt: Date | string
-    checkOutAt?: Date | string | null
-    totalPrice?: number | null
-    status: $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    vehicle?: VehicleCreateNestedOneWithoutParkingRecordsInput
-    parkingSpot?: ParkingSpotCreateNestedOneWithoutParkingRecordsInput
-    paymentRecord?: PaymentRecordCreateNestedOneWithoutParkingRecordInput
-  }
-
-  export type ParkingRecordUncheckedCreateWithoutReservationInput = {
-    id?: number
-    checkInAt: Date | string
-    checkOutAt?: Date | string | null
-    totalPrice?: number | null
-    status: $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    vehicleId?: number | null
-    parkingSpotId?: number | null
-    paymentRecord?: PaymentRecordUncheckedCreateNestedOneWithoutParkingRecordInput
-  }
-
-  export type ParkingRecordCreateOrConnectWithoutReservationInput = {
-    where: ParkingRecordWhereUniqueInput
-    create: XOR<ParkingRecordCreateWithoutReservationInput, ParkingRecordUncheckedCreateWithoutReservationInput>
-  }
-
   export type ParkingLotServiceCreateWithoutReservationsInput = {
     name: string
     type: $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
@@ -23064,6 +21193,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotServiceCreatemediaUrlsInput | string[]
     price: number
     vehicleTypes?: ParkingLotServiceCreatevehicleTypesInput | $Enums.VEHICLE__TYPE_ALIAS[]
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingLot: ParkingLotCreateNestedOneWithoutParkingLotServicesInput
@@ -23077,6 +21207,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotServiceCreatemediaUrlsInput | string[]
     price: number
     vehicleTypes?: ParkingLotServiceCreatevehicleTypesInput | $Enums.VEHICLE__TYPE_ALIAS[]
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingLotId: number
@@ -23129,9 +21260,9 @@ export namespace Prisma {
     name: string
     isAvailable?: boolean
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    parkingRecords?: ParkingRecordCreateNestedManyWithoutParkingSpotInput
     parkingLot: ParkingLotCreateNestedOneWithoutParkingSpotsInput
   }
 
@@ -23140,10 +21271,10 @@ export namespace Prisma {
     name: string
     isAvailable?: boolean
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingLotId: number
-    parkingRecords?: ParkingRecordUncheckedCreateNestedManyWithoutParkingSpotInput
   }
 
   export type ParkingSpotCreateOrConnectWithoutReservationsInput = {
@@ -23158,9 +21289,9 @@ export namespace Prisma {
     model: string
     color: string
     imageUrl: string
+    deleteAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    parkingRecords?: ParkingRecordCreateNestedManyWithoutVehicleInput
     owner: UserCreateNestedOneWithoutVehiclesInput
   }
 
@@ -23172,10 +21303,10 @@ export namespace Prisma {
     model: string
     color: string
     imageUrl: string
+    deleteAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: number
-    parkingRecords?: ParkingRecordUncheckedCreateNestedManyWithoutVehicleInput
   }
 
   export type VehicleCreateOrConnectWithoutReservationsInput = {
@@ -23183,40 +21314,28 @@ export namespace Prisma {
     create: XOR<VehicleCreateWithoutReservationsInput, VehicleUncheckedCreateWithoutReservationsInput>
   }
 
-  export type ParkingRecordUpsertWithoutReservationInput = {
-    update: XOR<ParkingRecordUpdateWithoutReservationInput, ParkingRecordUncheckedUpdateWithoutReservationInput>
-    create: XOR<ParkingRecordCreateWithoutReservationInput, ParkingRecordUncheckedCreateWithoutReservationInput>
-    where?: ParkingRecordWhereInput
+  export type PaymentRecordCreateWithoutReservationInput = {
+    status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
+    method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPaymentRecordsInput
   }
 
-  export type ParkingRecordUpdateToOneWithWhereWithoutReservationInput = {
-    where?: ParkingRecordWhereInput
-    data: XOR<ParkingRecordUpdateWithoutReservationInput, ParkingRecordUncheckedUpdateWithoutReservationInput>
+  export type PaymentRecordUncheckedCreateWithoutReservationInput = {
+    id?: number
+    status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
+    method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
+    amount: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: number
   }
 
-  export type ParkingRecordUpdateWithoutReservationInput = {
-    checkInAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    totalPrice?: NullableFloatFieldUpdateOperationsInput | number | null
-    status?: EnumPARKING_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    vehicle?: VehicleUpdateOneWithoutParkingRecordsNestedInput
-    parkingSpot?: ParkingSpotUpdateOneWithoutParkingRecordsNestedInput
-    paymentRecord?: PaymentRecordUpdateOneWithoutParkingRecordNestedInput
-  }
-
-  export type ParkingRecordUncheckedUpdateWithoutReservationInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    checkInAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    totalPrice?: NullableFloatFieldUpdateOperationsInput | number | null
-    status?: EnumPARKING_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    vehicleId?: NullableIntFieldUpdateOperationsInput | number | null
-    parkingSpotId?: NullableIntFieldUpdateOperationsInput | number | null
-    paymentRecord?: PaymentRecordUncheckedUpdateOneWithoutParkingRecordNestedInput
+  export type PaymentRecordCreateOrConnectWithoutReservationInput = {
+    where: PaymentRecordWhereUniqueInput
+    create: XOR<PaymentRecordCreateWithoutReservationInput, PaymentRecordUncheckedCreateWithoutReservationInput>
   }
 
   export type ParkingLotServiceUpsertWithWhereUniqueWithoutReservationsInput = {
@@ -23294,9 +21413,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    parkingRecords?: ParkingRecordUpdateManyWithoutParkingSpotNestedInput
     parkingLot?: ParkingLotUpdateOneRequiredWithoutParkingSpotsNestedInput
   }
 
@@ -23305,10 +21424,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingLotId?: IntFieldUpdateOperationsInput | number
-    parkingRecords?: ParkingRecordUncheckedUpdateManyWithoutParkingSpotNestedInput
   }
 
   export type VehicleUpsertWithoutReservationsInput = {
@@ -23329,9 +21448,9 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
+    deleteAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    parkingRecords?: ParkingRecordUpdateManyWithoutVehicleNestedInput
     owner?: UserUpdateOneRequiredWithoutVehiclesNestedInput
   }
 
@@ -23343,244 +21462,25 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
+    deleteAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: IntFieldUpdateOperationsInput | number
-    parkingRecords?: ParkingRecordUncheckedUpdateManyWithoutVehicleNestedInput
   }
 
-  export type VehicleCreateWithoutParkingRecordsInput = {
-    type: $Enums.VEHICLE__TYPE_ALIAS
-    plate: string
-    brand: string
-    model: string
-    color: string
-    imageUrl: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    reservations?: ReservationCreateNestedManyWithoutVehicleInput
-    owner: UserCreateNestedOneWithoutVehiclesInput
-  }
-
-  export type VehicleUncheckedCreateWithoutParkingRecordsInput = {
-    id?: number
-    type: $Enums.VEHICLE__TYPE_ALIAS
-    plate: string
-    brand: string
-    model: string
-    color: string
-    imageUrl: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    ownerId: number
-    reservations?: ReservationUncheckedCreateNestedManyWithoutVehicleInput
-  }
-
-  export type VehicleCreateOrConnectWithoutParkingRecordsInput = {
-    where: VehicleWhereUniqueInput
-    create: XOR<VehicleCreateWithoutParkingRecordsInput, VehicleUncheckedCreateWithoutParkingRecordsInput>
-  }
-
-  export type ParkingSpotCreateWithoutParkingRecordsInput = {
-    name: string
-    isAvailable?: boolean
-    vehicleType: $Enums.VEHICLE__TYPE_ALIAS
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    reservations?: ReservationCreateNestedManyWithoutParkingSpotInput
-    parkingLot: ParkingLotCreateNestedOneWithoutParkingSpotsInput
-  }
-
-  export type ParkingSpotUncheckedCreateWithoutParkingRecordsInput = {
-    id?: number
-    name: string
-    isAvailable?: boolean
-    vehicleType: $Enums.VEHICLE__TYPE_ALIAS
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    parkingLotId: number
-    reservations?: ReservationUncheckedCreateNestedManyWithoutParkingSpotInput
-  }
-
-  export type ParkingSpotCreateOrConnectWithoutParkingRecordsInput = {
-    where: ParkingSpotWhereUniqueInput
-    create: XOR<ParkingSpotCreateWithoutParkingRecordsInput, ParkingSpotUncheckedCreateWithoutParkingRecordsInput>
-  }
-
-  export type ReservationCreateWithoutParkingRecordInput = {
-    code: string
-    status?: $Enums.RESERVATION__STATUS_ALIAS
-    startTime: Date | string
-    endTime: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    services?: ParkingLotServiceCreateNestedManyWithoutReservationsInput
-    user: UserCreateNestedOneWithoutReservationsInput
-    parkingSpot: ParkingSpotCreateNestedOneWithoutReservationsInput
-    vehicle: VehicleCreateNestedOneWithoutReservationsInput
-  }
-
-  export type ReservationUncheckedCreateWithoutParkingRecordInput = {
-    id?: number
-    code: string
-    status?: $Enums.RESERVATION__STATUS_ALIAS
-    startTime: Date | string
-    endTime: Date | string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    userId: number
-    parkingSpotId: number
-    vehicleId: number
-    services?: ParkingLotServiceUncheckedCreateNestedManyWithoutReservationsInput
-  }
-
-  export type ReservationCreateOrConnectWithoutParkingRecordInput = {
-    where: ReservationWhereUniqueInput
-    create: XOR<ReservationCreateWithoutParkingRecordInput, ReservationUncheckedCreateWithoutParkingRecordInput>
-  }
-
-  export type PaymentRecordCreateWithoutParkingRecordInput = {
-    method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
-    amount: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutPaymentRecordsInput
-  }
-
-  export type PaymentRecordUncheckedCreateWithoutParkingRecordInput = {
-    id?: number
-    method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
-    amount: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    userId: number
-  }
-
-  export type PaymentRecordCreateOrConnectWithoutParkingRecordInput = {
-    where: PaymentRecordWhereUniqueInput
-    create: XOR<PaymentRecordCreateWithoutParkingRecordInput, PaymentRecordUncheckedCreateWithoutParkingRecordInput>
-  }
-
-  export type VehicleUpsertWithoutParkingRecordsInput = {
-    update: XOR<VehicleUpdateWithoutParkingRecordsInput, VehicleUncheckedUpdateWithoutParkingRecordsInput>
-    create: XOR<VehicleCreateWithoutParkingRecordsInput, VehicleUncheckedCreateWithoutParkingRecordsInput>
-    where?: VehicleWhereInput
-  }
-
-  export type VehicleUpdateToOneWithWhereWithoutParkingRecordsInput = {
-    where?: VehicleWhereInput
-    data: XOR<VehicleUpdateWithoutParkingRecordsInput, VehicleUncheckedUpdateWithoutParkingRecordsInput>
-  }
-
-  export type VehicleUpdateWithoutParkingRecordsInput = {
-    type?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
-    plate?: StringFieldUpdateOperationsInput | string
-    brand?: StringFieldUpdateOperationsInput | string
-    model?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
-    imageUrl?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reservations?: ReservationUpdateManyWithoutVehicleNestedInput
-    owner?: UserUpdateOneRequiredWithoutVehiclesNestedInput
-  }
-
-  export type VehicleUncheckedUpdateWithoutParkingRecordsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    type?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
-    plate?: StringFieldUpdateOperationsInput | string
-    brand?: StringFieldUpdateOperationsInput | string
-    model?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
-    imageUrl?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ownerId?: IntFieldUpdateOperationsInput | number
-    reservations?: ReservationUncheckedUpdateManyWithoutVehicleNestedInput
-  }
-
-  export type ParkingSpotUpsertWithoutParkingRecordsInput = {
-    update: XOR<ParkingSpotUpdateWithoutParkingRecordsInput, ParkingSpotUncheckedUpdateWithoutParkingRecordsInput>
-    create: XOR<ParkingSpotCreateWithoutParkingRecordsInput, ParkingSpotUncheckedCreateWithoutParkingRecordsInput>
-    where?: ParkingSpotWhereInput
-  }
-
-  export type ParkingSpotUpdateToOneWithWhereWithoutParkingRecordsInput = {
-    where?: ParkingSpotWhereInput
-    data: XOR<ParkingSpotUpdateWithoutParkingRecordsInput, ParkingSpotUncheckedUpdateWithoutParkingRecordsInput>
-  }
-
-  export type ParkingSpotUpdateWithoutParkingRecordsInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    isAvailable?: BoolFieldUpdateOperationsInput | boolean
-    vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    reservations?: ReservationUpdateManyWithoutParkingSpotNestedInput
-    parkingLot?: ParkingLotUpdateOneRequiredWithoutParkingSpotsNestedInput
-  }
-
-  export type ParkingSpotUncheckedUpdateWithoutParkingRecordsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    isAvailable?: BoolFieldUpdateOperationsInput | boolean
-    vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    parkingLotId?: IntFieldUpdateOperationsInput | number
-    reservations?: ReservationUncheckedUpdateManyWithoutParkingSpotNestedInput
-  }
-
-  export type ReservationUpsertWithoutParkingRecordInput = {
-    update: XOR<ReservationUpdateWithoutParkingRecordInput, ReservationUncheckedUpdateWithoutParkingRecordInput>
-    create: XOR<ReservationCreateWithoutParkingRecordInput, ReservationUncheckedCreateWithoutParkingRecordInput>
-    where?: ReservationWhereInput
-  }
-
-  export type ReservationUpdateToOneWithWhereWithoutParkingRecordInput = {
-    where?: ReservationWhereInput
-    data: XOR<ReservationUpdateWithoutParkingRecordInput, ReservationUncheckedUpdateWithoutParkingRecordInput>
-  }
-
-  export type ReservationUpdateWithoutParkingRecordInput = {
-    code?: StringFieldUpdateOperationsInput | string
-    status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
-    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    services?: ParkingLotServiceUpdateManyWithoutReservationsNestedInput
-    user?: UserUpdateOneRequiredWithoutReservationsNestedInput
-    parkingSpot?: ParkingSpotUpdateOneRequiredWithoutReservationsNestedInput
-    vehicle?: VehicleUpdateOneRequiredWithoutReservationsNestedInput
-  }
-
-  export type ReservationUncheckedUpdateWithoutParkingRecordInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    code?: StringFieldUpdateOperationsInput | string
-    status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
-    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: IntFieldUpdateOperationsInput | number
-    parkingSpotId?: IntFieldUpdateOperationsInput | number
-    vehicleId?: IntFieldUpdateOperationsInput | number
-    services?: ParkingLotServiceUncheckedUpdateManyWithoutReservationsNestedInput
-  }
-
-  export type PaymentRecordUpsertWithoutParkingRecordInput = {
-    update: XOR<PaymentRecordUpdateWithoutParkingRecordInput, PaymentRecordUncheckedUpdateWithoutParkingRecordInput>
-    create: XOR<PaymentRecordCreateWithoutParkingRecordInput, PaymentRecordUncheckedCreateWithoutParkingRecordInput>
+  export type PaymentRecordUpsertWithoutReservationInput = {
+    update: XOR<PaymentRecordUpdateWithoutReservationInput, PaymentRecordUncheckedUpdateWithoutReservationInput>
+    create: XOR<PaymentRecordCreateWithoutReservationInput, PaymentRecordUncheckedCreateWithoutReservationInput>
     where?: PaymentRecordWhereInput
   }
 
-  export type PaymentRecordUpdateToOneWithWhereWithoutParkingRecordInput = {
+  export type PaymentRecordUpdateToOneWithWhereWithoutReservationInput = {
     where?: PaymentRecordWhereInput
-    data: XOR<PaymentRecordUpdateWithoutParkingRecordInput, PaymentRecordUncheckedUpdateWithoutParkingRecordInput>
+    data: XOR<PaymentRecordUpdateWithoutReservationInput, PaymentRecordUncheckedUpdateWithoutReservationInput>
   }
 
-  export type PaymentRecordUpdateWithoutParkingRecordInput = {
+  export type PaymentRecordUpdateWithoutReservationInput = {
+    status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     method?: EnumPAYMENT_RECORD__METHOD_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23588,8 +21488,9 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutPaymentRecordsNestedInput
   }
 
-  export type PaymentRecordUncheckedUpdateWithoutParkingRecordInput = {
+  export type PaymentRecordUncheckedUpdateWithoutReservationInput = {
     id?: IntFieldUpdateOperationsInput | number
+    status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     method?: EnumPAYMENT_RECORD__METHOD_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23635,34 +21536,36 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutPaymentRecordsInput, UserUncheckedCreateWithoutPaymentRecordsInput>
   }
 
-  export type ParkingRecordCreateWithoutPaymentRecordInput = {
-    checkInAt: Date | string
-    checkOutAt?: Date | string | null
-    totalPrice?: number | null
-    status: $Enums.PARKING_RECORD__STATUS_ALIAS
+  export type ReservationCreateWithoutPaymentRecordInput = {
+    code: string
+    status?: $Enums.RESERVATION__STATUS_ALIAS
+    startTime: Date | string
+    endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    vehicle?: VehicleCreateNestedOneWithoutParkingRecordsInput
-    parkingSpot?: ParkingSpotCreateNestedOneWithoutParkingRecordsInput
-    reservation?: ReservationCreateNestedOneWithoutParkingRecordInput
+    services?: ParkingLotServiceCreateNestedManyWithoutReservationsInput
+    user: UserCreateNestedOneWithoutReservationsInput
+    parkingSpot: ParkingSpotCreateNestedOneWithoutReservationsInput
+    vehicle: VehicleCreateNestedOneWithoutReservationsInput
   }
 
-  export type ParkingRecordUncheckedCreateWithoutPaymentRecordInput = {
+  export type ReservationUncheckedCreateWithoutPaymentRecordInput = {
     id?: number
-    checkInAt: Date | string
-    checkOutAt?: Date | string | null
-    totalPrice?: number | null
-    status: $Enums.PARKING_RECORD__STATUS_ALIAS
+    code: string
+    status?: $Enums.RESERVATION__STATUS_ALIAS
+    startTime: Date | string
+    endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
-    vehicleId?: number | null
-    parkingSpotId?: number | null
-    reservationId?: number | null
+    userId: number
+    parkingSpotId: number
+    vehicleId: number
+    services?: ParkingLotServiceUncheckedCreateNestedManyWithoutReservationsInput
   }
 
-  export type ParkingRecordCreateOrConnectWithoutPaymentRecordInput = {
-    where: ParkingRecordWhereUniqueInput
-    create: XOR<ParkingRecordCreateWithoutPaymentRecordInput, ParkingRecordUncheckedCreateWithoutPaymentRecordInput>
+  export type ReservationCreateOrConnectWithoutPaymentRecordInput = {
+    where: ReservationWhereUniqueInput
+    create: XOR<ReservationCreateWithoutPaymentRecordInput, ReservationUncheckedCreateWithoutPaymentRecordInput>
   }
 
   export type UserUpsertWithoutPaymentRecordsInput = {
@@ -23709,40 +21612,42 @@ export namespace Prisma {
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type ParkingRecordUpsertWithoutPaymentRecordInput = {
-    update: XOR<ParkingRecordUpdateWithoutPaymentRecordInput, ParkingRecordUncheckedUpdateWithoutPaymentRecordInput>
-    create: XOR<ParkingRecordCreateWithoutPaymentRecordInput, ParkingRecordUncheckedCreateWithoutPaymentRecordInput>
-    where?: ParkingRecordWhereInput
+  export type ReservationUpsertWithoutPaymentRecordInput = {
+    update: XOR<ReservationUpdateWithoutPaymentRecordInput, ReservationUncheckedUpdateWithoutPaymentRecordInput>
+    create: XOR<ReservationCreateWithoutPaymentRecordInput, ReservationUncheckedCreateWithoutPaymentRecordInput>
+    where?: ReservationWhereInput
   }
 
-  export type ParkingRecordUpdateToOneWithWhereWithoutPaymentRecordInput = {
-    where?: ParkingRecordWhereInput
-    data: XOR<ParkingRecordUpdateWithoutPaymentRecordInput, ParkingRecordUncheckedUpdateWithoutPaymentRecordInput>
+  export type ReservationUpdateToOneWithWhereWithoutPaymentRecordInput = {
+    where?: ReservationWhereInput
+    data: XOR<ReservationUpdateWithoutPaymentRecordInput, ReservationUncheckedUpdateWithoutPaymentRecordInput>
   }
 
-  export type ParkingRecordUpdateWithoutPaymentRecordInput = {
-    checkInAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    totalPrice?: NullableFloatFieldUpdateOperationsInput | number | null
-    status?: EnumPARKING_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_RECORD__STATUS_ALIAS
+  export type ReservationUpdateWithoutPaymentRecordInput = {
+    code?: StringFieldUpdateOperationsInput | string
+    status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    vehicle?: VehicleUpdateOneWithoutParkingRecordsNestedInput
-    parkingSpot?: ParkingSpotUpdateOneWithoutParkingRecordsNestedInput
-    reservation?: ReservationUpdateOneWithoutParkingRecordNestedInput
+    services?: ParkingLotServiceUpdateManyWithoutReservationsNestedInput
+    user?: UserUpdateOneRequiredWithoutReservationsNestedInput
+    parkingSpot?: ParkingSpotUpdateOneRequiredWithoutReservationsNestedInput
+    vehicle?: VehicleUpdateOneRequiredWithoutReservationsNestedInput
   }
 
-  export type ParkingRecordUncheckedUpdateWithoutPaymentRecordInput = {
+  export type ReservationUncheckedUpdateWithoutPaymentRecordInput = {
     id?: IntFieldUpdateOperationsInput | number
-    checkInAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    totalPrice?: NullableFloatFieldUpdateOperationsInput | number | null
-    status?: EnumPARKING_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_RECORD__STATUS_ALIAS
+    code?: StringFieldUpdateOperationsInput | string
+    status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    vehicleId?: NullableIntFieldUpdateOperationsInput | number | null
-    parkingSpotId?: NullableIntFieldUpdateOperationsInput | number | null
-    reservationId?: NullableIntFieldUpdateOperationsInput | number | null
+    userId?: IntFieldUpdateOperationsInput | number
+    parkingSpotId?: IntFieldUpdateOperationsInput | number
+    vehicleId?: IntFieldUpdateOperationsInput | number
+    services?: ParkingLotServiceUncheckedUpdateManyWithoutReservationsNestedInput
   }
 
   export type AccountTokenCreateManyAccountInput = {
@@ -23780,6 +21685,7 @@ export namespace Prisma {
     model: string
     color: string
     imageUrl: string
+    deleteAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -23814,11 +21720,12 @@ export namespace Prisma {
 
   export type PaymentRecordCreateManyUserInput = {
     id?: number
+    status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    parkingRecordId: number
+    reservationId: number
   }
 
   export type UserNotificationCreateManyUserInput = {
@@ -23849,10 +21756,10 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
+    deleteAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservations?: ReservationUpdateManyWithoutVehicleNestedInput
-    parkingRecords?: ParkingRecordUpdateManyWithoutVehicleNestedInput
   }
 
   export type VehicleUncheckedUpdateWithoutOwnerInput = {
@@ -23863,10 +21770,10 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
+    deleteAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservations?: ReservationUncheckedUpdateManyWithoutVehicleNestedInput
-    parkingRecords?: ParkingRecordUncheckedUpdateManyWithoutVehicleNestedInput
   }
 
   export type VehicleUncheckedUpdateManyWithoutOwnerInput = {
@@ -23877,6 +21784,7 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
+    deleteAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -23972,29 +21880,32 @@ export namespace Prisma {
   }
 
   export type PaymentRecordUpdateWithoutUserInput = {
+    status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     method?: EnumPAYMENT_RECORD__METHOD_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    parkingRecord?: ParkingRecordUpdateOneRequiredWithoutPaymentRecordNestedInput
+    reservation?: ReservationUpdateOneRequiredWithoutPaymentRecordNestedInput
   }
 
   export type PaymentRecordUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
+    status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     method?: EnumPAYMENT_RECORD__METHOD_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    parkingRecordId?: IntFieldUpdateOperationsInput | number
+    reservationId?: IntFieldUpdateOperationsInput | number
   }
 
   export type PaymentRecordUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
+    status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     method?: EnumPAYMENT_RECORD__METHOD_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    parkingRecordId?: IntFieldUpdateOperationsInput | number
+    reservationId?: IntFieldUpdateOperationsInput | number
   }
 
   export type UserNotificationUpdateWithoutUserInput = {
@@ -24030,10 +21941,10 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    parkingRecord?: ParkingRecordUpdateOneWithoutReservationNestedInput
     services?: ParkingLotServiceUpdateManyWithoutReservationsNestedInput
     parkingSpot?: ParkingSpotUpdateOneRequiredWithoutReservationsNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutReservationsNestedInput
+    PaymentRecord?: PaymentRecordUpdateOneWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateWithoutUserInput = {
@@ -24046,8 +21957,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingSpotId?: IntFieldUpdateOperationsInput | number
     vehicleId?: IntFieldUpdateOperationsInput | number
-    parkingRecord?: ParkingRecordUncheckedUpdateOneWithoutReservationNestedInput
     services?: ParkingLotServiceUncheckedUpdateManyWithoutReservationsNestedInput
+    PaymentRecord?: PaymentRecordUncheckedUpdateOneWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateManyWithoutUserInput = {
@@ -24074,18 +21985,6 @@ export namespace Prisma {
     parkingSpotId: number
   }
 
-  export type ParkingRecordCreateManyVehicleInput = {
-    id?: number
-    checkInAt: Date | string
-    checkOutAt?: Date | string | null
-    totalPrice?: number | null
-    status: $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    parkingSpotId?: number | null
-    reservationId?: number | null
-  }
-
   export type ReservationUpdateWithoutVehicleInput = {
     code?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
@@ -24093,10 +21992,10 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    parkingRecord?: ParkingRecordUpdateOneWithoutReservationNestedInput
     services?: ParkingLotServiceUpdateManyWithoutReservationsNestedInput
     user?: UserUpdateOneRequiredWithoutReservationsNestedInput
     parkingSpot?: ParkingSpotUpdateOneRequiredWithoutReservationsNestedInput
+    PaymentRecord?: PaymentRecordUpdateOneWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateWithoutVehicleInput = {
@@ -24109,8 +22008,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
     parkingSpotId?: IntFieldUpdateOperationsInput | number
-    parkingRecord?: ParkingRecordUncheckedUpdateOneWithoutReservationNestedInput
     services?: ParkingLotServiceUncheckedUpdateManyWithoutReservationsNestedInput
+    PaymentRecord?: PaymentRecordUncheckedUpdateOneWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateManyWithoutVehicleInput = {
@@ -24125,48 +22024,12 @@ export namespace Prisma {
     parkingSpotId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type ParkingRecordUpdateWithoutVehicleInput = {
-    checkInAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    totalPrice?: NullableFloatFieldUpdateOperationsInput | number | null
-    status?: EnumPARKING_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    parkingSpot?: ParkingSpotUpdateOneWithoutParkingRecordsNestedInput
-    reservation?: ReservationUpdateOneWithoutParkingRecordNestedInput
-    paymentRecord?: PaymentRecordUpdateOneWithoutParkingRecordNestedInput
-  }
-
-  export type ParkingRecordUncheckedUpdateWithoutVehicleInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    checkInAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    totalPrice?: NullableFloatFieldUpdateOperationsInput | number | null
-    status?: EnumPARKING_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    parkingSpotId?: NullableIntFieldUpdateOperationsInput | number | null
-    reservationId?: NullableIntFieldUpdateOperationsInput | number | null
-    paymentRecord?: PaymentRecordUncheckedUpdateOneWithoutParkingRecordNestedInput
-  }
-
-  export type ParkingRecordUncheckedUpdateManyWithoutVehicleInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    checkInAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    totalPrice?: NullableFloatFieldUpdateOperationsInput | number | null
-    status?: EnumPARKING_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    parkingSpotId?: NullableIntFieldUpdateOperationsInput | number | null
-    reservationId?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
   export type ParkingSpotCreateManyParkingLotInput = {
     id?: number
     name: string
     isAvailable?: boolean
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -24179,6 +22042,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotServiceCreatemediaUrlsInput | string[]
     price: number
     vehicleTypes?: ParkingLotServiceCreatevehicleTypesInput | $Enums.VEHICLE__TYPE_ALIAS[]
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -24202,10 +22066,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservations?: ReservationUpdateManyWithoutParkingSpotNestedInput
-    parkingRecords?: ParkingRecordUpdateManyWithoutParkingSpotNestedInput
   }
 
   export type ParkingSpotUncheckedUpdateWithoutParkingLotInput = {
@@ -24213,10 +22077,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservations?: ReservationUncheckedUpdateManyWithoutParkingSpotNestedInput
-    parkingRecords?: ParkingRecordUncheckedUpdateManyWithoutParkingSpotNestedInput
   }
 
   export type ParkingSpotUncheckedUpdateManyWithoutParkingLotInput = {
@@ -24224,6 +22088,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24235,6 +22100,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotServiceUpdatemediaUrlsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
     vehicleTypes?: ParkingLotServiceUpdatevehicleTypesInput | $Enums.VEHICLE__TYPE_ALIAS[]
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservations?: ReservationUpdateManyWithoutServicesNestedInput
@@ -24248,6 +22114,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotServiceUpdatemediaUrlsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
     vehicleTypes?: ParkingLotServiceUpdatevehicleTypesInput | $Enums.VEHICLE__TYPE_ALIAS[]
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservations?: ReservationUncheckedUpdateManyWithoutServicesNestedInput
@@ -24261,6 +22128,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotServiceUpdatemediaUrlsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
     vehicleTypes?: ParkingLotServiceUpdatevehicleTypesInput | $Enums.VEHICLE__TYPE_ALIAS[]
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24316,10 +22184,10 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    parkingRecord?: ParkingRecordUpdateOneWithoutReservationNestedInput
     user?: UserUpdateOneRequiredWithoutReservationsNestedInput
     parkingSpot?: ParkingSpotUpdateOneRequiredWithoutReservationsNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutReservationsNestedInput
+    PaymentRecord?: PaymentRecordUpdateOneWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateWithoutServicesInput = {
@@ -24333,7 +22201,7 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     parkingSpotId?: IntFieldUpdateOperationsInput | number
     vehicleId?: IntFieldUpdateOperationsInput | number
-    parkingRecord?: ParkingRecordUncheckedUpdateOneWithoutReservationNestedInput
+    PaymentRecord?: PaymentRecordUncheckedUpdateOneWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateManyWithoutServicesInput = {
@@ -24361,18 +22229,6 @@ export namespace Prisma {
     vehicleId: number
   }
 
-  export type ParkingRecordCreateManyParkingSpotInput = {
-    id?: number
-    checkInAt: Date | string
-    checkOutAt?: Date | string | null
-    totalPrice?: number | null
-    status: $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    vehicleId?: number | null
-    reservationId?: number | null
-  }
-
   export type ReservationUpdateWithoutParkingSpotInput = {
     code?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
@@ -24380,10 +22236,10 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    parkingRecord?: ParkingRecordUpdateOneWithoutReservationNestedInput
     services?: ParkingLotServiceUpdateManyWithoutReservationsNestedInput
     user?: UserUpdateOneRequiredWithoutReservationsNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutReservationsNestedInput
+    PaymentRecord?: PaymentRecordUpdateOneWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateWithoutParkingSpotInput = {
@@ -24396,8 +22252,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
     vehicleId?: IntFieldUpdateOperationsInput | number
-    parkingRecord?: ParkingRecordUncheckedUpdateOneWithoutReservationNestedInput
     services?: ParkingLotServiceUncheckedUpdateManyWithoutReservationsNestedInput
+    PaymentRecord?: PaymentRecordUncheckedUpdateOneWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateManyWithoutParkingSpotInput = {
@@ -24412,43 +22268,6 @@ export namespace Prisma {
     vehicleId?: IntFieldUpdateOperationsInput | number
   }
 
-  export type ParkingRecordUpdateWithoutParkingSpotInput = {
-    checkInAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    totalPrice?: NullableFloatFieldUpdateOperationsInput | number | null
-    status?: EnumPARKING_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    vehicle?: VehicleUpdateOneWithoutParkingRecordsNestedInput
-    reservation?: ReservationUpdateOneWithoutParkingRecordNestedInput
-    paymentRecord?: PaymentRecordUpdateOneWithoutParkingRecordNestedInput
-  }
-
-  export type ParkingRecordUncheckedUpdateWithoutParkingSpotInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    checkInAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    totalPrice?: NullableFloatFieldUpdateOperationsInput | number | null
-    status?: EnumPARKING_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    vehicleId?: NullableIntFieldUpdateOperationsInput | number | null
-    reservationId?: NullableIntFieldUpdateOperationsInput | number | null
-    paymentRecord?: PaymentRecordUncheckedUpdateOneWithoutParkingRecordNestedInput
-  }
-
-  export type ParkingRecordUncheckedUpdateManyWithoutParkingSpotInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    checkInAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    totalPrice?: NullableFloatFieldUpdateOperationsInput | number | null
-    status?: EnumPARKING_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_RECORD__STATUS_ALIAS
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    vehicleId?: NullableIntFieldUpdateOperationsInput | number | null
-    reservationId?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
   export type ParkingLotServiceUpdateWithoutReservationsInput = {
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumPARKING_LOT_SERVICE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT_SERVICE__TYPE_ALIAS
@@ -24456,6 +22275,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotServiceUpdatemediaUrlsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
     vehicleTypes?: ParkingLotServiceUpdatevehicleTypesInput | $Enums.VEHICLE__TYPE_ALIAS[]
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingLot?: ParkingLotUpdateOneRequiredWithoutParkingLotServicesNestedInput
@@ -24469,6 +22289,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotServiceUpdatemediaUrlsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
     vehicleTypes?: ParkingLotServiceUpdatevehicleTypesInput | $Enums.VEHICLE__TYPE_ALIAS[]
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingLotId?: IntFieldUpdateOperationsInput | number
@@ -24482,6 +22303,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotServiceUpdatemediaUrlsInput | string[]
     price?: FloatFieldUpdateOperationsInput | number
     vehicleTypes?: ParkingLotServiceUpdatevehicleTypesInput | $Enums.VEHICLE__TYPE_ALIAS[]
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingLotId?: IntFieldUpdateOperationsInput | number
@@ -24564,10 +22386,6 @@ export namespace Prisma {
      * @deprecated Use ReservationDefaultArgs instead
      */
     export type ReservationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ReservationDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use ParkingRecordDefaultArgs instead
-     */
-    export type ParkingRecordArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ParkingRecordDefaultArgs<ExtArgs>
     /**
      * @deprecated Use PaymentRecordDefaultArgs instead
      */
