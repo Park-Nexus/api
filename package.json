@@ -10,7 +10,8 @@
   },
   "exports": {
     ".": {
-      "types": "./src/index.d.ts"
+      "types": "./src/index.d.ts",
+      "default": "./src/index.ts"
     },
     "./prisma/client": {
       "types": "./prisma/client/index.d.ts"
