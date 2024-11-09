@@ -20,5 +20,3 @@ app.use("/upload", uploadRouter);
 app.listen(apiConfig.port, () => {
   console.log("Server is running on port", apiConfig.port);
 });
-
-export * from "./types/rules.types";
