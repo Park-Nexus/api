@@ -600,12 +600,12 @@ export const getAvailability = procedure
         parkingSpot: {
           parkingLotId: lotId,
         },
-        startTime: {
-          gte: startTimeObj.toDate(),
-        },
-        endTime: {
-          lte: endTimeObj.toDate(),
-        },
+        OR: [
+          { startTime: { gte: startTimeObj.toDate(), lte: endTimeObj.toDate() } },
+          { endTime: { gte: startTimeObj.toDate(), lte: endTimeObj.toDate() } },
+          { startTime: { lte: startTimeObj.toDate() }, endTime: { gte: startTimeObj.toDate() } },
+          { startTime: { gte: startTimeObj.toDate() }, endTime: { lte: endTimeObj.toDate() } },
+        ],
         status: {
           notIn: ["EXPIRED", "CANCELLED", "COMPLETED"],
         },
@@ -617,6 +617,8 @@ export const getAvailability = procedure
     const availableParkingSpots = parkingLot.parkingSpots.filter(
       (spot) => !reservedParkingSpots.includes(spot.id),
     );
+
+    console.log("-----------", reservedParkingSpots, availableParkingSpots);
 
     // Find available vehicle types
     const availableVehicleTypes = new Set<VEHICLE__TYPE_ALIAS>();
