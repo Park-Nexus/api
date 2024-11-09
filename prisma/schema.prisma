@@ -257,7 +257,7 @@ model Reservation {
 model PaymentRecord {
   id Int @id @default(autoincrement())
 
-  stripeIntentId String
+  stripeIntentId String?
   status         PAYMENT_RECORD__STATUS_ALIAS @default(AWAITING)
   amountInUsd    Float
   createdAt      DateTime                     @default(now())

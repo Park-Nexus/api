@@ -52,7 +52,7 @@ export namespace StripeUtils {
       type: "card",
     });
 
-    return paymentMethods.data[0];
+    return paymentMethods.data;
   };
 
   // Create intent -----------------------------------------------------------------------------

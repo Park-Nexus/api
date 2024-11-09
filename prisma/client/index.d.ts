@@ -13926,7 +13926,7 @@ export namespace Prisma {
 
   export type PaymentRecordGroupByOutputType = {
     id: number
-    stripeIntentId: string
+    stripeIntentId: string | null
     status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd: number
     createdAt: Date
@@ -14008,7 +14008,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      stripeIntentId: string
+      stripeIntentId: string | null
       status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
       amountInUsd: number
       createdAt: Date
@@ -16020,7 +16020,7 @@ export namespace Prisma {
     OR?: PaymentRecordWhereInput[]
     NOT?: PaymentRecordWhereInput | PaymentRecordWhereInput[]
     id?: IntFilter<"PaymentRecord"> | number
-    stripeIntentId?: StringFilter<"PaymentRecord"> | string
+    stripeIntentId?: StringNullableFilter<"PaymentRecord"> | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFilter<"PaymentRecord"> | number
     createdAt?: DateTimeFilter<"PaymentRecord"> | Date | string
@@ -16033,7 +16033,7 @@ export namespace Prisma {
 
   export type PaymentRecordOrderByWithRelationInput = {
     id?: SortOrder
-    stripeIntentId?: SortOrder
+    stripeIntentId?: SortOrderInput | SortOrder
     status?: SortOrder
     amountInUsd?: SortOrder
     createdAt?: SortOrder
@@ -16050,7 +16050,7 @@ export namespace Prisma {
     AND?: PaymentRecordWhereInput | PaymentRecordWhereInput[]
     OR?: PaymentRecordWhereInput[]
     NOT?: PaymentRecordWhereInput | PaymentRecordWhereInput[]
-    stripeIntentId?: StringFilter<"PaymentRecord"> | string
+    stripeIntentId?: StringNullableFilter<"PaymentRecord"> | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFilter<"PaymentRecord"> | number
     createdAt?: DateTimeFilter<"PaymentRecord"> | Date | string
@@ -16062,7 +16062,7 @@ export namespace Prisma {
 
   export type PaymentRecordOrderByWithAggregationInput = {
     id?: SortOrder
-    stripeIntentId?: SortOrder
+    stripeIntentId?: SortOrderInput | SortOrder
     status?: SortOrder
     amountInUsd?: SortOrder
     createdAt?: SortOrder
@@ -16081,7 +16081,7 @@ export namespace Prisma {
     OR?: PaymentRecordScalarWhereWithAggregatesInput[]
     NOT?: PaymentRecordScalarWhereWithAggregatesInput | PaymentRecordScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"PaymentRecord"> | number
-    stripeIntentId?: StringWithAggregatesFilter<"PaymentRecord"> | string
+    stripeIntentId?: StringNullableWithAggregatesFilter<"PaymentRecord"> | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASWithAggregatesFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatWithAggregatesFilter<"PaymentRecord"> | number
     createdAt?: DateTimeWithAggregatesFilter<"PaymentRecord"> | Date | string
@@ -17015,7 +17015,7 @@ export namespace Prisma {
   }
 
   export type PaymentRecordCreateInput = {
-    stripeIntentId: string
+    stripeIntentId?: string | null
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd: number
     createdAt?: Date | string
@@ -17026,7 +17026,7 @@ export namespace Prisma {
 
   export type PaymentRecordUncheckedCreateInput = {
     id?: number
-    stripeIntentId: string
+    stripeIntentId?: string | null
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd: number
     createdAt?: Date | string
@@ -17036,7 +17036,7 @@ export namespace Prisma {
   }
 
   export type PaymentRecordUpdateInput = {
-    stripeIntentId?: StringFieldUpdateOperationsInput | string
+    stripeIntentId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17047,7 +17047,7 @@ export namespace Prisma {
 
   export type PaymentRecordUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    stripeIntentId?: StringFieldUpdateOperationsInput | string
+    stripeIntentId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17058,7 +17058,7 @@ export namespace Prisma {
 
   export type PaymentRecordCreateManyInput = {
     id?: number
-    stripeIntentId: string
+    stripeIntentId?: string | null
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd: number
     createdAt?: Date | string
@@ -17068,7 +17068,7 @@ export namespace Prisma {
   }
 
   export type PaymentRecordUpdateManyMutationInput = {
-    stripeIntentId?: StringFieldUpdateOperationsInput | string
+    stripeIntentId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17077,7 +17077,7 @@ export namespace Prisma {
 
   export type PaymentRecordUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    stripeIntentId?: StringFieldUpdateOperationsInput | string
+    stripeIntentId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19706,7 +19706,7 @@ export namespace Prisma {
   }
 
   export type PaymentRecordCreateWithoutUserInput = {
-    stripeIntentId: string
+    stripeIntentId?: string | null
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd: number
     createdAt?: Date | string
@@ -19716,7 +19716,7 @@ export namespace Prisma {
 
   export type PaymentRecordUncheckedCreateWithoutUserInput = {
     id?: number
-    stripeIntentId: string
+    stripeIntentId?: string | null
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd: number
     createdAt?: Date | string
@@ -19945,7 +19945,7 @@ export namespace Prisma {
     OR?: PaymentRecordScalarWhereInput[]
     NOT?: PaymentRecordScalarWhereInput | PaymentRecordScalarWhereInput[]
     id?: IntFilter<"PaymentRecord"> | number
-    stripeIntentId?: StringFilter<"PaymentRecord"> | string
+    stripeIntentId?: StringNullableFilter<"PaymentRecord"> | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFilter<"PaymentRecord"> | number
     createdAt?: DateTimeFilter<"PaymentRecord"> | Date | string
@@ -21304,7 +21304,7 @@ export namespace Prisma {
   }
 
   export type PaymentRecordCreateWithoutReservationInput = {
-    stripeIntentId: string
+    stripeIntentId?: string | null
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd: number
     createdAt?: Date | string
@@ -21314,7 +21314,7 @@ export namespace Prisma {
 
   export type PaymentRecordUncheckedCreateWithoutReservationInput = {
     id?: number
-    stripeIntentId: string
+    stripeIntentId?: string | null
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd: number
     createdAt?: Date | string
@@ -21471,7 +21471,7 @@ export namespace Prisma {
   }
 
   export type PaymentRecordUpdateWithoutReservationInput = {
-    stripeIntentId?: StringFieldUpdateOperationsInput | string
+    stripeIntentId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21481,7 +21481,7 @@ export namespace Prisma {
 
   export type PaymentRecordUncheckedUpdateWithoutReservationInput = {
     id?: IntFieldUpdateOperationsInput | number
-    stripeIntentId?: StringFieldUpdateOperationsInput | string
+    stripeIntentId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21715,7 +21715,7 @@ export namespace Prisma {
 
   export type PaymentRecordCreateManyUserInput = {
     id?: number
-    stripeIntentId: string
+    stripeIntentId?: string | null
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd: number
     createdAt?: Date | string
@@ -21875,7 +21875,7 @@ export namespace Prisma {
   }
 
   export type PaymentRecordUpdateWithoutUserInput = {
-    stripeIntentId?: StringFieldUpdateOperationsInput | string
+    stripeIntentId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21885,7 +21885,7 @@ export namespace Prisma {
 
   export type PaymentRecordUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
-    stripeIntentId?: StringFieldUpdateOperationsInput | string
+    stripeIntentId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21895,7 +21895,7 @@ export namespace Prisma {
 
   export type PaymentRecordUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
-    stripeIntentId?: StringFieldUpdateOperationsInput | string
+    stripeIntentId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
