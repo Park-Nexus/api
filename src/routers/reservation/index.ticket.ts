@@ -229,7 +229,12 @@ export const getSingle = procedure
           { id, parkingSpot: { parkingLot: { ownerId: user.id } } },
         ],
       },
-      include: { paymentRecord: true, parkingSpot: true, vehicle: true, services: true },
+      include: {
+        paymentRecord: true,
+        parkingSpot: { include: { parkingLot: true } },
+        vehicle: true,
+        services: true,
+      },
     });
 
     return reservation;
