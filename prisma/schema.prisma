@@ -60,6 +60,7 @@ enum PAYMENT_RECORD__STATUS_ALIAS {
   CANCELLED
   AWAITING
   PAID
+  REFUNDED
 }
 
 model Account {
@@ -247,9 +248,10 @@ model Reservation {
   parkingSpotId Int
   parkingSpot   ParkingSpot @relation(fields: [parkingSpotId], references: [id])
 
-  vehicleId     Int
-  vehicle       Vehicle        @relation(fields: [vehicleId], references: [id])
-  PaymentRecord PaymentRecord?
+  vehicleId Int
+  vehicle   Vehicle @relation(fields: [vehicleId], references: [id])
+
+  paymentRecord PaymentRecord?
 }
 
 model PaymentRecord {
@@ -257,7 +259,7 @@ model PaymentRecord {
 
   stripeIntentId String
   status         PAYMENT_RECORD__STATUS_ALIAS @default(AWAITING)
-  amount         Float
+  amountInUsd    Float
   createdAt      DateTime                     @default(now())
   updatedAt      DateTime                     @updatedAt
 

@@ -13,6 +13,7 @@ import {
   MAX_ALLOWED_RESERVATIONS,
   MINIMUM_DURATION_IN_HOURS,
 } from "../../../rules";
+import { StripeUtils } from "../../stripe";
 
 // Create a new ticket ------------------------------------------------------------------------------
 const createSchema = z.object({
@@ -105,6 +106,32 @@ export const create = procedure
       throw new TRPCError({ code: "BAD_REQUEST", message: "No available parking spot" });
     }
 
+    // calc price
+    let totalPrice = 0;
+    services.forEach((service) => {
+      totalPrice += service.price;
+    });
+    const parkingDuration = endTimeObj.diff(startTimeObj, "hours");
+    const parkingLotPrice = await prisma.parkingLotPrice.findFirst({
+      where: { parkingLotId, vehicleType: vehicle.type },
+    });
+    if (!parkingLotPrice) {
+      throw new TRPCError({ code: "NOT_FOUND", message: "Parking lot price not found" });
+    }
+    totalPrice = totalPrice + parkingDuration * parkingLotPrice.price;
+
+    // create payment intent
+    const newStripeIntent = await StripeUtils.createIntent({
+      amountInUsd: totalPrice,
+      customerId: user.stripeCustomerId,
+    }).catch((error) => {
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Failed to create payment intent" + error.message,
+      });
+    });
+
+    // create reservation
     const newTicketCode = uuid(); // generate new ticket code
     const newReservation = await prisma.reservation.create({
       data: {
@@ -120,10 +147,21 @@ export const create = procedure
       },
     });
 
+    // create payment record
+    await prisma.paymentRecord.create({
+      data: {
+        stripeIntentId: newStripeIntent.id,
+        reservationId: newReservation.id,
+        userId: user.id,
+        amountInUsd: totalPrice,
+      },
+    });
+
     const expiredAtObj = startTimeObj.add(EXPIRATION_TIME_IN_HOURS, "hours").toDate();
     const job = cron.schedule(DateUtils.toCronDate(expiredAtObj), async () => {
       const reservation = await prisma.reservation.findUnique({
         where: { id: newReservation.id },
+        include: { paymentRecord: true },
       });
 
       if (reservation?.status === "PENDING") {
@@ -131,12 +169,26 @@ export const create = procedure
           where: { id: newReservation.id },
           data: { status: "EXPIRED" },
         });
-        console.log(`Reservation ${newReservation.id} expired`);
-        // will setup notification here -------------------------------------------
+        const intent = await StripeUtils.retrieveIntent({
+          intentId: reservation.paymentRecord.stripeIntentId,
+        });
+        if (intent.status === "succeeded") await StripeUtils.refundIntent({ intentId: intent.id });
+        await prisma.paymentRecord.update({
+          where: { id: reservation.paymentRecord.id },
+          data: { status: "REFUNDED", stripeIntentId: "" },
+        });
+        console.log(`Reservation ${newReservation.id} expired, refunded!`);
+        // will setup notification here
       }
 
       job.stop();
     });
+
+    console.log("Created cron job", cron.getTasks());
+
+    return {
+      stripeIntentSecret: newStripeIntent.client_secret,
+    };
   });
 
 // Get many tickets ---------------------------------------------------------------------------

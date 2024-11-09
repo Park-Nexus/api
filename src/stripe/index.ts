@@ -20,7 +20,7 @@ export namespace StripeUtils {
     return customer;
   };
 
-  // Save payment method -------------------------------------------------------------------
+  // Save payment method ---------------------------------------------------------------------
   type TSavePaymentMethodParams = {
     customerId: string;
     paymentMethodId: string;
@@ -34,7 +34,7 @@ export namespace StripeUtils {
     });
   };
 
-  // Remove payment method -----------------------------------------------------------------
+  // Remove payment method --------------------------------------------------------------------
   type TRemovePaymentMethodParams = {
     paymentMethodId: string;
   };
@@ -42,7 +42,7 @@ export namespace StripeUtils {
     await stripe.paymentMethods.detach(paymentMethodId);
   };
 
-  // Retrieve payment methods ---------------------------------------------------------------
+  // Retrieve payment methods ------------------------------------------------------------------
   type TRetrievePaymentMethodsParams = {
     customerId: string;
   };
@@ -55,28 +55,47 @@ export namespace StripeUtils {
     return paymentMethods.data[0];
   };
 
-  // Create intent -------------------------------------------------------------------------
+  // Create intent -----------------------------------------------------------------------------
   type TCreateIntentParams = {
     amountInUsd: number;
     customerId: string;
   };
   export const createIntent = async ({ amountInUsd, customerId }: TCreateIntentParams) => {
+    const amountInCents = Math.round(amountInUsd * 100);
+
     const intent = await stripe.paymentIntents.create({
-      amount: amountInUsd,
+      amount: amountInCents,
       currency: "usd",
       customer: customerId,
-      use_stripe_sdk: true,
     });
 
     return intent;
   };
 
-  // Get intent -----------------------------------------------------------------------------
-  type TGetIntentParams = {
+  // Retrieve intent -----------------------------------------------------------------------------
+  type TRetrieveIntentParams = {
     intentId: string;
   };
-  export const getIntent = async ({ intentId }: TGetIntentParams) => {
+  export const retrieveIntent = async ({ intentId }: TRetrieveIntentParams) => {
     const intent = await stripe.paymentIntents.retrieve(intentId);
+    return intent;
+  };
+
+  // Cancel intent -------------------------------------------------------------------------------
+  type TCancelIntentParams = {
+    intentId: string;
+  };
+  export const cancelIntent = async ({ intentId }: TCancelIntentParams) => {
+    const intent = await stripe.paymentIntents.cancel(intentId);
+    return intent;
+  };
+
+  // Refund intent -------------------------------------------------------------------------------
+  type TRefundIntentParams = {
+    intentId: string;
+  };
+  export const refundIntent = async ({ intentId }: TRefundIntentParams) => {
+    const intent = await stripe.refunds.create({ payment_intent: intentId });
     return intent;
   };
 }

@@ -140,7 +140,8 @@ export type RESERVATION__STATUS_ALIAS = (typeof RESERVATION__STATUS_ALIAS)[keyof
 export const PAYMENT_RECORD__STATUS_ALIAS: {
   CANCELLED: 'CANCELLED',
   AWAITING: 'AWAITING',
-  PAID: 'PAID'
+  PAID: 'PAID',
+  REFUNDED: 'REFUNDED'
 };
 
 export type PAYMENT_RECORD__STATUS_ALIAS = (typeof PAYMENT_RECORD__STATUS_ALIAS)[keyof typeof PAYMENT_RECORD__STATUS_ALIAS]
@@ -12886,7 +12887,7 @@ export namespace Prisma {
     user?: boolean | UserDefaultArgs<ExtArgs>
     parkingSpot?: boolean | ParkingSpotDefaultArgs<ExtArgs>
     vehicle?: boolean | VehicleDefaultArgs<ExtArgs>
-    PaymentRecord?: boolean | Reservation$PaymentRecordArgs<ExtArgs>
+    paymentRecord?: boolean | Reservation$paymentRecordArgs<ExtArgs>
     _count?: boolean | ReservationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["reservation"]>
 
@@ -12924,7 +12925,7 @@ export namespace Prisma {
     user?: boolean | UserDefaultArgs<ExtArgs>
     parkingSpot?: boolean | ParkingSpotDefaultArgs<ExtArgs>
     vehicle?: boolean | VehicleDefaultArgs<ExtArgs>
-    PaymentRecord?: boolean | Reservation$PaymentRecordArgs<ExtArgs>
+    paymentRecord?: boolean | Reservation$paymentRecordArgs<ExtArgs>
     _count?: boolean | ReservationCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ReservationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12940,7 +12941,7 @@ export namespace Prisma {
       user: Prisma.$UserPayload<ExtArgs>
       parkingSpot: Prisma.$ParkingSpotPayload<ExtArgs>
       vehicle: Prisma.$VehiclePayload<ExtArgs>
-      PaymentRecord: Prisma.$PaymentRecordPayload<ExtArgs> | null
+      paymentRecord: Prisma.$PaymentRecordPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -13321,7 +13322,7 @@ export namespace Prisma {
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     parkingSpot<T extends ParkingSpotDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ParkingSpotDefaultArgs<ExtArgs>>): Prisma__ParkingSpotClient<$Result.GetResult<Prisma.$ParkingSpotPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     vehicle<T extends VehicleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VehicleDefaultArgs<ExtArgs>>): Prisma__VehicleClient<$Result.GetResult<Prisma.$VehiclePayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    PaymentRecord<T extends Reservation$PaymentRecordArgs<ExtArgs> = {}>(args?: Subset<T, Reservation$PaymentRecordArgs<ExtArgs>>): Prisma__PaymentRecordClient<$Result.GetResult<Prisma.$PaymentRecordPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    paymentRecord<T extends Reservation$paymentRecordArgs<ExtArgs> = {}>(args?: Subset<T, Reservation$paymentRecordArgs<ExtArgs>>): Prisma__PaymentRecordClient<$Result.GetResult<Prisma.$PaymentRecordPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13699,9 +13700,9 @@ export namespace Prisma {
   }
 
   /**
-   * Reservation.PaymentRecord
+   * Reservation.paymentRecord
    */
-  export type Reservation$PaymentRecordArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Reservation$paymentRecordArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the PaymentRecord
      */
@@ -13742,14 +13743,14 @@ export namespace Prisma {
 
   export type PaymentRecordAvgAggregateOutputType = {
     id: number | null
-    amount: number | null
+    amountInUsd: number | null
     userId: number | null
     reservationId: number | null
   }
 
   export type PaymentRecordSumAggregateOutputType = {
     id: number | null
-    amount: number | null
+    amountInUsd: number | null
     userId: number | null
     reservationId: number | null
   }
@@ -13758,7 +13759,7 @@ export namespace Prisma {
     id: number | null
     stripeIntentId: string | null
     status: $Enums.PAYMENT_RECORD__STATUS_ALIAS | null
-    amount: number | null
+    amountInUsd: number | null
     createdAt: Date | null
     updatedAt: Date | null
     userId: number | null
@@ -13769,7 +13770,7 @@ export namespace Prisma {
     id: number | null
     stripeIntentId: string | null
     status: $Enums.PAYMENT_RECORD__STATUS_ALIAS | null
-    amount: number | null
+    amountInUsd: number | null
     createdAt: Date | null
     updatedAt: Date | null
     userId: number | null
@@ -13780,7 +13781,7 @@ export namespace Prisma {
     id: number
     stripeIntentId: number
     status: number
-    amount: number
+    amountInUsd: number
     createdAt: number
     updatedAt: number
     userId: number
@@ -13791,14 +13792,14 @@ export namespace Prisma {
 
   export type PaymentRecordAvgAggregateInputType = {
     id?: true
-    amount?: true
+    amountInUsd?: true
     userId?: true
     reservationId?: true
   }
 
   export type PaymentRecordSumAggregateInputType = {
     id?: true
-    amount?: true
+    amountInUsd?: true
     userId?: true
     reservationId?: true
   }
@@ -13807,7 +13808,7 @@ export namespace Prisma {
     id?: true
     stripeIntentId?: true
     status?: true
-    amount?: true
+    amountInUsd?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
@@ -13818,7 +13819,7 @@ export namespace Prisma {
     id?: true
     stripeIntentId?: true
     status?: true
-    amount?: true
+    amountInUsd?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
@@ -13829,7 +13830,7 @@ export namespace Prisma {
     id?: true
     stripeIntentId?: true
     status?: true
-    amount?: true
+    amountInUsd?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
@@ -13927,7 +13928,7 @@ export namespace Prisma {
     id: number
     stripeIntentId: string
     status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount: number
+    amountInUsd: number
     createdAt: Date
     updatedAt: Date
     userId: number
@@ -13957,7 +13958,7 @@ export namespace Prisma {
     id?: boolean
     stripeIntentId?: boolean
     status?: boolean
-    amount?: boolean
+    amountInUsd?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
@@ -13970,7 +13971,7 @@ export namespace Prisma {
     id?: boolean
     stripeIntentId?: boolean
     status?: boolean
-    amount?: boolean
+    amountInUsd?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
@@ -13983,7 +13984,7 @@ export namespace Prisma {
     id?: boolean
     stripeIntentId?: boolean
     status?: boolean
-    amount?: boolean
+    amountInUsd?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
@@ -14009,7 +14010,7 @@ export namespace Prisma {
       id: number
       stripeIntentId: string
       status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
-      amount: number
+      amountInUsd: number
       createdAt: Date
       updatedAt: Date
       userId: number
@@ -14412,7 +14413,7 @@ export namespace Prisma {
     readonly id: FieldRef<"PaymentRecord", 'Int'>
     readonly stripeIntentId: FieldRef<"PaymentRecord", 'String'>
     readonly status: FieldRef<"PaymentRecord", 'PAYMENT_RECORD__STATUS_ALIAS'>
-    readonly amount: FieldRef<"PaymentRecord", 'Float'>
+    readonly amountInUsd: FieldRef<"PaymentRecord", 'Float'>
     readonly createdAt: FieldRef<"PaymentRecord", 'DateTime'>
     readonly updatedAt: FieldRef<"PaymentRecord", 'DateTime'>
     readonly userId: FieldRef<"PaymentRecord", 'Int'>
@@ -14928,7 +14929,7 @@ export namespace Prisma {
     id: 'id',
     stripeIntentId: 'stripeIntentId',
     status: 'status',
-    amount: 'amount',
+    amountInUsd: 'amountInUsd',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     userId: 'userId',
@@ -15938,7 +15939,7 @@ export namespace Prisma {
     user?: XOR<UserRelationFilter, UserWhereInput>
     parkingSpot?: XOR<ParkingSpotRelationFilter, ParkingSpotWhereInput>
     vehicle?: XOR<VehicleRelationFilter, VehicleWhereInput>
-    PaymentRecord?: XOR<PaymentRecordNullableRelationFilter, PaymentRecordWhereInput> | null
+    paymentRecord?: XOR<PaymentRecordNullableRelationFilter, PaymentRecordWhereInput> | null
   }
 
   export type ReservationOrderByWithRelationInput = {
@@ -15956,7 +15957,7 @@ export namespace Prisma {
     user?: UserOrderByWithRelationInput
     parkingSpot?: ParkingSpotOrderByWithRelationInput
     vehicle?: VehicleOrderByWithRelationInput
-    PaymentRecord?: PaymentRecordOrderByWithRelationInput
+    paymentRecord?: PaymentRecordOrderByWithRelationInput
   }
 
   export type ReservationWhereUniqueInput = Prisma.AtLeast<{
@@ -15977,7 +15978,7 @@ export namespace Prisma {
     user?: XOR<UserRelationFilter, UserWhereInput>
     parkingSpot?: XOR<ParkingSpotRelationFilter, ParkingSpotWhereInput>
     vehicle?: XOR<VehicleRelationFilter, VehicleWhereInput>
-    PaymentRecord?: XOR<PaymentRecordNullableRelationFilter, PaymentRecordWhereInput> | null
+    paymentRecord?: XOR<PaymentRecordNullableRelationFilter, PaymentRecordWhereInput> | null
   }, "id">
 
   export type ReservationOrderByWithAggregationInput = {
@@ -16021,7 +16022,7 @@ export namespace Prisma {
     id?: IntFilter<"PaymentRecord"> | number
     stripeIntentId?: StringFilter<"PaymentRecord"> | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount?: FloatFilter<"PaymentRecord"> | number
+    amountInUsd?: FloatFilter<"PaymentRecord"> | number
     createdAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     userId?: IntFilter<"PaymentRecord"> | number
@@ -16034,7 +16035,7 @@ export namespace Prisma {
     id?: SortOrder
     stripeIntentId?: SortOrder
     status?: SortOrder
-    amount?: SortOrder
+    amountInUsd?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -16051,7 +16052,7 @@ export namespace Prisma {
     NOT?: PaymentRecordWhereInput | PaymentRecordWhereInput[]
     stripeIntentId?: StringFilter<"PaymentRecord"> | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount?: FloatFilter<"PaymentRecord"> | number
+    amountInUsd?: FloatFilter<"PaymentRecord"> | number
     createdAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     userId?: IntFilter<"PaymentRecord"> | number
@@ -16063,7 +16064,7 @@ export namespace Prisma {
     id?: SortOrder
     stripeIntentId?: SortOrder
     status?: SortOrder
-    amount?: SortOrder
+    amountInUsd?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -16082,7 +16083,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"PaymentRecord"> | number
     stripeIntentId?: StringWithAggregatesFilter<"PaymentRecord"> | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASWithAggregatesFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount?: FloatWithAggregatesFilter<"PaymentRecord"> | number
+    amountInUsd?: FloatWithAggregatesFilter<"PaymentRecord"> | number
     createdAt?: DateTimeWithAggregatesFilter<"PaymentRecord"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"PaymentRecord"> | Date | string
     userId?: IntWithAggregatesFilter<"PaymentRecord"> | number
@@ -16931,7 +16932,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutReservationsInput
     parkingSpot: ParkingSpotCreateNestedOneWithoutReservationsInput
     vehicle: VehicleCreateNestedOneWithoutReservationsInput
-    PaymentRecord?: PaymentRecordCreateNestedOneWithoutReservationInput
+    paymentRecord?: PaymentRecordCreateNestedOneWithoutReservationInput
   }
 
   export type ReservationUncheckedCreateInput = {
@@ -16946,7 +16947,7 @@ export namespace Prisma {
     parkingSpotId: number
     vehicleId: number
     services?: ParkingLotServiceUncheckedCreateNestedManyWithoutReservationsInput
-    PaymentRecord?: PaymentRecordUncheckedCreateNestedOneWithoutReservationInput
+    paymentRecord?: PaymentRecordUncheckedCreateNestedOneWithoutReservationInput
   }
 
   export type ReservationUpdateInput = {
@@ -16960,7 +16961,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutReservationsNestedInput
     parkingSpot?: ParkingSpotUpdateOneRequiredWithoutReservationsNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutReservationsNestedInput
-    PaymentRecord?: PaymentRecordUpdateOneWithoutReservationNestedInput
+    paymentRecord?: PaymentRecordUpdateOneWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateInput = {
@@ -16975,7 +16976,7 @@ export namespace Prisma {
     parkingSpotId?: IntFieldUpdateOperationsInput | number
     vehicleId?: IntFieldUpdateOperationsInput | number
     services?: ParkingLotServiceUncheckedUpdateManyWithoutReservationsNestedInput
-    PaymentRecord?: PaymentRecordUncheckedUpdateOneWithoutReservationNestedInput
+    paymentRecord?: PaymentRecordUncheckedUpdateOneWithoutReservationNestedInput
   }
 
   export type ReservationCreateManyInput = {
@@ -17016,7 +17017,7 @@ export namespace Prisma {
   export type PaymentRecordCreateInput = {
     stripeIntentId: string
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount: number
+    amountInUsd: number
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutPaymentRecordsInput
@@ -17027,7 +17028,7 @@ export namespace Prisma {
     id?: number
     stripeIntentId: string
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount: number
+    amountInUsd: number
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: number
@@ -17037,7 +17038,7 @@ export namespace Prisma {
   export type PaymentRecordUpdateInput = {
     stripeIntentId?: StringFieldUpdateOperationsInput | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount?: FloatFieldUpdateOperationsInput | number
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPaymentRecordsNestedInput
@@ -17048,7 +17049,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     stripeIntentId?: StringFieldUpdateOperationsInput | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount?: FloatFieldUpdateOperationsInput | number
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -17059,7 +17060,7 @@ export namespace Prisma {
     id?: number
     stripeIntentId: string
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount: number
+    amountInUsd: number
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: number
@@ -17069,7 +17070,7 @@ export namespace Prisma {
   export type PaymentRecordUpdateManyMutationInput = {
     stripeIntentId?: StringFieldUpdateOperationsInput | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount?: FloatFieldUpdateOperationsInput | number
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -17078,7 +17079,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     stripeIntentId?: StringFieldUpdateOperationsInput | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount?: FloatFieldUpdateOperationsInput | number
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -18035,7 +18036,7 @@ export namespace Prisma {
     id?: SortOrder
     stripeIntentId?: SortOrder
     status?: SortOrder
-    amount?: SortOrder
+    amountInUsd?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -18044,7 +18045,7 @@ export namespace Prisma {
 
   export type PaymentRecordAvgOrderByAggregateInput = {
     id?: SortOrder
-    amount?: SortOrder
+    amountInUsd?: SortOrder
     userId?: SortOrder
     reservationId?: SortOrder
   }
@@ -18053,7 +18054,7 @@ export namespace Prisma {
     id?: SortOrder
     stripeIntentId?: SortOrder
     status?: SortOrder
-    amount?: SortOrder
+    amountInUsd?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -18064,7 +18065,7 @@ export namespace Prisma {
     id?: SortOrder
     stripeIntentId?: SortOrder
     status?: SortOrder
-    amount?: SortOrder
+    amountInUsd?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -18073,7 +18074,7 @@ export namespace Prisma {
 
   export type PaymentRecordSumOrderByAggregateInput = {
     id?: SortOrder
-    amount?: SortOrder
+    amountInUsd?: SortOrder
     userId?: SortOrder
     reservationId?: SortOrder
   }
@@ -19707,7 +19708,7 @@ export namespace Prisma {
   export type PaymentRecordCreateWithoutUserInput = {
     stripeIntentId: string
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount: number
+    amountInUsd: number
     createdAt?: Date | string
     updatedAt?: Date | string
     reservation: ReservationCreateNestedOneWithoutPaymentRecordInput
@@ -19717,7 +19718,7 @@ export namespace Prisma {
     id?: number
     stripeIntentId: string
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount: number
+    amountInUsd: number
     createdAt?: Date | string
     updatedAt?: Date | string
     reservationId: number
@@ -19770,7 +19771,7 @@ export namespace Prisma {
     services?: ParkingLotServiceCreateNestedManyWithoutReservationsInput
     parkingSpot: ParkingSpotCreateNestedOneWithoutReservationsInput
     vehicle: VehicleCreateNestedOneWithoutReservationsInput
-    PaymentRecord?: PaymentRecordCreateNestedOneWithoutReservationInput
+    paymentRecord?: PaymentRecordCreateNestedOneWithoutReservationInput
   }
 
   export type ReservationUncheckedCreateWithoutUserInput = {
@@ -19784,7 +19785,7 @@ export namespace Prisma {
     parkingSpotId: number
     vehicleId: number
     services?: ParkingLotServiceUncheckedCreateNestedManyWithoutReservationsInput
-    PaymentRecord?: PaymentRecordUncheckedCreateNestedOneWithoutReservationInput
+    paymentRecord?: PaymentRecordUncheckedCreateNestedOneWithoutReservationInput
   }
 
   export type ReservationCreateOrConnectWithoutUserInput = {
@@ -19946,7 +19947,7 @@ export namespace Prisma {
     id?: IntFilter<"PaymentRecord"> | number
     stripeIntentId?: StringFilter<"PaymentRecord"> | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount?: FloatFilter<"PaymentRecord"> | number
+    amountInUsd?: FloatFilter<"PaymentRecord"> | number
     createdAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     userId?: IntFilter<"PaymentRecord"> | number
@@ -20141,7 +20142,7 @@ export namespace Prisma {
     services?: ParkingLotServiceCreateNestedManyWithoutReservationsInput
     user: UserCreateNestedOneWithoutReservationsInput
     parkingSpot: ParkingSpotCreateNestedOneWithoutReservationsInput
-    PaymentRecord?: PaymentRecordCreateNestedOneWithoutReservationInput
+    paymentRecord?: PaymentRecordCreateNestedOneWithoutReservationInput
   }
 
   export type ReservationUncheckedCreateWithoutVehicleInput = {
@@ -20155,7 +20156,7 @@ export namespace Prisma {
     userId: number
     parkingSpotId: number
     services?: ParkingLotServiceUncheckedCreateNestedManyWithoutReservationsInput
-    PaymentRecord?: PaymentRecordUncheckedCreateNestedOneWithoutReservationInput
+    paymentRecord?: PaymentRecordUncheckedCreateNestedOneWithoutReservationInput
   }
 
   export type ReservationCreateOrConnectWithoutVehicleInput = {
@@ -20925,7 +20926,7 @@ export namespace Prisma {
     user: UserCreateNestedOneWithoutReservationsInput
     parkingSpot: ParkingSpotCreateNestedOneWithoutReservationsInput
     vehicle: VehicleCreateNestedOneWithoutReservationsInput
-    PaymentRecord?: PaymentRecordCreateNestedOneWithoutReservationInput
+    paymentRecord?: PaymentRecordCreateNestedOneWithoutReservationInput
   }
 
   export type ReservationUncheckedCreateWithoutServicesInput = {
@@ -20939,7 +20940,7 @@ export namespace Prisma {
     userId: number
     parkingSpotId: number
     vehicleId: number
-    PaymentRecord?: PaymentRecordUncheckedCreateNestedOneWithoutReservationInput
+    paymentRecord?: PaymentRecordUncheckedCreateNestedOneWithoutReservationInput
   }
 
   export type ReservationCreateOrConnectWithoutServicesInput = {
@@ -21027,7 +21028,7 @@ export namespace Prisma {
     services?: ParkingLotServiceCreateNestedManyWithoutReservationsInput
     user: UserCreateNestedOneWithoutReservationsInput
     vehicle: VehicleCreateNestedOneWithoutReservationsInput
-    PaymentRecord?: PaymentRecordCreateNestedOneWithoutReservationInput
+    paymentRecord?: PaymentRecordCreateNestedOneWithoutReservationInput
   }
 
   export type ReservationUncheckedCreateWithoutParkingSpotInput = {
@@ -21041,7 +21042,7 @@ export namespace Prisma {
     userId: number
     vehicleId: number
     services?: ParkingLotServiceUncheckedCreateNestedManyWithoutReservationsInput
-    PaymentRecord?: PaymentRecordUncheckedCreateNestedOneWithoutReservationInput
+    paymentRecord?: PaymentRecordUncheckedCreateNestedOneWithoutReservationInput
   }
 
   export type ReservationCreateOrConnectWithoutParkingSpotInput = {
@@ -21305,7 +21306,7 @@ export namespace Prisma {
   export type PaymentRecordCreateWithoutReservationInput = {
     stripeIntentId: string
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount: number
+    amountInUsd: number
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutPaymentRecordsInput
@@ -21315,7 +21316,7 @@ export namespace Prisma {
     id?: number
     stripeIntentId: string
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount: number
+    amountInUsd: number
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: number
@@ -21472,7 +21473,7 @@ export namespace Prisma {
   export type PaymentRecordUpdateWithoutReservationInput = {
     stripeIntentId?: StringFieldUpdateOperationsInput | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount?: FloatFieldUpdateOperationsInput | number
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPaymentRecordsNestedInput
@@ -21482,7 +21483,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     stripeIntentId?: StringFieldUpdateOperationsInput | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount?: FloatFieldUpdateOperationsInput | number
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -21716,7 +21717,7 @@ export namespace Prisma {
     id?: number
     stripeIntentId: string
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount: number
+    amountInUsd: number
     createdAt?: Date | string
     updatedAt?: Date | string
     reservationId: number
@@ -21876,7 +21877,7 @@ export namespace Prisma {
   export type PaymentRecordUpdateWithoutUserInput = {
     stripeIntentId?: StringFieldUpdateOperationsInput | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount?: FloatFieldUpdateOperationsInput | number
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservation?: ReservationUpdateOneRequiredWithoutPaymentRecordNestedInput
@@ -21886,7 +21887,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     stripeIntentId?: StringFieldUpdateOperationsInput | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount?: FloatFieldUpdateOperationsInput | number
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservationId?: IntFieldUpdateOperationsInput | number
@@ -21896,7 +21897,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     stripeIntentId?: StringFieldUpdateOperationsInput | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    amount?: FloatFieldUpdateOperationsInput | number
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservationId?: IntFieldUpdateOperationsInput | number
@@ -21938,7 +21939,7 @@ export namespace Prisma {
     services?: ParkingLotServiceUpdateManyWithoutReservationsNestedInput
     parkingSpot?: ParkingSpotUpdateOneRequiredWithoutReservationsNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutReservationsNestedInput
-    PaymentRecord?: PaymentRecordUpdateOneWithoutReservationNestedInput
+    paymentRecord?: PaymentRecordUpdateOneWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateWithoutUserInput = {
@@ -21952,7 +21953,7 @@ export namespace Prisma {
     parkingSpotId?: IntFieldUpdateOperationsInput | number
     vehicleId?: IntFieldUpdateOperationsInput | number
     services?: ParkingLotServiceUncheckedUpdateManyWithoutReservationsNestedInput
-    PaymentRecord?: PaymentRecordUncheckedUpdateOneWithoutReservationNestedInput
+    paymentRecord?: PaymentRecordUncheckedUpdateOneWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateManyWithoutUserInput = {
@@ -21989,7 +21990,7 @@ export namespace Prisma {
     services?: ParkingLotServiceUpdateManyWithoutReservationsNestedInput
     user?: UserUpdateOneRequiredWithoutReservationsNestedInput
     parkingSpot?: ParkingSpotUpdateOneRequiredWithoutReservationsNestedInput
-    PaymentRecord?: PaymentRecordUpdateOneWithoutReservationNestedInput
+    paymentRecord?: PaymentRecordUpdateOneWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateWithoutVehicleInput = {
@@ -22003,7 +22004,7 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     parkingSpotId?: IntFieldUpdateOperationsInput | number
     services?: ParkingLotServiceUncheckedUpdateManyWithoutReservationsNestedInput
-    PaymentRecord?: PaymentRecordUncheckedUpdateOneWithoutReservationNestedInput
+    paymentRecord?: PaymentRecordUncheckedUpdateOneWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateManyWithoutVehicleInput = {
@@ -22181,7 +22182,7 @@ export namespace Prisma {
     user?: UserUpdateOneRequiredWithoutReservationsNestedInput
     parkingSpot?: ParkingSpotUpdateOneRequiredWithoutReservationsNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutReservationsNestedInput
-    PaymentRecord?: PaymentRecordUpdateOneWithoutReservationNestedInput
+    paymentRecord?: PaymentRecordUpdateOneWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateWithoutServicesInput = {
@@ -22195,7 +22196,7 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     parkingSpotId?: IntFieldUpdateOperationsInput | number
     vehicleId?: IntFieldUpdateOperationsInput | number
-    PaymentRecord?: PaymentRecordUncheckedUpdateOneWithoutReservationNestedInput
+    paymentRecord?: PaymentRecordUncheckedUpdateOneWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateManyWithoutServicesInput = {
@@ -22233,7 +22234,7 @@ export namespace Prisma {
     services?: ParkingLotServiceUpdateManyWithoutReservationsNestedInput
     user?: UserUpdateOneRequiredWithoutReservationsNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutReservationsNestedInput
-    PaymentRecord?: PaymentRecordUpdateOneWithoutReservationNestedInput
+    paymentRecord?: PaymentRecordUpdateOneWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateWithoutParkingSpotInput = {
@@ -22247,7 +22248,7 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     vehicleId?: IntFieldUpdateOperationsInput | number
     services?: ParkingLotServiceUncheckedUpdateManyWithoutReservationsNestedInput
-    PaymentRecord?: PaymentRecordUncheckedUpdateOneWithoutReservationNestedInput
+    paymentRecord?: PaymentRecordUncheckedUpdateOneWithoutReservationNestedInput
   }
 
   export type ReservationUncheckedUpdateManyWithoutParkingSpotInput = {
