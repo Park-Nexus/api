@@ -9,10 +9,10 @@ import cron from "node-cron";
 import { DateUtils } from "../../utils/date";
 import {
   EXPIRATION_TIME_IN_HOURS,
+  MAX_AHEAD_TIME_ALLOWED_IN_HOURS,
   MAX_ALLOWED_RESERVATIONS,
-  MAX_TIME_ALLOWED_IN_HOURS,
   MINIMUM_BOOKING_DURATION_IN_HOURS,
-} from "../../types/rules.types";
+} from "../../../rules";
 
 // Create a new ticket ------------------------------------------------------------------------------
 const createSchema = z.object({
@@ -53,10 +53,10 @@ export const create = procedure
     if (startTimeObj.isBefore(now)) {
       throw new TRPCError({ code: "BAD_REQUEST", message: "Start time must be in the future" });
     }
-    if (startTimeObj.diff(now, "hours") > MAX_TIME_ALLOWED_IN_HOURS) {
+    if (startTimeObj.diff(now, "hours") > MAX_AHEAD_TIME_ALLOWED_IN_HOURS) {
       throw new TRPCError({
         code: "BAD_REQUEST",
-        message: `Start time must be less than ${MAX_TIME_ALLOWED_IN_HOURS} hours from now`,
+        message: `Start time must be less than ${MAX_AHEAD_TIME_ALLOWED_IN_HOURS} hours from now`,
       });
     }
 

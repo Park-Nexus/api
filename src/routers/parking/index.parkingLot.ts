@@ -12,7 +12,7 @@ import {
 } from "../../db";
 import { procedure } from "../../trpc";
 import { deleteFile, extractPathFromURL, getFileSignedUrl } from "../../storage";
-import { MAXIMUM_OVERSTAYING_DURATION_IN_HOURS } from "../../types/rules.types";
+import { MAXIMUM_OVERSTAYING_DURATION_IN_HOURS } from "../../../rules";
 
 const EARTH_RADIUS_IN_KM = 6371;
 
