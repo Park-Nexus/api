@@ -1,3 +1,0 @@
-export const MAX_ALLOWED_RESERVATIONS = 2;
-export const MAX_TIME_ALLOWED_IN_HOURS = 48;
-export const EXPIRATION_TIME_IN_HOURS = 1;

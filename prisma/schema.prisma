@@ -49,8 +49,11 @@ enum PARKING_SPOT__STATUS_ALIAS {
 
 enum RESERVATION__STATUS_ALIAS {
   PENDING
-  COMPLETED
+  ON_GOING
+  CANCELLED
+  OVERSTAYED
   EXPIRED
+  COMPLETED
 }
 
 enum PARKING_RECORD__STATUS_ALIAS {
@@ -233,6 +236,7 @@ model Reservation {
   code      String
   status    RESERVATION__STATUS_ALIAS @default(PENDING)
   startTime DateTime
+  endTime   DateTime
   createdAt DateTime                  @default(now())
   updatedAt DateTime                  @updatedAt
 

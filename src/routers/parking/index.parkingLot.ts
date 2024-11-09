@@ -12,7 +12,7 @@ import {
 } from "../../db";
 import { procedure } from "../../trpc";
 import { deleteFile, extractPathFromURL, getFileSignedUrl } from "../../storage";
-import { EXPIRATION_TIME_IN_HOURS } from "../index.rules";
+import { MAXIMUM_OVERSTAYING_DURATION_IN_HOURS } from "../../types/rules.types";
 
 const EARTH_RADIUS_IN_KM = 6371;
 
@@ -567,12 +567,13 @@ export const getSingleService = procedure
 const getAvailabilitySchema = z.object({
   lotId: z.number(),
   startTime: z.string(),
+  endTime: z.string(),
 });
 export const getAvailability = procedure
   .use(authMiddleware(["USER"]))
   .input(getAvailabilitySchema)
   .query(async ({ input }) => {
-    const { lotId, startTime } = input;
+    const { lotId, startTime, endTime } = input;
 
     const parkingLot = await prisma.parkingLot.findUnique({
       where: { id: lotId },
@@ -580,8 +581,8 @@ export const getAvailability = procedure
     });
     if (!parkingLot) throw new Error("Parking lot not found");
 
-    const startTimeObj = dayjs(startTime).subtract(15, "minutes");
-    const endTimeObj = dayjs(startTime).add(EXPIRATION_TIME_IN_HOURS, "hours").add(15, "minutes");
+    const startTimeObj = dayjs(startTime).subtract(MAXIMUM_OVERSTAYING_DURATION_IN_HOURS, "hours");
+    const endTimeObj = dayjs(endTime).add(MAXIMUM_OVERSTAYING_DURATION_IN_HOURS, "hours");
 
     const reservations = await prisma.reservation.findMany({
       where: {
@@ -590,7 +591,12 @@ export const getAvailability = procedure
         },
         startTime: {
           gte: startTimeObj.toDate(),
+        },
+        endTime: {
           lte: endTimeObj.toDate(),
+        },
+        status: {
+          notIn: ["EXPIRED", "CANCELLED", "COMPLETED"],
         },
       },
     });

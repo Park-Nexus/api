@@ -11,20 +11,22 @@ import {
   EXPIRATION_TIME_IN_HOURS,
   MAX_ALLOWED_RESERVATIONS,
   MAX_TIME_ALLOWED_IN_HOURS,
-} from "../index.rules";
+  MINIMUM_BOOKING_DURATION_IN_HOURS,
+} from "../../types/rules.types";
 
 // Create a new ticket ------------------------------------------------------------------------------
 const createSchema = z.object({
   parkingLotId: z.number(),
   serviceIds: z.array(z.number()),
   vehicleId: z.number(),
-  dateTime: z.string(),
+  startTime: z.string(),
+  endTime: z.string(),
 });
 export const create = procedure
   .use(authMiddleware(["USER"]))
   .input(createSchema)
   .mutation(async ({ ctx, input }) => {
-    const { dateTime, parkingLotId, serviceIds, vehicleId } = input;
+    const { startTime, endTime, parkingLotId, serviceIds, vehicleId } = input;
     const {
       account: { id: accountId },
     } = ctx;
@@ -46,14 +48,15 @@ export const create = procedure
 
     // check if date time is in the future, and less than 48 hours
     const now = dayjs();
-    const startTimeObj = dayjs(dateTime);
+    const startTimeObj = dayjs(startTime);
+    const endTimeObj = dayjs(endTime);
     if (startTimeObj.isBefore(now)) {
-      throw new TRPCError({ code: "BAD_REQUEST", message: "Date time must be in the future" });
+      throw new TRPCError({ code: "BAD_REQUEST", message: "Start time must be in the future" });
     }
     if (startTimeObj.diff(now, "hours") > MAX_TIME_ALLOWED_IN_HOURS) {
       throw new TRPCError({
         code: "BAD_REQUEST",
-        message: `Date time must be less than ${MAX_TIME_ALLOWED_IN_HOURS} hours from now`,
+        message: `Start time must be less than ${MAX_TIME_ALLOWED_IN_HOURS} hours from now`,
       });
     }
 
@@ -64,6 +67,12 @@ export const create = procedure
       throw new TRPCError({
         code: "BAD_REQUEST",
         message: "You cannot reserve your own parking lot",
+      });
+    }
+    if (startTimeObj.diff(endTimeObj, "hours") < MINIMUM_BOOKING_DURATION_IN_HOURS) {
+      throw new TRPCError({
+        code: "BAD_REQUEST",
+        message: `Parking must be at least ${MINIMUM_BOOKING_DURATION_IN_HOURS} hours`,
       });
     }
 
@@ -101,6 +110,7 @@ export const create = procedure
       data: {
         code: newTicketCode,
         startTime: startTimeObj.toDate(),
+        endTime: endTimeObj.toDate(),
         userId: user.id,
         parkingSpotId: availableParkingSpot.id,
         vehicleId: vehicle.id,
