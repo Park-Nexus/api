@@ -11,7 +11,7 @@ import {
   EXPIRATION_TIME_IN_HOURS,
   MAX_AHEAD_TIME_ALLOWED_IN_HOURS,
   MAX_ALLOWED_RESERVATIONS,
-  MINIMUM_BOOKING_DURATION_IN_HOURS,
+  MINIMUM_DURATION_IN_HOURS,
 } from "../../../rules";
 
 // Create a new ticket ------------------------------------------------------------------------------
@@ -69,10 +69,10 @@ export const create = procedure
         message: "You cannot reserve your own parking lot",
       });
     }
-    if (startTimeObj.diff(endTimeObj, "hours") < MINIMUM_BOOKING_DURATION_IN_HOURS) {
+    if (startTimeObj.diff(endTimeObj, "hours") < MINIMUM_DURATION_IN_HOURS) {
       throw new TRPCError({
         code: "BAD_REQUEST",
-        message: `Parking must be at least ${MINIMUM_BOOKING_DURATION_IN_HOURS} hours`,
+        message: `Parking must be at least ${MINIMUM_DURATION_IN_HOURS} hours`,
       });
     }
 
