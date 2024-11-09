@@ -11,7 +11,7 @@
   "exports": {
     ".": {
       "types": "./src/index.d.ts",
-      "default": "./src/index.exports.ts"
+      "default": "./src/index.exports.js"
     },
     "./prisma/client": {
       "types": "./prisma/client/index.d.ts"
