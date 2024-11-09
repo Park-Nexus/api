@@ -27,7 +27,7 @@ export const create = procedure
 
     const { firstName, lastName, phone, avatarUrl, gender } = input;
     await prisma.user.create({
-      data: { firstName, lastName, phone, avatarUrl, gender, accountId: id },
+      data: { firstName, lastName, phone, avatarUrl, gender, accountId: id, stripeCustomerId: "" },
     });
   });
 

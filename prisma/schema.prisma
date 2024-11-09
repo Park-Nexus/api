@@ -56,10 +56,6 @@ enum RESERVATION__STATUS_ALIAS {
   COMPLETED
 }
 
-enum PAYMENT_RECORD__METHOD_ALIAS {
-  CASH
-}
-
 enum PAYMENT_RECORD__STATUS_ALIAS {
   CANCELLED
   AWAITING
@@ -93,13 +89,14 @@ model AccountToken {
 model User {
   id Int @id @default(autoincrement())
 
-  firstName String
-  lastName  String
-  phone     String
-  avatarUrl String?
-  gender    USER__GENDER_ALIAS
-  createdAt DateTime           @default(now())
-  updatedAt DateTime           @updatedAt
+  firstName        String
+  lastName         String
+  phone            String
+  avatarUrl        String?
+  gender           USER__GENDER_ALIAS
+  stripeCustomerId String
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
 
   vehicles          Vehicle[]
   parkingLotReviews ParkingLotReview[]
@@ -258,11 +255,11 @@ model Reservation {
 model PaymentRecord {
   id Int @id @default(autoincrement())
 
-  status    PAYMENT_RECORD__STATUS_ALIAS @default(AWAITING)
-  method    PAYMENT_RECORD__METHOD_ALIAS
-  amount    Float
-  createdAt DateTime                     @default(now())
-  updatedAt DateTime                     @updatedAt
+  stripeIntentId String
+  status         PAYMENT_RECORD__STATUS_ALIAS @default(AWAITING)
+  amount         Float
+  createdAt      DateTime                     @default(now())
+  updatedAt      DateTime                     @updatedAt
 
   userId Int
   user   User @relation(fields: [userId], references: [id])

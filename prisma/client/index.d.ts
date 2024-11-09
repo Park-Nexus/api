@@ -138,18 +138,12 @@ export type RESERVATION__STATUS_ALIAS = (typeof RESERVATION__STATUS_ALIAS)[keyof
 
 
 export const PAYMENT_RECORD__STATUS_ALIAS: {
+  CANCELLED: 'CANCELLED',
   AWAITING: 'AWAITING',
   PAID: 'PAID'
 };
 
 export type PAYMENT_RECORD__STATUS_ALIAS = (typeof PAYMENT_RECORD__STATUS_ALIAS)[keyof typeof PAYMENT_RECORD__STATUS_ALIAS]
-
-
-export const PAYMENT_RECORD__METHOD_ALIAS: {
-  CASH: 'CASH'
-};
-
-export type PAYMENT_RECORD__METHOD_ALIAS = (typeof PAYMENT_RECORD__METHOD_ALIAS)[keyof typeof PAYMENT_RECORD__METHOD_ALIAS]
 
 }
 
@@ -180,10 +174,6 @@ export const RESERVATION__STATUS_ALIAS: typeof $Enums.RESERVATION__STATUS_ALIAS
 export type PAYMENT_RECORD__STATUS_ALIAS = $Enums.PAYMENT_RECORD__STATUS_ALIAS
 
 export const PAYMENT_RECORD__STATUS_ALIAS: typeof $Enums.PAYMENT_RECORD__STATUS_ALIAS
-
-export type PAYMENT_RECORD__METHOD_ALIAS = $Enums.PAYMENT_RECORD__METHOD_ALIAS
-
-export const PAYMENT_RECORD__METHOD_ALIAS: typeof $Enums.PAYMENT_RECORD__METHOD_ALIAS
 
 /**
  * ##  Prisma Client ʲˢ
@@ -4161,6 +4151,7 @@ export namespace Prisma {
     phone: string | null
     avatarUrl: string | null
     gender: $Enums.USER__GENDER_ALIAS | null
+    stripeCustomerId: string | null
     createdAt: Date | null
     updatedAt: Date | null
     accountId: string | null
@@ -4173,6 +4164,7 @@ export namespace Prisma {
     phone: string | null
     avatarUrl: string | null
     gender: $Enums.USER__GENDER_ALIAS | null
+    stripeCustomerId: string | null
     createdAt: Date | null
     updatedAt: Date | null
     accountId: string | null
@@ -4185,6 +4177,7 @@ export namespace Prisma {
     phone: number
     avatarUrl: number
     gender: number
+    stripeCustomerId: number
     createdAt: number
     updatedAt: number
     accountId: number
@@ -4207,6 +4200,7 @@ export namespace Prisma {
     phone?: true
     avatarUrl?: true
     gender?: true
+    stripeCustomerId?: true
     createdAt?: true
     updatedAt?: true
     accountId?: true
@@ -4219,6 +4213,7 @@ export namespace Prisma {
     phone?: true
     avatarUrl?: true
     gender?: true
+    stripeCustomerId?: true
     createdAt?: true
     updatedAt?: true
     accountId?: true
@@ -4231,6 +4226,7 @@ export namespace Prisma {
     phone?: true
     avatarUrl?: true
     gender?: true
+    stripeCustomerId?: true
     createdAt?: true
     updatedAt?: true
     accountId?: true
@@ -4330,6 +4326,7 @@ export namespace Prisma {
     phone: string
     avatarUrl: string | null
     gender: $Enums.USER__GENDER_ALIAS
+    stripeCustomerId: string
     createdAt: Date
     updatedAt: Date
     accountId: string
@@ -4361,6 +4358,7 @@ export namespace Prisma {
     phone?: boolean
     avatarUrl?: boolean
     gender?: boolean
+    stripeCustomerId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     accountId?: boolean
@@ -4381,6 +4379,7 @@ export namespace Prisma {
     phone?: boolean
     avatarUrl?: boolean
     gender?: boolean
+    stripeCustomerId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     accountId?: boolean
@@ -4394,6 +4393,7 @@ export namespace Prisma {
     phone?: boolean
     avatarUrl?: boolean
     gender?: boolean
+    stripeCustomerId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     accountId?: boolean
@@ -4431,6 +4431,7 @@ export namespace Prisma {
       phone: string
       avatarUrl: string | null
       gender: $Enums.USER__GENDER_ALIAS
+      stripeCustomerId: string
       createdAt: Date
       updatedAt: Date
       accountId: string
@@ -4840,6 +4841,7 @@ export namespace Prisma {
     readonly phone: FieldRef<"User", 'String'>
     readonly avatarUrl: FieldRef<"User", 'String'>
     readonly gender: FieldRef<"User", 'USER__GENDER_ALIAS'>
+    readonly stripeCustomerId: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly accountId: FieldRef<"User", 'String'>
@@ -13754,8 +13756,8 @@ export namespace Prisma {
 
   export type PaymentRecordMinAggregateOutputType = {
     id: number | null
+    stripeIntentId: string | null
     status: $Enums.PAYMENT_RECORD__STATUS_ALIAS | null
-    method: $Enums.PAYMENT_RECORD__METHOD_ALIAS | null
     amount: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -13765,8 +13767,8 @@ export namespace Prisma {
 
   export type PaymentRecordMaxAggregateOutputType = {
     id: number | null
+    stripeIntentId: string | null
     status: $Enums.PAYMENT_RECORD__STATUS_ALIAS | null
-    method: $Enums.PAYMENT_RECORD__METHOD_ALIAS | null
     amount: number | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -13776,8 +13778,8 @@ export namespace Prisma {
 
   export type PaymentRecordCountAggregateOutputType = {
     id: number
+    stripeIntentId: number
     status: number
-    method: number
     amount: number
     createdAt: number
     updatedAt: number
@@ -13803,8 +13805,8 @@ export namespace Prisma {
 
   export type PaymentRecordMinAggregateInputType = {
     id?: true
+    stripeIntentId?: true
     status?: true
-    method?: true
     amount?: true
     createdAt?: true
     updatedAt?: true
@@ -13814,8 +13816,8 @@ export namespace Prisma {
 
   export type PaymentRecordMaxAggregateInputType = {
     id?: true
+    stripeIntentId?: true
     status?: true
-    method?: true
     amount?: true
     createdAt?: true
     updatedAt?: true
@@ -13825,8 +13827,8 @@ export namespace Prisma {
 
   export type PaymentRecordCountAggregateInputType = {
     id?: true
+    stripeIntentId?: true
     status?: true
-    method?: true
     amount?: true
     createdAt?: true
     updatedAt?: true
@@ -13923,8 +13925,8 @@ export namespace Prisma {
 
   export type PaymentRecordGroupByOutputType = {
     id: number
+    stripeIntentId: string
     status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount: number
     createdAt: Date
     updatedAt: Date
@@ -13953,8 +13955,8 @@ export namespace Prisma {
 
   export type PaymentRecordSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    stripeIntentId?: boolean
     status?: boolean
-    method?: boolean
     amount?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -13966,8 +13968,8 @@ export namespace Prisma {
 
   export type PaymentRecordSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    stripeIntentId?: boolean
     status?: boolean
-    method?: boolean
     amount?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -13979,8 +13981,8 @@ export namespace Prisma {
 
   export type PaymentRecordSelectScalar = {
     id?: boolean
+    stripeIntentId?: boolean
     status?: boolean
-    method?: boolean
     amount?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -14005,8 +14007,8 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      stripeIntentId: string
       status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
-      method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
       amount: number
       createdAt: Date
       updatedAt: Date
@@ -14408,8 +14410,8 @@ export namespace Prisma {
    */ 
   interface PaymentRecordFieldRefs {
     readonly id: FieldRef<"PaymentRecord", 'Int'>
+    readonly stripeIntentId: FieldRef<"PaymentRecord", 'String'>
     readonly status: FieldRef<"PaymentRecord", 'PAYMENT_RECORD__STATUS_ALIAS'>
-    readonly method: FieldRef<"PaymentRecord", 'PAYMENT_RECORD__METHOD_ALIAS'>
     readonly amount: FieldRef<"PaymentRecord", 'Float'>
     readonly createdAt: FieldRef<"PaymentRecord", 'DateTime'>
     readonly updatedAt: FieldRef<"PaymentRecord", 'DateTime'>
@@ -14791,6 +14793,7 @@ export namespace Prisma {
     phone: 'phone',
     avatarUrl: 'avatarUrl',
     gender: 'gender',
+    stripeCustomerId: 'stripeCustomerId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     accountId: 'accountId'
@@ -14923,8 +14926,8 @@ export namespace Prisma {
 
   export const PaymentRecordScalarFieldEnum: {
     id: 'id',
+    stripeIntentId: 'stripeIntentId',
     status: 'status',
-    method: 'method',
     amount: 'amount',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
@@ -15123,20 +15126,6 @@ export namespace Prisma {
    */
   export type ListEnumPAYMENT_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PAYMENT_RECORD__STATUS_ALIAS[]'>
     
-
-
-  /**
-   * Reference to a field of type 'PAYMENT_RECORD__METHOD_ALIAS'
-   */
-  export type EnumPAYMENT_RECORD__METHOD_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PAYMENT_RECORD__METHOD_ALIAS'>
-    
-
-
-  /**
-   * Reference to a field of type 'PAYMENT_RECORD__METHOD_ALIAS[]'
-   */
-  export type ListEnumPAYMENT_RECORD__METHOD_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PAYMENT_RECORD__METHOD_ALIAS[]'>
-    
   /**
    * Deep Input Types
    */
@@ -15272,6 +15261,7 @@ export namespace Prisma {
     phone?: StringFilter<"User"> | string
     avatarUrl?: StringNullableFilter<"User"> | string | null
     gender?: EnumUSER__GENDER_ALIASFilter<"User"> | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     accountId?: StringFilter<"User"> | string
@@ -15291,6 +15281,7 @@ export namespace Prisma {
     phone?: SortOrder
     avatarUrl?: SortOrderInput | SortOrder
     gender?: SortOrder
+    stripeCustomerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     accountId?: SortOrder
@@ -15314,6 +15305,7 @@ export namespace Prisma {
     phone?: StringFilter<"User"> | string
     avatarUrl?: StringNullableFilter<"User"> | string | null
     gender?: EnumUSER__GENDER_ALIASFilter<"User"> | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     vehicles?: VehicleListRelationFilter
@@ -15332,6 +15324,7 @@ export namespace Prisma {
     phone?: SortOrder
     avatarUrl?: SortOrderInput | SortOrder
     gender?: SortOrder
+    stripeCustomerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     accountId?: SortOrder
@@ -15352,6 +15345,7 @@ export namespace Prisma {
     phone?: StringWithAggregatesFilter<"User"> | string
     avatarUrl?: StringNullableWithAggregatesFilter<"User"> | string | null
     gender?: EnumUSER__GENDER_ALIASWithAggregatesFilter<"User"> | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     accountId?: StringWithAggregatesFilter<"User"> | string
@@ -16025,8 +16019,8 @@ export namespace Prisma {
     OR?: PaymentRecordWhereInput[]
     NOT?: PaymentRecordWhereInput | PaymentRecordWhereInput[]
     id?: IntFilter<"PaymentRecord"> | number
+    stripeIntentId?: StringFilter<"PaymentRecord"> | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method?: EnumPAYMENT_RECORD__METHOD_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFilter<"PaymentRecord"> | number
     createdAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PaymentRecord"> | Date | string
@@ -16038,8 +16032,8 @@ export namespace Prisma {
 
   export type PaymentRecordOrderByWithRelationInput = {
     id?: SortOrder
+    stripeIntentId?: SortOrder
     status?: SortOrder
-    method?: SortOrder
     amount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -16055,8 +16049,8 @@ export namespace Prisma {
     AND?: PaymentRecordWhereInput | PaymentRecordWhereInput[]
     OR?: PaymentRecordWhereInput[]
     NOT?: PaymentRecordWhereInput | PaymentRecordWhereInput[]
+    stripeIntentId?: StringFilter<"PaymentRecord"> | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method?: EnumPAYMENT_RECORD__METHOD_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFilter<"PaymentRecord"> | number
     createdAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PaymentRecord"> | Date | string
@@ -16067,8 +16061,8 @@ export namespace Prisma {
 
   export type PaymentRecordOrderByWithAggregationInput = {
     id?: SortOrder
+    stripeIntentId?: SortOrder
     status?: SortOrder
-    method?: SortOrder
     amount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -16086,8 +16080,8 @@ export namespace Prisma {
     OR?: PaymentRecordScalarWhereWithAggregatesInput[]
     NOT?: PaymentRecordScalarWhereWithAggregatesInput | PaymentRecordScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"PaymentRecord"> | number
+    stripeIntentId?: StringWithAggregatesFilter<"PaymentRecord"> | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASWithAggregatesFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method?: EnumPAYMENT_RECORD__METHOD_ALIASWithAggregatesFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatWithAggregatesFilter<"PaymentRecord"> | number
     createdAt?: DateTimeWithAggregatesFilter<"PaymentRecord"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"PaymentRecord"> | Date | string
@@ -16224,6 +16218,7 @@ export namespace Prisma {
     phone: string
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
+    stripeCustomerId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     vehicles?: VehicleCreateNestedManyWithoutOwnerInput
@@ -16242,6 +16237,7 @@ export namespace Prisma {
     phone: string
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
+    stripeCustomerId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     accountId: string
@@ -16259,6 +16255,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
@@ -16277,6 +16274,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accountId?: StringFieldUpdateOperationsInput | string
@@ -16295,6 +16293,7 @@ export namespace Prisma {
     phone: string
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
+    stripeCustomerId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     accountId: string
@@ -16306,6 +16305,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16317,6 +16317,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accountId?: StringFieldUpdateOperationsInput | string
@@ -17013,8 +17014,8 @@ export namespace Prisma {
   }
 
   export type PaymentRecordCreateInput = {
-    status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
+    stripeIntentId: string
+    status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amount: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -17024,8 +17025,8 @@ export namespace Prisma {
 
   export type PaymentRecordUncheckedCreateInput = {
     id?: number
-    status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
+    stripeIntentId: string
+    status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amount: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -17034,8 +17035,8 @@ export namespace Prisma {
   }
 
   export type PaymentRecordUpdateInput = {
+    stripeIntentId?: StringFieldUpdateOperationsInput | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method?: EnumPAYMENT_RECORD__METHOD_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17045,8 +17046,8 @@ export namespace Prisma {
 
   export type PaymentRecordUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    stripeIntentId?: StringFieldUpdateOperationsInput | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method?: EnumPAYMENT_RECORD__METHOD_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17056,8 +17057,8 @@ export namespace Prisma {
 
   export type PaymentRecordCreateManyInput = {
     id?: number
-    status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
+    stripeIntentId: string
+    status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amount: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -17066,8 +17067,8 @@ export namespace Prisma {
   }
 
   export type PaymentRecordUpdateManyMutationInput = {
+    stripeIntentId?: StringFieldUpdateOperationsInput | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method?: EnumPAYMENT_RECORD__METHOD_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17075,8 +17076,8 @@ export namespace Prisma {
 
   export type PaymentRecordUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    stripeIntentId?: StringFieldUpdateOperationsInput | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method?: EnumPAYMENT_RECORD__METHOD_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17359,6 +17360,7 @@ export namespace Prisma {
     phone?: SortOrder
     avatarUrl?: SortOrder
     gender?: SortOrder
+    stripeCustomerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     accountId?: SortOrder
@@ -17375,6 +17377,7 @@ export namespace Prisma {
     phone?: SortOrder
     avatarUrl?: SortOrder
     gender?: SortOrder
+    stripeCustomerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     accountId?: SortOrder
@@ -17387,6 +17390,7 @@ export namespace Prisma {
     phone?: SortOrder
     avatarUrl?: SortOrder
     gender?: SortOrder
+    stripeCustomerId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     accountId?: SortOrder
@@ -18022,13 +18026,6 @@ export namespace Prisma {
     not?: NestedEnumPAYMENT_RECORD__STATUS_ALIASFilter<$PrismaModel> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
   }
 
-  export type EnumPAYMENT_RECORD__METHOD_ALIASFilter<$PrismaModel = never> = {
-    equals?: $Enums.PAYMENT_RECORD__METHOD_ALIAS | EnumPAYMENT_RECORD__METHOD_ALIASFieldRefInput<$PrismaModel>
-    in?: $Enums.PAYMENT_RECORD__METHOD_ALIAS[] | ListEnumPAYMENT_RECORD__METHOD_ALIASFieldRefInput<$PrismaModel>
-    notIn?: $Enums.PAYMENT_RECORD__METHOD_ALIAS[] | ListEnumPAYMENT_RECORD__METHOD_ALIASFieldRefInput<$PrismaModel>
-    not?: NestedEnumPAYMENT_RECORD__METHOD_ALIASFilter<$PrismaModel> | $Enums.PAYMENT_RECORD__METHOD_ALIAS
-  }
-
   export type ReservationRelationFilter = {
     is?: ReservationWhereInput
     isNot?: ReservationWhereInput
@@ -18036,8 +18033,8 @@ export namespace Prisma {
 
   export type PaymentRecordCountOrderByAggregateInput = {
     id?: SortOrder
+    stripeIntentId?: SortOrder
     status?: SortOrder
-    method?: SortOrder
     amount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -18054,8 +18051,8 @@ export namespace Prisma {
 
   export type PaymentRecordMaxOrderByAggregateInput = {
     id?: SortOrder
+    stripeIntentId?: SortOrder
     status?: SortOrder
-    method?: SortOrder
     amount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -18065,8 +18062,8 @@ export namespace Prisma {
 
   export type PaymentRecordMinOrderByAggregateInput = {
     id?: SortOrder
+    stripeIntentId?: SortOrder
     status?: SortOrder
-    method?: SortOrder
     amount?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -18089,16 +18086,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumPAYMENT_RECORD__STATUS_ALIASFilter<$PrismaModel>
     _max?: NestedEnumPAYMENT_RECORD__STATUS_ALIASFilter<$PrismaModel>
-  }
-
-  export type EnumPAYMENT_RECORD__METHOD_ALIASWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.PAYMENT_RECORD__METHOD_ALIAS | EnumPAYMENT_RECORD__METHOD_ALIASFieldRefInput<$PrismaModel>
-    in?: $Enums.PAYMENT_RECORD__METHOD_ALIAS[] | ListEnumPAYMENT_RECORD__METHOD_ALIASFieldRefInput<$PrismaModel>
-    notIn?: $Enums.PAYMENT_RECORD__METHOD_ALIAS[] | ListEnumPAYMENT_RECORD__METHOD_ALIASFieldRefInput<$PrismaModel>
-    not?: NestedEnumPAYMENT_RECORD__METHOD_ALIASWithAggregatesFilter<$PrismaModel> | $Enums.PAYMENT_RECORD__METHOD_ALIAS
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumPAYMENT_RECORD__METHOD_ALIASFilter<$PrismaModel>
-    _max?: NestedEnumPAYMENT_RECORD__METHOD_ALIASFilter<$PrismaModel>
   }
 
   export type UserCreateNestedOneWithoutAccountInput = {
@@ -19081,10 +19068,6 @@ export namespace Prisma {
     set?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
   }
 
-  export type EnumPAYMENT_RECORD__METHOD_ALIASFieldUpdateOperationsInput = {
-    set?: $Enums.PAYMENT_RECORD__METHOD_ALIAS
-  }
-
   export type UserUpdateOneRequiredWithoutPaymentRecordsNestedInput = {
     create?: XOR<UserCreateWithoutPaymentRecordsInput, UserUncheckedCreateWithoutPaymentRecordsInput>
     connectOrCreate?: UserCreateOrConnectWithoutPaymentRecordsInput
@@ -19400,13 +19383,6 @@ export namespace Prisma {
     not?: NestedEnumPAYMENT_RECORD__STATUS_ALIASFilter<$PrismaModel> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
   }
 
-  export type NestedEnumPAYMENT_RECORD__METHOD_ALIASFilter<$PrismaModel = never> = {
-    equals?: $Enums.PAYMENT_RECORD__METHOD_ALIAS | EnumPAYMENT_RECORD__METHOD_ALIASFieldRefInput<$PrismaModel>
-    in?: $Enums.PAYMENT_RECORD__METHOD_ALIAS[] | ListEnumPAYMENT_RECORD__METHOD_ALIASFieldRefInput<$PrismaModel>
-    notIn?: $Enums.PAYMENT_RECORD__METHOD_ALIAS[] | ListEnumPAYMENT_RECORD__METHOD_ALIASFieldRefInput<$PrismaModel>
-    not?: NestedEnumPAYMENT_RECORD__METHOD_ALIASFilter<$PrismaModel> | $Enums.PAYMENT_RECORD__METHOD_ALIAS
-  }
-
   export type NestedEnumPAYMENT_RECORD__STATUS_ALIASWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.PAYMENT_RECORD__STATUS_ALIAS | EnumPAYMENT_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
     in?: $Enums.PAYMENT_RECORD__STATUS_ALIAS[] | ListEnumPAYMENT_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel>
@@ -19417,22 +19393,13 @@ export namespace Prisma {
     _max?: NestedEnumPAYMENT_RECORD__STATUS_ALIASFilter<$PrismaModel>
   }
 
-  export type NestedEnumPAYMENT_RECORD__METHOD_ALIASWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.PAYMENT_RECORD__METHOD_ALIAS | EnumPAYMENT_RECORD__METHOD_ALIASFieldRefInput<$PrismaModel>
-    in?: $Enums.PAYMENT_RECORD__METHOD_ALIAS[] | ListEnumPAYMENT_RECORD__METHOD_ALIASFieldRefInput<$PrismaModel>
-    notIn?: $Enums.PAYMENT_RECORD__METHOD_ALIAS[] | ListEnumPAYMENT_RECORD__METHOD_ALIASFieldRefInput<$PrismaModel>
-    not?: NestedEnumPAYMENT_RECORD__METHOD_ALIASWithAggregatesFilter<$PrismaModel> | $Enums.PAYMENT_RECORD__METHOD_ALIAS
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumPAYMENT_RECORD__METHOD_ALIASFilter<$PrismaModel>
-    _max?: NestedEnumPAYMENT_RECORD__METHOD_ALIASFilter<$PrismaModel>
-  }
-
   export type UserCreateWithoutAccountInput = {
     firstName: string
     lastName: string
     phone: string
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
+    stripeCustomerId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     vehicles?: VehicleCreateNestedManyWithoutOwnerInput
@@ -19450,6 +19417,7 @@ export namespace Prisma {
     phone: string
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
+    stripeCustomerId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     vehicles?: VehicleUncheckedCreateNestedManyWithoutOwnerInput
@@ -19505,6 +19473,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
@@ -19522,6 +19491,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     vehicles?: VehicleUncheckedUpdateManyWithoutOwnerNestedInput
@@ -19735,8 +19705,8 @@ export namespace Prisma {
   }
 
   export type PaymentRecordCreateWithoutUserInput = {
-    status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
+    stripeIntentId: string
+    status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amount: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -19745,8 +19715,8 @@ export namespace Prisma {
 
   export type PaymentRecordUncheckedCreateWithoutUserInput = {
     id?: number
-    status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
+    stripeIntentId: string
+    status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amount: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -19974,8 +19944,8 @@ export namespace Prisma {
     OR?: PaymentRecordScalarWhereInput[]
     NOT?: PaymentRecordScalarWhereInput | PaymentRecordScalarWhereInput[]
     id?: IntFilter<"PaymentRecord"> | number
+    stripeIntentId?: StringFilter<"PaymentRecord"> | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method?: EnumPAYMENT_RECORD__METHOD_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFilter<"PaymentRecord"> | number
     createdAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PaymentRecord"> | Date | string
@@ -20081,6 +20051,7 @@ export namespace Prisma {
     phone: string
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
+    stripeCustomerId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     vehicles?: VehicleCreateNestedManyWithoutOwnerInput
@@ -20098,6 +20069,7 @@ export namespace Prisma {
     phone: string
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
+    stripeCustomerId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     accountId: string
@@ -20130,6 +20102,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
@@ -20147,6 +20120,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accountId?: StringFieldUpdateOperationsInput | string
@@ -20200,6 +20174,7 @@ export namespace Prisma {
     phone: string
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
+    stripeCustomerId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutUserInput
@@ -20217,6 +20192,7 @@ export namespace Prisma {
     phone: string
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
+    stripeCustomerId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     accountId: string
@@ -20265,6 +20241,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutUserNestedInput
@@ -20282,6 +20259,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accountId?: StringFieldUpdateOperationsInput | string
@@ -20415,6 +20393,7 @@ export namespace Prisma {
     phone: string
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
+    stripeCustomerId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     vehicles?: VehicleCreateNestedManyWithoutOwnerInput
@@ -20432,6 +20411,7 @@ export namespace Prisma {
     phone: string
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
+    stripeCustomerId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     accountId: string
@@ -20568,6 +20548,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
@@ -20585,6 +20566,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accountId?: StringFieldUpdateOperationsInput | string
@@ -20751,6 +20733,7 @@ export namespace Prisma {
     phone: string
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
+    stripeCustomerId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     vehicles?: VehicleCreateNestedManyWithoutOwnerInput
@@ -20768,6 +20751,7 @@ export namespace Prisma {
     phone: string
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
+    stripeCustomerId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     accountId: string
@@ -20854,6 +20838,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
@@ -20871,6 +20856,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accountId?: StringFieldUpdateOperationsInput | string
@@ -21224,6 +21210,7 @@ export namespace Prisma {
     phone: string
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
+    stripeCustomerId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     vehicles?: VehicleCreateNestedManyWithoutOwnerInput
@@ -21241,6 +21228,7 @@ export namespace Prisma {
     phone: string
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
+    stripeCustomerId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     accountId: string
@@ -21315,8 +21303,8 @@ export namespace Prisma {
   }
 
   export type PaymentRecordCreateWithoutReservationInput = {
-    status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
+    stripeIntentId: string
+    status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amount: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21325,8 +21313,8 @@ export namespace Prisma {
 
   export type PaymentRecordUncheckedCreateWithoutReservationInput = {
     id?: number
-    status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
+    stripeIntentId: string
+    status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amount: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21371,6 +21359,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
@@ -21388,6 +21377,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accountId?: StringFieldUpdateOperationsInput | string
@@ -21480,8 +21470,8 @@ export namespace Prisma {
   }
 
   export type PaymentRecordUpdateWithoutReservationInput = {
+    stripeIntentId?: StringFieldUpdateOperationsInput | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method?: EnumPAYMENT_RECORD__METHOD_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21490,8 +21480,8 @@ export namespace Prisma {
 
   export type PaymentRecordUncheckedUpdateWithoutReservationInput = {
     id?: IntFieldUpdateOperationsInput | number
+    stripeIntentId?: StringFieldUpdateOperationsInput | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method?: EnumPAYMENT_RECORD__METHOD_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21504,6 +21494,7 @@ export namespace Prisma {
     phone: string
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
+    stripeCustomerId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     vehicles?: VehicleCreateNestedManyWithoutOwnerInput
@@ -21521,6 +21512,7 @@ export namespace Prisma {
     phone: string
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
+    stripeCustomerId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     accountId: string
@@ -21585,6 +21577,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
@@ -21602,6 +21595,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accountId?: StringFieldUpdateOperationsInput | string
@@ -21720,8 +21714,8 @@ export namespace Prisma {
 
   export type PaymentRecordCreateManyUserInput = {
     id?: number
-    status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method: $Enums.PAYMENT_RECORD__METHOD_ALIAS
+    stripeIntentId: string
+    status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amount: number
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -21880,8 +21874,8 @@ export namespace Prisma {
   }
 
   export type PaymentRecordUpdateWithoutUserInput = {
+    stripeIntentId?: StringFieldUpdateOperationsInput | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method?: EnumPAYMENT_RECORD__METHOD_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21890,8 +21884,8 @@ export namespace Prisma {
 
   export type PaymentRecordUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
+    stripeIntentId?: StringFieldUpdateOperationsInput | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method?: EnumPAYMENT_RECORD__METHOD_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21900,8 +21894,8 @@ export namespace Prisma {
 
   export type PaymentRecordUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
+    stripeIntentId?: StringFieldUpdateOperationsInput | string
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
-    method?: EnumPAYMENT_RECORD__METHOD_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__METHOD_ALIAS
     amount?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

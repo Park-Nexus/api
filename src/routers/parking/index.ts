@@ -16,5 +16,4 @@ export const parkingRouter = trpcInstance.router({
     },
     availability: { get: lot.getAvailability },
   },
-  record: {},
 });

@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "ACCOUNT__ROLE_ALIAS" AS ENUM ('ADMIN', 'USER', 'PLOT_OWNER');
+CREATE TYPE "ACCOUNT__ROLE_ALIAS" AS ENUM ('ADMIN', 'USER');
 
 -- CreateEnum
 CREATE TYPE "USER__GENDER_ALIAS" AS ENUM ('MALE', 'FEMALE', 'OTHER');
@@ -11,20 +11,20 @@ CREATE TYPE "VEHICLE__TYPE_ALIAS" AS ENUM ('MOTORCYCLE', 'CAR', 'TRUCK');
 CREATE TYPE "PARKING_LOT__STATUS_ALIAS" AS ENUM ('ACTIVE', 'INACTIVE', 'SUSPENDED', 'DELETED');
 
 -- CreateEnum
+CREATE TYPE "PARKING_LOT_SERVICE__TYPE_ALIAS" AS ENUM ('CAR_WASH', 'CAR_REPAIR', 'TIRE_REPAIR', 'OIL_CHANGE', 'CHARGING');
+
+-- CreateEnum
 CREATE TYPE "PARKING_SPOT__STATUS_ALIAS" AS ENUM ('AVAILABLE', 'OCCUPIED', 'RESERVED', 'MAINTENANCE');
 
 -- CreateEnum
-CREATE TYPE "RESERVATION__STATUS_ALIAS" AS ENUM ('PENDING', 'COMPLETED', 'EXPIRED');
+CREATE TYPE "RESERVATION__STATUS_ALIAS" AS ENUM ('PENDING', 'ON_GOING', 'CANCELLED', 'OVERSTAYED', 'EXPIRED', 'COMPLETED');
 
 -- CreateEnum
-CREATE TYPE "PARKING_RECORD__STATUS_ALIAS" AS ENUM ('ON_GOING', 'COMPLETED');
-
--- CreateEnum
-CREATE TYPE "PAYMENT_RECORD__METHOD_ALIAS" AS ENUM ('CASH');
+CREATE TYPE "PAYMENT_RECORD__STATUS_ALIAS" AS ENUM ('CANCELLED', 'AWAITING', 'PAID');
 
 -- CreateTable
 CREATE TABLE "Account" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "role" "ACCOUNT__ROLE_ALIAS" NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE "AccountToken" (
     "token" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "accountId" INTEGER NOT NULL,
+    "accountId" TEXT NOT NULL,
 
     CONSTRAINT "AccountToken_pkey" PRIMARY KEY ("id")
 );
@@ -53,9 +53,10 @@ CREATE TABLE "User" (
     "phone" TEXT NOT NULL,
     "avatarUrl" TEXT,
     "gender" "USER__GENDER_ALIAS" NOT NULL,
+    "stripeCustomerId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "accountId" INTEGER NOT NULL,
+    "accountId" TEXT NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -81,7 +82,8 @@ CREATE TABLE "Vehicle" (
     "brand" TEXT NOT NULL,
     "model" TEXT NOT NULL,
     "color" TEXT NOT NULL,
-    "imageUrls" TEXT[],
+    "imageUrl" TEXT NOT NULL,
+    "deleteAt" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "ownerId" INTEGER NOT NULL,
@@ -93,15 +95,31 @@ CREATE TABLE "Vehicle" (
 CREATE TABLE "ParkingLot" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "description" TEXT NOT NULL DEFAULT '',
     "latitude" DOUBLE PRECISION NOT NULL,
     "longitude" DOUBLE PRECISION NOT NULL,
     "mediaUrls" TEXT[],
+    "ratings" DOUBLE PRECISION NOT NULL DEFAULT 0,
+    "phone" TEXT NOT NULL,
+    "openAt" TEXT NOT NULL,
+    "closeAt" TEXT NOT NULL,
     "status" "PARKING_LOT__STATUS_ALIAS" NOT NULL,
+    "isApproved" BOOLEAN NOT NULL DEFAULT false,
+    "approvedAt" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "ownerId" INTEGER NOT NULL,
 
     CONSTRAINT "ParkingLot_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "ParkingLotPrice" (
+    "vehicleType" "VEHICLE__TYPE_ALIAS" NOT NULL,
+    "price" DOUBLE PRECISION NOT NULL,
+    "parkingLotId" INTEGER NOT NULL,
+
+    CONSTRAINT "ParkingLotPrice_pkey" PRIMARY KEY ("vehicleType","parkingLotId")
 );
 
 -- CreateTable
@@ -122,10 +140,12 @@ CREATE TABLE "ParkingLotReview" (
 CREATE TABLE "ParkingLotService" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "type" "PARKING_LOT_SERVICE__TYPE_ALIAS" NOT NULL,
     "description" TEXT NOT NULL,
     "mediaUrls" TEXT[],
     "price" DOUBLE PRECISION NOT NULL,
     "vehicleTypes" "VEHICLE__TYPE_ALIAS"[],
+    "deletedAt" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "parkingLotId" INTEGER NOT NULL,
@@ -136,8 +156,10 @@ CREATE TABLE "ParkingLotService" (
 -- CreateTable
 CREATE TABLE "ParkingSpot" (
     "id" SERIAL NOT NULL,
-    "isAvailable" BOOLEAN NOT NULL,
+    "name" TEXT NOT NULL,
+    "isAvailable" BOOLEAN NOT NULL DEFAULT true,
     "vehicleType" "VEHICLE__TYPE_ALIAS" NOT NULL,
+    "deletedAt" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "parkingLotId" INTEGER NOT NULL,
@@ -148,10 +170,13 @@ CREATE TABLE "ParkingSpot" (
 -- CreateTable
 CREATE TABLE "Reservation" (
     "id" SERIAL NOT NULL,
-    "checkInAt" TIMESTAMP(3) NOT NULL,
-    "status" "RESERVATION__STATUS_ALIAS" NOT NULL,
+    "code" TEXT NOT NULL,
+    "status" "RESERVATION__STATUS_ALIAS" NOT NULL DEFAULT 'PENDING',
+    "startTime" TIMESTAMP(3) NOT NULL,
+    "endTime" TIMESTAMP(3) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "userId" INTEGER NOT NULL,
     "parkingSpotId" INTEGER NOT NULL,
     "vehicleId" INTEGER NOT NULL,
 
@@ -159,32 +184,23 @@ CREATE TABLE "Reservation" (
 );
 
 -- CreateTable
-CREATE TABLE "ParkingRecord" (
-    "id" SERIAL NOT NULL,
-    "checkInAt" TIMESTAMP(3) NOT NULL,
-    "checkOutAt" TIMESTAMP(3),
-    "totalPrice" DOUBLE PRECISION,
-    "status" "PARKING_RECORD__STATUS_ALIAS" NOT NULL,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
-    "vehicleId" INTEGER,
-    "parkingSpotId" INTEGER,
-    "reservationId" INTEGER,
-
-    CONSTRAINT "ParkingRecord_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "PaymentRecord" (
     "id" SERIAL NOT NULL,
-    "method" "PAYMENT_RECORD__METHOD_ALIAS" NOT NULL,
+    "stripeIntentId" TEXT NOT NULL,
+    "status" "PAYMENT_RECORD__STATUS_ALIAS" NOT NULL DEFAULT 'AWAITING',
     "amount" DOUBLE PRECISION NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "userId" INTEGER NOT NULL,
-    "parkingRecordId" INTEGER NOT NULL,
+    "reservationId" INTEGER NOT NULL,
 
     CONSTRAINT "PaymentRecord_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "_ParkingLotServiceToReservation" (
+    "A" INTEGER NOT NULL,
+    "B" INTEGER NOT NULL
 );
 
 -- CreateIndex
@@ -194,10 +210,13 @@ CREATE UNIQUE INDEX "Account_email_key" ON "Account"("email");
 CREATE UNIQUE INDEX "User_accountId_key" ON "User"("accountId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "ParkingRecord_reservationId_key" ON "ParkingRecord"("reservationId");
+CREATE UNIQUE INDEX "PaymentRecord_reservationId_key" ON "PaymentRecord"("reservationId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "PaymentRecord_parkingRecordId_key" ON "PaymentRecord"("parkingRecordId");
+CREATE UNIQUE INDEX "_ParkingLotServiceToReservation_AB_unique" ON "_ParkingLotServiceToReservation"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_ParkingLotServiceToReservation_B_index" ON "_ParkingLotServiceToReservation"("B");
 
 -- AddForeignKey
 ALTER TABLE "AccountToken" ADD CONSTRAINT "AccountToken_accountId_fkey" FOREIGN KEY ("accountId") REFERENCES "Account"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -215,6 +234,9 @@ ALTER TABLE "Vehicle" ADD CONSTRAINT "Vehicle_ownerId_fkey" FOREIGN KEY ("ownerI
 ALTER TABLE "ParkingLot" ADD CONSTRAINT "ParkingLot_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "ParkingLotPrice" ADD CONSTRAINT "ParkingLotPrice_parkingLotId_fkey" FOREIGN KEY ("parkingLotId") REFERENCES "ParkingLot"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "ParkingLotReview" ADD CONSTRAINT "ParkingLotReview_parkingLotId_fkey" FOREIGN KEY ("parkingLotId") REFERENCES "ParkingLot"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -227,22 +249,22 @@ ALTER TABLE "ParkingLotService" ADD CONSTRAINT "ParkingLotService_parkingLotId_f
 ALTER TABLE "ParkingSpot" ADD CONSTRAINT "ParkingSpot_parkingLotId_fkey" FOREIGN KEY ("parkingLotId") REFERENCES "ParkingLot"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "Reservation" ADD CONSTRAINT "Reservation_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "Reservation" ADD CONSTRAINT "Reservation_parkingSpotId_fkey" FOREIGN KEY ("parkingSpotId") REFERENCES "ParkingSpot"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Reservation" ADD CONSTRAINT "Reservation_vehicleId_fkey" FOREIGN KEY ("vehicleId") REFERENCES "Vehicle"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ParkingRecord" ADD CONSTRAINT "ParkingRecord_vehicleId_fkey" FOREIGN KEY ("vehicleId") REFERENCES "Vehicle"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "ParkingRecord" ADD CONSTRAINT "ParkingRecord_parkingSpotId_fkey" FOREIGN KEY ("parkingSpotId") REFERENCES "ParkingSpot"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "ParkingRecord" ADD CONSTRAINT "ParkingRecord_reservationId_fkey" FOREIGN KEY ("reservationId") REFERENCES "Reservation"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "PaymentRecord" ADD CONSTRAINT "PaymentRecord_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PaymentRecord" ADD CONSTRAINT "PaymentRecord_parkingRecordId_fkey" FOREIGN KEY ("parkingRecordId") REFERENCES "ParkingRecord"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "PaymentRecord" ADD CONSTRAINT "PaymentRecord_reservationId_fkey" FOREIGN KEY ("reservationId") REFERENCES "Reservation"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_ParkingLotServiceToReservation" ADD CONSTRAINT "_ParkingLotServiceToReservation_A_fkey" FOREIGN KEY ("A") REFERENCES "ParkingLotService"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_ParkingLotServiceToReservation" ADD CONSTRAINT "_ParkingLotServiceToReservation_B_fkey" FOREIGN KEY ("B") REFERENCES "Reservation"("id") ON DELETE CASCADE ON UPDATE CASCADE;
