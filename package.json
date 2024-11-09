@@ -12,6 +12,7 @@
     ".": {
       "types": "./src/index.d.ts"
     },
+    "./rules": "./rules/index.ts",
     "./prisma/client": {
       "types": "./prisma/client/index.d.ts"
     }
