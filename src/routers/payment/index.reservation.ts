@@ -40,6 +40,11 @@ export const getStripeIntent = procedure
         customerId: user.stripeCustomerId,
       });
 
+      await prisma.paymentRecord.update({
+        where: { id: paymentRecord.id },
+        data: { stripeIntentId: newIntent.id },
+      });
+
       return {
         clientSecret: newIntent.client_secret,
       };

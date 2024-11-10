@@ -4,7 +4,6 @@ import { BUCKET_NAME, SIGNED_URL_EXPIRATION } from "./index.types";
 import path from "path";
 
 const storage = new Storage({ keyFilename: path.join(__dirname, "../../gc-storage-key.json") });
-console.log(path.join(__dirname, "../../gc-storage-key.json"));
 
 // Upload file --------------------------------------------------------------------
 type TUploadFileParams = {

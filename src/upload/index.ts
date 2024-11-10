@@ -59,7 +59,6 @@ uploadRouter.post("/parkingLotService/media", upload.array("files"), async (req,
 
 // Get file signed url ------------------------------------------------------------------
 uploadRouter.get("/signedUrl/:filepath", (req, res) => {
-  console.log(req.params.filepath);
   return res.sendStatus(200);
 });
 

@@ -618,8 +618,6 @@ export const getAvailability = procedure
       (spot) => !reservedParkingSpots.includes(spot.id),
     );
 
-    console.log("-----------", reservedParkingSpots, availableParkingSpots);
-
     // Find available vehicle types
     const availableVehicleTypes = new Set<VEHICLE__TYPE_ALIAS>();
     availableParkingSpots.forEach((spot) => {
