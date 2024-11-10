@@ -121,10 +121,12 @@ export const create = procedure
     totalPrice = totalPrice + parkingDuration * parkingLotPrice.price;
 
     // create reservation
-    const newTicketCode = uuid(); // generate new ticket code
+    const newCheckInCode = uuid();
+    const newCheckOutCode = uuid();
     const newReservation = await prisma.reservation.create({
       data: {
-        code: newTicketCode,
+        checkInCode: newCheckInCode,
+        checkOutCode: newCheckOutCode,
         startTime: startTimeObj.toDate(),
         endTime: endTimeObj.toDate(),
         userId: user.id,

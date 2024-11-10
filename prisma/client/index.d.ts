@@ -12649,7 +12649,8 @@ export namespace Prisma {
 
   export type ReservationMinAggregateOutputType = {
     id: number | null
-    code: string | null
+    checkInCode: string | null
+    checkOutCode: string | null
     status: $Enums.RESERVATION__STATUS_ALIAS | null
     startTime: Date | null
     endTime: Date | null
@@ -12662,7 +12663,8 @@ export namespace Prisma {
 
   export type ReservationMaxAggregateOutputType = {
     id: number | null
-    code: string | null
+    checkInCode: string | null
+    checkOutCode: string | null
     status: $Enums.RESERVATION__STATUS_ALIAS | null
     startTime: Date | null
     endTime: Date | null
@@ -12675,7 +12677,8 @@ export namespace Prisma {
 
   export type ReservationCountAggregateOutputType = {
     id: number
-    code: number
+    checkInCode: number
+    checkOutCode: number
     status: number
     startTime: number
     endTime: number
@@ -12704,7 +12707,8 @@ export namespace Prisma {
 
   export type ReservationMinAggregateInputType = {
     id?: true
-    code?: true
+    checkInCode?: true
+    checkOutCode?: true
     status?: true
     startTime?: true
     endTime?: true
@@ -12717,7 +12721,8 @@ export namespace Prisma {
 
   export type ReservationMaxAggregateInputType = {
     id?: true
-    code?: true
+    checkInCode?: true
+    checkOutCode?: true
     status?: true
     startTime?: true
     endTime?: true
@@ -12730,7 +12735,8 @@ export namespace Prisma {
 
   export type ReservationCountAggregateInputType = {
     id?: true
-    code?: true
+    checkInCode?: true
+    checkOutCode?: true
     status?: true
     startTime?: true
     endTime?: true
@@ -12830,7 +12836,8 @@ export namespace Prisma {
 
   export type ReservationGroupByOutputType = {
     id: number
-    code: string
+    checkInCode: string
+    checkOutCode: string
     status: $Enums.RESERVATION__STATUS_ALIAS
     startTime: Date
     endTime: Date
@@ -12862,7 +12869,8 @@ export namespace Prisma {
 
   export type ReservationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    code?: boolean
+    checkInCode?: boolean
+    checkOutCode?: boolean
     status?: boolean
     startTime?: boolean
     endTime?: boolean
@@ -12881,7 +12889,8 @@ export namespace Prisma {
 
   export type ReservationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    code?: boolean
+    checkInCode?: boolean
+    checkOutCode?: boolean
     status?: boolean
     startTime?: boolean
     endTime?: boolean
@@ -12897,7 +12906,8 @@ export namespace Prisma {
 
   export type ReservationSelectScalar = {
     id?: boolean
-    code?: boolean
+    checkInCode?: boolean
+    checkOutCode?: boolean
     status?: boolean
     startTime?: boolean
     endTime?: boolean
@@ -12933,7 +12943,8 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      code: string
+      checkInCode: string
+      checkOutCode: string
       status: $Enums.RESERVATION__STATUS_ALIAS
       startTime: Date
       endTime: Date
@@ -13341,7 +13352,8 @@ export namespace Prisma {
    */ 
   interface ReservationFieldRefs {
     readonly id: FieldRef<"Reservation", 'Int'>
-    readonly code: FieldRef<"Reservation", 'String'>
+    readonly checkInCode: FieldRef<"Reservation", 'String'>
+    readonly checkOutCode: FieldRef<"Reservation", 'String'>
     readonly status: FieldRef<"Reservation", 'RESERVATION__STATUS_ALIAS'>
     readonly startTime: FieldRef<"Reservation", 'DateTime'>
     readonly endTime: FieldRef<"Reservation", 'DateTime'>
@@ -14898,7 +14910,8 @@ export namespace Prisma {
 
   export const ReservationScalarFieldEnum: {
     id: 'id',
-    code: 'code',
+    checkInCode: 'checkInCode',
+    checkOutCode: 'checkOutCode',
     status: 'status',
     startTime: 'startTime',
     endTime: 'endTime',
@@ -15908,7 +15921,8 @@ export namespace Prisma {
     OR?: ReservationWhereInput[]
     NOT?: ReservationWhereInput | ReservationWhereInput[]
     id?: IntFilter<"Reservation"> | number
-    code?: StringFilter<"Reservation"> | string
+    checkInCode?: StringFilter<"Reservation"> | string
+    checkOutCode?: StringFilter<"Reservation"> | string
     status?: EnumRESERVATION__STATUS_ALIASFilter<"Reservation"> | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeFilter<"Reservation"> | Date | string
     endTime?: DateTimeFilter<"Reservation"> | Date | string
@@ -15926,7 +15940,8 @@ export namespace Prisma {
 
   export type ReservationOrderByWithRelationInput = {
     id?: SortOrder
-    code?: SortOrder
+    checkInCode?: SortOrder
+    checkOutCode?: SortOrder
     status?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
@@ -15947,7 +15962,8 @@ export namespace Prisma {
     AND?: ReservationWhereInput | ReservationWhereInput[]
     OR?: ReservationWhereInput[]
     NOT?: ReservationWhereInput | ReservationWhereInput[]
-    code?: StringFilter<"Reservation"> | string
+    checkInCode?: StringFilter<"Reservation"> | string
+    checkOutCode?: StringFilter<"Reservation"> | string
     status?: EnumRESERVATION__STATUS_ALIASFilter<"Reservation"> | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeFilter<"Reservation"> | Date | string
     endTime?: DateTimeFilter<"Reservation"> | Date | string
@@ -15965,7 +15981,8 @@ export namespace Prisma {
 
   export type ReservationOrderByWithAggregationInput = {
     id?: SortOrder
-    code?: SortOrder
+    checkInCode?: SortOrder
+    checkOutCode?: SortOrder
     status?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
@@ -15986,7 +16003,8 @@ export namespace Prisma {
     OR?: ReservationScalarWhereWithAggregatesInput[]
     NOT?: ReservationScalarWhereWithAggregatesInput | ReservationScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Reservation"> | number
-    code?: StringWithAggregatesFilter<"Reservation"> | string
+    checkInCode?: StringWithAggregatesFilter<"Reservation"> | string
+    checkOutCode?: StringWithAggregatesFilter<"Reservation"> | string
     status?: EnumRESERVATION__STATUS_ALIASWithAggregatesFilter<"Reservation"> | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
     endTime?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
@@ -16897,7 +16915,8 @@ export namespace Prisma {
   }
 
   export type ReservationCreateInput = {
-    code: string
+    checkInCode: string
+    checkOutCode: string
     status?: $Enums.RESERVATION__STATUS_ALIAS
     startTime: Date | string
     endTime: Date | string
@@ -16912,7 +16931,8 @@ export namespace Prisma {
 
   export type ReservationUncheckedCreateInput = {
     id?: number
-    code: string
+    checkInCode: string
+    checkOutCode: string
     status?: $Enums.RESERVATION__STATUS_ALIAS
     startTime: Date | string
     endTime: Date | string
@@ -16926,7 +16946,8 @@ export namespace Prisma {
   }
 
   export type ReservationUpdateInput = {
-    code?: StringFieldUpdateOperationsInput | string
+    checkInCode?: StringFieldUpdateOperationsInput | string
+    checkOutCode?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16941,7 +16962,8 @@ export namespace Prisma {
 
   export type ReservationUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    code?: StringFieldUpdateOperationsInput | string
+    checkInCode?: StringFieldUpdateOperationsInput | string
+    checkOutCode?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16956,7 +16978,8 @@ export namespace Prisma {
 
   export type ReservationCreateManyInput = {
     id?: number
-    code: string
+    checkInCode: string
+    checkOutCode: string
     status?: $Enums.RESERVATION__STATUS_ALIAS
     startTime: Date | string
     endTime: Date | string
@@ -16968,7 +16991,8 @@ export namespace Prisma {
   }
 
   export type ReservationUpdateManyMutationInput = {
-    code?: StringFieldUpdateOperationsInput | string
+    checkInCode?: StringFieldUpdateOperationsInput | string
+    checkOutCode?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16978,7 +17002,8 @@ export namespace Prisma {
 
   export type ReservationUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    code?: StringFieldUpdateOperationsInput | string
+    checkInCode?: StringFieldUpdateOperationsInput | string
+    checkOutCode?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17931,7 +17956,8 @@ export namespace Prisma {
 
   export type ReservationCountOrderByAggregateInput = {
     id?: SortOrder
-    code?: SortOrder
+    checkInCode?: SortOrder
+    checkOutCode?: SortOrder
     status?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
@@ -17951,7 +17977,8 @@ export namespace Prisma {
 
   export type ReservationMaxOrderByAggregateInput = {
     id?: SortOrder
-    code?: SortOrder
+    checkInCode?: SortOrder
+    checkOutCode?: SortOrder
     status?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
@@ -17964,7 +17991,8 @@ export namespace Prisma {
 
   export type ReservationMinOrderByAggregateInput = {
     id?: SortOrder
-    code?: SortOrder
+    checkInCode?: SortOrder
+    checkOutCode?: SortOrder
     status?: SortOrder
     startTime?: SortOrder
     endTime?: SortOrder
@@ -19732,7 +19760,8 @@ export namespace Prisma {
   }
 
   export type ReservationCreateWithoutUserInput = {
-    code: string
+    checkInCode: string
+    checkOutCode: string
     status?: $Enums.RESERVATION__STATUS_ALIAS
     startTime: Date | string
     endTime: Date | string
@@ -19746,7 +19775,8 @@ export namespace Prisma {
 
   export type ReservationUncheckedCreateWithoutUserInput = {
     id?: number
-    code: string
+    checkInCode: string
+    checkOutCode: string
     status?: $Enums.RESERVATION__STATUS_ALIAS
     startTime: Date | string
     endTime: Date | string
@@ -19973,7 +20003,8 @@ export namespace Prisma {
     OR?: ReservationScalarWhereInput[]
     NOT?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
     id?: IntFilter<"Reservation"> | number
-    code?: StringFilter<"Reservation"> | string
+    checkInCode?: StringFilter<"Reservation"> | string
+    checkOutCode?: StringFilter<"Reservation"> | string
     status?: EnumRESERVATION__STATUS_ALIASFilter<"Reservation"> | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeFilter<"Reservation"> | Date | string
     endTime?: DateTimeFilter<"Reservation"> | Date | string
@@ -20102,7 +20133,8 @@ export namespace Prisma {
   }
 
   export type ReservationCreateWithoutVehicleInput = {
-    code: string
+    checkInCode: string
+    checkOutCode: string
     status?: $Enums.RESERVATION__STATUS_ALIAS
     startTime: Date | string
     endTime: Date | string
@@ -20116,7 +20148,8 @@ export namespace Prisma {
 
   export type ReservationUncheckedCreateWithoutVehicleInput = {
     id?: number
-    code: string
+    checkInCode: string
+    checkOutCode: string
     status?: $Enums.RESERVATION__STATUS_ALIAS
     startTime: Date | string
     endTime: Date | string
@@ -20886,7 +20919,8 @@ export namespace Prisma {
   }
 
   export type ReservationCreateWithoutServicesInput = {
-    code: string
+    checkInCode: string
+    checkOutCode: string
     status?: $Enums.RESERVATION__STATUS_ALIAS
     startTime: Date | string
     endTime: Date | string
@@ -20900,7 +20934,8 @@ export namespace Prisma {
 
   export type ReservationUncheckedCreateWithoutServicesInput = {
     id?: number
-    code: string
+    checkInCode: string
+    checkOutCode: string
     status?: $Enums.RESERVATION__STATUS_ALIAS
     startTime: Date | string
     endTime: Date | string
@@ -20988,7 +21023,8 @@ export namespace Prisma {
   }
 
   export type ReservationCreateWithoutParkingSpotInput = {
-    code: string
+    checkInCode: string
+    checkOutCode: string
     status?: $Enums.RESERVATION__STATUS_ALIAS
     startTime: Date | string
     endTime: Date | string
@@ -21002,7 +21038,8 @@ export namespace Prisma {
 
   export type ReservationUncheckedCreateWithoutParkingSpotInput = {
     id?: number
-    code: string
+    checkInCode: string
+    checkOutCode: string
     status?: $Enums.RESERVATION__STATUS_ALIAS
     startTime: Date | string
     endTime: Date | string
@@ -21499,7 +21536,8 @@ export namespace Prisma {
   }
 
   export type ReservationCreateWithoutPaymentRecordInput = {
-    code: string
+    checkInCode: string
+    checkOutCode: string
     status?: $Enums.RESERVATION__STATUS_ALIAS
     startTime: Date | string
     endTime: Date | string
@@ -21513,7 +21551,8 @@ export namespace Prisma {
 
   export type ReservationUncheckedCreateWithoutPaymentRecordInput = {
     id?: number
-    code: string
+    checkInCode: string
+    checkOutCode: string
     status?: $Enums.RESERVATION__STATUS_ALIAS
     startTime: Date | string
     endTime: Date | string
@@ -21588,7 +21627,8 @@ export namespace Prisma {
   }
 
   export type ReservationUpdateWithoutPaymentRecordInput = {
-    code?: StringFieldUpdateOperationsInput | string
+    checkInCode?: StringFieldUpdateOperationsInput | string
+    checkOutCode?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21602,7 +21642,8 @@ export namespace Prisma {
 
   export type ReservationUncheckedUpdateWithoutPaymentRecordInput = {
     id?: IntFieldUpdateOperationsInput | number
-    code?: StringFieldUpdateOperationsInput | string
+    checkInCode?: StringFieldUpdateOperationsInput | string
+    checkOutCode?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21702,7 +21743,8 @@ export namespace Prisma {
 
   export type ReservationCreateManyUserInput = {
     id?: number
-    code: string
+    checkInCode: string
+    checkOutCode: string
     status?: $Enums.RESERVATION__STATUS_ALIAS
     startTime: Date | string
     endTime: Date | string
@@ -21895,7 +21937,8 @@ export namespace Prisma {
   }
 
   export type ReservationUpdateWithoutUserInput = {
-    code?: StringFieldUpdateOperationsInput | string
+    checkInCode?: StringFieldUpdateOperationsInput | string
+    checkOutCode?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21909,7 +21952,8 @@ export namespace Prisma {
 
   export type ReservationUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
-    code?: StringFieldUpdateOperationsInput | string
+    checkInCode?: StringFieldUpdateOperationsInput | string
+    checkOutCode?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21923,7 +21967,8 @@ export namespace Prisma {
 
   export type ReservationUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
-    code?: StringFieldUpdateOperationsInput | string
+    checkInCode?: StringFieldUpdateOperationsInput | string
+    checkOutCode?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21935,7 +21980,8 @@ export namespace Prisma {
 
   export type ReservationCreateManyVehicleInput = {
     id?: number
-    code: string
+    checkInCode: string
+    checkOutCode: string
     status?: $Enums.RESERVATION__STATUS_ALIAS
     startTime: Date | string
     endTime: Date | string
@@ -21946,7 +21992,8 @@ export namespace Prisma {
   }
 
   export type ReservationUpdateWithoutVehicleInput = {
-    code?: StringFieldUpdateOperationsInput | string
+    checkInCode?: StringFieldUpdateOperationsInput | string
+    checkOutCode?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21960,7 +22007,8 @@ export namespace Prisma {
 
   export type ReservationUncheckedUpdateWithoutVehicleInput = {
     id?: IntFieldUpdateOperationsInput | number
-    code?: StringFieldUpdateOperationsInput | string
+    checkInCode?: StringFieldUpdateOperationsInput | string
+    checkOutCode?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21974,7 +22022,8 @@ export namespace Prisma {
 
   export type ReservationUncheckedUpdateManyWithoutVehicleInput = {
     id?: IntFieldUpdateOperationsInput | number
-    code?: StringFieldUpdateOperationsInput | string
+    checkInCode?: StringFieldUpdateOperationsInput | string
+    checkOutCode?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22138,7 +22187,8 @@ export namespace Prisma {
   }
 
   export type ReservationUpdateWithoutServicesInput = {
-    code?: StringFieldUpdateOperationsInput | string
+    checkInCode?: StringFieldUpdateOperationsInput | string
+    checkOutCode?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22152,7 +22202,8 @@ export namespace Prisma {
 
   export type ReservationUncheckedUpdateWithoutServicesInput = {
     id?: IntFieldUpdateOperationsInput | number
-    code?: StringFieldUpdateOperationsInput | string
+    checkInCode?: StringFieldUpdateOperationsInput | string
+    checkOutCode?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22166,7 +22217,8 @@ export namespace Prisma {
 
   export type ReservationUncheckedUpdateManyWithoutServicesInput = {
     id?: IntFieldUpdateOperationsInput | number
-    code?: StringFieldUpdateOperationsInput | string
+    checkInCode?: StringFieldUpdateOperationsInput | string
+    checkOutCode?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22179,7 +22231,8 @@ export namespace Prisma {
 
   export type ReservationCreateManyParkingSpotInput = {
     id?: number
-    code: string
+    checkInCode: string
+    checkOutCode: string
     status?: $Enums.RESERVATION__STATUS_ALIAS
     startTime: Date | string
     endTime: Date | string
@@ -22190,7 +22243,8 @@ export namespace Prisma {
   }
 
   export type ReservationUpdateWithoutParkingSpotInput = {
-    code?: StringFieldUpdateOperationsInput | string
+    checkInCode?: StringFieldUpdateOperationsInput | string
+    checkOutCode?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22204,7 +22258,8 @@ export namespace Prisma {
 
   export type ReservationUncheckedUpdateWithoutParkingSpotInput = {
     id?: IntFieldUpdateOperationsInput | number
-    code?: StringFieldUpdateOperationsInput | string
+    checkInCode?: StringFieldUpdateOperationsInput | string
+    checkOutCode?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22218,7 +22273,8 @@ export namespace Prisma {
 
   export type ReservationUncheckedUpdateManyWithoutParkingSpotInput = {
     id?: IntFieldUpdateOperationsInput | number
-    code?: StringFieldUpdateOperationsInput | string
+    checkInCode?: StringFieldUpdateOperationsInput | string
+    checkOutCode?: StringFieldUpdateOperationsInput | string
     status?: EnumRESERVATION__STATUS_ALIASFieldUpdateOperationsInput | $Enums.RESERVATION__STATUS_ALIAS
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
