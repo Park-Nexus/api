@@ -84,6 +84,8 @@ export const getSingle = procedure
       });
     }
 
+    if (!user) throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
+
     user = {
       ...user,
       avatarUrl: user.avatarUrl ? await getFileSignedUrl({ path: user.avatarUrl }) : "",

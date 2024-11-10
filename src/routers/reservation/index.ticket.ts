@@ -1,6 +1,5 @@
 import { z } from "zod";
 import dayjs from "dayjs";
-import { v4 as uuid } from "uuid";
 import { procedure } from "../../trpc";
 import { authMiddleware } from "../../auth";
 import { prisma } from "../../db";
@@ -121,12 +120,8 @@ export const create = procedure
     totalPrice = totalPrice + parkingDuration * parkingLotPrice.price;
 
     // create reservation
-    const newCheckInCode = uuid();
-    const newCheckOutCode = uuid();
     const newReservation = await prisma.reservation.create({
       data: {
-        checkInCode: newCheckInCode,
-        checkOutCode: newCheckOutCode,
         startTime: startTimeObj.toDate(),
         endTime: endTimeObj.toDate(),
         userId: user.id,

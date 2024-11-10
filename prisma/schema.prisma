@@ -232,13 +232,12 @@ model ParkingSpot {
 model Reservation {
   id Int @id @default(autoincrement())
 
-  checkInCode  String
-  checkOutCode String
-  status       RESERVATION__STATUS_ALIAS @default(PENDING)
-  startTime    DateTime
-  endTime      DateTime
-  createdAt    DateTime                  @default(now())
-  updatedAt    DateTime                  @updatedAt
+  code      String                    @unique @default(uuid())
+  status    RESERVATION__STATUS_ALIAS @default(PENDING)
+  startTime DateTime
+  endTime   DateTime
+  createdAt DateTime                  @default(now())
+  updatedAt DateTime                  @updatedAt
 
   services ParkingLotService[]
 
