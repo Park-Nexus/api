@@ -8,6 +8,7 @@ COPY .env.production ./.env
 COPY package.json ./package.json
 COPY yarn.lock ./yarn.lock
 COPY tsconfig.json ./tsconfig.json
+COPY gc-storage-key.json ./gc-storage-key.json
 
 
 RUN yarn install

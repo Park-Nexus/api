@@ -13,15 +13,20 @@
    5. Grant all privileges to the database with `grant all privileges on database parkNexus to postgres;`.
 
 2. Usage
-   1. To migrate the database, run `npx prisma migrate dev --name <migration name>`.
+   1. To migrate the database, run `npx prisma migrate dev`.
    2. To generate the Prisma client, run `npx prisma generate`.
 
-## ENV File
+## ENV and configuration files
 
-- The env file must contain the following variables:
+- The .env and .env.production files must contain the following variables:
+
   1. `API_PORT`
   2. `DATABASE_URL`
-  3. `JWT_SECRET`
-  4. `JWT_REFRESH_EXPIRES`
-  5. `JWT_ACCESS_EXPIRES`
-  6. `PASSWORD_ROUNDS`
+  3. `STRIPE_PUBLISHABLE_KEY`
+  4. `STRIPE_SECRET_KEY`
+  5. `JWT_SECRET`
+  6. `JWT_REFRESH_EXPIRES`
+  7. `JWT_ACCESS_EXPIRES`
+  8. `PASSWORD_ROUNDS`
+
+- To use storage, create a Google Cloud service account with the storage permission and put in the file `gc-storage-key.json` in the root of the project.
