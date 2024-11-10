@@ -95,7 +95,7 @@ model User {
   phone            String
   avatarUrl        String?
   gender           USER__GENDER_ALIAS
-  stripeCustomerId String
+  stripeCustomerId String             @unique
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
 
@@ -115,7 +115,6 @@ model UserNotification {
 
   title     String
   message   String
-  read      Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -257,7 +256,7 @@ model Reservation {
 model PaymentRecord {
   id Int @id @default(autoincrement())
 
-  stripeIntentId String?
+  stripeIntentId String?                      @unique
   status         PAYMENT_RECORD__STATUS_ALIAS @default(AWAITING)
   amountInUsd    Float
   createdAt      DateTime                     @default(now())

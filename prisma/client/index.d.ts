@@ -5324,7 +5324,6 @@ export namespace Prisma {
     id: number | null
     title: string | null
     message: string | null
-    read: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
     userId: number | null
@@ -5334,7 +5333,6 @@ export namespace Prisma {
     id: number | null
     title: string | null
     message: string | null
-    read: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
     userId: number | null
@@ -5344,7 +5342,6 @@ export namespace Prisma {
     id: number
     title: number
     message: number
-    read: number
     createdAt: number
     updatedAt: number
     userId: number
@@ -5366,7 +5363,6 @@ export namespace Prisma {
     id?: true
     title?: true
     message?: true
-    read?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
@@ -5376,7 +5372,6 @@ export namespace Prisma {
     id?: true
     title?: true
     message?: true
-    read?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
@@ -5386,7 +5381,6 @@ export namespace Prisma {
     id?: true
     title?: true
     message?: true
-    read?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
@@ -5483,7 +5477,6 @@ export namespace Prisma {
     id: number
     title: string
     message: string
-    read: boolean
     createdAt: Date
     updatedAt: Date
     userId: number
@@ -5512,7 +5505,6 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     message?: boolean
-    read?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
@@ -5523,7 +5515,6 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     message?: boolean
-    read?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
@@ -5534,7 +5525,6 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     message?: boolean
-    read?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
@@ -5556,7 +5546,6 @@ export namespace Prisma {
       id: number
       title: string
       message: string
-      read: boolean
       createdAt: Date
       updatedAt: Date
       userId: number
@@ -5957,7 +5946,6 @@ export namespace Prisma {
     readonly id: FieldRef<"UserNotification", 'Int'>
     readonly title: FieldRef<"UserNotification", 'String'>
     readonly message: FieldRef<"UserNotification", 'String'>
-    readonly read: FieldRef<"UserNotification", 'Boolean'>
     readonly createdAt: FieldRef<"UserNotification", 'DateTime'>
     readonly updatedAt: FieldRef<"UserNotification", 'DateTime'>
     readonly userId: FieldRef<"UserNotification", 'Int'>
@@ -14807,7 +14795,6 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     message: 'message',
-    read: 'read',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     userId: 'userId'
@@ -15039,13 +15026,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
    * Reference to a field of type 'VEHICLE__TYPE_ALIAS'
    */
   export type EnumVEHICLE__TYPE_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'VEHICLE__TYPE_ALIAS'>
@@ -15084,6 +15064,13 @@ export namespace Prisma {
    * Reference to a field of type 'PARKING_LOT__STATUS_ALIAS[]'
    */
   export type ListEnumPARKING_LOT__STATUS_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PARKING_LOT__STATUS_ALIAS[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -15297,6 +15284,7 @@ export namespace Prisma {
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    stripeCustomerId?: string
     accountId?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
@@ -15306,7 +15294,6 @@ export namespace Prisma {
     phone?: StringFilter<"User"> | string
     avatarUrl?: StringNullableFilter<"User"> | string | null
     gender?: EnumUSER__GENDER_ALIASFilter<"User"> | $Enums.USER__GENDER_ALIAS
-    stripeCustomerId?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     vehicles?: VehicleListRelationFilter
@@ -15316,7 +15303,7 @@ export namespace Prisma {
     userNotifications?: UserNotificationListRelationFilter
     reservations?: ReservationListRelationFilter
     account?: XOR<AccountRelationFilter, AccountWhereInput>
-  }, "id" | "accountId">
+  }, "id" | "stripeCustomerId" | "accountId">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
@@ -15359,7 +15346,6 @@ export namespace Prisma {
     id?: IntFilter<"UserNotification"> | number
     title?: StringFilter<"UserNotification"> | string
     message?: StringFilter<"UserNotification"> | string
-    read?: BoolFilter<"UserNotification"> | boolean
     createdAt?: DateTimeFilter<"UserNotification"> | Date | string
     updatedAt?: DateTimeFilter<"UserNotification"> | Date | string
     userId?: IntFilter<"UserNotification"> | number
@@ -15370,7 +15356,6 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     message?: SortOrder
-    read?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -15384,7 +15369,6 @@ export namespace Prisma {
     NOT?: UserNotificationWhereInput | UserNotificationWhereInput[]
     title?: StringFilter<"UserNotification"> | string
     message?: StringFilter<"UserNotification"> | string
-    read?: BoolFilter<"UserNotification"> | boolean
     createdAt?: DateTimeFilter<"UserNotification"> | Date | string
     updatedAt?: DateTimeFilter<"UserNotification"> | Date | string
     userId?: IntFilter<"UserNotification"> | number
@@ -15395,7 +15379,6 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     message?: SortOrder
-    read?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -15413,7 +15396,6 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"UserNotification"> | number
     title?: StringWithAggregatesFilter<"UserNotification"> | string
     message?: StringWithAggregatesFilter<"UserNotification"> | string
-    read?: BoolWithAggregatesFilter<"UserNotification"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"UserNotification"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"UserNotification"> | Date | string
     userId?: IntWithAggregatesFilter<"UserNotification"> | number
@@ -16046,11 +16028,11 @@ export namespace Prisma {
 
   export type PaymentRecordWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    stripeIntentId?: string
     reservationId?: number
     AND?: PaymentRecordWhereInput | PaymentRecordWhereInput[]
     OR?: PaymentRecordWhereInput[]
     NOT?: PaymentRecordWhereInput | PaymentRecordWhereInput[]
-    stripeIntentId?: StringNullableFilter<"PaymentRecord"> | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFilter<"PaymentRecord"> | number
     createdAt?: DateTimeFilter<"PaymentRecord"> | Date | string
@@ -16058,7 +16040,7 @@ export namespace Prisma {
     userId?: IntFilter<"PaymentRecord"> | number
     user?: XOR<UserRelationFilter, UserWhereInput>
     reservation?: XOR<ReservationRelationFilter, ReservationWhereInput>
-  }, "id" | "reservationId">
+  }, "id" | "stripeIntentId" | "reservationId">
 
   export type PaymentRecordOrderByWithAggregationInput = {
     id?: SortOrder
@@ -16327,7 +16309,6 @@ export namespace Prisma {
   export type UserNotificationCreateInput = {
     title: string
     message: string
-    read?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutUserNotificationsInput
@@ -16337,7 +16318,6 @@ export namespace Prisma {
     id?: number
     title: string
     message: string
-    read?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: number
@@ -16346,7 +16326,6 @@ export namespace Prisma {
   export type UserNotificationUpdateInput = {
     title?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
-    read?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutUserNotificationsNestedInput
@@ -16356,7 +16335,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
-    read?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -16366,7 +16344,6 @@ export namespace Prisma {
     id?: number
     title: string
     message: string
-    read?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: number
@@ -16375,7 +16352,6 @@ export namespace Prisma {
   export type UserNotificationUpdateManyMutationInput = {
     title?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
-    read?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16384,7 +16360,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
-    read?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -17429,11 +17404,6 @@ export namespace Prisma {
     _max?: NestedEnumUSER__GENDER_ALIASFilter<$PrismaModel>
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type UserRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -17443,7 +17413,6 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     message?: SortOrder
-    read?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -17458,7 +17427,6 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     message?: SortOrder
-    read?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -17468,7 +17436,6 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     message?: SortOrder
-    read?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -17477,14 +17444,6 @@ export namespace Prisma {
   export type UserNotificationSumOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type EnumVEHICLE__TYPE_ALIASFilter<$PrismaModel = never> = {
@@ -17605,6 +17564,11 @@ export namespace Prisma {
     in?: $Enums.PARKING_LOT__STATUS_ALIAS[] | ListEnumPARKING_LOT__STATUS_ALIASFieldRefInput<$PrismaModel>
     notIn?: $Enums.PARKING_LOT__STATUS_ALIAS[] | ListEnumPARKING_LOT__STATUS_ALIASFieldRefInput<$PrismaModel>
     not?: NestedEnumPARKING_LOT__STATUS_ALIASFilter<$PrismaModel> | $Enums.PARKING_LOT__STATUS_ALIAS
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type ParkingSpotListRelationFilter = {
@@ -17732,6 +17696,14 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumPARKING_LOT__STATUS_ALIASFilter<$PrismaModel>
     _max?: NestedEnumPARKING_LOT__STATUS_ALIASFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type ParkingLotRelationFilter = {
@@ -18477,10 +18449,6 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
-  }
-
   export type UserUpdateOneRequiredWithoutUserNotificationsNestedInput = {
     create?: XOR<UserCreateWithoutUserNotificationsInput, UserUncheckedCreateWithoutUserNotificationsInput>
     connectOrCreate?: UserCreateOrConnectWithoutUserNotificationsInput
@@ -18634,6 +18602,10 @@ export namespace Prisma {
 
   export type EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput = {
     set?: $Enums.PARKING_LOT__STATUS_ALIAS
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type ParkingSpotUpdateManyWithoutParkingLotNestedInput = {
@@ -19255,19 +19227,6 @@ export namespace Prisma {
     _max?: NestedEnumUSER__GENDER_ALIASFilter<$PrismaModel>
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type NestedEnumVEHICLE__TYPE_ALIASFilter<$PrismaModel = never> = {
     equals?: $Enums.VEHICLE__TYPE_ALIAS | EnumVEHICLE__TYPE_ALIASFieldRefInput<$PrismaModel>
     in?: $Enums.VEHICLE__TYPE_ALIAS[] | ListEnumVEHICLE__TYPE_ALIASFieldRefInput<$PrismaModel>
@@ -19317,6 +19276,11 @@ export namespace Prisma {
     not?: NestedEnumPARKING_LOT__STATUS_ALIASFilter<$PrismaModel> | $Enums.PARKING_LOT__STATUS_ALIAS
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -19341,6 +19305,14 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumPARKING_LOT__STATUS_ALIASFilter<$PrismaModel>
     _max?: NestedEnumPARKING_LOT__STATUS_ALIASFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedEnumPARKING_LOT_SERVICE__TYPE_ALIASFilter<$PrismaModel = never> = {
@@ -19737,7 +19709,6 @@ export namespace Prisma {
   export type UserNotificationCreateWithoutUserInput = {
     title: string
     message: string
-    read?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -19746,7 +19717,6 @@ export namespace Prisma {
     id?: number
     title: string
     message: string
-    read?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -19977,7 +19947,6 @@ export namespace Prisma {
     id?: IntFilter<"UserNotification"> | number
     title?: StringFilter<"UserNotification"> | string
     message?: StringFilter<"UserNotification"> | string
-    read?: BoolFilter<"UserNotification"> | boolean
     createdAt?: DateTimeFilter<"UserNotification"> | Date | string
     updatedAt?: DateTimeFilter<"UserNotification"> | Date | string
     userId?: IntFilter<"UserNotification"> | number
@@ -21727,7 +21696,6 @@ export namespace Prisma {
     id?: number
     title: string
     message: string
-    read?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21906,7 +21874,6 @@ export namespace Prisma {
   export type UserNotificationUpdateWithoutUserInput = {
     title?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
-    read?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21915,7 +21882,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
-    read?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21924,7 +21890,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     title?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
-    read?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
