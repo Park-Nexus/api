@@ -6,13 +6,13 @@ import { TRPCError } from "@trpc/server";
 import { StripeUtils } from "../../stripe";
 
 // Create a new Stripe intent ----------------------------------------------------------------
-const createStripeIntentSchema = z.object({
+const getIntentSchema = z.object({
   ticketId: z.number(),
 });
-export const createStripeIntent = procedure
+export const getStripeIntent = procedure
   .use(authMiddleware(["USER"]))
-  .input(createStripeIntentSchema)
-  .mutation(async ({ input, ctx }) => {
+  .input(getIntentSchema)
+  .query(async ({ input, ctx }) => {
     const { ticketId } = input;
     const {
       account: { id: accountId },

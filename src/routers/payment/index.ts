@@ -6,6 +6,6 @@ import * as method from "./index.method";
 
 export const paymentRouter = trpcInstance.router({
   key: { stripePublishable: { get: key.getStripePublishableKey } },
-  reservation: { stripeIntent: { create: reservation.createStripeIntent } },
+  reservation: { stripeIntent: { get: reservation.getStripeIntent } },
   method: { get: { many: method.getMany }, add: method.add, remove: method.remove },
 });
