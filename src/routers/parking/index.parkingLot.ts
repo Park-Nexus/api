@@ -13,6 +13,7 @@ import {
 import { procedure } from "../../trpc";
 import { deleteFile, extractPathFromURL, getFileSignedUrl } from "../../storage";
 import { MAXIMUM_OVERSTAYING_DURATION_IN_HOURS } from "../../../rules";
+import { TRPCError } from "@trpc/server";
 
 const EARTH_RADIUS_IN_KM = 6371;
 
@@ -205,8 +206,15 @@ const getSingleSchema = z.object({
 export const getSingle = procedure
   .use(authMiddleware())
   .input(getSingleSchema)
-  .query(async ({ input }) => {
+  .query(async ({ ctx, input }) => {
+    const {
+      account: { id: accountId },
+    } = ctx;
+
     const { id } = input;
+
+    const user = await prisma.user.findUnique({ where: { accountId } });
+    if (!user) throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
 
     const parkingLot = await prisma.parkingLot.findUnique({
       where: { id },
@@ -239,9 +247,14 @@ export const getSingle = procedure
         return signedUrl;
       }),
     );
-    parkingLot.mediaUrls = mediaSignedUrls;
 
-    return parkingLot;
+    const result = {
+      ...parkingLot,
+      isMine: parkingLot.ownerId === user.id,
+      mediaUrls: mediaSignedUrls,
+    };
+
+    return result;
   });
 
 // Update parking lot price --------------------------------------------------------------------
