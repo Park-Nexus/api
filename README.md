@@ -15,6 +15,8 @@
 2. Usage
    1. To migrate the database, run `npx prisma migrate dev`.
    2. To generate the Prisma client, run `npx prisma generate`.
+   3. To seed the database, run `npx prisma db seed`.
+   4. To reset the database, run `npx prisma migrate reset`.
 
 ## ENV and configuration files
 
@@ -28,5 +30,7 @@
   6. `JWT_REFRESH_EXPIRES`
   7. `JWT_ACCESS_EXPIRES`
   8. `PASSWORD_ROUNDS`
+  9. `ADMIN_EMAIL`
+  10. `ADMIN_PASSWORD`
 
 - To use storage, create a Google Cloud service account with the storage permission and put in the file `gc-storage-key.json` in the root of the project.
