@@ -193,7 +193,9 @@ export const getMany = procedure
       );
     }
 
-    return parkingLots;
+    const result = parkingLots.map((lot) => ({ ...lot, isMine: lot.ownerId === user.id }));
+
+    return result;
   });
 
 // Get single parking lot ----------------------------------------------------------------------
