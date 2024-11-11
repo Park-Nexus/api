@@ -8584,18 +8584,21 @@ export namespace Prisma {
   export type ParkingLotPriceMinAggregateOutputType = {
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS | null
     price: number | null
+    updatedAt: Date | null
     parkingLotId: number | null
   }
 
   export type ParkingLotPriceMaxAggregateOutputType = {
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS | null
     price: number | null
+    updatedAt: Date | null
     parkingLotId: number | null
   }
 
   export type ParkingLotPriceCountAggregateOutputType = {
     vehicleType: number
     price: number
+    updatedAt: number
     parkingLotId: number
     _all: number
   }
@@ -8614,18 +8617,21 @@ export namespace Prisma {
   export type ParkingLotPriceMinAggregateInputType = {
     vehicleType?: true
     price?: true
+    updatedAt?: true
     parkingLotId?: true
   }
 
   export type ParkingLotPriceMaxAggregateInputType = {
     vehicleType?: true
     price?: true
+    updatedAt?: true
     parkingLotId?: true
   }
 
   export type ParkingLotPriceCountAggregateInputType = {
     vehicleType?: true
     price?: true
+    updatedAt?: true
     parkingLotId?: true
     _all?: true
   }
@@ -8719,6 +8725,7 @@ export namespace Prisma {
   export type ParkingLotPriceGroupByOutputType = {
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     price: number
+    updatedAt: Date
     parkingLotId: number
     _count: ParkingLotPriceCountAggregateOutputType | null
     _avg: ParkingLotPriceAvgAggregateOutputType | null
@@ -8744,6 +8751,7 @@ export namespace Prisma {
   export type ParkingLotPriceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     vehicleType?: boolean
     price?: boolean
+    updatedAt?: boolean
     parkingLotId?: boolean
     parkingLot?: boolean | ParkingLotDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["parkingLotPrice"]>
@@ -8751,6 +8759,7 @@ export namespace Prisma {
   export type ParkingLotPriceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     vehicleType?: boolean
     price?: boolean
+    updatedAt?: boolean
     parkingLotId?: boolean
     parkingLot?: boolean | ParkingLotDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["parkingLotPrice"]>
@@ -8758,6 +8767,7 @@ export namespace Prisma {
   export type ParkingLotPriceSelectScalar = {
     vehicleType?: boolean
     price?: boolean
+    updatedAt?: boolean
     parkingLotId?: boolean
   }
 
@@ -8776,6 +8786,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       vehicleType: $Enums.VEHICLE__TYPE_ALIAS
       price: number
+      updatedAt: Date
       parkingLotId: number
     }, ExtArgs["result"]["parkingLotPrice"]>
     composites: {}
@@ -9173,6 +9184,7 @@ export namespace Prisma {
   interface ParkingLotPriceFieldRefs {
     readonly vehicleType: FieldRef<"ParkingLotPrice", 'VEHICLE__TYPE_ALIAS'>
     readonly price: FieldRef<"ParkingLotPrice", 'Float'>
+    readonly updatedAt: FieldRef<"ParkingLotPrice", 'DateTime'>
     readonly parkingLotId: FieldRef<"ParkingLotPrice", 'Int'>
   }
     
@@ -14845,6 +14857,7 @@ export namespace Prisma {
   export const ParkingLotPriceScalarFieldEnum: {
     vehicleType: 'vehicleType',
     price: 'price',
+    updatedAt: 'updatedAt',
     parkingLotId: 'parkingLotId'
   };
 
@@ -15621,6 +15634,7 @@ export namespace Prisma {
     NOT?: ParkingLotPriceWhereInput | ParkingLotPriceWhereInput[]
     vehicleType?: EnumVEHICLE__TYPE_ALIASFilter<"ParkingLotPrice"> | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatFilter<"ParkingLotPrice"> | number
+    updatedAt?: DateTimeFilter<"ParkingLotPrice"> | Date | string
     parkingLotId?: IntFilter<"ParkingLotPrice"> | number
     parkingLot?: XOR<ParkingLotRelationFilter, ParkingLotWhereInput>
   }
@@ -15628,6 +15642,7 @@ export namespace Prisma {
   export type ParkingLotPriceOrderByWithRelationInput = {
     vehicleType?: SortOrder
     price?: SortOrder
+    updatedAt?: SortOrder
     parkingLotId?: SortOrder
     parkingLot?: ParkingLotOrderByWithRelationInput
   }
@@ -15639,6 +15654,7 @@ export namespace Prisma {
     NOT?: ParkingLotPriceWhereInput | ParkingLotPriceWhereInput[]
     vehicleType?: EnumVEHICLE__TYPE_ALIASFilter<"ParkingLotPrice"> | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatFilter<"ParkingLotPrice"> | number
+    updatedAt?: DateTimeFilter<"ParkingLotPrice"> | Date | string
     parkingLotId?: IntFilter<"ParkingLotPrice"> | number
     parkingLot?: XOR<ParkingLotRelationFilter, ParkingLotWhereInput>
   }, "vehicleType_parkingLotId">
@@ -15646,6 +15662,7 @@ export namespace Prisma {
   export type ParkingLotPriceOrderByWithAggregationInput = {
     vehicleType?: SortOrder
     price?: SortOrder
+    updatedAt?: SortOrder
     parkingLotId?: SortOrder
     _count?: ParkingLotPriceCountOrderByAggregateInput
     _avg?: ParkingLotPriceAvgOrderByAggregateInput
@@ -15660,6 +15677,7 @@ export namespace Prisma {
     NOT?: ParkingLotPriceScalarWhereWithAggregatesInput | ParkingLotPriceScalarWhereWithAggregatesInput[]
     vehicleType?: EnumVEHICLE__TYPE_ALIASWithAggregatesFilter<"ParkingLotPrice"> | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatWithAggregatesFilter<"ParkingLotPrice"> | number
+    updatedAt?: DateTimeWithAggregatesFilter<"ParkingLotPrice"> | Date | string
     parkingLotId?: IntWithAggregatesFilter<"ParkingLotPrice"> | number
   }
 
@@ -16611,41 +16629,48 @@ export namespace Prisma {
   export type ParkingLotPriceCreateInput = {
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     price: number
+    updatedAt?: Date | string
     parkingLot: ParkingLotCreateNestedOneWithoutParkingLotPricesInput
   }
 
   export type ParkingLotPriceUncheckedCreateInput = {
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     price: number
+    updatedAt?: Date | string
     parkingLotId: number
   }
 
   export type ParkingLotPriceUpdateInput = {
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingLot?: ParkingLotUpdateOneRequiredWithoutParkingLotPricesNestedInput
   }
 
   export type ParkingLotPriceUncheckedUpdateInput = {
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingLotId?: IntFieldUpdateOperationsInput | number
   }
 
   export type ParkingLotPriceCreateManyInput = {
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     price: number
+    updatedAt?: Date | string
     parkingLotId: number
   }
 
   export type ParkingLotPriceUpdateManyMutationInput = {
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ParkingLotPriceUncheckedUpdateManyInput = {
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingLotId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -17719,6 +17744,7 @@ export namespace Prisma {
   export type ParkingLotPriceCountOrderByAggregateInput = {
     vehicleType?: SortOrder
     price?: SortOrder
+    updatedAt?: SortOrder
     parkingLotId?: SortOrder
   }
 
@@ -17730,12 +17756,14 @@ export namespace Prisma {
   export type ParkingLotPriceMaxOrderByAggregateInput = {
     vehicleType?: SortOrder
     price?: SortOrder
+    updatedAt?: SortOrder
     parkingLotId?: SortOrder
   }
 
   export type ParkingLotPriceMinOrderByAggregateInput = {
     vehicleType?: SortOrder
     price?: SortOrder
+    updatedAt?: SortOrder
     parkingLotId?: SortOrder
   }
 
@@ -20340,11 +20368,13 @@ export namespace Prisma {
   export type ParkingLotPriceCreateWithoutParkingLotInput = {
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     price: number
+    updatedAt?: Date | string
   }
 
   export type ParkingLotPriceUncheckedCreateWithoutParkingLotInput = {
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     price: number
+    updatedAt?: Date | string
   }
 
   export type ParkingLotPriceCreateOrConnectWithoutParkingLotInput = {
@@ -20498,6 +20528,7 @@ export namespace Prisma {
     NOT?: ParkingLotPriceScalarWhereInput | ParkingLotPriceScalarWhereInput[]
     vehicleType?: EnumVEHICLE__TYPE_ALIASFilter<"ParkingLotPrice"> | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatFilter<"ParkingLotPrice"> | number
+    updatedAt?: DateTimeFilter<"ParkingLotPrice"> | Date | string
     parkingLotId?: IntFilter<"ParkingLotPrice"> | number
   }
 
@@ -22020,6 +22051,7 @@ export namespace Prisma {
   export type ParkingLotPriceCreateManyParkingLotInput = {
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     price: number
+    updatedAt?: Date | string
   }
 
   export type ParkingSpotUpdateWithoutParkingLotInput = {
@@ -22125,16 +22157,19 @@ export namespace Prisma {
   export type ParkingLotPriceUpdateWithoutParkingLotInput = {
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ParkingLotPriceUncheckedUpdateWithoutParkingLotInput = {
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ParkingLotPriceUncheckedUpdateManyWithoutParkingLotInput = {
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReservationUpdateWithoutServicesInput = {

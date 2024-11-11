@@ -171,6 +171,7 @@ model ParkingLot {
 model ParkingLotPrice {
   vehicleType VEHICLE__TYPE_ALIAS
   price       Float
+  updatedAt   DateTime            @updatedAt
 
   parkingLotId Int
   parkingLot   ParkingLot @relation(fields: [parkingLotId], references: [id])
