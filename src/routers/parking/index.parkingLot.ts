@@ -14,7 +14,10 @@ import { procedure } from "../../trpc";
 import { deleteFile, extractPathFromURL, getFileSignedUrl } from "../../storage";
 import { MAXIMUM_OVERSTAYING_DURATION_IN_HOURS } from "../../../rules";
 import { TRPCError } from "@trpc/server";
+import EventEmitter, { on } from "events";
+import { observable } from "@trpc/server/dist/observable";
 
+const ee = new EventEmitter();
 const EARTH_RADIUS_IN_KM = 6371;
 
 // Submit new parking lot for approval --------------------------------------------------------
@@ -143,6 +146,8 @@ export const getMany = procedure
     } = ctx;
     const { name, latitude, longitude, radiusInKm, status, isApproved } = input;
 
+    ee.emit("test");
+
     const user = await prisma.user.findUnique({ where: { accountId: id } });
     if (!user) throw new Error("User not found");
 
@@ -202,6 +207,16 @@ export const getMany = procedure
 // Get single parking lot ----------------------------------------------------------------------
 const getSingleSchema = z.object({
   id: z.number(),
+});
+export const getSingleSubscribe = procedure.subscription(async function* (opts) {
+  // listen for new events
+  for await (const [] of on(ee, "test", {
+    // Passing the AbortSignal from the request automatically cancels the event emitter when the request is aborted
+    signal: opts.signal,
+  })) {
+    console.log("okok");
+    yield "okok";
+  }
 });
 export const getSingle = procedure
   .use(authMiddleware())
