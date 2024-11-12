@@ -10,11 +10,11 @@ const inputSchema = z.object({
     .string()
     .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Invalid email format"),
   password: z.string().min(8, "Password must be at least 8 characters"),
-  allowAdmin: z.boolean().optional(),
+  isAdmin: z.boolean().optional(),
 });
 
 export const loginRouter = procedure.input(inputSchema).mutation(async ({ input }) => {
-  const { email, password, allowAdmin } = input;
+  const { email, password, isAdmin } = input;
 
   const account = await prisma.account.findUnique({
     where: { email: email.toLowerCase() },
@@ -22,8 +22,11 @@ export const loginRouter = procedure.input(inputSchema).mutation(async ({ input 
 
   if (!account) throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
 
-  if (account.role === "ADMIN" && !allowAdmin) {
-    throw new TRPCError({ code: "UNAUTHORIZED", message: "Admin is not allowed" });
+  if (account.role === "ADMIN" && !isAdmin) {
+    throw new TRPCError({ code: "UNAUTHORIZED", message: "Admin accounts are not allowed" });
+  }
+  if (isAdmin && account.role !== "ADMIN") {
+    throw new TRPCError({ code: "UNAUTHORIZED", message: "Only admin accounts are allowed" });
   }
 
   const hash = account.password;

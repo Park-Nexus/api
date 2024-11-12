@@ -15,7 +15,6 @@ import { deleteFile, extractPathFromURL, getFileSignedUrl } from "../../storage"
 import { MAXIMUM_OVERSTAYING_DURATION_IN_HOURS } from "../../../rules";
 import { TRPCError } from "@trpc/server";
 import EventEmitter, { on } from "events";
-import { observable } from "@trpc/server/dist/observable";
 
 const ee = new EventEmitter();
 const EARTH_RADIUS_IN_KM = 6371;
@@ -214,8 +213,7 @@ export const getSingleSubscribe = procedure.subscription(async function* (opts) 
     // Passing the AbortSignal from the request automatically cancels the event emitter when the request is aborted
     signal: opts.signal,
   })) {
-    console.log("okok");
-    yield "okok";
+    yield;
   }
 });
 export const getSingle = procedure
