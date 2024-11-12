@@ -1,9 +1,20 @@
-import { Storage } from "@google-cloud/storage";
+import { Storage as GCStorage } from "@google-cloud/storage";
 import { v4 as uuidv4 } from "uuid";
 import { BUCKET_NAME, SIGNED_URL_EXPIRATION } from "./index.types";
 import path from "path";
 
-const storage = new Storage({ keyFilename: path.join(__dirname, "../../gc-storage-key.json") });
+class Storage {
+  static instance: GCStorage;
+
+  static getInstance() {
+    if (!Storage.instance) {
+      Storage.instance = new GCStorage({
+        keyFilename: path.join(__dirname, "../../gc-storage-key.json"),
+      });
+    }
+    return Storage.instance;
+  }
+}
 
 // Upload file --------------------------------------------------------------------
 type TUploadFileParams = {
@@ -14,7 +25,7 @@ export async function uploadFile(params: TUploadFileParams) {
   const { file, folder } = params;
   const fileName = `${uuidv4()}-${file.originalname}`;
 
-  await storage.bucket(BUCKET_NAME).file(`${folder}/${fileName}`).save(file.buffer);
+  await Storage.getInstance().bucket(BUCKET_NAME).file(`${folder}/${fileName}`).save(file.buffer);
   return `${folder}/${fileName}`;
 }
 
@@ -25,7 +36,7 @@ type TGetFileSignedUrlParams = {
 export async function getFileSignedUrl(params: TGetFileSignedUrlParams) {
   const { path } = params;
 
-  const [url] = await storage
+  const [url] = await Storage.getInstance()
     .bucket(BUCKET_NAME)
     .file(path)
     .getSignedUrl({
@@ -44,7 +55,7 @@ type TDeleteFileParams = {
 export async function deleteFile(params: TDeleteFileParams) {
   const { path } = params;
 
-  await storage.bucket(BUCKET_NAME).file(path).delete();
+  await Storage.getInstance().bucket(BUCKET_NAME).file(path).delete();
 }
 
 // Extract path from URL -----------------------------------------------------------
