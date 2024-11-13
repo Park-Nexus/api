@@ -20,6 +20,47 @@ export namespace StripeUtils {
     return customer;
   };
 
+  // Create Stripe Connect account -----------------------------------------------------------
+  type TCreateConnectAccountParams = {
+    email: string;
+    name: string;
+    phone: string;
+  };
+  export const createConnectAccount = async ({
+    email,
+    name,
+    phone,
+  }: TCreateConnectAccountParams) => {
+    const connectAccount = await stripe.accounts.create({
+      type: "express",
+      email: email,
+      metadata: {
+        name: name,
+        phone: phone,
+      },
+    });
+
+    return connectAccount;
+  };
+
+  // Retrieve Connect account ----------------------------------------------------------------
+  type TRetrieveConnectAccountParams = {
+    accountId: string;
+  };
+  export const retrieveConnectAccount = async ({ accountId }: TRetrieveConnectAccountParams) => {
+    const connectAccount = await stripe.accounts.retrieve(accountId);
+    return connectAccount;
+  };
+
+  // Get Connect account url ------------------------------------------------------------------
+  type TGetConnectAccountUrlParams = {
+    accountId: string;
+  };
+  export const getConnectAccountUrl = async ({ accountId }: TGetConnectAccountUrlParams) => {
+    const connectAccount = await stripe.accounts.createLoginLink(accountId);
+    return connectAccount.url;
+  };
+
   // Save payment method ---------------------------------------------------------------------
   type TSavePaymentMethodParams = {
     customerId: string;
