@@ -58,6 +58,23 @@ export const submit = procedure
     });
   });
 
+// Update parking lot approval status ------------------------------------------------------------
+const updateApprovalStatusSchema = z.object({
+  lotId: z.number(),
+  isApproved: z.boolean(),
+});
+export const updateApprovalStatus = procedure
+  .use(authMiddleware(["ADMIN"]))
+  .input(updateApprovalStatusSchema)
+  .mutation(async ({ input }) => {
+    const { lotId, isApproved } = input;
+
+    await prisma.parkingLot.update({
+      where: { id: lotId },
+      data: { isApproved, status: isApproved ? "ACTIVE" : "INACTIVE" },
+    });
+  });
+
 // Update parking lot --------------------------------------------------------------------------
 const updateSchema = z.object({
   id: z.number(),
