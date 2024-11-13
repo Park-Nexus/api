@@ -4,7 +4,7 @@ import { TRPCError } from "@trpc/server";
 import { authMiddleware } from "../../auth";
 import { prisma, User, USER__GENDER_ALIAS } from "../../db";
 import { procedure } from "../../trpc";
-import { getFileSignedUrl } from "../../storage";
+import { deleteFile, getFileSignedUrl } from "../../storage";
 import { StripeUtils } from "../../stripe";
 
 // Create a new user profile --------------------------------------------------------------
@@ -104,7 +104,7 @@ export const getMany = procedure
     return users;
   });
 
-// Update current profile -----------------------------------------------------------------------
+// Update  profile -----------------------------------------------------------------------
 const updateSchema = z.object({
   userId: z.number().optional(),
 
@@ -136,6 +136,8 @@ export const update = procedure
     if (!user) {
       throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
     }
+
+    if (avatarUrl && user.avatarUrl) await deleteFile({ path: user.avatarUrl });
 
     await prisma.user.update({
       where: { id: user.id },
