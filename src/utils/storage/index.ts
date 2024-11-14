@@ -9,7 +9,7 @@ class Storage {
   static getInstance() {
     if (!Storage.instance) {
       Storage.instance = new GCStorage({
-        keyFilename: path.join(__dirname, "../../gc-storage-key.json"),
+        keyFilename: path.join(__dirname, "../../../gc-storage-key.json"),
       });
     }
     return Storage.instance;

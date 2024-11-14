@@ -230,7 +230,7 @@ export const getSingleSubscribe = procedure.input(getSingleSchema).subscription(
   for await (const [] of on(EventEmitter.getInstance(), EvenNameFn.getSingleParkingLot(input.id), {
     signal,
   })) {
-    yield;
+    yield "update";
   }
 });
 export const getSingle = procedure

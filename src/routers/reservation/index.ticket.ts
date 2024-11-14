@@ -40,7 +40,7 @@ export const create = procedure
 
     // check if user has reached maximum allowed reservations
     const currentReservations = await prisma.reservation.findMany({
-      where: { vehicle: { ownerId: user.id } },
+      where: { vehicle: { ownerId: user.id }, status: "PENDING" },
     });
     if (currentReservations.length > MAX_ALLOWED_RESERVATIONS) {
       throw new TRPCError({
@@ -219,7 +219,7 @@ export const getSingleSubscribe = procedure.input(getSingleSchema).subscription(
   for await (const [] of on(EventEmitter.getInstance(), EvenNameFn.getSingleTicket(input.id), {
     signal,
   })) {
-    yield;
+    yield "update";
   }
 });
 export const getSingle = procedure
