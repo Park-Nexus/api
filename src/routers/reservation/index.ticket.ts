@@ -208,8 +208,8 @@ export const getMany = procedure
         parkingSpot: {
           include: { parkingLot: { select: { name: true, latitude: true, longitude: true } } },
         },
+        vehicle: { select: { type: true } },
       },
-
       orderBy: { createdAt: "desc" },
     });
 
