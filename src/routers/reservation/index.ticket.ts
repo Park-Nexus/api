@@ -201,6 +201,16 @@ export const getMany = procedure
       where: isMine
         ? { userId: user.id }
         : { parkingSpot: { parkingLot: { id: parkingLotId, ownerId: user.id } } },
+      include: {
+        paymentRecord: {
+          select: { status: true },
+        },
+        parkingSpot: {
+          include: { parkingLot: { select: { name: true, latitude: true, longitude: true } } },
+        },
+      },
+
+      orderBy: { createdAt: "desc" },
     });
 
     return reservations;
