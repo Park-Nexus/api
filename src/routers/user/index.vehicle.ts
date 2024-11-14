@@ -47,7 +47,6 @@ export const add = procedure
 // Update a vehicle ------------------------------------------------------------------------
 const updateSchema = z.object({
   id: z.number(),
-  type: z.nativeEnum(VEHICLE__TYPE_ALIAS).optional(),
   plate: z.string().optional(),
   brand: z.string().optional(),
   model: z.string().optional(),
@@ -58,7 +57,7 @@ export const update = procedure
   .use(authMiddleware(["USER"]))
   .input(updateSchema)
   .mutation(async ({ input, ctx }) => {
-    const { id, type, plate, brand, model, color, imageUrl } = input;
+    const { id, plate, brand, model, color, imageUrl } = input;
     const {
       account: { id: accountId },
     } = ctx;
@@ -74,7 +73,6 @@ export const update = procedure
     await prisma.vehicle.update({
       where: { id },
       data: {
-        type,
         plate,
         brand,
         model,

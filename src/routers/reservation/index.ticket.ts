@@ -13,6 +13,7 @@ import {
   MINIMUM_DURATION_IN_HOURS,
 } from "../../../rules";
 import { StripeUtils } from "../../stripe";
+import { getFileSignedUrl } from "../../storage";
 
 // Create a new ticket ------------------------------------------------------------------------------
 const createSchema = z.object({
@@ -236,6 +237,12 @@ export const getSingle = procedure
         services: true,
       },
     });
+    if (!reservation) throw new TRPCError({ code: "NOT_FOUND", message: "Reservation not found" });
+
+    if (!!reservation.vehicle.imageUrl && reservation.vehicle.imageUrl !== "") {
+      const signedUrl = await getFileSignedUrl({ path: reservation.vehicle.imageUrl });
+      reservation.vehicle.imageUrl = signedUrl;
+    }
 
     return reservation;
   });

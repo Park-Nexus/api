@@ -137,7 +137,11 @@ export const update = procedure
       throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
     }
 
-    if (avatarUrl && user.avatarUrl) await deleteFile({ path: user.avatarUrl });
+    try {
+      if (avatarUrl) await deleteFile({ path: user.avatarUrl });
+    } catch (error) {
+      console.error(error);
+    }
 
     await prisma.user.update({
       where: { id: user.id },
