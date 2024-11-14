@@ -4,8 +4,8 @@ import { TRPCError } from "@trpc/server";
 import { authMiddleware } from "../../auth";
 import { prisma, User, USER__GENDER_ALIAS } from "../../db";
 import { procedure } from "../../trpc";
-import { deleteFile, getFileSignedUrl } from "../../storage";
-import { StripeUtils } from "../../stripe";
+import { deleteFile, getFileSignedUrl } from "../../utils/storage";
+import { StripeUtils } from "../../utils/stripe";
 
 // Create a new user profile --------------------------------------------------------------
 const createSchema = z.object({

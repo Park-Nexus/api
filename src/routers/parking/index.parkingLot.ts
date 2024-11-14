@@ -11,12 +11,12 @@ import {
   VEHICLE__TYPE_ALIAS,
 } from "../../db";
 import { procedure } from "../../trpc";
-import { deleteFile, extractPathFromURL, getFileSignedUrl } from "../../storage";
+import { deleteFile, extractPathFromURL, getFileSignedUrl } from "../../utils/storage";
 import { MAXIMUM_OVERSTAYING_DURATION_IN_HOURS } from "../../../rules";
 import { TRPCError } from "@trpc/server";
-import EventEmitter, { on } from "events";
+import { on } from "events";
+import { EvenNameFn, EventEmitter } from "../../utils/sse";
 
-const ee = new EventEmitter();
 const EARTH_RADIUS_IN_KM = 6371;
 
 // Submit new parking lot for approval --------------------------------------------------------
@@ -162,8 +162,6 @@ export const getMany = procedure
     } = ctx;
     const { name, latitude, longitude, radiusInKm, status, isApproved } = input;
 
-    ee.emit("test");
-
     const user = await prisma.user.findUnique({ where: { accountId: id } });
     if (!user) throw new Error("User not found");
 
@@ -224,11 +222,13 @@ export const getMany = procedure
 const getSingleSchema = z.object({
   id: z.number(),
 });
-export const getSingleSubscribe = procedure.subscription(async function* (opts) {
-  // listen for new events
-  for await (const [] of on(ee, "test", {
-    // Passing the AbortSignal from the request automatically cancels the event emitter when the request is aborted
-    signal: opts.signal,
+export const getSingleSubscribe = procedure.input(getSingleSchema).subscription(async function* ({
+  signal,
+  input,
+}) {
+  // eslint-disable-next-line no-empty-pattern
+  for await (const [] of on(EventEmitter.getInstance(), EvenNameFn.getSingleParkingLot(input.id), {
+    signal,
   })) {
     yield;
   }

@@ -12,8 +12,10 @@ import {
   MAX_ALLOWED_RESERVATIONS,
   MINIMUM_DURATION_IN_HOURS,
 } from "../../../rules";
-import { StripeUtils } from "../../stripe";
-import { getFileSignedUrl } from "../../storage";
+import { getFileSignedUrl } from "../../utils/storage";
+import { StripeUtils } from "../../utils/stripe";
+import { EvenNameFn, EventEmitter } from "../../utils/sse";
+import { on } from "events";
 
 // Create a new ticket ------------------------------------------------------------------------------
 const createSchema = z.object({
@@ -208,6 +210,17 @@ export const getMany = procedure
 const getSingleSchema = z.object({
   id: z.number().optional(),
   code: z.string().optional(),
+});
+export const getSingleSubscribe = procedure.input(getSingleSchema).subscription(async function* ({
+  signal,
+  input,
+}) {
+  // eslint-disable-next-line no-empty-pattern
+  for await (const [] of on(EventEmitter.getInstance(), EvenNameFn.getSingleTicket(input.id), {
+    signal,
+  })) {
+    yield;
+  }
 });
 export const getSingle = procedure
   .use(authMiddleware())

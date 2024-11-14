@@ -1,6 +1,6 @@
 import { Router } from "express";
 import multer from "multer";
-import { uploadFile } from "../storage";
+import { uploadFile } from "../utils/storage";
 
 const uploadRouter = Router();
 const upload = multer({

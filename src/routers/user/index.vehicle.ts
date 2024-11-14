@@ -4,7 +4,7 @@ import { authMiddleware } from "../../auth";
 import { prisma, Vehicle, VEHICLE__TYPE_ALIAS } from "../../db";
 import { procedure } from "../../trpc";
 import { TRPCError } from "@trpc/server";
-import { deleteFile, getFileSignedUrl } from "../../storage";
+import { deleteFile, getFileSignedUrl } from "../../utils/storage";
 
 // Add a new vehicle ------------------------------------------------------------------------
 const addSchema = z.object({

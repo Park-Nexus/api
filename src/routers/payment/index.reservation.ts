@@ -3,7 +3,8 @@ import { procedure } from "../../trpc";
 import { authMiddleware } from "../../auth";
 import { prisma } from "../../db";
 import { TRPCError } from "@trpc/server";
-import { StripeUtils } from "../../stripe";
+import { StripeUtils } from "../../utils/stripe";
+import { EvenNameFn, EventEmitter } from "../../utils/sse";
 
 // Create a new Stripe intent ----------------------------------------------------------------
 const getIntentSchema = z.object({
@@ -91,4 +92,6 @@ export const verifyPayment = procedure
         data: { status: "PAID" },
       });
     }
+
+    EventEmitter.getInstance().emit(EvenNameFn.getSingleTicket(ticketId));
   });

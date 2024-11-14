@@ -2,8 +2,8 @@ import { z } from "zod";
 import { procedure } from "../../trpc";
 import { authMiddleware } from "../../auth";
 import { prisma } from "../../db";
-import { StripeUtils } from "../../stripe";
 import { TRPCError } from "@trpc/server";
+import { StripeUtils } from "../../utils/stripe";
 
 // Get many payment methods ----------------------------------------------------------------
 export const getMany = procedure.use(authMiddleware()).query(async ({ ctx }) => {
