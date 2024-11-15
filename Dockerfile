@@ -16,6 +16,8 @@ RUN yarn install
 RUN npx prisma migrate deploy
 RUN npx prisma db seed
 RUN yarn build
+RUN cp -r prisma/* dist/prisma
+RUN cp -r .env dist
 
 EXPOSE 4200
 EXPOSE 5432
