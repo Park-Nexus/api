@@ -34,3 +34,10 @@
   10. `ADMIN_PASSWORD`
 
 - To use storage, create a Google Cloud service account with the storage permission and put in the file `gc-storage-key.json` in the root of the project.
+
+## Deployment
+
+1. Install Google Cloud CLI, follow Google Cloud documentation.
+2. Create Artifact Registry repository, follow this instructions: `https://cloud.google.com/artifact-registry/docs/docker/store-docker-container-images`
+3. Build the image, run `docker build -t asia-east2-docker.pkg.dev/parknexus-440604/park-nexus-images/api .` (the image name is example only, it must be your repository url).
+4. Push the image to the repository, run `docker push asia-east2-docker.pkg.dev/parknexus-440604/park-nexus-images/api`.
