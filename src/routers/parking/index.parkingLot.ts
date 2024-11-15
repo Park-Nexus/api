@@ -373,7 +373,6 @@ export const addSpot = procedure
 const updateSpotSchema = z.object({
   spotId: z.number(),
   name: z.string().optional(),
-  vehicleType: z.nativeEnum(VEHICLE__TYPE_ALIAS).optional(),
 });
 export const updateSpot = procedure
   .use(authMiddleware(["USER"]))
@@ -382,7 +381,7 @@ export const updateSpot = procedure
     const {
       account: { id: ownerAccountId },
     } = ctx;
-    const { spotId, name, vehicleType } = input;
+    const { spotId, name } = input;
 
     const owner = await prisma.user.findUnique({ where: { accountId: ownerAccountId } });
     if (!owner) throw new Error("User not found");
@@ -401,7 +400,6 @@ export const updateSpot = procedure
       where: { id: spotId },
       data: {
         name,
-        vehicleType,
       },
     });
 
