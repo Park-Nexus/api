@@ -41,3 +41,5 @@
 2. Create Artifact Registry repository, follow this instructions: `https://cloud.google.com/artifact-registry/docs/docker/store-docker-container-images`
 3. Build the image, run `docker build --platform linux/amd64 -t asia-east2-docker.pkg.dev/parknexus-440604/park-nexus-images/api .` (the image name is example only, it must be your repository url).
 4. Push the image to the repository, run `docker --platform linux/amd64 push asia-east2-docker.pkg.dev/parknexus-440604/park-nexus-images/api`.
+
+// ---------------------------------------- todo: handle parking spots availability
