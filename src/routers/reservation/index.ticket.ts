@@ -14,7 +14,7 @@ import {
 } from "../../../rules";
 import { getFileSignedUrl } from "../../utils/storage";
 import { StripeUtils } from "../../utils/stripe";
-import { EvenNameFn, EventEmitter } from "../../utils/sse";
+import { EventNameFn, EventEmitter } from "../../utils/sse";
 import { on } from "events";
 
 // Create a new ticket ------------------------------------------------------------------------------
@@ -226,7 +226,7 @@ export const getSingleSubscribe = procedure.input(getSingleSchema).subscription(
   input,
 }) {
   // eslint-disable-next-line no-empty-pattern
-  for await (const [] of on(EventEmitter.getInstance(), EvenNameFn.getSingleTicket(input.id), {
+  for await (const [] of on(EventEmitter.getInstance(), EventNameFn.getSingleTicket(input.id), {
     signal,
   })) {
     yield "update";
@@ -268,4 +268,95 @@ export const getSingle = procedure
     }
 
     return reservation;
+  });
+
+// Cancel ticket --------------------------------------------------------------------------
+const cancelSchema = z.object({
+  id: z.number(),
+});
+export const cancel = procedure
+  .use(authMiddleware())
+  .input(cancelSchema)
+  .mutation(async ({ input }) => {
+    const { id } = input;
+    const reservation = await prisma.reservation.findUnique({ where: { id } });
+    if (!reservation) throw new TRPCError({ code: "NOT_FOUND", message: "Reservation not found" });
+    if (reservation.status !== "PENDING") {
+      throw new TRPCError({ code: "BAD_REQUEST", message: "Reservation is not pending" });
+    }
+
+    await prisma.reservation.update({
+      where: { id },
+      data: {
+        status: "CANCELLED",
+      },
+    });
+    EventEmitter.getInstance().emit(EventNameFn.getSingleTicket(id));
+  });
+
+// Check-In -------------------------------------------------------------------------------
+const checkInSchema = z.object({
+  ticketCode: z.string(),
+});
+export const checkIn = procedure
+  .use(authMiddleware())
+  .input(checkInSchema)
+  .mutation(async ({ input, ctx }) => {
+    const { ticketCode } = input;
+    const {
+      account: { id: accountId },
+    } = ctx;
+
+    const user = await prisma.user.findUnique({ where: { accountId } });
+    if (!user) throw new Error("User not found");
+
+    const reservation = await prisma.reservation.findFirst({
+      where: { code: ticketCode, parkingSpot: { parkingLot: { ownerId: user.id } } },
+      include: { paymentRecord: { select: { status: true } } },
+    });
+    if (!reservation) throw new TRPCError({ code: "NOT_FOUND", message: "Reservation not found" });
+    if (reservation.status !== "PENDING") {
+      throw new TRPCError({ code: "BAD_REQUEST", message: "Reservation is not pending" });
+    }
+    if (reservation.paymentRecord.status !== "PAID") {
+      throw new TRPCError({ code: "BAD_REQUEST", message: "Reservation is not paid" });
+    }
+
+    await prisma.reservation.update({
+      where: { id: reservation.id },
+      data: { status: "ON_GOING" },
+    });
+    EventEmitter.getInstance().emit(EventNameFn.getSingleTicket(reservation.id));
+  });
+
+// Check Out -------------------------------------------------------------------------------
+const checkOutSchema = z.object({
+  ticketCode: z.string(),
+});
+export const checkOut = procedure
+  .use(authMiddleware())
+  .input(checkOutSchema)
+  .mutation(async ({ input, ctx }) => {
+    const { ticketCode } = input;
+    const {
+      account: { id: accountId },
+    } = ctx;
+
+    const user = await prisma.user.findUnique({ where: { accountId } });
+    if (!user) throw new Error("User not found");
+
+    const reservation = await prisma.reservation.findFirst({
+      where: { code: ticketCode, parkingSpot: { parkingLot: { ownerId: user.id } } },
+      include: { paymentRecord: { select: { status: true } } },
+    });
+    if (!reservation) throw new TRPCError({ code: "NOT_FOUND", message: "Reservation not found" });
+    if (reservation.status !== "ON_GOING" && reservation.status !== "OVERSTAYED") {
+      throw new TRPCError({ code: "BAD_REQUEST", message: "Reservation is not on going" });
+    }
+
+    await prisma.reservation.update({
+      where: { id: reservation.id },
+      data: { status: "COMPLETED" },
+    });
+    EventEmitter.getInstance().emit(EventNameFn.getSingleTicket(reservation.id));
   });

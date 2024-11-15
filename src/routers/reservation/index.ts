@@ -9,5 +9,8 @@ export const reservationRouter = trpcInstance.router({
       single: ticket.getSingle,
       shouldUpdate: { single: ticket.getSingleSubscribe },
     },
+    cancel: ticket.cancel,
+    checkIn: ticket.checkIn,
+    checkOut: ticket.checkOut,
   },
 });

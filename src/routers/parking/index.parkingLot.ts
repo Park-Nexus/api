@@ -15,7 +15,7 @@ import { deleteFile, extractPathFromURL, getFileSignedUrl } from "../../utils/st
 import { MAXIMUM_OVERSTAYING_DURATION_IN_HOURS } from "../../../rules";
 import { TRPCError } from "@trpc/server";
 import { on } from "events";
-import { EvenNameFn, EventEmitter } from "../../utils/sse";
+import { EventNameFn, EventEmitter } from "../../utils/sse";
 
 const EARTH_RADIUS_IN_KM = 6371;
 
@@ -227,7 +227,7 @@ export const getSingleSubscribe = procedure.input(getSingleSchema).subscription(
   input,
 }) {
   // eslint-disable-next-line no-empty-pattern
-  for await (const [] of on(EventEmitter.getInstance(), EvenNameFn.getSingleParkingLot(input.id), {
+  for await (const [] of on(EventEmitter.getInstance(), EventNameFn.getSingleParkingLot(input.id), {
     signal,
   })) {
     yield "update";

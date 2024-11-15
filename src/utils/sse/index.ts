@@ -12,7 +12,7 @@ export class EventEmitter {
   }
 }
 
-export const EvenNameFn: Record<TUpdateEvent, (param?: string | number) => string> = {
+export const EventNameFn: Record<TUpdateEvent, (param?: string | number) => string> = {
   getManyParkingLots: () => "getManyParkingLots",
   getSingleParkingLot: (id: number) => `getSingleParkingLot-${id}`,
   getSingleTicket: (id: number) => `getSingleTicket-${id}`,
