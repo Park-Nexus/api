@@ -47,12 +47,14 @@ export const getStripeIntent = procedure
       });
 
       return {
+        amountInUsd: paymentRecord.amountInUsd,
         clientSecret: newIntent.client_secret,
       };
     }
 
     const intent = await StripeUtils.retrieveIntent({ intentId: paymentRecord.stripeIntentId });
     return {
+      amountInUsd: paymentRecord.amountInUsd,
       clientSecret: intent.client_secret,
     };
   });

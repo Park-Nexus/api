@@ -265,7 +265,7 @@ export const getSingle = procedure
         approvedAt: true,
         mediaUrls: true,
         parkingLotPrices: true,
-        parkingSpots: true,
+        parkingSpots: { orderBy: { vehicleType: "desc" } },
         parkingLotServices: true,
       },
     });
