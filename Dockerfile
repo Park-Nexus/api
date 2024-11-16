@@ -18,6 +18,7 @@ RUN npx prisma db seed
 RUN yarn build
 RUN cp -r prisma/* dist/prisma
 RUN cp -r .env dist
+RUN cp -r gc-storage-key.json dist
 
 EXPOSE 4200
 EXPOSE 5432
