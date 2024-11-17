@@ -189,4 +189,10 @@ export namespace StripeUtils {
     const intent = await stripe.refunds.create({ payment_intent: intentId });
     return intent;
   };
+
+  // Retrieve account balance -------------------------------------------------------------------
+  export const retrieveAccountBalance = async () => {
+    const balance = await stripe.balance.retrieve();
+    return balance;
+  };
 }

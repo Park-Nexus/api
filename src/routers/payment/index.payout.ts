@@ -10,6 +10,12 @@ import Stripe from "stripe";
 
 const CREATE_PAYOUTS_JOB_KEY = "create-payouts-job";
 
+// Get Platform Balance -----------------------------------------------------------------------
+export const getPlatformBalance = procedure.use(authMiddleware()).query(async () => {
+  const balance = await StripeUtils.retrieveAccountBalance();
+  return { balance };
+});
+
 // Get Stripe Connect URL ---------------------------------------------------------------------
 export const getStripeConnectUrl = procedure
   .use(authMiddleware(["USER"]))
@@ -61,7 +67,7 @@ export const getStripeConnectUrl = procedure
   });
 
 // Get many payouts --------------------------------------------------------------------------
-const getManyPayoutsSchema = z.object({
+const getManySchema = z.object({
   lotOwnerEmail: z.string().optional(),
   parkingLotId: z.number().optional(),
   startDate: z.string().optional(),
@@ -69,7 +75,7 @@ const getManyPayoutsSchema = z.object({
 });
 export const getMany = procedure
   .use(authMiddleware())
-  .input(getManyPayoutsSchema)
+  .input(getManySchema)
   .query(async ({ input, ctx }) => {
     const { id: accountId, role } = ctx.account;
     const { lotOwnerEmail, parkingLotId, startDate, endDate } = input;
@@ -109,12 +115,12 @@ export const getMany = procedure
   });
 
 // Get single payout --------------------------------------------------------------------------
-const getPayoutSchema = z.object({
+const getSingleSchema = z.object({
   id: z.number(),
 });
 export const getSingle = procedure
   .use(authMiddleware())
-  .input(getPayoutSchema)
+  .input(getSingleSchema)
   .query(async ({ input, ctx }) => {
     const { id: accountId, role } = ctx.account;
     const { id } = input;
