@@ -115,8 +115,6 @@ model User {
 
   accountId String  @unique
   account   Account @relation(fields: [accountId], references: [id])
-
-  payoutRecords PayoutRecord[]
 }
 
 model UserNotification {
@@ -172,8 +170,9 @@ model ParkingLot {
   parkingLotReviews  ParkingLotReview[]
   parkingLotPrices   ParkingLotPrice[]
 
-  ownerId Int
-  owner   User @relation(fields: [ownerId], references: [id])
+  ownerId      Int
+  owner        User           @relation(fields: [ownerId], references: [id])
+  PayoutRecord PayoutRecord[]
 }
 
 model ParkingLotPrice {
@@ -275,19 +274,23 @@ model PaymentRecord {
   userId Int
   user   User @relation(fields: [userId], references: [id])
 
-  reservationId Int         @unique
-  reservation   Reservation @relation(fields: [reservationId], references: [id])
+  reservationId Int           @unique
+  reservation   Reservation   @relation(fields: [reservationId], references: [id])
+  PayoutRecord  PayoutRecord? @relation(fields: [payoutRecordId], references: [id])
+
+  payoutRecordId Int?
 }
 
 model PayoutRecord {
   id Int @id @default(autoincrement())
 
-  transferId  String?             @unique
-  amountInUsd Float
-  status      PAYOUT_STATUS_ALIAS @default(PENDING)
-  createdAt   DateTime            @default(now())
-  updatedAt   DateTime            @updatedAt
+  transferId     String?             @unique
+  amountInUsd    Float
+  paymentRecords PaymentRecord[]
+  status         PAYOUT_STATUS_ALIAS @default(PENDING)
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
 
-  userId Int
-  user   User @relation(fields: [userId], references: [id])
+  parkingLotId Int
+  parkingLot   ParkingLot @relation(fields: [parkingLotId], references: [id])
 }

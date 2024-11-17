@@ -2027,7 +2027,6 @@ export namespace Prisma {
     paymentRecords: number
     userNotifications: number
     reservations: number
-    payoutRecords: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2037,7 +2036,6 @@ export namespace Prisma {
     paymentRecords?: boolean | UserCountOutputTypeCountPaymentRecordsArgs
     userNotifications?: boolean | UserCountOutputTypeCountUserNotificationsArgs
     reservations?: boolean | UserCountOutputTypeCountReservationsArgs
-    payoutRecords?: boolean | UserCountOutputTypeCountPayoutRecordsArgs
   }
 
   // Custom InputTypes
@@ -2093,13 +2091,6 @@ export namespace Prisma {
     where?: ReservationWhereInput
   }
 
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountPayoutRecordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PayoutRecordWhereInput
-  }
-
 
   /**
    * Count Type VehicleCountOutputType
@@ -2141,6 +2132,7 @@ export namespace Prisma {
     parkingLotServices: number
     parkingLotReviews: number
     parkingLotPrices: number
+    PayoutRecord: number
   }
 
   export type ParkingLotCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2148,6 +2140,7 @@ export namespace Prisma {
     parkingLotServices?: boolean | ParkingLotCountOutputTypeCountParkingLotServicesArgs
     parkingLotReviews?: boolean | ParkingLotCountOutputTypeCountParkingLotReviewsArgs
     parkingLotPrices?: boolean | ParkingLotCountOutputTypeCountParkingLotPricesArgs
+    PayoutRecord?: boolean | ParkingLotCountOutputTypeCountPayoutRecordArgs
   }
 
   // Custom InputTypes
@@ -2187,6 +2180,13 @@ export namespace Prisma {
    */
   export type ParkingLotCountOutputTypeCountParkingLotPricesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ParkingLotPriceWhereInput
+  }
+
+  /**
+   * ParkingLotCountOutputType without action
+   */
+  export type ParkingLotCountOutputTypeCountPayoutRecordArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PayoutRecordWhereInput
   }
 
 
@@ -2280,6 +2280,37 @@ export namespace Prisma {
    */
   export type ReservationCountOutputTypeCountServicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ParkingLotServiceWhereInput
+  }
+
+
+  /**
+   * Count Type PayoutRecordCountOutputType
+   */
+
+  export type PayoutRecordCountOutputType = {
+    paymentRecords: number
+  }
+
+  export type PayoutRecordCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    paymentRecords?: boolean | PayoutRecordCountOutputTypeCountPaymentRecordsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PayoutRecordCountOutputType without action
+   */
+  export type PayoutRecordCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PayoutRecordCountOutputType
+     */
+    select?: PayoutRecordCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PayoutRecordCountOutputType without action
+   */
+  export type PayoutRecordCountOutputTypeCountPaymentRecordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentRecordWhereInput
   }
 
 
@@ -4486,7 +4517,6 @@ export namespace Prisma {
     userNotifications?: boolean | User$userNotificationsArgs<ExtArgs>
     reservations?: boolean | User$reservationsArgs<ExtArgs>
     account?: boolean | AccountDefaultArgs<ExtArgs>
-    payoutRecords?: boolean | User$payoutRecordsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -4527,7 +4557,6 @@ export namespace Prisma {
     userNotifications?: boolean | User$userNotificationsArgs<ExtArgs>
     reservations?: boolean | User$reservationsArgs<ExtArgs>
     account?: boolean | AccountDefaultArgs<ExtArgs>
-    payoutRecords?: boolean | User$payoutRecordsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4544,7 +4573,6 @@ export namespace Prisma {
       userNotifications: Prisma.$UserNotificationPayload<ExtArgs>[]
       reservations: Prisma.$ReservationPayload<ExtArgs>[]
       account: Prisma.$AccountPayload<ExtArgs>
-      payoutRecords: Prisma.$PayoutRecordPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -4929,7 +4957,6 @@ export namespace Prisma {
     userNotifications<T extends User$userNotificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$userNotificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserNotificationPayload<ExtArgs>, T, "findMany"> | Null>
     reservations<T extends User$reservationsArgs<ExtArgs> = {}>(args?: Subset<T, User$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany"> | Null>
     account<T extends AccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AccountDefaultArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    payoutRecords<T extends User$payoutRecordsArgs<ExtArgs> = {}>(args?: Subset<T, User$payoutRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PayoutRecordPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5405,26 +5432,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReservationScalarFieldEnum | ReservationScalarFieldEnum[]
-  }
-
-  /**
-   * User.payoutRecords
-   */
-  export type User$payoutRecordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the PayoutRecord
-     */
-    select?: PayoutRecordSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: PayoutRecordInclude<ExtArgs> | null
-    where?: PayoutRecordWhereInput
-    orderBy?: PayoutRecordOrderByWithRelationInput | PayoutRecordOrderByWithRelationInput[]
-    cursor?: PayoutRecordWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: PayoutRecordScalarFieldEnum | PayoutRecordScalarFieldEnum[]
   }
 
   /**
@@ -7785,6 +7792,7 @@ export namespace Prisma {
     parkingLotReviews?: boolean | ParkingLot$parkingLotReviewsArgs<ExtArgs>
     parkingLotPrices?: boolean | ParkingLot$parkingLotPricesArgs<ExtArgs>
     owner?: boolean | UserDefaultArgs<ExtArgs>
+    PayoutRecord?: boolean | ParkingLot$PayoutRecordArgs<ExtArgs>
     _count?: boolean | ParkingLotCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["parkingLot"]>
 
@@ -7833,6 +7841,7 @@ export namespace Prisma {
     parkingLotReviews?: boolean | ParkingLot$parkingLotReviewsArgs<ExtArgs>
     parkingLotPrices?: boolean | ParkingLot$parkingLotPricesArgs<ExtArgs>
     owner?: boolean | UserDefaultArgs<ExtArgs>
+    PayoutRecord?: boolean | ParkingLot$PayoutRecordArgs<ExtArgs>
     _count?: boolean | ParkingLotCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ParkingLotIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7847,6 +7856,7 @@ export namespace Prisma {
       parkingLotReviews: Prisma.$ParkingLotReviewPayload<ExtArgs>[]
       parkingLotPrices: Prisma.$ParkingLotPricePayload<ExtArgs>[]
       owner: Prisma.$UserPayload<ExtArgs>
+      PayoutRecord: Prisma.$PayoutRecordPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -8234,6 +8244,7 @@ export namespace Prisma {
     parkingLotReviews<T extends ParkingLot$parkingLotReviewsArgs<ExtArgs> = {}>(args?: Subset<T, ParkingLot$parkingLotReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParkingLotReviewPayload<ExtArgs>, T, "findMany"> | Null>
     parkingLotPrices<T extends ParkingLot$parkingLotPricesArgs<ExtArgs> = {}>(args?: Subset<T, ParkingLot$parkingLotPricesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParkingLotPricePayload<ExtArgs>, T, "findMany"> | Null>
     owner<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    PayoutRecord<T extends ParkingLot$PayoutRecordArgs<ExtArgs> = {}>(args?: Subset<T, ParkingLot$PayoutRecordArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PayoutRecordPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8674,6 +8685,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ParkingLotPriceScalarFieldEnum | ParkingLotPriceScalarFieldEnum[]
+  }
+
+  /**
+   * ParkingLot.PayoutRecord
+   */
+  export type ParkingLot$PayoutRecordArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PayoutRecord
+     */
+    select?: PayoutRecordSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PayoutRecordInclude<ExtArgs> | null
+    where?: PayoutRecordWhereInput
+    orderBy?: PayoutRecordOrderByWithRelationInput | PayoutRecordOrderByWithRelationInput[]
+    cursor?: PayoutRecordWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PayoutRecordScalarFieldEnum | PayoutRecordScalarFieldEnum[]
   }
 
   /**
@@ -13879,6 +13910,7 @@ export namespace Prisma {
     transactionFeeInUsd: number | null
     userId: number | null
     reservationId: number | null
+    payoutRecordId: number | null
   }
 
   export type PaymentRecordSumAggregateOutputType = {
@@ -13887,6 +13919,7 @@ export namespace Prisma {
     transactionFeeInUsd: number | null
     userId: number | null
     reservationId: number | null
+    payoutRecordId: number | null
   }
 
   export type PaymentRecordMinAggregateOutputType = {
@@ -13899,6 +13932,7 @@ export namespace Prisma {
     updatedAt: Date | null
     userId: number | null
     reservationId: number | null
+    payoutRecordId: number | null
   }
 
   export type PaymentRecordMaxAggregateOutputType = {
@@ -13911,6 +13945,7 @@ export namespace Prisma {
     updatedAt: Date | null
     userId: number | null
     reservationId: number | null
+    payoutRecordId: number | null
   }
 
   export type PaymentRecordCountAggregateOutputType = {
@@ -13923,6 +13958,7 @@ export namespace Prisma {
     updatedAt: number
     userId: number
     reservationId: number
+    payoutRecordId: number
     _all: number
   }
 
@@ -13933,6 +13969,7 @@ export namespace Prisma {
     transactionFeeInUsd?: true
     userId?: true
     reservationId?: true
+    payoutRecordId?: true
   }
 
   export type PaymentRecordSumAggregateInputType = {
@@ -13941,6 +13978,7 @@ export namespace Prisma {
     transactionFeeInUsd?: true
     userId?: true
     reservationId?: true
+    payoutRecordId?: true
   }
 
   export type PaymentRecordMinAggregateInputType = {
@@ -13953,6 +13991,7 @@ export namespace Prisma {
     updatedAt?: true
     userId?: true
     reservationId?: true
+    payoutRecordId?: true
   }
 
   export type PaymentRecordMaxAggregateInputType = {
@@ -13965,6 +14004,7 @@ export namespace Prisma {
     updatedAt?: true
     userId?: true
     reservationId?: true
+    payoutRecordId?: true
   }
 
   export type PaymentRecordCountAggregateInputType = {
@@ -13977,6 +14017,7 @@ export namespace Prisma {
     updatedAt?: true
     userId?: true
     reservationId?: true
+    payoutRecordId?: true
     _all?: true
   }
 
@@ -14076,6 +14117,7 @@ export namespace Prisma {
     updatedAt: Date
     userId: number
     reservationId: number
+    payoutRecordId: number | null
     _count: PaymentRecordCountAggregateOutputType | null
     _avg: PaymentRecordAvgAggregateOutputType | null
     _sum: PaymentRecordSumAggregateOutputType | null
@@ -14107,8 +14149,10 @@ export namespace Prisma {
     updatedAt?: boolean
     userId?: boolean
     reservationId?: boolean
+    payoutRecordId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     reservation?: boolean | ReservationDefaultArgs<ExtArgs>
+    PayoutRecord?: boolean | PaymentRecord$PayoutRecordArgs<ExtArgs>
   }, ExtArgs["result"]["paymentRecord"]>
 
   export type PaymentRecordSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -14121,8 +14165,10 @@ export namespace Prisma {
     updatedAt?: boolean
     userId?: boolean
     reservationId?: boolean
+    payoutRecordId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     reservation?: boolean | ReservationDefaultArgs<ExtArgs>
+    PayoutRecord?: boolean | PaymentRecord$PayoutRecordArgs<ExtArgs>
   }, ExtArgs["result"]["paymentRecord"]>
 
   export type PaymentRecordSelectScalar = {
@@ -14135,15 +14181,18 @@ export namespace Prisma {
     updatedAt?: boolean
     userId?: boolean
     reservationId?: boolean
+    payoutRecordId?: boolean
   }
 
   export type PaymentRecordInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     reservation?: boolean | ReservationDefaultArgs<ExtArgs>
+    PayoutRecord?: boolean | PaymentRecord$PayoutRecordArgs<ExtArgs>
   }
   export type PaymentRecordIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     reservation?: boolean | ReservationDefaultArgs<ExtArgs>
+    PayoutRecord?: boolean | PaymentRecord$PayoutRecordArgs<ExtArgs>
   }
 
   export type $PaymentRecordPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14151,6 +14200,7 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       reservation: Prisma.$ReservationPayload<ExtArgs>
+      PayoutRecord: Prisma.$PayoutRecordPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -14162,6 +14212,7 @@ export namespace Prisma {
       updatedAt: Date
       userId: number
       reservationId: number
+      payoutRecordId: number | null
     }, ExtArgs["result"]["paymentRecord"]>
     composites: {}
   }
@@ -14528,6 +14579,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     reservation<T extends ReservationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ReservationDefaultArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    PayoutRecord<T extends PaymentRecord$PayoutRecordArgs<ExtArgs> = {}>(args?: Subset<T, PaymentRecord$PayoutRecordArgs<ExtArgs>>): Prisma__PayoutRecordClient<$Result.GetResult<Prisma.$PayoutRecordPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14566,6 +14618,7 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"PaymentRecord", 'DateTime'>
     readonly userId: FieldRef<"PaymentRecord", 'Int'>
     readonly reservationId: FieldRef<"PaymentRecord", 'Int'>
+    readonly payoutRecordId: FieldRef<"PaymentRecord", 'Int'>
   }
     
 
@@ -14884,6 +14937,21 @@ export namespace Prisma {
   }
 
   /**
+   * PaymentRecord.PayoutRecord
+   */
+  export type PaymentRecord$PayoutRecordArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PayoutRecord
+     */
+    select?: PayoutRecordSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PayoutRecordInclude<ExtArgs> | null
+    where?: PayoutRecordWhereInput
+  }
+
+  /**
    * PaymentRecord without action
    */
   export type PaymentRecordDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14913,13 +14981,13 @@ export namespace Prisma {
   export type PayoutRecordAvgAggregateOutputType = {
     id: number | null
     amountInUsd: number | null
-    userId: number | null
+    parkingLotId: number | null
   }
 
   export type PayoutRecordSumAggregateOutputType = {
     id: number | null
     amountInUsd: number | null
-    userId: number | null
+    parkingLotId: number | null
   }
 
   export type PayoutRecordMinAggregateOutputType = {
@@ -14929,7 +14997,7 @@ export namespace Prisma {
     status: $Enums.PAYOUT_STATUS_ALIAS | null
     createdAt: Date | null
     updatedAt: Date | null
-    userId: number | null
+    parkingLotId: number | null
   }
 
   export type PayoutRecordMaxAggregateOutputType = {
@@ -14939,7 +15007,7 @@ export namespace Prisma {
     status: $Enums.PAYOUT_STATUS_ALIAS | null
     createdAt: Date | null
     updatedAt: Date | null
-    userId: number | null
+    parkingLotId: number | null
   }
 
   export type PayoutRecordCountAggregateOutputType = {
@@ -14949,7 +15017,7 @@ export namespace Prisma {
     status: number
     createdAt: number
     updatedAt: number
-    userId: number
+    parkingLotId: number
     _all: number
   }
 
@@ -14957,13 +15025,13 @@ export namespace Prisma {
   export type PayoutRecordAvgAggregateInputType = {
     id?: true
     amountInUsd?: true
-    userId?: true
+    parkingLotId?: true
   }
 
   export type PayoutRecordSumAggregateInputType = {
     id?: true
     amountInUsd?: true
-    userId?: true
+    parkingLotId?: true
   }
 
   export type PayoutRecordMinAggregateInputType = {
@@ -14973,7 +15041,7 @@ export namespace Prisma {
     status?: true
     createdAt?: true
     updatedAt?: true
-    userId?: true
+    parkingLotId?: true
   }
 
   export type PayoutRecordMaxAggregateInputType = {
@@ -14983,7 +15051,7 @@ export namespace Prisma {
     status?: true
     createdAt?: true
     updatedAt?: true
-    userId?: true
+    parkingLotId?: true
   }
 
   export type PayoutRecordCountAggregateInputType = {
@@ -14993,7 +15061,7 @@ export namespace Prisma {
     status?: true
     createdAt?: true
     updatedAt?: true
-    userId?: true
+    parkingLotId?: true
     _all?: true
   }
 
@@ -15090,7 +15158,7 @@ export namespace Prisma {
     status: $Enums.PAYOUT_STATUS_ALIAS
     createdAt: Date
     updatedAt: Date
-    userId: number
+    parkingLotId: number
     _count: PayoutRecordCountAggregateOutputType | null
     _avg: PayoutRecordAvgAggregateOutputType | null
     _sum: PayoutRecordSumAggregateOutputType | null
@@ -15119,8 +15187,10 @@ export namespace Prisma {
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    userId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    parkingLotId?: boolean
+    paymentRecords?: boolean | PayoutRecord$paymentRecordsArgs<ExtArgs>
+    parkingLot?: boolean | ParkingLotDefaultArgs<ExtArgs>
+    _count?: boolean | PayoutRecordCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["payoutRecord"]>
 
   export type PayoutRecordSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -15130,8 +15200,8 @@ export namespace Prisma {
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    userId?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    parkingLotId?: boolean
+    parkingLot?: boolean | ParkingLotDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["payoutRecord"]>
 
   export type PayoutRecordSelectScalar = {
@@ -15141,20 +15211,23 @@ export namespace Prisma {
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    userId?: boolean
+    parkingLotId?: boolean
   }
 
   export type PayoutRecordInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    paymentRecords?: boolean | PayoutRecord$paymentRecordsArgs<ExtArgs>
+    parkingLot?: boolean | ParkingLotDefaultArgs<ExtArgs>
+    _count?: boolean | PayoutRecordCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PayoutRecordIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    parkingLot?: boolean | ParkingLotDefaultArgs<ExtArgs>
   }
 
   export type $PayoutRecordPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "PayoutRecord"
     objects: {
-      user: Prisma.$UserPayload<ExtArgs>
+      paymentRecords: Prisma.$PaymentRecordPayload<ExtArgs>[]
+      parkingLot: Prisma.$ParkingLotPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -15163,7 +15236,7 @@ export namespace Prisma {
       status: $Enums.PAYOUT_STATUS_ALIAS
       createdAt: Date
       updatedAt: Date
-      userId: number
+      parkingLotId: number
     }, ExtArgs["result"]["payoutRecord"]>
     composites: {}
   }
@@ -15528,7 +15601,8 @@ export namespace Prisma {
    */
   export interface Prisma__PayoutRecordClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    paymentRecords<T extends PayoutRecord$paymentRecordsArgs<ExtArgs> = {}>(args?: Subset<T, PayoutRecord$paymentRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentRecordPayload<ExtArgs>, T, "findMany"> | Null>
+    parkingLot<T extends ParkingLotDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ParkingLotDefaultArgs<ExtArgs>>): Prisma__ParkingLotClient<$Result.GetResult<Prisma.$ParkingLotPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15564,7 +15638,7 @@ export namespace Prisma {
     readonly status: FieldRef<"PayoutRecord", 'PAYOUT_STATUS_ALIAS'>
     readonly createdAt: FieldRef<"PayoutRecord", 'DateTime'>
     readonly updatedAt: FieldRef<"PayoutRecord", 'DateTime'>
-    readonly userId: FieldRef<"PayoutRecord", 'Int'>
+    readonly parkingLotId: FieldRef<"PayoutRecord", 'Int'>
   }
     
 
@@ -15883,6 +15957,26 @@ export namespace Prisma {
   }
 
   /**
+   * PayoutRecord.paymentRecords
+   */
+  export type PayoutRecord$paymentRecordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaymentRecord
+     */
+    select?: PaymentRecordSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentRecordInclude<ExtArgs> | null
+    where?: PaymentRecordWhereInput
+    orderBy?: PaymentRecordOrderByWithRelationInput | PaymentRecordOrderByWithRelationInput[]
+    cursor?: PaymentRecordWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PaymentRecordScalarFieldEnum | PaymentRecordScalarFieldEnum[]
+  }
+
+  /**
    * PayoutRecord without action
    */
   export type PayoutRecordDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -16081,7 +16175,8 @@ export namespace Prisma {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     userId: 'userId',
-    reservationId: 'reservationId'
+    reservationId: 'reservationId',
+    payoutRecordId: 'payoutRecordId'
   };
 
   export type PaymentRecordScalarFieldEnum = (typeof PaymentRecordScalarFieldEnum)[keyof typeof PaymentRecordScalarFieldEnum]
@@ -16094,7 +16189,7 @@ export namespace Prisma {
     status: 'status',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    userId: 'userId'
+    parkingLotId: 'parkingLotId'
   };
 
   export type PayoutRecordScalarFieldEnum = (typeof PayoutRecordScalarFieldEnum)[keyof typeof PayoutRecordScalarFieldEnum]
@@ -16449,7 +16544,6 @@ export namespace Prisma {
     userNotifications?: UserNotificationListRelationFilter
     reservations?: ReservationListRelationFilter
     account?: XOR<AccountRelationFilter, AccountWhereInput>
-    payoutRecords?: PayoutRecordListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -16471,7 +16565,6 @@ export namespace Prisma {
     userNotifications?: UserNotificationOrderByRelationAggregateInput
     reservations?: ReservationOrderByRelationAggregateInput
     account?: AccountOrderByWithRelationInput
-    payoutRecords?: PayoutRecordOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -16496,7 +16589,6 @@ export namespace Prisma {
     userNotifications?: UserNotificationListRelationFilter
     reservations?: ReservationListRelationFilter
     account?: XOR<AccountRelationFilter, AccountWhereInput>
-    payoutRecords?: PayoutRecordListRelationFilter
   }, "id" | "stripeCustomerId" | "accountId">
 
   export type UserOrderByWithAggregationInput = {
@@ -16707,6 +16799,7 @@ export namespace Prisma {
     parkingLotReviews?: ParkingLotReviewListRelationFilter
     parkingLotPrices?: ParkingLotPriceListRelationFilter
     owner?: XOR<UserRelationFilter, UserWhereInput>
+    PayoutRecord?: PayoutRecordListRelationFilter
   }
 
   export type ParkingLotOrderByWithRelationInput = {
@@ -16731,6 +16824,7 @@ export namespace Prisma {
     parkingLotReviews?: ParkingLotReviewOrderByRelationAggregateInput
     parkingLotPrices?: ParkingLotPriceOrderByRelationAggregateInput
     owner?: UserOrderByWithRelationInput
+    PayoutRecord?: PayoutRecordOrderByRelationAggregateInput
   }
 
   export type ParkingLotWhereUniqueInput = Prisma.AtLeast<{
@@ -16758,6 +16852,7 @@ export namespace Prisma {
     parkingLotReviews?: ParkingLotReviewListRelationFilter
     parkingLotPrices?: ParkingLotPriceListRelationFilter
     owner?: XOR<UserRelationFilter, UserWhereInput>
+    PayoutRecord?: PayoutRecordListRelationFilter
   }, "id">
 
   export type ParkingLotOrderByWithAggregationInput = {
@@ -17206,8 +17301,10 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     userId?: IntFilter<"PaymentRecord"> | number
     reservationId?: IntFilter<"PaymentRecord"> | number
+    payoutRecordId?: IntNullableFilter<"PaymentRecord"> | number | null
     user?: XOR<UserRelationFilter, UserWhereInput>
     reservation?: XOR<ReservationRelationFilter, ReservationWhereInput>
+    PayoutRecord?: XOR<PayoutRecordNullableRelationFilter, PayoutRecordWhereInput> | null
   }
 
   export type PaymentRecordOrderByWithRelationInput = {
@@ -17220,8 +17317,10 @@ export namespace Prisma {
     updatedAt?: SortOrder
     userId?: SortOrder
     reservationId?: SortOrder
+    payoutRecordId?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     reservation?: ReservationOrderByWithRelationInput
+    PayoutRecord?: PayoutRecordOrderByWithRelationInput
   }
 
   export type PaymentRecordWhereUniqueInput = Prisma.AtLeast<{
@@ -17237,8 +17336,10 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     userId?: IntFilter<"PaymentRecord"> | number
+    payoutRecordId?: IntNullableFilter<"PaymentRecord"> | number | null
     user?: XOR<UserRelationFilter, UserWhereInput>
     reservation?: XOR<ReservationRelationFilter, ReservationWhereInput>
+    PayoutRecord?: XOR<PayoutRecordNullableRelationFilter, PayoutRecordWhereInput> | null
   }, "id" | "stripeIntentId" | "reservationId">
 
   export type PaymentRecordOrderByWithAggregationInput = {
@@ -17251,6 +17352,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     userId?: SortOrder
     reservationId?: SortOrder
+    payoutRecordId?: SortOrderInput | SortOrder
     _count?: PaymentRecordCountOrderByAggregateInput
     _avg?: PaymentRecordAvgOrderByAggregateInput
     _max?: PaymentRecordMaxOrderByAggregateInput
@@ -17271,6 +17373,7 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"PaymentRecord"> | Date | string
     userId?: IntWithAggregatesFilter<"PaymentRecord"> | number
     reservationId?: IntWithAggregatesFilter<"PaymentRecord"> | number
+    payoutRecordId?: IntNullableWithAggregatesFilter<"PaymentRecord"> | number | null
   }
 
   export type PayoutRecordWhereInput = {
@@ -17283,8 +17386,9 @@ export namespace Prisma {
     status?: EnumPAYOUT_STATUS_ALIASFilter<"PayoutRecord"> | $Enums.PAYOUT_STATUS_ALIAS
     createdAt?: DateTimeFilter<"PayoutRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PayoutRecord"> | Date | string
-    userId?: IntFilter<"PayoutRecord"> | number
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    parkingLotId?: IntFilter<"PayoutRecord"> | number
+    paymentRecords?: PaymentRecordListRelationFilter
+    parkingLot?: XOR<ParkingLotRelationFilter, ParkingLotWhereInput>
   }
 
   export type PayoutRecordOrderByWithRelationInput = {
@@ -17294,8 +17398,9 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    userId?: SortOrder
-    user?: UserOrderByWithRelationInput
+    parkingLotId?: SortOrder
+    paymentRecords?: PaymentRecordOrderByRelationAggregateInput
+    parkingLot?: ParkingLotOrderByWithRelationInput
   }
 
   export type PayoutRecordWhereUniqueInput = Prisma.AtLeast<{
@@ -17308,8 +17413,9 @@ export namespace Prisma {
     status?: EnumPAYOUT_STATUS_ALIASFilter<"PayoutRecord"> | $Enums.PAYOUT_STATUS_ALIAS
     createdAt?: DateTimeFilter<"PayoutRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PayoutRecord"> | Date | string
-    userId?: IntFilter<"PayoutRecord"> | number
-    user?: XOR<UserRelationFilter, UserWhereInput>
+    parkingLotId?: IntFilter<"PayoutRecord"> | number
+    paymentRecords?: PaymentRecordListRelationFilter
+    parkingLot?: XOR<ParkingLotRelationFilter, ParkingLotWhereInput>
   }, "id" | "transferId">
 
   export type PayoutRecordOrderByWithAggregationInput = {
@@ -17319,7 +17425,7 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    userId?: SortOrder
+    parkingLotId?: SortOrder
     _count?: PayoutRecordCountOrderByAggregateInput
     _avg?: PayoutRecordAvgOrderByAggregateInput
     _max?: PayoutRecordMaxOrderByAggregateInput
@@ -17337,7 +17443,7 @@ export namespace Prisma {
     status?: EnumPAYOUT_STATUS_ALIASWithAggregatesFilter<"PayoutRecord"> | $Enums.PAYOUT_STATUS_ALIAS
     createdAt?: DateTimeWithAggregatesFilter<"PayoutRecord"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"PayoutRecord"> | Date | string
-    userId?: IntWithAggregatesFilter<"PayoutRecord"> | number
+    parkingLotId?: IntWithAggregatesFilter<"PayoutRecord"> | number
   }
 
   export type AccountCreateInput = {
@@ -17480,7 +17586,6 @@ export namespace Prisma {
     userNotifications?: UserNotificationCreateNestedManyWithoutUserInput
     reservations?: ReservationCreateNestedManyWithoutUserInput
     account: AccountCreateNestedOneWithoutUserInput
-    payoutRecords?: PayoutRecordCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -17501,7 +17606,6 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUncheckedCreateNestedManyWithoutUserInput
     userNotifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
-    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -17521,7 +17625,6 @@ export namespace Prisma {
     userNotifications?: UserNotificationUpdateManyWithoutUserNestedInput
     reservations?: ReservationUpdateManyWithoutUserNestedInput
     account?: AccountUpdateOneRequiredWithoutUserNestedInput
-    payoutRecords?: PayoutRecordUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -17542,7 +17645,6 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUncheckedUpdateManyWithoutUserNestedInput
     userNotifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
-    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -17755,6 +17857,7 @@ export namespace Prisma {
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceCreateNestedManyWithoutParkingLotInput
     owner: UserCreateNestedOneWithoutParkingLotsInput
+    PayoutRecord?: PayoutRecordCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotUncheckedCreateInput = {
@@ -17778,6 +17881,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceUncheckedCreateNestedManyWithoutParkingLotInput
+    PayoutRecord?: PayoutRecordUncheckedCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotUpdateInput = {
@@ -17800,6 +17904,7 @@ export namespace Prisma {
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUpdateManyWithoutParkingLotNestedInput
     owner?: UserUpdateOneRequiredWithoutParkingLotsNestedInput
+    PayoutRecord?: PayoutRecordUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotUncheckedUpdateInput = {
@@ -17823,6 +17928,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUncheckedUpdateManyWithoutParkingLotNestedInput
+    PayoutRecord?: PayoutRecordUncheckedUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotCreateManyInput = {
@@ -18277,6 +18383,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutPaymentRecordsInput
     reservation: ReservationCreateNestedOneWithoutPaymentRecordInput
+    PayoutRecord?: PayoutRecordCreateNestedOneWithoutPaymentRecordsInput
   }
 
   export type PaymentRecordUncheckedCreateInput = {
@@ -18289,6 +18396,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     userId: number
     reservationId: number
+    payoutRecordId?: number | null
   }
 
   export type PaymentRecordUpdateInput = {
@@ -18300,6 +18408,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPaymentRecordsNestedInput
     reservation?: ReservationUpdateOneRequiredWithoutPaymentRecordNestedInput
+    PayoutRecord?: PayoutRecordUpdateOneWithoutPaymentRecordsNestedInput
   }
 
   export type PaymentRecordUncheckedUpdateInput = {
@@ -18312,6 +18421,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
     reservationId?: IntFieldUpdateOperationsInput | number
+    payoutRecordId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PaymentRecordCreateManyInput = {
@@ -18324,6 +18434,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     userId: number
     reservationId: number
+    payoutRecordId?: number | null
   }
 
   export type PaymentRecordUpdateManyMutationInput = {
@@ -18345,6 +18456,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
     reservationId?: IntFieldUpdateOperationsInput | number
+    payoutRecordId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PayoutRecordCreateInput = {
@@ -18353,7 +18465,8 @@ export namespace Prisma {
     status?: $Enums.PAYOUT_STATUS_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutPayoutRecordsInput
+    paymentRecords?: PaymentRecordCreateNestedManyWithoutPayoutRecordInput
+    parkingLot: ParkingLotCreateNestedOneWithoutPayoutRecordInput
   }
 
   export type PayoutRecordUncheckedCreateInput = {
@@ -18363,7 +18476,8 @@ export namespace Prisma {
     status?: $Enums.PAYOUT_STATUS_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
-    userId: number
+    parkingLotId: number
+    paymentRecords?: PaymentRecordUncheckedCreateNestedManyWithoutPayoutRecordInput
   }
 
   export type PayoutRecordUpdateInput = {
@@ -18372,7 +18486,8 @@ export namespace Prisma {
     status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutPayoutRecordsNestedInput
+    paymentRecords?: PaymentRecordUpdateManyWithoutPayoutRecordNestedInput
+    parkingLot?: ParkingLotUpdateOneRequiredWithoutPayoutRecordNestedInput
   }
 
   export type PayoutRecordUncheckedUpdateInput = {
@@ -18382,7 +18497,8 @@ export namespace Prisma {
     status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: IntFieldUpdateOperationsInput | number
+    parkingLotId?: IntFieldUpdateOperationsInput | number
+    paymentRecords?: PaymentRecordUncheckedUpdateManyWithoutPayoutRecordNestedInput
   }
 
   export type PayoutRecordCreateManyInput = {
@@ -18392,7 +18508,7 @@ export namespace Prisma {
     status?: $Enums.PAYOUT_STATUS_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
-    userId: number
+    parkingLotId: number
   }
 
   export type PayoutRecordUpdateManyMutationInput = {
@@ -18410,7 +18526,7 @@ export namespace Prisma {
     status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: IntFieldUpdateOperationsInput | number
+    parkingLotId?: IntFieldUpdateOperationsInput | number
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -18652,12 +18768,6 @@ export namespace Prisma {
     none?: ReservationWhereInput
   }
 
-  export type PayoutRecordListRelationFilter = {
-    every?: PayoutRecordWhereInput
-    some?: PayoutRecordWhereInput
-    none?: PayoutRecordWhereInput
-  }
-
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -18684,10 +18794,6 @@ export namespace Prisma {
   }
 
   export type ReservationOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type PayoutRecordOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -18951,6 +19057,12 @@ export namespace Prisma {
     none?: ParkingLotPriceWhereInput
   }
 
+  export type PayoutRecordListRelationFilter = {
+    every?: PayoutRecordWhereInput
+    some?: PayoutRecordWhereInput
+    none?: PayoutRecordWhereInput
+  }
+
   export type ParkingSpotOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -18960,6 +19072,10 @@ export namespace Prisma {
   }
 
   export type ParkingLotPriceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PayoutRecordOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -19364,9 +19480,25 @@ export namespace Prisma {
     not?: NestedEnumPAYMENT_RECORD__STATUS_ALIASFilter<$PrismaModel> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type ReservationRelationFilter = {
     is?: ReservationWhereInput
     isNot?: ReservationWhereInput
+  }
+
+  export type PayoutRecordNullableRelationFilter = {
+    is?: PayoutRecordWhereInput | null
+    isNot?: PayoutRecordWhereInput | null
   }
 
   export type PaymentRecordCountOrderByAggregateInput = {
@@ -19379,6 +19511,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     userId?: SortOrder
     reservationId?: SortOrder
+    payoutRecordId?: SortOrder
   }
 
   export type PaymentRecordAvgOrderByAggregateInput = {
@@ -19387,6 +19520,7 @@ export namespace Prisma {
     transactionFeeInUsd?: SortOrder
     userId?: SortOrder
     reservationId?: SortOrder
+    payoutRecordId?: SortOrder
   }
 
   export type PaymentRecordMaxOrderByAggregateInput = {
@@ -19399,6 +19533,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     userId?: SortOrder
     reservationId?: SortOrder
+    payoutRecordId?: SortOrder
   }
 
   export type PaymentRecordMinOrderByAggregateInput = {
@@ -19411,6 +19546,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     userId?: SortOrder
     reservationId?: SortOrder
+    payoutRecordId?: SortOrder
   }
 
   export type PaymentRecordSumOrderByAggregateInput = {
@@ -19419,6 +19555,7 @@ export namespace Prisma {
     transactionFeeInUsd?: SortOrder
     userId?: SortOrder
     reservationId?: SortOrder
+    payoutRecordId?: SortOrder
   }
 
   export type EnumPAYMENT_RECORD__STATUS_ALIASWithAggregatesFilter<$PrismaModel = never> = {
@@ -19429,6 +19566,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumPAYMENT_RECORD__STATUS_ALIASFilter<$PrismaModel>
     _max?: NestedEnumPAYMENT_RECORD__STATUS_ALIASFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type EnumPAYOUT_STATUS_ALIASFilter<$PrismaModel = never> = {
@@ -19445,13 +19598,13 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    userId?: SortOrder
+    parkingLotId?: SortOrder
   }
 
   export type PayoutRecordAvgOrderByAggregateInput = {
     id?: SortOrder
     amountInUsd?: SortOrder
-    userId?: SortOrder
+    parkingLotId?: SortOrder
   }
 
   export type PayoutRecordMaxOrderByAggregateInput = {
@@ -19461,7 +19614,7 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    userId?: SortOrder
+    parkingLotId?: SortOrder
   }
 
   export type PayoutRecordMinOrderByAggregateInput = {
@@ -19471,13 +19624,13 @@ export namespace Prisma {
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    userId?: SortOrder
+    parkingLotId?: SortOrder
   }
 
   export type PayoutRecordSumOrderByAggregateInput = {
     id?: SortOrder
     amountInUsd?: SortOrder
-    userId?: SortOrder
+    parkingLotId?: SortOrder
   }
 
   export type EnumPAYOUT_STATUS_ALIASWithAggregatesFilter<$PrismaModel = never> = {
@@ -19646,13 +19799,6 @@ export namespace Prisma {
     connect?: AccountWhereUniqueInput
   }
 
-  export type PayoutRecordCreateNestedManyWithoutUserInput = {
-    create?: XOR<PayoutRecordCreateWithoutUserInput, PayoutRecordUncheckedCreateWithoutUserInput> | PayoutRecordCreateWithoutUserInput[] | PayoutRecordUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PayoutRecordCreateOrConnectWithoutUserInput | PayoutRecordCreateOrConnectWithoutUserInput[]
-    createMany?: PayoutRecordCreateManyUserInputEnvelope
-    connect?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
-  }
-
   export type VehicleUncheckedCreateNestedManyWithoutOwnerInput = {
     create?: XOR<VehicleCreateWithoutOwnerInput, VehicleUncheckedCreateWithoutOwnerInput> | VehicleCreateWithoutOwnerInput[] | VehicleUncheckedCreateWithoutOwnerInput[]
     connectOrCreate?: VehicleCreateOrConnectWithoutOwnerInput | VehicleCreateOrConnectWithoutOwnerInput[]
@@ -19693,13 +19839,6 @@ export namespace Prisma {
     connectOrCreate?: ReservationCreateOrConnectWithoutUserInput | ReservationCreateOrConnectWithoutUserInput[]
     createMany?: ReservationCreateManyUserInputEnvelope
     connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
-  }
-
-  export type PayoutRecordUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<PayoutRecordCreateWithoutUserInput, PayoutRecordUncheckedCreateWithoutUserInput> | PayoutRecordCreateWithoutUserInput[] | PayoutRecordUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PayoutRecordCreateOrConnectWithoutUserInput | PayoutRecordCreateOrConnectWithoutUserInput[]
-    createMany?: PayoutRecordCreateManyUserInputEnvelope
-    connect?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -19802,20 +19941,6 @@ export namespace Prisma {
     update?: XOR<XOR<AccountUpdateToOneWithWhereWithoutUserInput, AccountUpdateWithoutUserInput>, AccountUncheckedUpdateWithoutUserInput>
   }
 
-  export type PayoutRecordUpdateManyWithoutUserNestedInput = {
-    create?: XOR<PayoutRecordCreateWithoutUserInput, PayoutRecordUncheckedCreateWithoutUserInput> | PayoutRecordCreateWithoutUserInput[] | PayoutRecordUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PayoutRecordCreateOrConnectWithoutUserInput | PayoutRecordCreateOrConnectWithoutUserInput[]
-    upsert?: PayoutRecordUpsertWithWhereUniqueWithoutUserInput | PayoutRecordUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: PayoutRecordCreateManyUserInputEnvelope
-    set?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
-    disconnect?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
-    delete?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
-    connect?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
-    update?: PayoutRecordUpdateWithWhereUniqueWithoutUserInput | PayoutRecordUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: PayoutRecordUpdateManyWithWhereWithoutUserInput | PayoutRecordUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: PayoutRecordScalarWhereInput | PayoutRecordScalarWhereInput[]
-  }
-
   export type VehicleUncheckedUpdateManyWithoutOwnerNestedInput = {
     create?: XOR<VehicleCreateWithoutOwnerInput, VehicleUncheckedCreateWithoutOwnerInput> | VehicleCreateWithoutOwnerInput[] | VehicleUncheckedCreateWithoutOwnerInput[]
     connectOrCreate?: VehicleCreateOrConnectWithoutOwnerInput | VehicleCreateOrConnectWithoutOwnerInput[]
@@ -19898,20 +20023,6 @@ export namespace Prisma {
     update?: ReservationUpdateWithWhereUniqueWithoutUserInput | ReservationUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ReservationUpdateManyWithWhereWithoutUserInput | ReservationUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
-  }
-
-  export type PayoutRecordUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<PayoutRecordCreateWithoutUserInput, PayoutRecordUncheckedCreateWithoutUserInput> | PayoutRecordCreateWithoutUserInput[] | PayoutRecordUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: PayoutRecordCreateOrConnectWithoutUserInput | PayoutRecordCreateOrConnectWithoutUserInput[]
-    upsert?: PayoutRecordUpsertWithWhereUniqueWithoutUserInput | PayoutRecordUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: PayoutRecordCreateManyUserInputEnvelope
-    set?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
-    disconnect?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
-    delete?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
-    connect?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
-    update?: PayoutRecordUpdateWithWhereUniqueWithoutUserInput | PayoutRecordUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: PayoutRecordUpdateManyWithWhereWithoutUserInput | PayoutRecordUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: PayoutRecordScalarWhereInput | PayoutRecordScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutUserNotificationsInput = {
@@ -20030,6 +20141,13 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type PayoutRecordCreateNestedManyWithoutParkingLotInput = {
+    create?: XOR<PayoutRecordCreateWithoutParkingLotInput, PayoutRecordUncheckedCreateWithoutParkingLotInput> | PayoutRecordCreateWithoutParkingLotInput[] | PayoutRecordUncheckedCreateWithoutParkingLotInput[]
+    connectOrCreate?: PayoutRecordCreateOrConnectWithoutParkingLotInput | PayoutRecordCreateOrConnectWithoutParkingLotInput[]
+    createMany?: PayoutRecordCreateManyParkingLotInputEnvelope
+    connect?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
+  }
+
   export type ParkingSpotUncheckedCreateNestedManyWithoutParkingLotInput = {
     create?: XOR<ParkingSpotCreateWithoutParkingLotInput, ParkingSpotUncheckedCreateWithoutParkingLotInput> | ParkingSpotCreateWithoutParkingLotInput[] | ParkingSpotUncheckedCreateWithoutParkingLotInput[]
     connectOrCreate?: ParkingSpotCreateOrConnectWithoutParkingLotInput | ParkingSpotCreateOrConnectWithoutParkingLotInput[]
@@ -20056,6 +20174,13 @@ export namespace Prisma {
     connectOrCreate?: ParkingLotPriceCreateOrConnectWithoutParkingLotInput | ParkingLotPriceCreateOrConnectWithoutParkingLotInput[]
     createMany?: ParkingLotPriceCreateManyParkingLotInputEnvelope
     connect?: ParkingLotPriceWhereUniqueInput | ParkingLotPriceWhereUniqueInput[]
+  }
+
+  export type PayoutRecordUncheckedCreateNestedManyWithoutParkingLotInput = {
+    create?: XOR<PayoutRecordCreateWithoutParkingLotInput, PayoutRecordUncheckedCreateWithoutParkingLotInput> | PayoutRecordCreateWithoutParkingLotInput[] | PayoutRecordUncheckedCreateWithoutParkingLotInput[]
+    connectOrCreate?: PayoutRecordCreateOrConnectWithoutParkingLotInput | PayoutRecordCreateOrConnectWithoutParkingLotInput[]
+    createMany?: PayoutRecordCreateManyParkingLotInputEnvelope
+    connect?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -20143,6 +20268,20 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutParkingLotsInput, UserUpdateWithoutParkingLotsInput>, UserUncheckedUpdateWithoutParkingLotsInput>
   }
 
+  export type PayoutRecordUpdateManyWithoutParkingLotNestedInput = {
+    create?: XOR<PayoutRecordCreateWithoutParkingLotInput, PayoutRecordUncheckedCreateWithoutParkingLotInput> | PayoutRecordCreateWithoutParkingLotInput[] | PayoutRecordUncheckedCreateWithoutParkingLotInput[]
+    connectOrCreate?: PayoutRecordCreateOrConnectWithoutParkingLotInput | PayoutRecordCreateOrConnectWithoutParkingLotInput[]
+    upsert?: PayoutRecordUpsertWithWhereUniqueWithoutParkingLotInput | PayoutRecordUpsertWithWhereUniqueWithoutParkingLotInput[]
+    createMany?: PayoutRecordCreateManyParkingLotInputEnvelope
+    set?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
+    disconnect?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
+    delete?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
+    connect?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
+    update?: PayoutRecordUpdateWithWhereUniqueWithoutParkingLotInput | PayoutRecordUpdateWithWhereUniqueWithoutParkingLotInput[]
+    updateMany?: PayoutRecordUpdateManyWithWhereWithoutParkingLotInput | PayoutRecordUpdateManyWithWhereWithoutParkingLotInput[]
+    deleteMany?: PayoutRecordScalarWhereInput | PayoutRecordScalarWhereInput[]
+  }
+
   export type ParkingSpotUncheckedUpdateManyWithoutParkingLotNestedInput = {
     create?: XOR<ParkingSpotCreateWithoutParkingLotInput, ParkingSpotUncheckedCreateWithoutParkingLotInput> | ParkingSpotCreateWithoutParkingLotInput[] | ParkingSpotUncheckedCreateWithoutParkingLotInput[]
     connectOrCreate?: ParkingSpotCreateOrConnectWithoutParkingLotInput | ParkingSpotCreateOrConnectWithoutParkingLotInput[]
@@ -20197,6 +20336,20 @@ export namespace Prisma {
     update?: ParkingLotPriceUpdateWithWhereUniqueWithoutParkingLotInput | ParkingLotPriceUpdateWithWhereUniqueWithoutParkingLotInput[]
     updateMany?: ParkingLotPriceUpdateManyWithWhereWithoutParkingLotInput | ParkingLotPriceUpdateManyWithWhereWithoutParkingLotInput[]
     deleteMany?: ParkingLotPriceScalarWhereInput | ParkingLotPriceScalarWhereInput[]
+  }
+
+  export type PayoutRecordUncheckedUpdateManyWithoutParkingLotNestedInput = {
+    create?: XOR<PayoutRecordCreateWithoutParkingLotInput, PayoutRecordUncheckedCreateWithoutParkingLotInput> | PayoutRecordCreateWithoutParkingLotInput[] | PayoutRecordUncheckedCreateWithoutParkingLotInput[]
+    connectOrCreate?: PayoutRecordCreateOrConnectWithoutParkingLotInput | PayoutRecordCreateOrConnectWithoutParkingLotInput[]
+    upsert?: PayoutRecordUpsertWithWhereUniqueWithoutParkingLotInput | PayoutRecordUpsertWithWhereUniqueWithoutParkingLotInput[]
+    createMany?: PayoutRecordCreateManyParkingLotInputEnvelope
+    set?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
+    disconnect?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
+    delete?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
+    connect?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
+    update?: PayoutRecordUpdateWithWhereUniqueWithoutParkingLotInput | PayoutRecordUpdateWithWhereUniqueWithoutParkingLotInput[]
+    updateMany?: PayoutRecordUpdateManyWithWhereWithoutParkingLotInput | PayoutRecordUpdateManyWithWhereWithoutParkingLotInput[]
+    deleteMany?: PayoutRecordScalarWhereInput | PayoutRecordScalarWhereInput[]
   }
 
   export type ParkingLotCreateNestedOneWithoutParkingLotPricesInput = {
@@ -20508,6 +20661,12 @@ export namespace Prisma {
     connect?: ReservationWhereUniqueInput
   }
 
+  export type PayoutRecordCreateNestedOneWithoutPaymentRecordsInput = {
+    create?: XOR<PayoutRecordCreateWithoutPaymentRecordsInput, PayoutRecordUncheckedCreateWithoutPaymentRecordsInput>
+    connectOrCreate?: PayoutRecordCreateOrConnectWithoutPaymentRecordsInput
+    connect?: PayoutRecordWhereUniqueInput
+  }
+
   export type EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput = {
     set?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
   }
@@ -20528,22 +20687,82 @@ export namespace Prisma {
     update?: XOR<XOR<ReservationUpdateToOneWithWhereWithoutPaymentRecordInput, ReservationUpdateWithoutPaymentRecordInput>, ReservationUncheckedUpdateWithoutPaymentRecordInput>
   }
 
-  export type UserCreateNestedOneWithoutPayoutRecordsInput = {
-    create?: XOR<UserCreateWithoutPayoutRecordsInput, UserUncheckedCreateWithoutPayoutRecordsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPayoutRecordsInput
-    connect?: UserWhereUniqueInput
+  export type PayoutRecordUpdateOneWithoutPaymentRecordsNestedInput = {
+    create?: XOR<PayoutRecordCreateWithoutPaymentRecordsInput, PayoutRecordUncheckedCreateWithoutPaymentRecordsInput>
+    connectOrCreate?: PayoutRecordCreateOrConnectWithoutPaymentRecordsInput
+    upsert?: PayoutRecordUpsertWithoutPaymentRecordsInput
+    disconnect?: PayoutRecordWhereInput | boolean
+    delete?: PayoutRecordWhereInput | boolean
+    connect?: PayoutRecordWhereUniqueInput
+    update?: XOR<XOR<PayoutRecordUpdateToOneWithWhereWithoutPaymentRecordsInput, PayoutRecordUpdateWithoutPaymentRecordsInput>, PayoutRecordUncheckedUpdateWithoutPaymentRecordsInput>
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type PaymentRecordCreateNestedManyWithoutPayoutRecordInput = {
+    create?: XOR<PaymentRecordCreateWithoutPayoutRecordInput, PaymentRecordUncheckedCreateWithoutPayoutRecordInput> | PaymentRecordCreateWithoutPayoutRecordInput[] | PaymentRecordUncheckedCreateWithoutPayoutRecordInput[]
+    connectOrCreate?: PaymentRecordCreateOrConnectWithoutPayoutRecordInput | PaymentRecordCreateOrConnectWithoutPayoutRecordInput[]
+    createMany?: PaymentRecordCreateManyPayoutRecordInputEnvelope
+    connect?: PaymentRecordWhereUniqueInput | PaymentRecordWhereUniqueInput[]
+  }
+
+  export type ParkingLotCreateNestedOneWithoutPayoutRecordInput = {
+    create?: XOR<ParkingLotCreateWithoutPayoutRecordInput, ParkingLotUncheckedCreateWithoutPayoutRecordInput>
+    connectOrCreate?: ParkingLotCreateOrConnectWithoutPayoutRecordInput
+    connect?: ParkingLotWhereUniqueInput
+  }
+
+  export type PaymentRecordUncheckedCreateNestedManyWithoutPayoutRecordInput = {
+    create?: XOR<PaymentRecordCreateWithoutPayoutRecordInput, PaymentRecordUncheckedCreateWithoutPayoutRecordInput> | PaymentRecordCreateWithoutPayoutRecordInput[] | PaymentRecordUncheckedCreateWithoutPayoutRecordInput[]
+    connectOrCreate?: PaymentRecordCreateOrConnectWithoutPayoutRecordInput | PaymentRecordCreateOrConnectWithoutPayoutRecordInput[]
+    createMany?: PaymentRecordCreateManyPayoutRecordInputEnvelope
+    connect?: PaymentRecordWhereUniqueInput | PaymentRecordWhereUniqueInput[]
   }
 
   export type EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput = {
     set?: $Enums.PAYOUT_STATUS_ALIAS
   }
 
-  export type UserUpdateOneRequiredWithoutPayoutRecordsNestedInput = {
-    create?: XOR<UserCreateWithoutPayoutRecordsInput, UserUncheckedCreateWithoutPayoutRecordsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutPayoutRecordsInput
-    upsert?: UserUpsertWithoutPayoutRecordsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPayoutRecordsInput, UserUpdateWithoutPayoutRecordsInput>, UserUncheckedUpdateWithoutPayoutRecordsInput>
+  export type PaymentRecordUpdateManyWithoutPayoutRecordNestedInput = {
+    create?: XOR<PaymentRecordCreateWithoutPayoutRecordInput, PaymentRecordUncheckedCreateWithoutPayoutRecordInput> | PaymentRecordCreateWithoutPayoutRecordInput[] | PaymentRecordUncheckedCreateWithoutPayoutRecordInput[]
+    connectOrCreate?: PaymentRecordCreateOrConnectWithoutPayoutRecordInput | PaymentRecordCreateOrConnectWithoutPayoutRecordInput[]
+    upsert?: PaymentRecordUpsertWithWhereUniqueWithoutPayoutRecordInput | PaymentRecordUpsertWithWhereUniqueWithoutPayoutRecordInput[]
+    createMany?: PaymentRecordCreateManyPayoutRecordInputEnvelope
+    set?: PaymentRecordWhereUniqueInput | PaymentRecordWhereUniqueInput[]
+    disconnect?: PaymentRecordWhereUniqueInput | PaymentRecordWhereUniqueInput[]
+    delete?: PaymentRecordWhereUniqueInput | PaymentRecordWhereUniqueInput[]
+    connect?: PaymentRecordWhereUniqueInput | PaymentRecordWhereUniqueInput[]
+    update?: PaymentRecordUpdateWithWhereUniqueWithoutPayoutRecordInput | PaymentRecordUpdateWithWhereUniqueWithoutPayoutRecordInput[]
+    updateMany?: PaymentRecordUpdateManyWithWhereWithoutPayoutRecordInput | PaymentRecordUpdateManyWithWhereWithoutPayoutRecordInput[]
+    deleteMany?: PaymentRecordScalarWhereInput | PaymentRecordScalarWhereInput[]
+  }
+
+  export type ParkingLotUpdateOneRequiredWithoutPayoutRecordNestedInput = {
+    create?: XOR<ParkingLotCreateWithoutPayoutRecordInput, ParkingLotUncheckedCreateWithoutPayoutRecordInput>
+    connectOrCreate?: ParkingLotCreateOrConnectWithoutPayoutRecordInput
+    upsert?: ParkingLotUpsertWithoutPayoutRecordInput
+    connect?: ParkingLotWhereUniqueInput
+    update?: XOR<XOR<ParkingLotUpdateToOneWithWhereWithoutPayoutRecordInput, ParkingLotUpdateWithoutPayoutRecordInput>, ParkingLotUncheckedUpdateWithoutPayoutRecordInput>
+  }
+
+  export type PaymentRecordUncheckedUpdateManyWithoutPayoutRecordNestedInput = {
+    create?: XOR<PaymentRecordCreateWithoutPayoutRecordInput, PaymentRecordUncheckedCreateWithoutPayoutRecordInput> | PaymentRecordCreateWithoutPayoutRecordInput[] | PaymentRecordUncheckedCreateWithoutPayoutRecordInput[]
+    connectOrCreate?: PaymentRecordCreateOrConnectWithoutPayoutRecordInput | PaymentRecordCreateOrConnectWithoutPayoutRecordInput[]
+    upsert?: PaymentRecordUpsertWithWhereUniqueWithoutPayoutRecordInput | PaymentRecordUpsertWithWhereUniqueWithoutPayoutRecordInput[]
+    createMany?: PaymentRecordCreateManyPayoutRecordInputEnvelope
+    set?: PaymentRecordWhereUniqueInput | PaymentRecordWhereUniqueInput[]
+    disconnect?: PaymentRecordWhereUniqueInput | PaymentRecordWhereUniqueInput[]
+    delete?: PaymentRecordWhereUniqueInput | PaymentRecordWhereUniqueInput[]
+    connect?: PaymentRecordWhereUniqueInput | PaymentRecordWhereUniqueInput[]
+    update?: PaymentRecordUpdateWithWhereUniqueWithoutPayoutRecordInput | PaymentRecordUpdateWithWhereUniqueWithoutPayoutRecordInput[]
+    updateMany?: PaymentRecordUpdateManyWithWhereWithoutPayoutRecordInput | PaymentRecordUpdateManyWithWhereWithoutPayoutRecordInput[]
+    deleteMany?: PaymentRecordScalarWhereInput | PaymentRecordScalarWhereInput[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -20855,6 +21074,33 @@ export namespace Prisma {
     _max?: NestedEnumPAYMENT_RECORD__STATUS_ALIASFilter<$PrismaModel>
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedEnumPAYOUT_STATUS_ALIASFilter<$PrismaModel = never> = {
     equals?: $Enums.PAYOUT_STATUS_ALIAS | EnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
     in?: $Enums.PAYOUT_STATUS_ALIAS[] | ListEnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
@@ -20888,7 +21134,6 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordCreateNestedManyWithoutUserInput
     userNotifications?: UserNotificationCreateNestedManyWithoutUserInput
     reservations?: ReservationCreateNestedManyWithoutUserInput
-    payoutRecords?: PayoutRecordCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountInput = {
@@ -20908,7 +21153,6 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUncheckedCreateNestedManyWithoutUserInput
     userNotifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
-    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountInput = {
@@ -20966,7 +21210,6 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUpdateManyWithoutUserNestedInput
     userNotifications?: UserNotificationUpdateManyWithoutUserNestedInput
     reservations?: ReservationUpdateManyWithoutUserNestedInput
-    payoutRecords?: PayoutRecordUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountInput = {
@@ -20986,7 +21229,6 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUncheckedUpdateManyWithoutUserNestedInput
     userNotifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
-    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AccountTokenUpsertWithWhereUniqueWithoutAccountInput = {
@@ -21157,6 +21399,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceCreateNestedManyWithoutParkingLotInput
+    PayoutRecord?: PayoutRecordCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotUncheckedCreateWithoutOwnerInput = {
@@ -21179,6 +21422,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceUncheckedCreateNestedManyWithoutParkingLotInput
+    PayoutRecord?: PayoutRecordUncheckedCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotCreateOrConnectWithoutOwnerInput = {
@@ -21199,6 +21443,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     reservation: ReservationCreateNestedOneWithoutPaymentRecordInput
+    PayoutRecord?: PayoutRecordCreateNestedOneWithoutPaymentRecordsInput
   }
 
   export type PaymentRecordUncheckedCreateWithoutUserInput = {
@@ -21210,6 +21455,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     reservationId: number
+    payoutRecordId?: number | null
   }
 
   export type PaymentRecordCreateOrConnectWithoutUserInput = {
@@ -21305,33 +21551,6 @@ export namespace Prisma {
   export type AccountCreateOrConnectWithoutUserInput = {
     where: AccountWhereUniqueInput
     create: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput>
-  }
-
-  export type PayoutRecordCreateWithoutUserInput = {
-    transferId?: string | null
-    amountInUsd: number
-    status?: $Enums.PAYOUT_STATUS_ALIAS
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type PayoutRecordUncheckedCreateWithoutUserInput = {
-    id?: number
-    transferId?: string | null
-    amountInUsd: number
-    status?: $Enums.PAYOUT_STATUS_ALIAS
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type PayoutRecordCreateOrConnectWithoutUserInput = {
-    where: PayoutRecordWhereUniqueInput
-    create: XOR<PayoutRecordCreateWithoutUserInput, PayoutRecordUncheckedCreateWithoutUserInput>
-  }
-
-  export type PayoutRecordCreateManyUserInputEnvelope = {
-    data: PayoutRecordCreateManyUserInput | PayoutRecordCreateManyUserInput[]
-    skipDuplicates?: boolean
   }
 
   export type VehicleUpsertWithWhereUniqueWithoutOwnerInput = {
@@ -21464,6 +21683,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     userId?: IntFilter<"PaymentRecord"> | number
     reservationId?: IntFilter<"PaymentRecord"> | number
+    payoutRecordId?: IntNullableFilter<"PaymentRecord"> | number | null
   }
 
   export type UserNotificationUpsertWithWhereUniqueWithoutUserInput = {
@@ -21556,35 +21776,6 @@ export namespace Prisma {
     AccountToken?: AccountTokenUncheckedUpdateManyWithoutAccountNestedInput
   }
 
-  export type PayoutRecordUpsertWithWhereUniqueWithoutUserInput = {
-    where: PayoutRecordWhereUniqueInput
-    update: XOR<PayoutRecordUpdateWithoutUserInput, PayoutRecordUncheckedUpdateWithoutUserInput>
-    create: XOR<PayoutRecordCreateWithoutUserInput, PayoutRecordUncheckedCreateWithoutUserInput>
-  }
-
-  export type PayoutRecordUpdateWithWhereUniqueWithoutUserInput = {
-    where: PayoutRecordWhereUniqueInput
-    data: XOR<PayoutRecordUpdateWithoutUserInput, PayoutRecordUncheckedUpdateWithoutUserInput>
-  }
-
-  export type PayoutRecordUpdateManyWithWhereWithoutUserInput = {
-    where: PayoutRecordScalarWhereInput
-    data: XOR<PayoutRecordUpdateManyMutationInput, PayoutRecordUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type PayoutRecordScalarWhereInput = {
-    AND?: PayoutRecordScalarWhereInput | PayoutRecordScalarWhereInput[]
-    OR?: PayoutRecordScalarWhereInput[]
-    NOT?: PayoutRecordScalarWhereInput | PayoutRecordScalarWhereInput[]
-    id?: IntFilter<"PayoutRecord"> | number
-    transferId?: StringNullableFilter<"PayoutRecord"> | string | null
-    amountInUsd?: FloatFilter<"PayoutRecord"> | number
-    status?: EnumPAYOUT_STATUS_ALIASFilter<"PayoutRecord"> | $Enums.PAYOUT_STATUS_ALIAS
-    createdAt?: DateTimeFilter<"PayoutRecord"> | Date | string
-    updatedAt?: DateTimeFilter<"PayoutRecord"> | Date | string
-    userId?: IntFilter<"PayoutRecord"> | number
-  }
-
   export type UserCreateWithoutUserNotificationsInput = {
     firstName: string
     lastName: string
@@ -21601,7 +21792,6 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordCreateNestedManyWithoutUserInput
     reservations?: ReservationCreateNestedManyWithoutUserInput
     account: AccountCreateNestedOneWithoutUserInput
-    payoutRecords?: PayoutRecordCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUserNotificationsInput = {
@@ -21621,7 +21811,6 @@ export namespace Prisma {
     parkingLots?: ParkingLotUncheckedCreateNestedManyWithoutOwnerInput
     paymentRecords?: PaymentRecordUncheckedCreateNestedManyWithoutUserInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
-    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUserNotificationsInput = {
@@ -21656,7 +21845,6 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUpdateManyWithoutUserNestedInput
     reservations?: ReservationUpdateManyWithoutUserNestedInput
     account?: AccountUpdateOneRequiredWithoutUserNestedInput
-    payoutRecords?: PayoutRecordUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserNotificationsInput = {
@@ -21676,7 +21864,6 @@ export namespace Prisma {
     parkingLots?: ParkingLotUncheckedUpdateManyWithoutOwnerNestedInput
     paymentRecords?: PaymentRecordUncheckedUpdateManyWithoutUserNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
-    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ReservationCreateWithoutVehicleInput = {
@@ -21732,7 +21919,6 @@ export namespace Prisma {
     userNotifications?: UserNotificationCreateNestedManyWithoutUserInput
     reservations?: ReservationCreateNestedManyWithoutUserInput
     account: AccountCreateNestedOneWithoutUserInput
-    payoutRecords?: PayoutRecordCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutVehiclesInput = {
@@ -21752,7 +21938,6 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUncheckedCreateNestedManyWithoutUserInput
     userNotifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
-    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutVehiclesInput = {
@@ -21803,7 +21988,6 @@ export namespace Prisma {
     userNotifications?: UserNotificationUpdateManyWithoutUserNestedInput
     reservations?: ReservationUpdateManyWithoutUserNestedInput
     account?: AccountUpdateOneRequiredWithoutUserNestedInput
-    payoutRecords?: PayoutRecordUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVehiclesInput = {
@@ -21823,7 +22007,6 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUncheckedUpdateManyWithoutUserNestedInput
     userNotifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
-    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ParkingSpotCreateWithoutParkingLotInput = {
@@ -21961,7 +22144,6 @@ export namespace Prisma {
     userNotifications?: UserNotificationCreateNestedManyWithoutUserInput
     reservations?: ReservationCreateNestedManyWithoutUserInput
     account: AccountCreateNestedOneWithoutUserInput
-    payoutRecords?: PayoutRecordCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutParkingLotsInput = {
@@ -21981,12 +22163,40 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUncheckedCreateNestedManyWithoutUserInput
     userNotifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
-    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutParkingLotsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutParkingLotsInput, UserUncheckedCreateWithoutParkingLotsInput>
+  }
+
+  export type PayoutRecordCreateWithoutParkingLotInput = {
+    transferId?: string | null
+    amountInUsd: number
+    status?: $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    paymentRecords?: PaymentRecordCreateNestedManyWithoutPayoutRecordInput
+  }
+
+  export type PayoutRecordUncheckedCreateWithoutParkingLotInput = {
+    id?: number
+    transferId?: string | null
+    amountInUsd: number
+    status?: $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    paymentRecords?: PaymentRecordUncheckedCreateNestedManyWithoutPayoutRecordInput
+  }
+
+  export type PayoutRecordCreateOrConnectWithoutParkingLotInput = {
+    where: PayoutRecordWhereUniqueInput
+    create: XOR<PayoutRecordCreateWithoutParkingLotInput, PayoutRecordUncheckedCreateWithoutParkingLotInput>
+  }
+
+  export type PayoutRecordCreateManyParkingLotInputEnvelope = {
+    data: PayoutRecordCreateManyParkingLotInput | PayoutRecordCreateManyParkingLotInput[]
+    skipDuplicates?: boolean
   }
 
   export type ParkingSpotUpsertWithWhereUniqueWithoutParkingLotInput = {
@@ -22121,7 +22331,6 @@ export namespace Prisma {
     userNotifications?: UserNotificationUpdateManyWithoutUserNestedInput
     reservations?: ReservationUpdateManyWithoutUserNestedInput
     account?: AccountUpdateOneRequiredWithoutUserNestedInput
-    payoutRecords?: PayoutRecordUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutParkingLotsInput = {
@@ -22141,7 +22350,35 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUncheckedUpdateManyWithoutUserNestedInput
     userNotifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
-    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type PayoutRecordUpsertWithWhereUniqueWithoutParkingLotInput = {
+    where: PayoutRecordWhereUniqueInput
+    update: XOR<PayoutRecordUpdateWithoutParkingLotInput, PayoutRecordUncheckedUpdateWithoutParkingLotInput>
+    create: XOR<PayoutRecordCreateWithoutParkingLotInput, PayoutRecordUncheckedCreateWithoutParkingLotInput>
+  }
+
+  export type PayoutRecordUpdateWithWhereUniqueWithoutParkingLotInput = {
+    where: PayoutRecordWhereUniqueInput
+    data: XOR<PayoutRecordUpdateWithoutParkingLotInput, PayoutRecordUncheckedUpdateWithoutParkingLotInput>
+  }
+
+  export type PayoutRecordUpdateManyWithWhereWithoutParkingLotInput = {
+    where: PayoutRecordScalarWhereInput
+    data: XOR<PayoutRecordUpdateManyMutationInput, PayoutRecordUncheckedUpdateManyWithoutParkingLotInput>
+  }
+
+  export type PayoutRecordScalarWhereInput = {
+    AND?: PayoutRecordScalarWhereInput | PayoutRecordScalarWhereInput[]
+    OR?: PayoutRecordScalarWhereInput[]
+    NOT?: PayoutRecordScalarWhereInput | PayoutRecordScalarWhereInput[]
+    id?: IntFilter<"PayoutRecord"> | number
+    transferId?: StringNullableFilter<"PayoutRecord"> | string | null
+    amountInUsd?: FloatFilter<"PayoutRecord"> | number
+    status?: EnumPAYOUT_STATUS_ALIASFilter<"PayoutRecord"> | $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: DateTimeFilter<"PayoutRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"PayoutRecord"> | Date | string
+    parkingLotId?: IntFilter<"PayoutRecord"> | number
   }
 
   export type ParkingLotCreateWithoutParkingLotPricesInput = {
@@ -22163,6 +22400,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
     owner: UserCreateNestedOneWithoutParkingLotsInput
+    PayoutRecord?: PayoutRecordCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotUncheckedCreateWithoutParkingLotPricesInput = {
@@ -22185,6 +22423,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutParkingLotInput
+    PayoutRecord?: PayoutRecordUncheckedCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotCreateOrConnectWithoutParkingLotPricesInput = {
@@ -22222,6 +22461,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
     owner?: UserUpdateOneRequiredWithoutParkingLotsNestedInput
+    PayoutRecord?: PayoutRecordUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotUncheckedUpdateWithoutParkingLotPricesInput = {
@@ -22244,6 +22484,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutParkingLotNestedInput
+    PayoutRecord?: PayoutRecordUncheckedUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotCreateWithoutParkingLotReviewsInput = {
@@ -22265,6 +22506,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceCreateNestedManyWithoutParkingLotInput
     owner: UserCreateNestedOneWithoutParkingLotsInput
+    PayoutRecord?: PayoutRecordCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotUncheckedCreateWithoutParkingLotReviewsInput = {
@@ -22287,6 +22529,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceUncheckedCreateNestedManyWithoutParkingLotInput
+    PayoutRecord?: PayoutRecordUncheckedCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotCreateOrConnectWithoutParkingLotReviewsInput = {
@@ -22310,7 +22553,6 @@ export namespace Prisma {
     userNotifications?: UserNotificationCreateNestedManyWithoutUserInput
     reservations?: ReservationCreateNestedManyWithoutUserInput
     account: AccountCreateNestedOneWithoutUserInput
-    payoutRecords?: PayoutRecordCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutParkingLotReviewsInput = {
@@ -22330,7 +22572,6 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUncheckedCreateNestedManyWithoutUserInput
     userNotifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
-    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutParkingLotReviewsInput = {
@@ -22368,6 +22609,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUpdateManyWithoutParkingLotNestedInput
     owner?: UserUpdateOneRequiredWithoutParkingLotsNestedInput
+    PayoutRecord?: PayoutRecordUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotUncheckedUpdateWithoutParkingLotReviewsInput = {
@@ -22390,6 +22632,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUncheckedUpdateManyWithoutParkingLotNestedInput
+    PayoutRecord?: PayoutRecordUncheckedUpdateManyWithoutParkingLotNestedInput
   }
 
   export type UserUpsertWithoutParkingLotReviewsInput = {
@@ -22419,7 +22662,6 @@ export namespace Prisma {
     userNotifications?: UserNotificationUpdateManyWithoutUserNestedInput
     reservations?: ReservationUpdateManyWithoutUserNestedInput
     account?: AccountUpdateOneRequiredWithoutUserNestedInput
-    payoutRecords?: PayoutRecordUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutParkingLotReviewsInput = {
@@ -22439,7 +22681,6 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUncheckedUpdateManyWithoutUserNestedInput
     userNotifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
-    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ParkingLotCreateWithoutParkingLotServicesInput = {
@@ -22461,6 +22702,7 @@ export namespace Prisma {
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceCreateNestedManyWithoutParkingLotInput
     owner: UserCreateNestedOneWithoutParkingLotsInput
+    PayoutRecord?: PayoutRecordCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotUncheckedCreateWithoutParkingLotServicesInput = {
@@ -22483,6 +22725,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceUncheckedCreateNestedManyWithoutParkingLotInput
+    PayoutRecord?: PayoutRecordUncheckedCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotCreateOrConnectWithoutParkingLotServicesInput = {
@@ -22552,6 +22795,7 @@ export namespace Prisma {
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUpdateManyWithoutParkingLotNestedInput
     owner?: UserUpdateOneRequiredWithoutParkingLotsNestedInput
+    PayoutRecord?: PayoutRecordUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotUncheckedUpdateWithoutParkingLotServicesInput = {
@@ -22574,6 +22818,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUncheckedUpdateManyWithoutParkingLotNestedInput
+    PayoutRecord?: PayoutRecordUncheckedUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ReservationUpsertWithWhereUniqueWithoutServicesInput = {
@@ -22648,6 +22893,7 @@ export namespace Prisma {
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceCreateNestedManyWithoutParkingLotInput
     owner: UserCreateNestedOneWithoutParkingLotsInput
+    PayoutRecord?: PayoutRecordCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotUncheckedCreateWithoutParkingSpotsInput = {
@@ -22670,6 +22916,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceUncheckedCreateNestedManyWithoutParkingLotInput
+    PayoutRecord?: PayoutRecordUncheckedCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotCreateOrConnectWithoutParkingSpotsInput = {
@@ -22723,6 +22970,7 @@ export namespace Prisma {
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUpdateManyWithoutParkingLotNestedInput
     owner?: UserUpdateOneRequiredWithoutParkingLotsNestedInput
+    PayoutRecord?: PayoutRecordUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotUncheckedUpdateWithoutParkingSpotsInput = {
@@ -22745,6 +22993,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUncheckedUpdateManyWithoutParkingLotNestedInput
+    PayoutRecord?: PayoutRecordUncheckedUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotServiceCreateWithoutReservationsInput = {
@@ -22795,7 +23044,6 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordCreateNestedManyWithoutUserInput
     userNotifications?: UserNotificationCreateNestedManyWithoutUserInput
     account: AccountCreateNestedOneWithoutUserInput
-    payoutRecords?: PayoutRecordCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReservationsInput = {
@@ -22815,7 +23063,6 @@ export namespace Prisma {
     parkingLots?: ParkingLotUncheckedCreateNestedManyWithoutOwnerInput
     paymentRecords?: PaymentRecordUncheckedCreateNestedManyWithoutUserInput
     userNotifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
-    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReservationsInput = {
@@ -22889,6 +23136,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutPaymentRecordsInput
+    PayoutRecord?: PayoutRecordCreateNestedOneWithoutPaymentRecordsInput
   }
 
   export type PaymentRecordUncheckedCreateWithoutReservationInput = {
@@ -22900,6 +23148,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: number
+    payoutRecordId?: number | null
   }
 
   export type PaymentRecordCreateOrConnectWithoutReservationInput = {
@@ -22950,7 +23199,6 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUpdateManyWithoutUserNestedInput
     userNotifications?: UserNotificationUpdateManyWithoutUserNestedInput
     account?: AccountUpdateOneRequiredWithoutUserNestedInput
-    payoutRecords?: PayoutRecordUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReservationsInput = {
@@ -22970,7 +23218,6 @@ export namespace Prisma {
     parkingLots?: ParkingLotUncheckedUpdateManyWithoutOwnerNestedInput
     paymentRecords?: PaymentRecordUncheckedUpdateManyWithoutUserNestedInput
     userNotifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
-    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ParkingSpotUpsertWithoutReservationsInput = {
@@ -23062,6 +23309,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPaymentRecordsNestedInput
+    PayoutRecord?: PayoutRecordUpdateOneWithoutPaymentRecordsNestedInput
   }
 
   export type PaymentRecordUncheckedUpdateWithoutReservationInput = {
@@ -23073,6 +23321,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
+    payoutRecordId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type UserCreateWithoutPaymentRecordsInput = {
@@ -23091,7 +23340,6 @@ export namespace Prisma {
     userNotifications?: UserNotificationCreateNestedManyWithoutUserInput
     reservations?: ReservationCreateNestedManyWithoutUserInput
     account: AccountCreateNestedOneWithoutUserInput
-    payoutRecords?: PayoutRecordCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPaymentRecordsInput = {
@@ -23111,7 +23359,6 @@ export namespace Prisma {
     parkingLots?: ParkingLotUncheckedCreateNestedManyWithoutOwnerInput
     userNotifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
-    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPaymentRecordsInput = {
@@ -23151,6 +23398,30 @@ export namespace Prisma {
     create: XOR<ReservationCreateWithoutPaymentRecordInput, ReservationUncheckedCreateWithoutPaymentRecordInput>
   }
 
+  export type PayoutRecordCreateWithoutPaymentRecordsInput = {
+    transferId?: string | null
+    amountInUsd: number
+    status?: $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    parkingLot: ParkingLotCreateNestedOneWithoutPayoutRecordInput
+  }
+
+  export type PayoutRecordUncheckedCreateWithoutPaymentRecordsInput = {
+    id?: number
+    transferId?: string | null
+    amountInUsd: number
+    status?: $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    parkingLotId: number
+  }
+
+  export type PayoutRecordCreateOrConnectWithoutPaymentRecordsInput = {
+    where: PayoutRecordWhereUniqueInput
+    create: XOR<PayoutRecordCreateWithoutPaymentRecordsInput, PayoutRecordUncheckedCreateWithoutPaymentRecordsInput>
+  }
+
   export type UserUpsertWithoutPaymentRecordsInput = {
     update: XOR<UserUpdateWithoutPaymentRecordsInput, UserUncheckedUpdateWithoutPaymentRecordsInput>
     create: XOR<UserCreateWithoutPaymentRecordsInput, UserUncheckedCreateWithoutPaymentRecordsInput>
@@ -23178,7 +23449,6 @@ export namespace Prisma {
     userNotifications?: UserNotificationUpdateManyWithoutUserNestedInput
     reservations?: ReservationUpdateManyWithoutUserNestedInput
     account?: AccountUpdateOneRequiredWithoutUserNestedInput
-    payoutRecords?: PayoutRecordUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentRecordsInput = {
@@ -23198,7 +23468,6 @@ export namespace Prisma {
     parkingLots?: ParkingLotUncheckedUpdateManyWithoutOwnerNestedInput
     userNotifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
-    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ReservationUpsertWithoutPaymentRecordInput = {
@@ -23239,98 +23508,189 @@ export namespace Prisma {
     services?: ParkingLotServiceUncheckedUpdateManyWithoutReservationsNestedInput
   }
 
-  export type UserCreateWithoutPayoutRecordsInput = {
-    firstName: string
-    lastName: string
-    phone: string
-    avatarUrl?: string | null
-    gender: $Enums.USER__GENDER_ALIAS
-    stripeCustomerId: string
-    stripeAccountId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    vehicles?: VehicleCreateNestedManyWithoutOwnerInput
-    parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutUserInput
-    parkingLots?: ParkingLotCreateNestedManyWithoutOwnerInput
-    paymentRecords?: PaymentRecordCreateNestedManyWithoutUserInput
-    userNotifications?: UserNotificationCreateNestedManyWithoutUserInput
-    reservations?: ReservationCreateNestedManyWithoutUserInput
-    account: AccountCreateNestedOneWithoutUserInput
+  export type PayoutRecordUpsertWithoutPaymentRecordsInput = {
+    update: XOR<PayoutRecordUpdateWithoutPaymentRecordsInput, PayoutRecordUncheckedUpdateWithoutPaymentRecordsInput>
+    create: XOR<PayoutRecordCreateWithoutPaymentRecordsInput, PayoutRecordUncheckedCreateWithoutPaymentRecordsInput>
+    where?: PayoutRecordWhereInput
   }
 
-  export type UserUncheckedCreateWithoutPayoutRecordsInput = {
-    id?: number
-    firstName: string
-    lastName: string
-    phone: string
-    avatarUrl?: string | null
-    gender: $Enums.USER__GENDER_ALIAS
-    stripeCustomerId: string
-    stripeAccountId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    accountId: string
-    vehicles?: VehicleUncheckedCreateNestedManyWithoutOwnerInput
-    parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutUserInput
-    parkingLots?: ParkingLotUncheckedCreateNestedManyWithoutOwnerInput
-    paymentRecords?: PaymentRecordUncheckedCreateNestedManyWithoutUserInput
-    userNotifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
-    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
+  export type PayoutRecordUpdateToOneWithWhereWithoutPaymentRecordsInput = {
+    where?: PayoutRecordWhereInput
+    data: XOR<PayoutRecordUpdateWithoutPaymentRecordsInput, PayoutRecordUncheckedUpdateWithoutPaymentRecordsInput>
   }
 
-  export type UserCreateOrConnectWithoutPayoutRecordsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutPayoutRecordsInput, UserUncheckedCreateWithoutPayoutRecordsInput>
-  }
-
-  export type UserUpsertWithoutPayoutRecordsInput = {
-    update: XOR<UserUpdateWithoutPayoutRecordsInput, UserUncheckedUpdateWithoutPayoutRecordsInput>
-    create: XOR<UserCreateWithoutPayoutRecordsInput, UserUncheckedCreateWithoutPayoutRecordsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutPayoutRecordsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutPayoutRecordsInput, UserUncheckedUpdateWithoutPayoutRecordsInput>
-  }
-
-  export type UserUpdateWithoutPayoutRecordsInput = {
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
-    stripeCustomerId?: StringFieldUpdateOperationsInput | string
-    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
+  export type PayoutRecordUpdateWithoutPaymentRecordsInput = {
+    transferId?: NullableStringFieldUpdateOperationsInput | string | null
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
+    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
-    parkingLotReviews?: ParkingLotReviewUpdateManyWithoutUserNestedInput
-    parkingLots?: ParkingLotUpdateManyWithoutOwnerNestedInput
-    paymentRecords?: PaymentRecordUpdateManyWithoutUserNestedInput
-    userNotifications?: UserNotificationUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUpdateManyWithoutUserNestedInput
-    account?: AccountUpdateOneRequiredWithoutUserNestedInput
+    parkingLot?: ParkingLotUpdateOneRequiredWithoutPayoutRecordNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutPayoutRecordsInput = {
+  export type PayoutRecordUncheckedUpdateWithoutPaymentRecordsInput = {
     id?: IntFieldUpdateOperationsInput | number
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
-    stripeCustomerId?: StringFieldUpdateOperationsInput | string
-    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
+    transferId?: NullableStringFieldUpdateOperationsInput | string | null
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
+    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accountId?: StringFieldUpdateOperationsInput | string
-    vehicles?: VehicleUncheckedUpdateManyWithoutOwnerNestedInput
-    parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutUserNestedInput
-    parkingLots?: ParkingLotUncheckedUpdateManyWithoutOwnerNestedInput
-    paymentRecords?: PaymentRecordUncheckedUpdateManyWithoutUserNestedInput
-    userNotifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
-    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
+    parkingLotId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PaymentRecordCreateWithoutPayoutRecordInput = {
+    stripeIntentId?: string | null
+    status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
+    amountInUsd: number
+    transactionFeeInUsd?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPaymentRecordsInput
+    reservation: ReservationCreateNestedOneWithoutPaymentRecordInput
+  }
+
+  export type PaymentRecordUncheckedCreateWithoutPayoutRecordInput = {
+    id?: number
+    stripeIntentId?: string | null
+    status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
+    amountInUsd: number
+    transactionFeeInUsd?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: number
+    reservationId: number
+  }
+
+  export type PaymentRecordCreateOrConnectWithoutPayoutRecordInput = {
+    where: PaymentRecordWhereUniqueInput
+    create: XOR<PaymentRecordCreateWithoutPayoutRecordInput, PaymentRecordUncheckedCreateWithoutPayoutRecordInput>
+  }
+
+  export type PaymentRecordCreateManyPayoutRecordInputEnvelope = {
+    data: PaymentRecordCreateManyPayoutRecordInput | PaymentRecordCreateManyPayoutRecordInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ParkingLotCreateWithoutPayoutRecordInput = {
+    name: string
+    description?: string
+    latitude: number
+    longitude: number
+    mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
+    ratings?: number
+    phone: string
+    openAt: string
+    closeAt: string
+    status: $Enums.PARKING_LOT__STATUS_ALIAS
+    isApproved?: boolean
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    parkingSpots?: ParkingSpotCreateNestedManyWithoutParkingLotInput
+    parkingLotServices?: ParkingLotServiceCreateNestedManyWithoutParkingLotInput
+    parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
+    parkingLotPrices?: ParkingLotPriceCreateNestedManyWithoutParkingLotInput
+    owner: UserCreateNestedOneWithoutParkingLotsInput
+  }
+
+  export type ParkingLotUncheckedCreateWithoutPayoutRecordInput = {
+    id?: number
+    name: string
+    description?: string
+    latitude: number
+    longitude: number
+    mediaUrls?: ParkingLotCreatemediaUrlsInput | string[]
+    ratings?: number
+    phone: string
+    openAt: string
+    closeAt: string
+    status: $Enums.PARKING_LOT__STATUS_ALIAS
+    isApproved?: boolean
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ownerId: number
+    parkingSpots?: ParkingSpotUncheckedCreateNestedManyWithoutParkingLotInput
+    parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
+    parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutParkingLotInput
+    parkingLotPrices?: ParkingLotPriceUncheckedCreateNestedManyWithoutParkingLotInput
+  }
+
+  export type ParkingLotCreateOrConnectWithoutPayoutRecordInput = {
+    where: ParkingLotWhereUniqueInput
+    create: XOR<ParkingLotCreateWithoutPayoutRecordInput, ParkingLotUncheckedCreateWithoutPayoutRecordInput>
+  }
+
+  export type PaymentRecordUpsertWithWhereUniqueWithoutPayoutRecordInput = {
+    where: PaymentRecordWhereUniqueInput
+    update: XOR<PaymentRecordUpdateWithoutPayoutRecordInput, PaymentRecordUncheckedUpdateWithoutPayoutRecordInput>
+    create: XOR<PaymentRecordCreateWithoutPayoutRecordInput, PaymentRecordUncheckedCreateWithoutPayoutRecordInput>
+  }
+
+  export type PaymentRecordUpdateWithWhereUniqueWithoutPayoutRecordInput = {
+    where: PaymentRecordWhereUniqueInput
+    data: XOR<PaymentRecordUpdateWithoutPayoutRecordInput, PaymentRecordUncheckedUpdateWithoutPayoutRecordInput>
+  }
+
+  export type PaymentRecordUpdateManyWithWhereWithoutPayoutRecordInput = {
+    where: PaymentRecordScalarWhereInput
+    data: XOR<PaymentRecordUpdateManyMutationInput, PaymentRecordUncheckedUpdateManyWithoutPayoutRecordInput>
+  }
+
+  export type ParkingLotUpsertWithoutPayoutRecordInput = {
+    update: XOR<ParkingLotUpdateWithoutPayoutRecordInput, ParkingLotUncheckedUpdateWithoutPayoutRecordInput>
+    create: XOR<ParkingLotCreateWithoutPayoutRecordInput, ParkingLotUncheckedCreateWithoutPayoutRecordInput>
+    where?: ParkingLotWhereInput
+  }
+
+  export type ParkingLotUpdateToOneWithWhereWithoutPayoutRecordInput = {
+    where?: ParkingLotWhereInput
+    data: XOR<ParkingLotUpdateWithoutPayoutRecordInput, ParkingLotUncheckedUpdateWithoutPayoutRecordInput>
+  }
+
+  export type ParkingLotUpdateWithoutPayoutRecordInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
+    ratings?: FloatFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    openAt?: StringFieldUpdateOperationsInput | string
+    closeAt?: StringFieldUpdateOperationsInput | string
+    status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    parkingSpots?: ParkingSpotUpdateManyWithoutParkingLotNestedInput
+    parkingLotServices?: ParkingLotServiceUpdateManyWithoutParkingLotNestedInput
+    parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
+    parkingLotPrices?: ParkingLotPriceUpdateManyWithoutParkingLotNestedInput
+    owner?: UserUpdateOneRequiredWithoutParkingLotsNestedInput
+  }
+
+  export type ParkingLotUncheckedUpdateWithoutPayoutRecordInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    latitude?: FloatFieldUpdateOperationsInput | number
+    longitude?: FloatFieldUpdateOperationsInput | number
+    mediaUrls?: ParkingLotUpdatemediaUrlsInput | string[]
+    ratings?: FloatFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    openAt?: StringFieldUpdateOperationsInput | string
+    closeAt?: StringFieldUpdateOperationsInput | string
+    status?: EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PARKING_LOT__STATUS_ALIAS
+    isApproved?: BoolFieldUpdateOperationsInput | boolean
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ownerId?: IntFieldUpdateOperationsInput | number
+    parkingSpots?: ParkingSpotUncheckedUpdateManyWithoutParkingLotNestedInput
+    parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
+    parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutParkingLotNestedInput
+    parkingLotPrices?: ParkingLotPriceUncheckedUpdateManyWithoutParkingLotNestedInput
   }
 
   export type AccountTokenCreateManyAccountInput = {
@@ -23410,6 +23770,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     reservationId: number
+    payoutRecordId?: number | null
   }
 
   export type UserNotificationCreateManyUserInput = {
@@ -23429,15 +23790,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     parkingSpotId: number
     vehicleId: number
-  }
-
-  export type PayoutRecordCreateManyUserInput = {
-    id?: number
-    transferId?: string | null
-    amountInUsd: number
-    status?: $Enums.PAYOUT_STATUS_ALIAS
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type VehicleUpdateWithoutOwnerInput = {
@@ -23528,6 +23880,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUpdateManyWithoutParkingLotNestedInput
+    PayoutRecord?: PayoutRecordUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotUncheckedUpdateWithoutOwnerInput = {
@@ -23550,6 +23903,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUncheckedUpdateManyWithoutParkingLotNestedInput
+    PayoutRecord?: PayoutRecordUncheckedUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotUncheckedUpdateManyWithoutOwnerInput = {
@@ -23578,6 +23932,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservation?: ReservationUpdateOneRequiredWithoutPaymentRecordNestedInput
+    PayoutRecord?: PayoutRecordUpdateOneWithoutPaymentRecordsNestedInput
   }
 
   export type PaymentRecordUncheckedUpdateWithoutUserInput = {
@@ -23589,6 +23944,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservationId?: IntFieldUpdateOperationsInput | number
+    payoutRecordId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PaymentRecordUncheckedUpdateManyWithoutUserInput = {
@@ -23600,6 +23956,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservationId?: IntFieldUpdateOperationsInput | number
+    payoutRecordId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type UserNotificationUpdateWithoutUserInput = {
@@ -23659,32 +24016,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingSpotId?: IntFieldUpdateOperationsInput | number
     vehicleId?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type PayoutRecordUpdateWithoutUserInput = {
-    transferId?: NullableStringFieldUpdateOperationsInput | string | null
-    amountInUsd?: FloatFieldUpdateOperationsInput | number
-    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PayoutRecordUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    transferId?: NullableStringFieldUpdateOperationsInput | string | null
-    amountInUsd?: FloatFieldUpdateOperationsInput | number
-    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type PayoutRecordUncheckedUpdateManyWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    transferId?: NullableStringFieldUpdateOperationsInput | string | null
-    amountInUsd?: FloatFieldUpdateOperationsInput | number
-    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReservationCreateManyVehicleInput = {
@@ -23774,6 +24105,15 @@ export namespace Prisma {
   export type ParkingLotPriceCreateManyParkingLotInput = {
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     price: number
+    updatedAt?: Date | string
+  }
+
+  export type PayoutRecordCreateManyParkingLotInput = {
+    id?: number
+    transferId?: string | null
+    amountInUsd: number
+    status?: $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: Date | string
     updatedAt?: Date | string
   }
 
@@ -23892,6 +24232,34 @@ export namespace Prisma {
   export type ParkingLotPriceUncheckedUpdateManyWithoutParkingLotInput = {
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatFieldUpdateOperationsInput | number
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PayoutRecordUpdateWithoutParkingLotInput = {
+    transferId?: NullableStringFieldUpdateOperationsInput | string | null
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
+    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    paymentRecords?: PaymentRecordUpdateManyWithoutPayoutRecordNestedInput
+  }
+
+  export type PayoutRecordUncheckedUpdateWithoutParkingLotInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    transferId?: NullableStringFieldUpdateOperationsInput | string | null
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
+    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    paymentRecords?: PaymentRecordUncheckedUpdateManyWithoutPayoutRecordNestedInput
+  }
+
+  export type PayoutRecordUncheckedUpdateManyWithoutParkingLotInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    transferId?: NullableStringFieldUpdateOperationsInput | string | null
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
+    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -24027,6 +24395,53 @@ export namespace Prisma {
     parkingLotId?: IntFieldUpdateOperationsInput | number
   }
 
+  export type PaymentRecordCreateManyPayoutRecordInput = {
+    id?: number
+    stripeIntentId?: string | null
+    status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
+    amountInUsd: number
+    transactionFeeInUsd?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: number
+    reservationId: number
+  }
+
+  export type PaymentRecordUpdateWithoutPayoutRecordInput = {
+    stripeIntentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
+    transactionFeeInUsd?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPaymentRecordsNestedInput
+    reservation?: ReservationUpdateOneRequiredWithoutPaymentRecordNestedInput
+  }
+
+  export type PaymentRecordUncheckedUpdateWithoutPayoutRecordInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    stripeIntentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
+    transactionFeeInUsd?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: IntFieldUpdateOperationsInput | number
+    reservationId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PaymentRecordUncheckedUpdateManyWithoutPayoutRecordInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    stripeIntentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
+    transactionFeeInUsd?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: IntFieldUpdateOperationsInput | number
+    reservationId?: IntFieldUpdateOperationsInput | number
+  }
+
 
 
   /**
@@ -24060,6 +24475,10 @@ export namespace Prisma {
      * @deprecated Use ReservationCountOutputTypeDefaultArgs instead
      */
     export type ReservationCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ReservationCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use PayoutRecordCountOutputTypeDefaultArgs instead
+     */
+    export type PayoutRecordCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PayoutRecordCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use AccountDefaultArgs instead
      */
