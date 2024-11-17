@@ -73,6 +73,7 @@ export const getMany = procedure
           },
         },
       },
+      include: { parkingLot: true },
     });
 
     return payouts;
