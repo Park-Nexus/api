@@ -73,6 +73,11 @@ export type Reservation = $Result.DefaultSelection<Prisma.$ReservationPayload>
  * 
  */
 export type PaymentRecord = $Result.DefaultSelection<Prisma.$PaymentRecordPayload>
+/**
+ * Model PayoutRecord
+ * 
+ */
+export type PayoutRecord = $Result.DefaultSelection<Prisma.$PayoutRecordPayload>
 
 /**
  * Enums
@@ -146,6 +151,15 @@ export const PAYMENT_RECORD__STATUS_ALIAS: {
 
 export type PAYMENT_RECORD__STATUS_ALIAS = (typeof PAYMENT_RECORD__STATUS_ALIAS)[keyof typeof PAYMENT_RECORD__STATUS_ALIAS]
 
+
+export const PAYOUT_STATUS_ALIAS: {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED'
+};
+
+export type PAYOUT_STATUS_ALIAS = (typeof PAYOUT_STATUS_ALIAS)[keyof typeof PAYOUT_STATUS_ALIAS]
+
 }
 
 export type ACCOUNT__ROLE_ALIAS = $Enums.ACCOUNT__ROLE_ALIAS
@@ -175,6 +189,10 @@ export const RESERVATION__STATUS_ALIAS: typeof $Enums.RESERVATION__STATUS_ALIAS
 export type PAYMENT_RECORD__STATUS_ALIAS = $Enums.PAYMENT_RECORD__STATUS_ALIAS
 
 export const PAYMENT_RECORD__STATUS_ALIAS: typeof $Enums.PAYMENT_RECORD__STATUS_ALIAS
+
+export type PAYOUT_STATUS_ALIAS = $Enums.PAYOUT_STATUS_ALIAS
+
+export const PAYOUT_STATUS_ALIAS: typeof $Enums.PAYOUT_STATUS_ALIAS
 
 /**
  * ##  Prisma Client ʲˢ
@@ -418,6 +436,16 @@ export class PrismaClient<
     * ```
     */
   get paymentRecord(): Prisma.PaymentRecordDelegate<ExtArgs>;
+
+  /**
+   * `prisma.payoutRecord`: Exposes CRUD operations for the **PayoutRecord** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PayoutRecords
+    * const payoutRecords = await prisma.payoutRecord.findMany()
+    * ```
+    */
+  get payoutRecord(): Prisma.PayoutRecordDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -870,7 +898,8 @@ export namespace Prisma {
     ParkingLotService: 'ParkingLotService',
     ParkingSpot: 'ParkingSpot',
     Reservation: 'Reservation',
-    PaymentRecord: 'PaymentRecord'
+    PaymentRecord: 'PaymentRecord',
+    PayoutRecord: 'PayoutRecord'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -886,7 +915,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "account" | "accountToken" | "user" | "userNotification" | "vehicle" | "parkingLot" | "parkingLotPrice" | "parkingLotReview" | "parkingLotService" | "parkingSpot" | "reservation" | "paymentRecord"
+      modelProps: "account" | "accountToken" | "user" | "userNotification" | "vehicle" | "parkingLot" | "parkingLotPrice" | "parkingLotReview" | "parkingLotService" | "parkingSpot" | "reservation" | "paymentRecord" | "payoutRecord"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1730,6 +1759,76 @@ export namespace Prisma {
           }
         }
       }
+      PayoutRecord: {
+        payload: Prisma.$PayoutRecordPayload<ExtArgs>
+        fields: Prisma.PayoutRecordFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PayoutRecordFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PayoutRecordPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PayoutRecordFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PayoutRecordPayload>
+          }
+          findFirst: {
+            args: Prisma.PayoutRecordFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PayoutRecordPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PayoutRecordFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PayoutRecordPayload>
+          }
+          findMany: {
+            args: Prisma.PayoutRecordFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PayoutRecordPayload>[]
+          }
+          create: {
+            args: Prisma.PayoutRecordCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PayoutRecordPayload>
+          }
+          createMany: {
+            args: Prisma.PayoutRecordCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PayoutRecordCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PayoutRecordPayload>[]
+          }
+          delete: {
+            args: Prisma.PayoutRecordDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PayoutRecordPayload>
+          }
+          update: {
+            args: Prisma.PayoutRecordUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PayoutRecordPayload>
+          }
+          deleteMany: {
+            args: Prisma.PayoutRecordDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PayoutRecordUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.PayoutRecordUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PayoutRecordPayload>
+          }
+          aggregate: {
+            args: Prisma.PayoutRecordAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePayoutRecord>
+          }
+          groupBy: {
+            args: Prisma.PayoutRecordGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PayoutRecordGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PayoutRecordCountArgs<ExtArgs>
+            result: $Utils.Optional<PayoutRecordCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1928,6 +2027,7 @@ export namespace Prisma {
     paymentRecords: number
     userNotifications: number
     reservations: number
+    payoutRecords: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1937,6 +2037,7 @@ export namespace Prisma {
     paymentRecords?: boolean | UserCountOutputTypeCountPaymentRecordsArgs
     userNotifications?: boolean | UserCountOutputTypeCountUserNotificationsArgs
     reservations?: boolean | UserCountOutputTypeCountReservationsArgs
+    payoutRecords?: boolean | UserCountOutputTypeCountPayoutRecordsArgs
   }
 
   // Custom InputTypes
@@ -1990,6 +2091,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountReservationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReservationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountPayoutRecordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PayoutRecordWhereInput
   }
 
 
@@ -4153,6 +4261,7 @@ export namespace Prisma {
     avatarUrl: string | null
     gender: $Enums.USER__GENDER_ALIAS | null
     stripeCustomerId: string | null
+    stripeAccountId: string | null
     createdAt: Date | null
     updatedAt: Date | null
     accountId: string | null
@@ -4166,6 +4275,7 @@ export namespace Prisma {
     avatarUrl: string | null
     gender: $Enums.USER__GENDER_ALIAS | null
     stripeCustomerId: string | null
+    stripeAccountId: string | null
     createdAt: Date | null
     updatedAt: Date | null
     accountId: string | null
@@ -4179,6 +4289,7 @@ export namespace Prisma {
     avatarUrl: number
     gender: number
     stripeCustomerId: number
+    stripeAccountId: number
     createdAt: number
     updatedAt: number
     accountId: number
@@ -4202,6 +4313,7 @@ export namespace Prisma {
     avatarUrl?: true
     gender?: true
     stripeCustomerId?: true
+    stripeAccountId?: true
     createdAt?: true
     updatedAt?: true
     accountId?: true
@@ -4215,6 +4327,7 @@ export namespace Prisma {
     avatarUrl?: true
     gender?: true
     stripeCustomerId?: true
+    stripeAccountId?: true
     createdAt?: true
     updatedAt?: true
     accountId?: true
@@ -4228,6 +4341,7 @@ export namespace Prisma {
     avatarUrl?: true
     gender?: true
     stripeCustomerId?: true
+    stripeAccountId?: true
     createdAt?: true
     updatedAt?: true
     accountId?: true
@@ -4328,6 +4442,7 @@ export namespace Prisma {
     avatarUrl: string | null
     gender: $Enums.USER__GENDER_ALIAS
     stripeCustomerId: string
+    stripeAccountId: string | null
     createdAt: Date
     updatedAt: Date
     accountId: string
@@ -4360,6 +4475,7 @@ export namespace Prisma {
     avatarUrl?: boolean
     gender?: boolean
     stripeCustomerId?: boolean
+    stripeAccountId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     accountId?: boolean
@@ -4370,6 +4486,7 @@ export namespace Prisma {
     userNotifications?: boolean | User$userNotificationsArgs<ExtArgs>
     reservations?: boolean | User$reservationsArgs<ExtArgs>
     account?: boolean | AccountDefaultArgs<ExtArgs>
+    payoutRecords?: boolean | User$payoutRecordsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -4381,6 +4498,7 @@ export namespace Prisma {
     avatarUrl?: boolean
     gender?: boolean
     stripeCustomerId?: boolean
+    stripeAccountId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     accountId?: boolean
@@ -4395,6 +4513,7 @@ export namespace Prisma {
     avatarUrl?: boolean
     gender?: boolean
     stripeCustomerId?: boolean
+    stripeAccountId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     accountId?: boolean
@@ -4408,6 +4527,7 @@ export namespace Prisma {
     userNotifications?: boolean | User$userNotificationsArgs<ExtArgs>
     reservations?: boolean | User$reservationsArgs<ExtArgs>
     account?: boolean | AccountDefaultArgs<ExtArgs>
+    payoutRecords?: boolean | User$payoutRecordsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4424,6 +4544,7 @@ export namespace Prisma {
       userNotifications: Prisma.$UserNotificationPayload<ExtArgs>[]
       reservations: Prisma.$ReservationPayload<ExtArgs>[]
       account: Prisma.$AccountPayload<ExtArgs>
+      payoutRecords: Prisma.$PayoutRecordPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -4433,6 +4554,7 @@ export namespace Prisma {
       avatarUrl: string | null
       gender: $Enums.USER__GENDER_ALIAS
       stripeCustomerId: string
+      stripeAccountId: string | null
       createdAt: Date
       updatedAt: Date
       accountId: string
@@ -4807,6 +4929,7 @@ export namespace Prisma {
     userNotifications<T extends User$userNotificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$userNotificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserNotificationPayload<ExtArgs>, T, "findMany"> | Null>
     reservations<T extends User$reservationsArgs<ExtArgs> = {}>(args?: Subset<T, User$reservationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findMany"> | Null>
     account<T extends AccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AccountDefaultArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    payoutRecords<T extends User$payoutRecordsArgs<ExtArgs> = {}>(args?: Subset<T, User$payoutRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PayoutRecordPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4843,6 +4966,7 @@ export namespace Prisma {
     readonly avatarUrl: FieldRef<"User", 'String'>
     readonly gender: FieldRef<"User", 'USER__GENDER_ALIAS'>
     readonly stripeCustomerId: FieldRef<"User", 'String'>
+    readonly stripeAccountId: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly accountId: FieldRef<"User", 'String'>
@@ -5284,6 +5408,26 @@ export namespace Prisma {
   }
 
   /**
+   * User.payoutRecords
+   */
+  export type User$payoutRecordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PayoutRecord
+     */
+    select?: PayoutRecordSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PayoutRecordInclude<ExtArgs> | null
+    where?: PayoutRecordWhereInput
+    orderBy?: PayoutRecordOrderByWithRelationInput | PayoutRecordOrderByWithRelationInput[]
+    cursor?: PayoutRecordWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PayoutRecordScalarFieldEnum | PayoutRecordScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5325,7 +5469,6 @@ export namespace Prisma {
     title: string | null
     message: string | null
     createdAt: Date | null
-    updatedAt: Date | null
     userId: number | null
   }
 
@@ -5334,7 +5477,6 @@ export namespace Prisma {
     title: string | null
     message: string | null
     createdAt: Date | null
-    updatedAt: Date | null
     userId: number | null
   }
 
@@ -5343,7 +5485,6 @@ export namespace Prisma {
     title: number
     message: number
     createdAt: number
-    updatedAt: number
     userId: number
     _all: number
   }
@@ -5364,7 +5505,6 @@ export namespace Prisma {
     title?: true
     message?: true
     createdAt?: true
-    updatedAt?: true
     userId?: true
   }
 
@@ -5373,7 +5513,6 @@ export namespace Prisma {
     title?: true
     message?: true
     createdAt?: true
-    updatedAt?: true
     userId?: true
   }
 
@@ -5382,7 +5521,6 @@ export namespace Prisma {
     title?: true
     message?: true
     createdAt?: true
-    updatedAt?: true
     userId?: true
     _all?: true
   }
@@ -5478,7 +5616,6 @@ export namespace Prisma {
     title: string
     message: string
     createdAt: Date
-    updatedAt: Date
     userId: number
     _count: UserNotificationCountAggregateOutputType | null
     _avg: UserNotificationAvgAggregateOutputType | null
@@ -5506,7 +5643,6 @@ export namespace Prisma {
     title?: boolean
     message?: boolean
     createdAt?: boolean
-    updatedAt?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userNotification"]>
@@ -5516,7 +5652,6 @@ export namespace Prisma {
     title?: boolean
     message?: boolean
     createdAt?: boolean
-    updatedAt?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userNotification"]>
@@ -5526,7 +5661,6 @@ export namespace Prisma {
     title?: boolean
     message?: boolean
     createdAt?: boolean
-    updatedAt?: boolean
     userId?: boolean
   }
 
@@ -5547,7 +5681,6 @@ export namespace Prisma {
       title: string
       message: string
       createdAt: Date
-      updatedAt: Date
       userId: number
     }, ExtArgs["result"]["userNotification"]>
     composites: {}
@@ -5947,7 +6080,6 @@ export namespace Prisma {
     readonly title: FieldRef<"UserNotification", 'String'>
     readonly message: FieldRef<"UserNotification", 'String'>
     readonly createdAt: FieldRef<"UserNotification", 'DateTime'>
-    readonly updatedAt: FieldRef<"UserNotification", 'DateTime'>
     readonly userId: FieldRef<"UserNotification", 'Int'>
   }
     
@@ -14767,6 +14899,1005 @@ export namespace Prisma {
 
 
   /**
+   * Model PayoutRecord
+   */
+
+  export type AggregatePayoutRecord = {
+    _count: PayoutRecordCountAggregateOutputType | null
+    _avg: PayoutRecordAvgAggregateOutputType | null
+    _sum: PayoutRecordSumAggregateOutputType | null
+    _min: PayoutRecordMinAggregateOutputType | null
+    _max: PayoutRecordMaxAggregateOutputType | null
+  }
+
+  export type PayoutRecordAvgAggregateOutputType = {
+    id: number | null
+    amountInUsd: number | null
+    userId: number | null
+  }
+
+  export type PayoutRecordSumAggregateOutputType = {
+    id: number | null
+    amountInUsd: number | null
+    userId: number | null
+  }
+
+  export type PayoutRecordMinAggregateOutputType = {
+    id: number | null
+    transferId: string | null
+    amountInUsd: number | null
+    status: $Enums.PAYOUT_STATUS_ALIAS | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: number | null
+  }
+
+  export type PayoutRecordMaxAggregateOutputType = {
+    id: number | null
+    transferId: string | null
+    amountInUsd: number | null
+    status: $Enums.PAYOUT_STATUS_ALIAS | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    userId: number | null
+  }
+
+  export type PayoutRecordCountAggregateOutputType = {
+    id: number
+    transferId: number
+    amountInUsd: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    userId: number
+    _all: number
+  }
+
+
+  export type PayoutRecordAvgAggregateInputType = {
+    id?: true
+    amountInUsd?: true
+    userId?: true
+  }
+
+  export type PayoutRecordSumAggregateInputType = {
+    id?: true
+    amountInUsd?: true
+    userId?: true
+  }
+
+  export type PayoutRecordMinAggregateInputType = {
+    id?: true
+    transferId?: true
+    amountInUsd?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+  }
+
+  export type PayoutRecordMaxAggregateInputType = {
+    id?: true
+    transferId?: true
+    amountInUsd?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+  }
+
+  export type PayoutRecordCountAggregateInputType = {
+    id?: true
+    transferId?: true
+    amountInUsd?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type PayoutRecordAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PayoutRecord to aggregate.
+     */
+    where?: PayoutRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PayoutRecords to fetch.
+     */
+    orderBy?: PayoutRecordOrderByWithRelationInput | PayoutRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PayoutRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PayoutRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PayoutRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PayoutRecords
+    **/
+    _count?: true | PayoutRecordCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PayoutRecordAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PayoutRecordSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PayoutRecordMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PayoutRecordMaxAggregateInputType
+  }
+
+  export type GetPayoutRecordAggregateType<T extends PayoutRecordAggregateArgs> = {
+        [P in keyof T & keyof AggregatePayoutRecord]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePayoutRecord[P]>
+      : GetScalarType<T[P], AggregatePayoutRecord[P]>
+  }
+
+
+
+
+  export type PayoutRecordGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PayoutRecordWhereInput
+    orderBy?: PayoutRecordOrderByWithAggregationInput | PayoutRecordOrderByWithAggregationInput[]
+    by: PayoutRecordScalarFieldEnum[] | PayoutRecordScalarFieldEnum
+    having?: PayoutRecordScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PayoutRecordCountAggregateInputType | true
+    _avg?: PayoutRecordAvgAggregateInputType
+    _sum?: PayoutRecordSumAggregateInputType
+    _min?: PayoutRecordMinAggregateInputType
+    _max?: PayoutRecordMaxAggregateInputType
+  }
+
+  export type PayoutRecordGroupByOutputType = {
+    id: number
+    transferId: string | null
+    amountInUsd: number
+    status: $Enums.PAYOUT_STATUS_ALIAS
+    createdAt: Date
+    updatedAt: Date
+    userId: number
+    _count: PayoutRecordCountAggregateOutputType | null
+    _avg: PayoutRecordAvgAggregateOutputType | null
+    _sum: PayoutRecordSumAggregateOutputType | null
+    _min: PayoutRecordMinAggregateOutputType | null
+    _max: PayoutRecordMaxAggregateOutputType | null
+  }
+
+  type GetPayoutRecordGroupByPayload<T extends PayoutRecordGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PayoutRecordGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PayoutRecordGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PayoutRecordGroupByOutputType[P]>
+            : GetScalarType<T[P], PayoutRecordGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PayoutRecordSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    transferId?: boolean
+    amountInUsd?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["payoutRecord"]>
+
+  export type PayoutRecordSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    transferId?: boolean
+    amountInUsd?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["payoutRecord"]>
+
+  export type PayoutRecordSelectScalar = {
+    id?: boolean
+    transferId?: boolean
+    amountInUsd?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    userId?: boolean
+  }
+
+  export type PayoutRecordInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PayoutRecordIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $PayoutRecordPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PayoutRecord"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      transferId: string | null
+      amountInUsd: number
+      status: $Enums.PAYOUT_STATUS_ALIAS
+      createdAt: Date
+      updatedAt: Date
+      userId: number
+    }, ExtArgs["result"]["payoutRecord"]>
+    composites: {}
+  }
+
+  type PayoutRecordGetPayload<S extends boolean | null | undefined | PayoutRecordDefaultArgs> = $Result.GetResult<Prisma.$PayoutRecordPayload, S>
+
+  type PayoutRecordCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<PayoutRecordFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: PayoutRecordCountAggregateInputType | true
+    }
+
+  export interface PayoutRecordDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PayoutRecord'], meta: { name: 'PayoutRecord' } }
+    /**
+     * Find zero or one PayoutRecord that matches the filter.
+     * @param {PayoutRecordFindUniqueArgs} args - Arguments to find a PayoutRecord
+     * @example
+     * // Get one PayoutRecord
+     * const payoutRecord = await prisma.payoutRecord.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PayoutRecordFindUniqueArgs>(args: SelectSubset<T, PayoutRecordFindUniqueArgs<ExtArgs>>): Prisma__PayoutRecordClient<$Result.GetResult<Prisma.$PayoutRecordPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one PayoutRecord that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {PayoutRecordFindUniqueOrThrowArgs} args - Arguments to find a PayoutRecord
+     * @example
+     * // Get one PayoutRecord
+     * const payoutRecord = await prisma.payoutRecord.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PayoutRecordFindUniqueOrThrowArgs>(args: SelectSubset<T, PayoutRecordFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PayoutRecordClient<$Result.GetResult<Prisma.$PayoutRecordPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first PayoutRecord that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PayoutRecordFindFirstArgs} args - Arguments to find a PayoutRecord
+     * @example
+     * // Get one PayoutRecord
+     * const payoutRecord = await prisma.payoutRecord.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PayoutRecordFindFirstArgs>(args?: SelectSubset<T, PayoutRecordFindFirstArgs<ExtArgs>>): Prisma__PayoutRecordClient<$Result.GetResult<Prisma.$PayoutRecordPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first PayoutRecord that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PayoutRecordFindFirstOrThrowArgs} args - Arguments to find a PayoutRecord
+     * @example
+     * // Get one PayoutRecord
+     * const payoutRecord = await prisma.payoutRecord.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PayoutRecordFindFirstOrThrowArgs>(args?: SelectSubset<T, PayoutRecordFindFirstOrThrowArgs<ExtArgs>>): Prisma__PayoutRecordClient<$Result.GetResult<Prisma.$PayoutRecordPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more PayoutRecords that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PayoutRecordFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PayoutRecords
+     * const payoutRecords = await prisma.payoutRecord.findMany()
+     * 
+     * // Get first 10 PayoutRecords
+     * const payoutRecords = await prisma.payoutRecord.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const payoutRecordWithIdOnly = await prisma.payoutRecord.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PayoutRecordFindManyArgs>(args?: SelectSubset<T, PayoutRecordFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PayoutRecordPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a PayoutRecord.
+     * @param {PayoutRecordCreateArgs} args - Arguments to create a PayoutRecord.
+     * @example
+     * // Create one PayoutRecord
+     * const PayoutRecord = await prisma.payoutRecord.create({
+     *   data: {
+     *     // ... data to create a PayoutRecord
+     *   }
+     * })
+     * 
+     */
+    create<T extends PayoutRecordCreateArgs>(args: SelectSubset<T, PayoutRecordCreateArgs<ExtArgs>>): Prisma__PayoutRecordClient<$Result.GetResult<Prisma.$PayoutRecordPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many PayoutRecords.
+     * @param {PayoutRecordCreateManyArgs} args - Arguments to create many PayoutRecords.
+     * @example
+     * // Create many PayoutRecords
+     * const payoutRecord = await prisma.payoutRecord.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PayoutRecordCreateManyArgs>(args?: SelectSubset<T, PayoutRecordCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PayoutRecords and returns the data saved in the database.
+     * @param {PayoutRecordCreateManyAndReturnArgs} args - Arguments to create many PayoutRecords.
+     * @example
+     * // Create many PayoutRecords
+     * const payoutRecord = await prisma.payoutRecord.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PayoutRecords and only return the `id`
+     * const payoutRecordWithIdOnly = await prisma.payoutRecord.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PayoutRecordCreateManyAndReturnArgs>(args?: SelectSubset<T, PayoutRecordCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PayoutRecordPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a PayoutRecord.
+     * @param {PayoutRecordDeleteArgs} args - Arguments to delete one PayoutRecord.
+     * @example
+     * // Delete one PayoutRecord
+     * const PayoutRecord = await prisma.payoutRecord.delete({
+     *   where: {
+     *     // ... filter to delete one PayoutRecord
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PayoutRecordDeleteArgs>(args: SelectSubset<T, PayoutRecordDeleteArgs<ExtArgs>>): Prisma__PayoutRecordClient<$Result.GetResult<Prisma.$PayoutRecordPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one PayoutRecord.
+     * @param {PayoutRecordUpdateArgs} args - Arguments to update one PayoutRecord.
+     * @example
+     * // Update one PayoutRecord
+     * const payoutRecord = await prisma.payoutRecord.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PayoutRecordUpdateArgs>(args: SelectSubset<T, PayoutRecordUpdateArgs<ExtArgs>>): Prisma__PayoutRecordClient<$Result.GetResult<Prisma.$PayoutRecordPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more PayoutRecords.
+     * @param {PayoutRecordDeleteManyArgs} args - Arguments to filter PayoutRecords to delete.
+     * @example
+     * // Delete a few PayoutRecords
+     * const { count } = await prisma.payoutRecord.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PayoutRecordDeleteManyArgs>(args?: SelectSubset<T, PayoutRecordDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PayoutRecords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PayoutRecordUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PayoutRecords
+     * const payoutRecord = await prisma.payoutRecord.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PayoutRecordUpdateManyArgs>(args: SelectSubset<T, PayoutRecordUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one PayoutRecord.
+     * @param {PayoutRecordUpsertArgs} args - Arguments to update or create a PayoutRecord.
+     * @example
+     * // Update or create a PayoutRecord
+     * const payoutRecord = await prisma.payoutRecord.upsert({
+     *   create: {
+     *     // ... data to create a PayoutRecord
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PayoutRecord we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PayoutRecordUpsertArgs>(args: SelectSubset<T, PayoutRecordUpsertArgs<ExtArgs>>): Prisma__PayoutRecordClient<$Result.GetResult<Prisma.$PayoutRecordPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of PayoutRecords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PayoutRecordCountArgs} args - Arguments to filter PayoutRecords to count.
+     * @example
+     * // Count the number of PayoutRecords
+     * const count = await prisma.payoutRecord.count({
+     *   where: {
+     *     // ... the filter for the PayoutRecords we want to count
+     *   }
+     * })
+    **/
+    count<T extends PayoutRecordCountArgs>(
+      args?: Subset<T, PayoutRecordCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PayoutRecordCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PayoutRecord.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PayoutRecordAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PayoutRecordAggregateArgs>(args: Subset<T, PayoutRecordAggregateArgs>): Prisma.PrismaPromise<GetPayoutRecordAggregateType<T>>
+
+    /**
+     * Group by PayoutRecord.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PayoutRecordGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PayoutRecordGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PayoutRecordGroupByArgs['orderBy'] }
+        : { orderBy?: PayoutRecordGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PayoutRecordGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPayoutRecordGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PayoutRecord model
+   */
+  readonly fields: PayoutRecordFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PayoutRecord.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PayoutRecordClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PayoutRecord model
+   */ 
+  interface PayoutRecordFieldRefs {
+    readonly id: FieldRef<"PayoutRecord", 'Int'>
+    readonly transferId: FieldRef<"PayoutRecord", 'String'>
+    readonly amountInUsd: FieldRef<"PayoutRecord", 'Float'>
+    readonly status: FieldRef<"PayoutRecord", 'PAYOUT_STATUS_ALIAS'>
+    readonly createdAt: FieldRef<"PayoutRecord", 'DateTime'>
+    readonly updatedAt: FieldRef<"PayoutRecord", 'DateTime'>
+    readonly userId: FieldRef<"PayoutRecord", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PayoutRecord findUnique
+   */
+  export type PayoutRecordFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PayoutRecord
+     */
+    select?: PayoutRecordSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PayoutRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which PayoutRecord to fetch.
+     */
+    where: PayoutRecordWhereUniqueInput
+  }
+
+  /**
+   * PayoutRecord findUniqueOrThrow
+   */
+  export type PayoutRecordFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PayoutRecord
+     */
+    select?: PayoutRecordSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PayoutRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which PayoutRecord to fetch.
+     */
+    where: PayoutRecordWhereUniqueInput
+  }
+
+  /**
+   * PayoutRecord findFirst
+   */
+  export type PayoutRecordFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PayoutRecord
+     */
+    select?: PayoutRecordSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PayoutRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which PayoutRecord to fetch.
+     */
+    where?: PayoutRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PayoutRecords to fetch.
+     */
+    orderBy?: PayoutRecordOrderByWithRelationInput | PayoutRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PayoutRecords.
+     */
+    cursor?: PayoutRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PayoutRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PayoutRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PayoutRecords.
+     */
+    distinct?: PayoutRecordScalarFieldEnum | PayoutRecordScalarFieldEnum[]
+  }
+
+  /**
+   * PayoutRecord findFirstOrThrow
+   */
+  export type PayoutRecordFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PayoutRecord
+     */
+    select?: PayoutRecordSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PayoutRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which PayoutRecord to fetch.
+     */
+    where?: PayoutRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PayoutRecords to fetch.
+     */
+    orderBy?: PayoutRecordOrderByWithRelationInput | PayoutRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PayoutRecords.
+     */
+    cursor?: PayoutRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PayoutRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PayoutRecords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PayoutRecords.
+     */
+    distinct?: PayoutRecordScalarFieldEnum | PayoutRecordScalarFieldEnum[]
+  }
+
+  /**
+   * PayoutRecord findMany
+   */
+  export type PayoutRecordFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PayoutRecord
+     */
+    select?: PayoutRecordSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PayoutRecordInclude<ExtArgs> | null
+    /**
+     * Filter, which PayoutRecords to fetch.
+     */
+    where?: PayoutRecordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PayoutRecords to fetch.
+     */
+    orderBy?: PayoutRecordOrderByWithRelationInput | PayoutRecordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PayoutRecords.
+     */
+    cursor?: PayoutRecordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PayoutRecords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PayoutRecords.
+     */
+    skip?: number
+    distinct?: PayoutRecordScalarFieldEnum | PayoutRecordScalarFieldEnum[]
+  }
+
+  /**
+   * PayoutRecord create
+   */
+  export type PayoutRecordCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PayoutRecord
+     */
+    select?: PayoutRecordSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PayoutRecordInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PayoutRecord.
+     */
+    data: XOR<PayoutRecordCreateInput, PayoutRecordUncheckedCreateInput>
+  }
+
+  /**
+   * PayoutRecord createMany
+   */
+  export type PayoutRecordCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PayoutRecords.
+     */
+    data: PayoutRecordCreateManyInput | PayoutRecordCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PayoutRecord createManyAndReturn
+   */
+  export type PayoutRecordCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PayoutRecord
+     */
+    select?: PayoutRecordSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many PayoutRecords.
+     */
+    data: PayoutRecordCreateManyInput | PayoutRecordCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PayoutRecordIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PayoutRecord update
+   */
+  export type PayoutRecordUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PayoutRecord
+     */
+    select?: PayoutRecordSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PayoutRecordInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PayoutRecord.
+     */
+    data: XOR<PayoutRecordUpdateInput, PayoutRecordUncheckedUpdateInput>
+    /**
+     * Choose, which PayoutRecord to update.
+     */
+    where: PayoutRecordWhereUniqueInput
+  }
+
+  /**
+   * PayoutRecord updateMany
+   */
+  export type PayoutRecordUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PayoutRecords.
+     */
+    data: XOR<PayoutRecordUpdateManyMutationInput, PayoutRecordUncheckedUpdateManyInput>
+    /**
+     * Filter which PayoutRecords to update
+     */
+    where?: PayoutRecordWhereInput
+  }
+
+  /**
+   * PayoutRecord upsert
+   */
+  export type PayoutRecordUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PayoutRecord
+     */
+    select?: PayoutRecordSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PayoutRecordInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PayoutRecord to update in case it exists.
+     */
+    where: PayoutRecordWhereUniqueInput
+    /**
+     * In case the PayoutRecord found by the `where` argument doesn't exist, create a new PayoutRecord with this data.
+     */
+    create: XOR<PayoutRecordCreateInput, PayoutRecordUncheckedCreateInput>
+    /**
+     * In case the PayoutRecord was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PayoutRecordUpdateInput, PayoutRecordUncheckedUpdateInput>
+  }
+
+  /**
+   * PayoutRecord delete
+   */
+  export type PayoutRecordDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PayoutRecord
+     */
+    select?: PayoutRecordSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PayoutRecordInclude<ExtArgs> | null
+    /**
+     * Filter which PayoutRecord to delete.
+     */
+    where: PayoutRecordWhereUniqueInput
+  }
+
+  /**
+   * PayoutRecord deleteMany
+   */
+  export type PayoutRecordDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PayoutRecords to delete
+     */
+    where?: PayoutRecordWhereInput
+  }
+
+  /**
+   * PayoutRecord without action
+   */
+  export type PayoutRecordDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PayoutRecord
+     */
+    select?: PayoutRecordSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PayoutRecordInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -14811,6 +15942,7 @@ export namespace Prisma {
     avatarUrl: 'avatarUrl',
     gender: 'gender',
     stripeCustomerId: 'stripeCustomerId',
+    stripeAccountId: 'stripeAccountId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     accountId: 'accountId'
@@ -14824,7 +15956,6 @@ export namespace Prisma {
     title: 'title',
     message: 'message',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
     userId: 'userId'
   };
 
@@ -14954,6 +16085,19 @@ export namespace Prisma {
   };
 
   export type PaymentRecordScalarFieldEnum = (typeof PaymentRecordScalarFieldEnum)[keyof typeof PaymentRecordScalarFieldEnum]
+
+
+  export const PayoutRecordScalarFieldEnum: {
+    id: 'id',
+    transferId: 'transferId',
+    amountInUsd: 'amountInUsd',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    userId: 'userId'
+  };
+
+  export type PayoutRecordScalarFieldEnum = (typeof PayoutRecordScalarFieldEnum)[keyof typeof PayoutRecordScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -15144,6 +16288,20 @@ export namespace Prisma {
    */
   export type ListEnumPAYMENT_RECORD__STATUS_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PAYMENT_RECORD__STATUS_ALIAS[]'>
     
+
+
+  /**
+   * Reference to a field of type 'PAYOUT_STATUS_ALIAS'
+   */
+  export type EnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PAYOUT_STATUS_ALIAS'>
+    
+
+
+  /**
+   * Reference to a field of type 'PAYOUT_STATUS_ALIAS[]'
+   */
+  export type ListEnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PAYOUT_STATUS_ALIAS[]'>
+    
   /**
    * Deep Input Types
    */
@@ -15280,6 +16438,7 @@ export namespace Prisma {
     avatarUrl?: StringNullableFilter<"User"> | string | null
     gender?: EnumUSER__GENDER_ALIASFilter<"User"> | $Enums.USER__GENDER_ALIAS
     stripeCustomerId?: StringFilter<"User"> | string
+    stripeAccountId?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     accountId?: StringFilter<"User"> | string
@@ -15290,6 +16449,7 @@ export namespace Prisma {
     userNotifications?: UserNotificationListRelationFilter
     reservations?: ReservationListRelationFilter
     account?: XOR<AccountRelationFilter, AccountWhereInput>
+    payoutRecords?: PayoutRecordListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -15300,6 +16460,7 @@ export namespace Prisma {
     avatarUrl?: SortOrderInput | SortOrder
     gender?: SortOrder
     stripeCustomerId?: SortOrder
+    stripeAccountId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     accountId?: SortOrder
@@ -15310,6 +16471,7 @@ export namespace Prisma {
     userNotifications?: UserNotificationOrderByRelationAggregateInput
     reservations?: ReservationOrderByRelationAggregateInput
     account?: AccountOrderByWithRelationInput
+    payoutRecords?: PayoutRecordOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -15324,6 +16486,7 @@ export namespace Prisma {
     phone?: StringFilter<"User"> | string
     avatarUrl?: StringNullableFilter<"User"> | string | null
     gender?: EnumUSER__GENDER_ALIASFilter<"User"> | $Enums.USER__GENDER_ALIAS
+    stripeAccountId?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     vehicles?: VehicleListRelationFilter
@@ -15333,6 +16496,7 @@ export namespace Prisma {
     userNotifications?: UserNotificationListRelationFilter
     reservations?: ReservationListRelationFilter
     account?: XOR<AccountRelationFilter, AccountWhereInput>
+    payoutRecords?: PayoutRecordListRelationFilter
   }, "id" | "stripeCustomerId" | "accountId">
 
   export type UserOrderByWithAggregationInput = {
@@ -15343,6 +16507,7 @@ export namespace Prisma {
     avatarUrl?: SortOrderInput | SortOrder
     gender?: SortOrder
     stripeCustomerId?: SortOrder
+    stripeAccountId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     accountId?: SortOrder
@@ -15364,6 +16529,7 @@ export namespace Prisma {
     avatarUrl?: StringNullableWithAggregatesFilter<"User"> | string | null
     gender?: EnumUSER__GENDER_ALIASWithAggregatesFilter<"User"> | $Enums.USER__GENDER_ALIAS
     stripeCustomerId?: StringWithAggregatesFilter<"User"> | string
+    stripeAccountId?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     accountId?: StringWithAggregatesFilter<"User"> | string
@@ -15377,7 +16543,6 @@ export namespace Prisma {
     title?: StringFilter<"UserNotification"> | string
     message?: StringFilter<"UserNotification"> | string
     createdAt?: DateTimeFilter<"UserNotification"> | Date | string
-    updatedAt?: DateTimeFilter<"UserNotification"> | Date | string
     userId?: IntFilter<"UserNotification"> | number
     user?: XOR<UserRelationFilter, UserWhereInput>
   }
@@ -15387,7 +16552,6 @@ export namespace Prisma {
     title?: SortOrder
     message?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
     userId?: SortOrder
     user?: UserOrderByWithRelationInput
   }
@@ -15400,7 +16564,6 @@ export namespace Prisma {
     title?: StringFilter<"UserNotification"> | string
     message?: StringFilter<"UserNotification"> | string
     createdAt?: DateTimeFilter<"UserNotification"> | Date | string
-    updatedAt?: DateTimeFilter<"UserNotification"> | Date | string
     userId?: IntFilter<"UserNotification"> | number
     user?: XOR<UserRelationFilter, UserWhereInput>
   }, "id">
@@ -15410,7 +16573,6 @@ export namespace Prisma {
     title?: SortOrder
     message?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
     userId?: SortOrder
     _count?: UserNotificationCountOrderByAggregateInput
     _avg?: UserNotificationAvgOrderByAggregateInput
@@ -15427,7 +16589,6 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"UserNotification"> | string
     message?: StringWithAggregatesFilter<"UserNotification"> | string
     createdAt?: DateTimeWithAggregatesFilter<"UserNotification"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"UserNotification"> | Date | string
     userId?: IntWithAggregatesFilter<"UserNotification"> | number
   }
 
@@ -16112,6 +17273,73 @@ export namespace Prisma {
     reservationId?: IntWithAggregatesFilter<"PaymentRecord"> | number
   }
 
+  export type PayoutRecordWhereInput = {
+    AND?: PayoutRecordWhereInput | PayoutRecordWhereInput[]
+    OR?: PayoutRecordWhereInput[]
+    NOT?: PayoutRecordWhereInput | PayoutRecordWhereInput[]
+    id?: IntFilter<"PayoutRecord"> | number
+    transferId?: StringNullableFilter<"PayoutRecord"> | string | null
+    amountInUsd?: FloatFilter<"PayoutRecord"> | number
+    status?: EnumPAYOUT_STATUS_ALIASFilter<"PayoutRecord"> | $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: DateTimeFilter<"PayoutRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"PayoutRecord"> | Date | string
+    userId?: IntFilter<"PayoutRecord"> | number
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }
+
+  export type PayoutRecordOrderByWithRelationInput = {
+    id?: SortOrder
+    transferId?: SortOrderInput | SortOrder
+    amountInUsd?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type PayoutRecordWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    transferId?: string
+    AND?: PayoutRecordWhereInput | PayoutRecordWhereInput[]
+    OR?: PayoutRecordWhereInput[]
+    NOT?: PayoutRecordWhereInput | PayoutRecordWhereInput[]
+    amountInUsd?: FloatFilter<"PayoutRecord"> | number
+    status?: EnumPAYOUT_STATUS_ALIASFilter<"PayoutRecord"> | $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: DateTimeFilter<"PayoutRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"PayoutRecord"> | Date | string
+    userId?: IntFilter<"PayoutRecord"> | number
+    user?: XOR<UserRelationFilter, UserWhereInput>
+  }, "id" | "transferId">
+
+  export type PayoutRecordOrderByWithAggregationInput = {
+    id?: SortOrder
+    transferId?: SortOrderInput | SortOrder
+    amountInUsd?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+    _count?: PayoutRecordCountOrderByAggregateInput
+    _avg?: PayoutRecordAvgOrderByAggregateInput
+    _max?: PayoutRecordMaxOrderByAggregateInput
+    _min?: PayoutRecordMinOrderByAggregateInput
+    _sum?: PayoutRecordSumOrderByAggregateInput
+  }
+
+  export type PayoutRecordScalarWhereWithAggregatesInput = {
+    AND?: PayoutRecordScalarWhereWithAggregatesInput | PayoutRecordScalarWhereWithAggregatesInput[]
+    OR?: PayoutRecordScalarWhereWithAggregatesInput[]
+    NOT?: PayoutRecordScalarWhereWithAggregatesInput | PayoutRecordScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"PayoutRecord"> | number
+    transferId?: StringNullableWithAggregatesFilter<"PayoutRecord"> | string | null
+    amountInUsd?: FloatWithAggregatesFilter<"PayoutRecord"> | number
+    status?: EnumPAYOUT_STATUS_ALIASWithAggregatesFilter<"PayoutRecord"> | $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: DateTimeWithAggregatesFilter<"PayoutRecord"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PayoutRecord"> | Date | string
+    userId?: IntWithAggregatesFilter<"PayoutRecord"> | number
+  }
+
   export type AccountCreateInput = {
     id?: string
     email: string
@@ -16242,6 +17470,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
     stripeCustomerId: string
+    stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     vehicles?: VehicleCreateNestedManyWithoutOwnerInput
@@ -16251,6 +17480,7 @@ export namespace Prisma {
     userNotifications?: UserNotificationCreateNestedManyWithoutUserInput
     reservations?: ReservationCreateNestedManyWithoutUserInput
     account: AccountCreateNestedOneWithoutUserInput
+    payoutRecords?: PayoutRecordCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -16261,6 +17491,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
     stripeCustomerId: string
+    stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accountId: string
@@ -16270,6 +17501,7 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUncheckedCreateNestedManyWithoutUserInput
     userNotifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
+    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -16279,6 +17511,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
@@ -16288,6 +17521,7 @@ export namespace Prisma {
     userNotifications?: UserNotificationUpdateManyWithoutUserNestedInput
     reservations?: ReservationUpdateManyWithoutUserNestedInput
     account?: AccountUpdateOneRequiredWithoutUserNestedInput
+    payoutRecords?: PayoutRecordUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -16298,6 +17532,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accountId?: StringFieldUpdateOperationsInput | string
@@ -16307,6 +17542,7 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUncheckedUpdateManyWithoutUserNestedInput
     userNotifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
+    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -16317,6 +17553,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
     stripeCustomerId: string
+    stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accountId: string
@@ -16329,6 +17566,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16341,6 +17579,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accountId?: StringFieldUpdateOperationsInput | string
@@ -16350,7 +17589,6 @@ export namespace Prisma {
     title: string
     message: string
     createdAt?: Date | string
-    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutUserNotificationsInput
   }
 
@@ -16359,7 +17597,6 @@ export namespace Prisma {
     title: string
     message: string
     createdAt?: Date | string
-    updatedAt?: Date | string
     userId: number
   }
 
@@ -16367,7 +17604,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutUserNotificationsNestedInput
   }
 
@@ -16376,7 +17612,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -16385,7 +17620,6 @@ export namespace Prisma {
     title: string
     message: string
     createdAt?: Date | string
-    updatedAt?: Date | string
     userId: number
   }
 
@@ -16393,7 +17627,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserNotificationUncheckedUpdateManyInput = {
@@ -16401,7 +17634,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -17115,6 +18347,72 @@ export namespace Prisma {
     reservationId?: IntFieldUpdateOperationsInput | number
   }
 
+  export type PayoutRecordCreateInput = {
+    transferId?: string | null
+    amountInUsd: number
+    status?: $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutPayoutRecordsInput
+  }
+
+  export type PayoutRecordUncheckedCreateInput = {
+    id?: number
+    transferId?: string | null
+    amountInUsd: number
+    status?: $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: number
+  }
+
+  export type PayoutRecordUpdateInput = {
+    transferId?: NullableStringFieldUpdateOperationsInput | string | null
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
+    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutPayoutRecordsNestedInput
+  }
+
+  export type PayoutRecordUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    transferId?: NullableStringFieldUpdateOperationsInput | string | null
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
+    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PayoutRecordCreateManyInput = {
+    id?: number
+    transferId?: string | null
+    amountInUsd: number
+    status?: $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userId: number
+  }
+
+  export type PayoutRecordUpdateManyMutationInput = {
+    transferId?: NullableStringFieldUpdateOperationsInput | string | null
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
+    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PayoutRecordUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    transferId?: NullableStringFieldUpdateOperationsInput | string | null
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
+    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: IntFieldUpdateOperationsInput | number
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -17354,6 +18652,12 @@ export namespace Prisma {
     none?: ReservationWhereInput
   }
 
+  export type PayoutRecordListRelationFilter = {
+    every?: PayoutRecordWhereInput
+    some?: PayoutRecordWhereInput
+    none?: PayoutRecordWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -17383,6 +18687,10 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type PayoutRecordOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     firstName?: SortOrder
@@ -17391,6 +18699,7 @@ export namespace Prisma {
     avatarUrl?: SortOrder
     gender?: SortOrder
     stripeCustomerId?: SortOrder
+    stripeAccountId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     accountId?: SortOrder
@@ -17408,6 +18717,7 @@ export namespace Prisma {
     avatarUrl?: SortOrder
     gender?: SortOrder
     stripeCustomerId?: SortOrder
+    stripeAccountId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     accountId?: SortOrder
@@ -17421,6 +18731,7 @@ export namespace Prisma {
     avatarUrl?: SortOrder
     gender?: SortOrder
     stripeCustomerId?: SortOrder
+    stripeAccountId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     accountId?: SortOrder
@@ -17468,7 +18779,6 @@ export namespace Prisma {
     title?: SortOrder
     message?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
     userId?: SortOrder
   }
 
@@ -17482,7 +18792,6 @@ export namespace Prisma {
     title?: SortOrder
     message?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
     userId?: SortOrder
   }
 
@@ -17491,7 +18800,6 @@ export namespace Prisma {
     title?: SortOrder
     message?: SortOrder
     createdAt?: SortOrder
-    updatedAt?: SortOrder
     userId?: SortOrder
   }
 
@@ -18123,6 +19431,65 @@ export namespace Prisma {
     _max?: NestedEnumPAYMENT_RECORD__STATUS_ALIASFilter<$PrismaModel>
   }
 
+  export type EnumPAYOUT_STATUS_ALIASFilter<$PrismaModel = never> = {
+    equals?: $Enums.PAYOUT_STATUS_ALIAS | EnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.PAYOUT_STATUS_ALIAS[] | ListEnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PAYOUT_STATUS_ALIAS[] | ListEnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumPAYOUT_STATUS_ALIASFilter<$PrismaModel> | $Enums.PAYOUT_STATUS_ALIAS
+  }
+
+  export type PayoutRecordCountOrderByAggregateInput = {
+    id?: SortOrder
+    transferId?: SortOrder
+    amountInUsd?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type PayoutRecordAvgOrderByAggregateInput = {
+    id?: SortOrder
+    amountInUsd?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type PayoutRecordMaxOrderByAggregateInput = {
+    id?: SortOrder
+    transferId?: SortOrder
+    amountInUsd?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type PayoutRecordMinOrderByAggregateInput = {
+    id?: SortOrder
+    transferId?: SortOrder
+    amountInUsd?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type PayoutRecordSumOrderByAggregateInput = {
+    id?: SortOrder
+    amountInUsd?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type EnumPAYOUT_STATUS_ALIASWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PAYOUT_STATUS_ALIAS | EnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.PAYOUT_STATUS_ALIAS[] | ListEnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PAYOUT_STATUS_ALIAS[] | ListEnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumPAYOUT_STATUS_ALIASWithAggregatesFilter<$PrismaModel> | $Enums.PAYOUT_STATUS_ALIAS
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPAYOUT_STATUS_ALIASFilter<$PrismaModel>
+    _max?: NestedEnumPAYOUT_STATUS_ALIASFilter<$PrismaModel>
+  }
+
   export type UserCreateNestedOneWithoutAccountInput = {
     create?: XOR<UserCreateWithoutAccountInput, UserUncheckedCreateWithoutAccountInput>
     connectOrCreate?: UserCreateOrConnectWithoutAccountInput
@@ -18279,6 +19646,13 @@ export namespace Prisma {
     connect?: AccountWhereUniqueInput
   }
 
+  export type PayoutRecordCreateNestedManyWithoutUserInput = {
+    create?: XOR<PayoutRecordCreateWithoutUserInput, PayoutRecordUncheckedCreateWithoutUserInput> | PayoutRecordCreateWithoutUserInput[] | PayoutRecordUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PayoutRecordCreateOrConnectWithoutUserInput | PayoutRecordCreateOrConnectWithoutUserInput[]
+    createMany?: PayoutRecordCreateManyUserInputEnvelope
+    connect?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
+  }
+
   export type VehicleUncheckedCreateNestedManyWithoutOwnerInput = {
     create?: XOR<VehicleCreateWithoutOwnerInput, VehicleUncheckedCreateWithoutOwnerInput> | VehicleCreateWithoutOwnerInput[] | VehicleUncheckedCreateWithoutOwnerInput[]
     connectOrCreate?: VehicleCreateOrConnectWithoutOwnerInput | VehicleCreateOrConnectWithoutOwnerInput[]
@@ -18319,6 +19693,13 @@ export namespace Prisma {
     connectOrCreate?: ReservationCreateOrConnectWithoutUserInput | ReservationCreateOrConnectWithoutUserInput[]
     createMany?: ReservationCreateManyUserInputEnvelope
     connect?: ReservationWhereUniqueInput | ReservationWhereUniqueInput[]
+  }
+
+  export type PayoutRecordUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<PayoutRecordCreateWithoutUserInput, PayoutRecordUncheckedCreateWithoutUserInput> | PayoutRecordCreateWithoutUserInput[] | PayoutRecordUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PayoutRecordCreateOrConnectWithoutUserInput | PayoutRecordCreateOrConnectWithoutUserInput[]
+    createMany?: PayoutRecordCreateManyUserInputEnvelope
+    connect?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -18421,6 +19802,20 @@ export namespace Prisma {
     update?: XOR<XOR<AccountUpdateToOneWithWhereWithoutUserInput, AccountUpdateWithoutUserInput>, AccountUncheckedUpdateWithoutUserInput>
   }
 
+  export type PayoutRecordUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PayoutRecordCreateWithoutUserInput, PayoutRecordUncheckedCreateWithoutUserInput> | PayoutRecordCreateWithoutUserInput[] | PayoutRecordUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PayoutRecordCreateOrConnectWithoutUserInput | PayoutRecordCreateOrConnectWithoutUserInput[]
+    upsert?: PayoutRecordUpsertWithWhereUniqueWithoutUserInput | PayoutRecordUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PayoutRecordCreateManyUserInputEnvelope
+    set?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
+    disconnect?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
+    delete?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
+    connect?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
+    update?: PayoutRecordUpdateWithWhereUniqueWithoutUserInput | PayoutRecordUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PayoutRecordUpdateManyWithWhereWithoutUserInput | PayoutRecordUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PayoutRecordScalarWhereInput | PayoutRecordScalarWhereInput[]
+  }
+
   export type VehicleUncheckedUpdateManyWithoutOwnerNestedInput = {
     create?: XOR<VehicleCreateWithoutOwnerInput, VehicleUncheckedCreateWithoutOwnerInput> | VehicleCreateWithoutOwnerInput[] | VehicleUncheckedCreateWithoutOwnerInput[]
     connectOrCreate?: VehicleCreateOrConnectWithoutOwnerInput | VehicleCreateOrConnectWithoutOwnerInput[]
@@ -18503,6 +19898,20 @@ export namespace Prisma {
     update?: ReservationUpdateWithWhereUniqueWithoutUserInput | ReservationUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ReservationUpdateManyWithWhereWithoutUserInput | ReservationUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ReservationScalarWhereInput | ReservationScalarWhereInput[]
+  }
+
+  export type PayoutRecordUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PayoutRecordCreateWithoutUserInput, PayoutRecordUncheckedCreateWithoutUserInput> | PayoutRecordCreateWithoutUserInput[] | PayoutRecordUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PayoutRecordCreateOrConnectWithoutUserInput | PayoutRecordCreateOrConnectWithoutUserInput[]
+    upsert?: PayoutRecordUpsertWithWhereUniqueWithoutUserInput | PayoutRecordUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PayoutRecordCreateManyUserInputEnvelope
+    set?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
+    disconnect?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
+    delete?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
+    connect?: PayoutRecordWhereUniqueInput | PayoutRecordWhereUniqueInput[]
+    update?: PayoutRecordUpdateWithWhereUniqueWithoutUserInput | PayoutRecordUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PayoutRecordUpdateManyWithWhereWithoutUserInput | PayoutRecordUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PayoutRecordScalarWhereInput | PayoutRecordScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutUserNotificationsInput = {
@@ -19119,6 +20528,24 @@ export namespace Prisma {
     update?: XOR<XOR<ReservationUpdateToOneWithWhereWithoutPaymentRecordInput, ReservationUpdateWithoutPaymentRecordInput>, ReservationUncheckedUpdateWithoutPaymentRecordInput>
   }
 
+  export type UserCreateNestedOneWithoutPayoutRecordsInput = {
+    create?: XOR<UserCreateWithoutPayoutRecordsInput, UserUncheckedCreateWithoutPayoutRecordsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPayoutRecordsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput = {
+    set?: $Enums.PAYOUT_STATUS_ALIAS
+  }
+
+  export type UserUpdateOneRequiredWithoutPayoutRecordsNestedInput = {
+    create?: XOR<UserCreateWithoutPayoutRecordsInput, UserUncheckedCreateWithoutPayoutRecordsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPayoutRecordsInput
+    upsert?: UserUpsertWithoutPayoutRecordsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPayoutRecordsInput, UserUpdateWithoutPayoutRecordsInput>, UserUncheckedUpdateWithoutPayoutRecordsInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -19428,6 +20855,23 @@ export namespace Prisma {
     _max?: NestedEnumPAYMENT_RECORD__STATUS_ALIASFilter<$PrismaModel>
   }
 
+  export type NestedEnumPAYOUT_STATUS_ALIASFilter<$PrismaModel = never> = {
+    equals?: $Enums.PAYOUT_STATUS_ALIAS | EnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.PAYOUT_STATUS_ALIAS[] | ListEnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PAYOUT_STATUS_ALIAS[] | ListEnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumPAYOUT_STATUS_ALIASFilter<$PrismaModel> | $Enums.PAYOUT_STATUS_ALIAS
+  }
+
+  export type NestedEnumPAYOUT_STATUS_ALIASWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PAYOUT_STATUS_ALIAS | EnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.PAYOUT_STATUS_ALIAS[] | ListEnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PAYOUT_STATUS_ALIAS[] | ListEnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumPAYOUT_STATUS_ALIASWithAggregatesFilter<$PrismaModel> | $Enums.PAYOUT_STATUS_ALIAS
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPAYOUT_STATUS_ALIASFilter<$PrismaModel>
+    _max?: NestedEnumPAYOUT_STATUS_ALIASFilter<$PrismaModel>
+  }
+
   export type UserCreateWithoutAccountInput = {
     firstName: string
     lastName: string
@@ -19435,6 +20879,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
     stripeCustomerId: string
+    stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     vehicles?: VehicleCreateNestedManyWithoutOwnerInput
@@ -19443,6 +20888,7 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordCreateNestedManyWithoutUserInput
     userNotifications?: UserNotificationCreateNestedManyWithoutUserInput
     reservations?: ReservationCreateNestedManyWithoutUserInput
+    payoutRecords?: PayoutRecordCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountInput = {
@@ -19453,6 +20899,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
     stripeCustomerId: string
+    stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     vehicles?: VehicleUncheckedCreateNestedManyWithoutOwnerInput
@@ -19461,6 +20908,7 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUncheckedCreateNestedManyWithoutUserInput
     userNotifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
+    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountInput = {
@@ -19509,6 +20957,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
@@ -19517,6 +20966,7 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUpdateManyWithoutUserNestedInput
     userNotifications?: UserNotificationUpdateManyWithoutUserNestedInput
     reservations?: ReservationUpdateManyWithoutUserNestedInput
+    payoutRecords?: PayoutRecordUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountInput = {
@@ -19527,6 +20977,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     vehicles?: VehicleUncheckedUpdateManyWithoutOwnerNestedInput
@@ -19535,6 +20986,7 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUncheckedUpdateManyWithoutUserNestedInput
     userNotifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
+    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AccountTokenUpsertWithWhereUniqueWithoutAccountInput = {
@@ -19774,7 +21226,6 @@ export namespace Prisma {
     title: string
     message: string
     createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type UserNotificationUncheckedCreateWithoutUserInput = {
@@ -19782,7 +21233,6 @@ export namespace Prisma {
     title: string
     message: string
     createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type UserNotificationCreateOrConnectWithoutUserInput = {
@@ -19855,6 +21305,33 @@ export namespace Prisma {
   export type AccountCreateOrConnectWithoutUserInput = {
     where: AccountWhereUniqueInput
     create: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput>
+  }
+
+  export type PayoutRecordCreateWithoutUserInput = {
+    transferId?: string | null
+    amountInUsd: number
+    status?: $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PayoutRecordUncheckedCreateWithoutUserInput = {
+    id?: number
+    transferId?: string | null
+    amountInUsd: number
+    status?: $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PayoutRecordCreateOrConnectWithoutUserInput = {
+    where: PayoutRecordWhereUniqueInput
+    create: XOR<PayoutRecordCreateWithoutUserInput, PayoutRecordUncheckedCreateWithoutUserInput>
+  }
+
+  export type PayoutRecordCreateManyUserInputEnvelope = {
+    data: PayoutRecordCreateManyUserInput | PayoutRecordCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type VehicleUpsertWithWhereUniqueWithoutOwnerInput = {
@@ -20013,7 +21490,6 @@ export namespace Prisma {
     title?: StringFilter<"UserNotification"> | string
     message?: StringFilter<"UserNotification"> | string
     createdAt?: DateTimeFilter<"UserNotification"> | Date | string
-    updatedAt?: DateTimeFilter<"UserNotification"> | Date | string
     userId?: IntFilter<"UserNotification"> | number
   }
 
@@ -20080,6 +21556,35 @@ export namespace Prisma {
     AccountToken?: AccountTokenUncheckedUpdateManyWithoutAccountNestedInput
   }
 
+  export type PayoutRecordUpsertWithWhereUniqueWithoutUserInput = {
+    where: PayoutRecordWhereUniqueInput
+    update: XOR<PayoutRecordUpdateWithoutUserInput, PayoutRecordUncheckedUpdateWithoutUserInput>
+    create: XOR<PayoutRecordCreateWithoutUserInput, PayoutRecordUncheckedCreateWithoutUserInput>
+  }
+
+  export type PayoutRecordUpdateWithWhereUniqueWithoutUserInput = {
+    where: PayoutRecordWhereUniqueInput
+    data: XOR<PayoutRecordUpdateWithoutUserInput, PayoutRecordUncheckedUpdateWithoutUserInput>
+  }
+
+  export type PayoutRecordUpdateManyWithWhereWithoutUserInput = {
+    where: PayoutRecordScalarWhereInput
+    data: XOR<PayoutRecordUpdateManyMutationInput, PayoutRecordUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type PayoutRecordScalarWhereInput = {
+    AND?: PayoutRecordScalarWhereInput | PayoutRecordScalarWhereInput[]
+    OR?: PayoutRecordScalarWhereInput[]
+    NOT?: PayoutRecordScalarWhereInput | PayoutRecordScalarWhereInput[]
+    id?: IntFilter<"PayoutRecord"> | number
+    transferId?: StringNullableFilter<"PayoutRecord"> | string | null
+    amountInUsd?: FloatFilter<"PayoutRecord"> | number
+    status?: EnumPAYOUT_STATUS_ALIASFilter<"PayoutRecord"> | $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: DateTimeFilter<"PayoutRecord"> | Date | string
+    updatedAt?: DateTimeFilter<"PayoutRecord"> | Date | string
+    userId?: IntFilter<"PayoutRecord"> | number
+  }
+
   export type UserCreateWithoutUserNotificationsInput = {
     firstName: string
     lastName: string
@@ -20087,6 +21592,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
     stripeCustomerId: string
+    stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     vehicles?: VehicleCreateNestedManyWithoutOwnerInput
@@ -20095,6 +21601,7 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordCreateNestedManyWithoutUserInput
     reservations?: ReservationCreateNestedManyWithoutUserInput
     account: AccountCreateNestedOneWithoutUserInput
+    payoutRecords?: PayoutRecordCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUserNotificationsInput = {
@@ -20105,6 +21612,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
     stripeCustomerId: string
+    stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accountId: string
@@ -20113,6 +21621,7 @@ export namespace Prisma {
     parkingLots?: ParkingLotUncheckedCreateNestedManyWithoutOwnerInput
     paymentRecords?: PaymentRecordUncheckedCreateNestedManyWithoutUserInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
+    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUserNotificationsInput = {
@@ -20138,6 +21647,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
@@ -20146,6 +21656,7 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUpdateManyWithoutUserNestedInput
     reservations?: ReservationUpdateManyWithoutUserNestedInput
     account?: AccountUpdateOneRequiredWithoutUserNestedInput
+    payoutRecords?: PayoutRecordUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserNotificationsInput = {
@@ -20156,6 +21667,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accountId?: StringFieldUpdateOperationsInput | string
@@ -20164,6 +21676,7 @@ export namespace Prisma {
     parkingLots?: ParkingLotUncheckedUpdateManyWithoutOwnerNestedInput
     paymentRecords?: PaymentRecordUncheckedUpdateManyWithoutUserNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
+    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ReservationCreateWithoutVehicleInput = {
@@ -20210,6 +21723,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
     stripeCustomerId: string
+    stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutUserInput
@@ -20218,6 +21732,7 @@ export namespace Prisma {
     userNotifications?: UserNotificationCreateNestedManyWithoutUserInput
     reservations?: ReservationCreateNestedManyWithoutUserInput
     account: AccountCreateNestedOneWithoutUserInput
+    payoutRecords?: PayoutRecordCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutVehiclesInput = {
@@ -20228,6 +21743,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
     stripeCustomerId: string
+    stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accountId: string
@@ -20236,6 +21752,7 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUncheckedCreateNestedManyWithoutUserInput
     userNotifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
+    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutVehiclesInput = {
@@ -20277,6 +21794,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutUserNestedInput
@@ -20285,6 +21803,7 @@ export namespace Prisma {
     userNotifications?: UserNotificationUpdateManyWithoutUserNestedInput
     reservations?: ReservationUpdateManyWithoutUserNestedInput
     account?: AccountUpdateOneRequiredWithoutUserNestedInput
+    payoutRecords?: PayoutRecordUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutVehiclesInput = {
@@ -20295,6 +21814,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accountId?: StringFieldUpdateOperationsInput | string
@@ -20303,6 +21823,7 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUncheckedUpdateManyWithoutUserNestedInput
     userNotifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
+    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ParkingSpotCreateWithoutParkingLotInput = {
@@ -20431,6 +21952,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
     stripeCustomerId: string
+    stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     vehicles?: VehicleCreateNestedManyWithoutOwnerInput
@@ -20439,6 +21961,7 @@ export namespace Prisma {
     userNotifications?: UserNotificationCreateNestedManyWithoutUserInput
     reservations?: ReservationCreateNestedManyWithoutUserInput
     account: AccountCreateNestedOneWithoutUserInput
+    payoutRecords?: PayoutRecordCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutParkingLotsInput = {
@@ -20449,6 +21972,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
     stripeCustomerId: string
+    stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accountId: string
@@ -20457,6 +21981,7 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUncheckedCreateNestedManyWithoutUserInput
     userNotifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
+    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutParkingLotsInput = {
@@ -20587,6 +22112,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
@@ -20595,6 +22121,7 @@ export namespace Prisma {
     userNotifications?: UserNotificationUpdateManyWithoutUserNestedInput
     reservations?: ReservationUpdateManyWithoutUserNestedInput
     account?: AccountUpdateOneRequiredWithoutUserNestedInput
+    payoutRecords?: PayoutRecordUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutParkingLotsInput = {
@@ -20605,6 +22132,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accountId?: StringFieldUpdateOperationsInput | string
@@ -20613,6 +22141,7 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUncheckedUpdateManyWithoutUserNestedInput
     userNotifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
+    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ParkingLotCreateWithoutParkingLotPricesInput = {
@@ -20772,6 +22301,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
     stripeCustomerId: string
+    stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     vehicles?: VehicleCreateNestedManyWithoutOwnerInput
@@ -20780,6 +22310,7 @@ export namespace Prisma {
     userNotifications?: UserNotificationCreateNestedManyWithoutUserInput
     reservations?: ReservationCreateNestedManyWithoutUserInput
     account: AccountCreateNestedOneWithoutUserInput
+    payoutRecords?: PayoutRecordCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutParkingLotReviewsInput = {
@@ -20790,6 +22321,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
     stripeCustomerId: string
+    stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accountId: string
@@ -20798,6 +22330,7 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUncheckedCreateNestedManyWithoutUserInput
     userNotifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
+    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutParkingLotReviewsInput = {
@@ -20877,6 +22410,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
@@ -20885,6 +22419,7 @@ export namespace Prisma {
     userNotifications?: UserNotificationUpdateManyWithoutUserNestedInput
     reservations?: ReservationUpdateManyWithoutUserNestedInput
     account?: AccountUpdateOneRequiredWithoutUserNestedInput
+    payoutRecords?: PayoutRecordUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutParkingLotReviewsInput = {
@@ -20895,6 +22430,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accountId?: StringFieldUpdateOperationsInput | string
@@ -20903,6 +22439,7 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUncheckedUpdateManyWithoutUserNestedInput
     userNotifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
+    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ParkingLotCreateWithoutParkingLotServicesInput = {
@@ -21249,6 +22786,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
     stripeCustomerId: string
+    stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     vehicles?: VehicleCreateNestedManyWithoutOwnerInput
@@ -21257,6 +22795,7 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordCreateNestedManyWithoutUserInput
     userNotifications?: UserNotificationCreateNestedManyWithoutUserInput
     account: AccountCreateNestedOneWithoutUserInput
+    payoutRecords?: PayoutRecordCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReservationsInput = {
@@ -21267,6 +22806,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
     stripeCustomerId: string
+    stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accountId: string
@@ -21275,6 +22815,7 @@ export namespace Prisma {
     parkingLots?: ParkingLotUncheckedCreateNestedManyWithoutOwnerInput
     paymentRecords?: PaymentRecordUncheckedCreateNestedManyWithoutUserInput
     userNotifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
+    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReservationsInput = {
@@ -21400,6 +22941,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
@@ -21408,6 +22950,7 @@ export namespace Prisma {
     paymentRecords?: PaymentRecordUpdateManyWithoutUserNestedInput
     userNotifications?: UserNotificationUpdateManyWithoutUserNestedInput
     account?: AccountUpdateOneRequiredWithoutUserNestedInput
+    payoutRecords?: PayoutRecordUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReservationsInput = {
@@ -21418,6 +22961,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accountId?: StringFieldUpdateOperationsInput | string
@@ -21426,6 +22970,7 @@ export namespace Prisma {
     parkingLots?: ParkingLotUncheckedUpdateManyWithoutOwnerNestedInput
     paymentRecords?: PaymentRecordUncheckedUpdateManyWithoutUserNestedInput
     userNotifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ParkingSpotUpsertWithoutReservationsInput = {
@@ -21537,6 +23082,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
     stripeCustomerId: string
+    stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     vehicles?: VehicleCreateNestedManyWithoutOwnerInput
@@ -21545,6 +23091,7 @@ export namespace Prisma {
     userNotifications?: UserNotificationCreateNestedManyWithoutUserInput
     reservations?: ReservationCreateNestedManyWithoutUserInput
     account: AccountCreateNestedOneWithoutUserInput
+    payoutRecords?: PayoutRecordCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPaymentRecordsInput = {
@@ -21555,6 +23102,7 @@ export namespace Prisma {
     avatarUrl?: string | null
     gender: $Enums.USER__GENDER_ALIAS
     stripeCustomerId: string
+    stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     accountId: string
@@ -21563,6 +23111,7 @@ export namespace Prisma {
     parkingLots?: ParkingLotUncheckedCreateNestedManyWithoutOwnerInput
     userNotifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
     reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
+    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPaymentRecordsInput = {
@@ -21620,6 +23169,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
@@ -21628,6 +23178,7 @@ export namespace Prisma {
     userNotifications?: UserNotificationUpdateManyWithoutUserNestedInput
     reservations?: ReservationUpdateManyWithoutUserNestedInput
     account?: AccountUpdateOneRequiredWithoutUserNestedInput
+    payoutRecords?: PayoutRecordUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPaymentRecordsInput = {
@@ -21638,6 +23189,7 @@ export namespace Prisma {
     avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
     gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
     stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accountId?: StringFieldUpdateOperationsInput | string
@@ -21646,6 +23198,7 @@ export namespace Prisma {
     parkingLots?: ParkingLotUncheckedUpdateManyWithoutOwnerNestedInput
     userNotifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
     reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
+    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ReservationUpsertWithoutPaymentRecordInput = {
@@ -21684,6 +23237,100 @@ export namespace Prisma {
     parkingSpotId?: IntFieldUpdateOperationsInput | number
     vehicleId?: IntFieldUpdateOperationsInput | number
     services?: ParkingLotServiceUncheckedUpdateManyWithoutReservationsNestedInput
+  }
+
+  export type UserCreateWithoutPayoutRecordsInput = {
+    firstName: string
+    lastName: string
+    phone: string
+    avatarUrl?: string | null
+    gender: $Enums.USER__GENDER_ALIAS
+    stripeCustomerId: string
+    stripeAccountId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    vehicles?: VehicleCreateNestedManyWithoutOwnerInput
+    parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutUserInput
+    parkingLots?: ParkingLotCreateNestedManyWithoutOwnerInput
+    paymentRecords?: PaymentRecordCreateNestedManyWithoutUserInput
+    userNotifications?: UserNotificationCreateNestedManyWithoutUserInput
+    reservations?: ReservationCreateNestedManyWithoutUserInput
+    account: AccountCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutPayoutRecordsInput = {
+    id?: number
+    firstName: string
+    lastName: string
+    phone: string
+    avatarUrl?: string | null
+    gender: $Enums.USER__GENDER_ALIAS
+    stripeCustomerId: string
+    stripeAccountId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accountId: string
+    vehicles?: VehicleUncheckedCreateNestedManyWithoutOwnerInput
+    parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutUserInput
+    parkingLots?: ParkingLotUncheckedCreateNestedManyWithoutOwnerInput
+    paymentRecords?: PaymentRecordUncheckedCreateNestedManyWithoutUserInput
+    userNotifications?: UserNotificationUncheckedCreateNestedManyWithoutUserInput
+    reservations?: ReservationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutPayoutRecordsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPayoutRecordsInput, UserUncheckedCreateWithoutPayoutRecordsInput>
+  }
+
+  export type UserUpsertWithoutPayoutRecordsInput = {
+    update: XOR<UserUpdateWithoutPayoutRecordsInput, UserUncheckedUpdateWithoutPayoutRecordsInput>
+    create: XOR<UserCreateWithoutPayoutRecordsInput, UserUncheckedCreateWithoutPayoutRecordsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPayoutRecordsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPayoutRecordsInput, UserUncheckedUpdateWithoutPayoutRecordsInput>
+  }
+
+  export type UserUpdateWithoutPayoutRecordsInput = {
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
+    parkingLotReviews?: ParkingLotReviewUpdateManyWithoutUserNestedInput
+    parkingLots?: ParkingLotUpdateManyWithoutOwnerNestedInput
+    paymentRecords?: PaymentRecordUpdateManyWithoutUserNestedInput
+    userNotifications?: UserNotificationUpdateManyWithoutUserNestedInput
+    reservations?: ReservationUpdateManyWithoutUserNestedInput
+    account?: AccountUpdateOneRequiredWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPayoutRecordsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    gender?: EnumUSER__GENDER_ALIASFieldUpdateOperationsInput | $Enums.USER__GENDER_ALIAS
+    stripeCustomerId?: StringFieldUpdateOperationsInput | string
+    stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accountId?: StringFieldUpdateOperationsInput | string
+    vehicles?: VehicleUncheckedUpdateManyWithoutOwnerNestedInput
+    parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutUserNestedInput
+    parkingLots?: ParkingLotUncheckedUpdateManyWithoutOwnerNestedInput
+    paymentRecords?: PaymentRecordUncheckedUpdateManyWithoutUserNestedInput
+    userNotifications?: UserNotificationUncheckedUpdateManyWithoutUserNestedInput
+    reservations?: ReservationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AccountTokenCreateManyAccountInput = {
@@ -21770,7 +23417,6 @@ export namespace Prisma {
     title: string
     message: string
     createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type ReservationCreateManyUserInput = {
@@ -21783,6 +23429,15 @@ export namespace Prisma {
     updatedAt?: Date | string
     parkingSpotId: number
     vehicleId: number
+  }
+
+  export type PayoutRecordCreateManyUserInput = {
+    id?: number
+    transferId?: string | null
+    amountInUsd: number
+    status?: $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type VehicleUpdateWithoutOwnerInput = {
@@ -21951,7 +23606,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserNotificationUncheckedUpdateWithoutUserInput = {
@@ -21959,7 +23613,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserNotificationUncheckedUpdateManyWithoutUserInput = {
@@ -21967,7 +23620,6 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReservationUpdateWithoutUserInput = {
@@ -22007,6 +23659,32 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingSpotId?: IntFieldUpdateOperationsInput | number
     vehicleId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PayoutRecordUpdateWithoutUserInput = {
+    transferId?: NullableStringFieldUpdateOperationsInput | string | null
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
+    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PayoutRecordUncheckedUpdateWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    transferId?: NullableStringFieldUpdateOperationsInput | string | null
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
+    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PayoutRecordUncheckedUpdateManyWithoutUserInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    transferId?: NullableStringFieldUpdateOperationsInput | string | null
+    amountInUsd?: FloatFieldUpdateOperationsInput | number
+    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReservationCreateManyVehicleInput = {
@@ -22430,6 +24108,10 @@ export namespace Prisma {
      * @deprecated Use PaymentRecordDefaultArgs instead
      */
     export type PaymentRecordArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PaymentRecordDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use PayoutRecordDefaultArgs instead
+     */
+    export type PayoutRecordArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PayoutRecordDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany
