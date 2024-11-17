@@ -57,8 +57,25 @@ export namespace StripeUtils {
     accountId: string;
   };
   export const getConnectAccountUrl = async ({ accountId }: TGetConnectAccountUrlParams) => {
-    const connectAccount = await stripe.accounts.createLoginLink(accountId);
-    return connectAccount.url;
+    const url = await stripe.accounts.createLoginLink(accountId);
+    return url.url;
+  };
+
+  // Get connect account onboarding url ------------------------------------------------------
+  type TGetConnectAccountOnboardingUrlParams = {
+    accountId: string;
+  };
+  export const getConnectAccountOnboardingUrl = async ({
+    accountId,
+  }: TGetConnectAccountOnboardingUrlParams) => {
+    const accountLink = await stripe.accountLinks.create({
+      account: accountId,
+      refresh_url: "https://example.com/reauth",
+      return_url: "https://example.com/return",
+      type: "account_onboarding",
+    });
+
+    return accountLink.url;
   };
 
   // Create transfer --------------------------------------------------------------------------

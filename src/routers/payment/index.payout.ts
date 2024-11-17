@@ -6,7 +6,6 @@ import { prisma } from "../../db";
 import { StripeUtils } from "../../utils/stripe";
 import { TRPCError } from "@trpc/server";
 import { jobManager } from "../../utils/jobManager";
-import cron from "node-cron";
 import Stripe from "stripe";
 
 const CREATE_PAYOUTS_JOB_KEY = "create-payouts-job";
@@ -43,6 +42,20 @@ export const getStripeConnectUrl = procedure
       return { url };
     }
 
+    const stripeConnectAccount = await StripeUtils.retrieveConnectAccount({
+      accountId: stripeAccountId,
+    });
+    if (!stripeConnectAccount) {
+      throw new TRPCError({ code: "NOT_FOUND", message: "Stripe account not found" });
+    }
+
+    if (!stripeConnectAccount.details_submitted || !stripeConnectAccount.charges_enabled) {
+      console.log("details not submitted");
+      const url = await StripeUtils.getConnectAccountOnboardingUrl({ accountId: stripeAccountId });
+      return { url };
+    }
+
+    console.log("details submitted");
     const url = await StripeUtils.getConnectAccountUrl({ accountId: stripeAccountId });
     return { url };
   });
@@ -79,7 +92,10 @@ export const getMany = procedure
           },
         },
       },
-      include: { parkingLot: true },
+      include: {
+        parkingLot: { include: { owner: { select: { account: { select: { email: true } } } } } },
+      },
+      orderBy: { createdAt: "desc" },
     });
 
     return payouts;
@@ -115,6 +131,7 @@ export const getSingle = procedure
           include: {
             user: { include: { account: { select: { email: true } } } },
           },
+          orderBy: { createdAt: "desc" },
         },
       },
     });
@@ -123,16 +140,18 @@ export const getSingle = procedure
   });
 
 // Create payout --------------------------------------------------------------------------
-export const create = procedure.use(authMiddleware(["ADMIN"])).mutation(async () => {
+export const create = procedure.use(authMiddleware(["ADMIN"])).mutation(() => {
   const isAlreadyRunning = jobManager.isJobRunning(CREATE_PAYOUTS_JOB_KEY);
 
   if (isAlreadyRunning) {
     throw new TRPCError({ code: "BAD_REQUEST", message: "Already generating payouts" });
   }
 
-  const job = cron.schedule("*/1 * * * * *", async () => {
+  const generatePayout = async () => {
+    console.log("Creating payouts");
     try {
       jobManager.markJobRunning(CREATE_PAYOUTS_JOB_KEY);
+
       const parkingLots = await prisma.parkingLot.findMany({
         include: { owner: true },
       });
@@ -157,29 +176,31 @@ export const create = procedure.use(authMiddleware(["ADMIN"])).mutation(async ()
 
           // Get the fees and the total amount to be paid
           for (const records of splittedUnpaidOutPaymentRecords) {
-            // Get the fees and the total amount to be paid
             await Promise.all(
               records.map(async (record) => {
                 const intentId = record.stripeIntentId;
+                console.log("intentId", intentId);
                 const paymentIntent = await StripeUtils.retrieveIntentWithBalanceTransaction({
                   intentId,
                 });
 
                 const charge = paymentIntent.latest_charge as Stripe.Charge;
-                if (typeof charge === "string") return;
+                if (!charge || typeof charge === "string") return;
 
                 const balanceTransaction = charge.balance_transaction as Stripe.BalanceTransaction;
                 if (typeof balanceTransaction === "string") return;
+                if (balanceTransaction.status !== "available") return;
 
                 totalNetInCent += balanceTransaction.net;
                 totalFeesInCent += balanceTransaction.fee;
                 markedPaymentIds.push(record.id);
               }),
             );
-            // Delay for 5 seconds, avoid Stripe rate limit
+
+            // Delay for 5 seconds to avoid rate limit
             await new Promise((resolve) => setTimeout(resolve, 5000));
           }
-
+          if (totalNetInCent === 0) return;
           // Create a payout record
           const ownerStripeAccountId = lot.owner.stripeAccountId;
           // If user does not have a stripe account, mark the payout as failed
@@ -214,7 +235,7 @@ export const create = procedure.use(authMiddleware(["ADMIN"])).mutation(async ()
               },
             });
           } catch (error) {
-            console.error(error);
+            console.error(JSON.stringify(error));
             await prisma.payoutRecord.create({
               data: {
                 parkingLotId: lot.id,
@@ -230,13 +251,12 @@ export const create = procedure.use(authMiddleware(["ADMIN"])).mutation(async ()
 
       console.log("Payouts are generated");
       jobManager.markJobCompleted(CREATE_PAYOUTS_JOB_KEY);
-      job.stop();
     } catch (error) {
       console.error(error);
       jobManager.markJobCompleted(CREATE_PAYOUTS_JOB_KEY);
-      job.stop();
     }
-  });
+  };
 
+  generatePayout();
   return { message: "Payouts are being generated" };
 });
