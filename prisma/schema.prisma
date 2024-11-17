@@ -96,14 +96,15 @@ model AccountToken {
 model User {
   id Int @id @default(autoincrement())
 
-  firstName        String
-  lastName         String
-  phone            String
-  avatarUrl        String?
-  gender           USER__GENDER_ALIAS
-  stripeCustomerId String             @unique
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime           @updatedAt
+  firstName              String
+  lastName               String
+  phone                  String
+  avatarUrl              String?
+  gender                 USER__GENDER_ALIAS
+  stripeCustomerId       String             @unique
+  stripeConnectAccountId String?
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
 
   vehicles          Vehicle[]
   parkingLotReviews ParkingLotReview[]
@@ -124,7 +125,6 @@ model UserNotification {
   title     String
   message   String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
   userId Int
   user   User @relation(fields: [userId], references: [id])
