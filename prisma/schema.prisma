@@ -272,12 +272,11 @@ model Reservation {
 model PaymentRecord {
   id Int @id @default(autoincrement())
 
-  stripeIntentId      String?                      @unique
-  status              PAYMENT_RECORD__STATUS_ALIAS @default(AWAITING)
-  amountInUsd         Float
-  transactionFeeInUsd Float                        @default(0)
-  createdAt           DateTime                     @default(now())
-  updatedAt           DateTime                     @updatedAt
+  stripeIntentId String?                      @unique
+  status         PAYMENT_RECORD__STATUS_ALIAS @default(AWAITING)
+  amountInUsd    Float
+  createdAt      DateTime                     @default(now())
+  updatedAt      DateTime                     @updatedAt
 
   userId Int
   user   User @relation(fields: [userId], references: [id])

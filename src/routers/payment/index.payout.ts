@@ -93,7 +93,14 @@ export const getMany = procedure
         },
       },
       include: {
-        parkingLot: { include: { owner: { select: { account: { select: { email: true } } } } } },
+        parkingLot: {
+          select: {
+            id: true,
+            name: true,
+            phone: true,
+            owner: { select: { account: { select: { email: true } } } },
+          },
+        },
       },
       orderBy: { createdAt: "desc" },
     });
