@@ -152,13 +152,24 @@ export const PAYMENT_RECORD__STATUS_ALIAS: {
 export type PAYMENT_RECORD__STATUS_ALIAS = (typeof PAYMENT_RECORD__STATUS_ALIAS)[keyof typeof PAYMENT_RECORD__STATUS_ALIAS]
 
 
-export const PAYOUT_STATUS_ALIAS: {
+export const PAYOUT__STATUS_ALIAS: {
   PENDING: 'PENDING',
   COMPLETED: 'COMPLETED',
   FAILED: 'FAILED'
 };
 
-export type PAYOUT_STATUS_ALIAS = (typeof PAYOUT_STATUS_ALIAS)[keyof typeof PAYOUT_STATUS_ALIAS]
+export type PAYOUT__STATUS_ALIAS = (typeof PAYOUT__STATUS_ALIAS)[keyof typeof PAYOUT__STATUS_ALIAS]
+
+
+export const PAYOUT__ERROR_TYPE_ALIAS: {
+  INSUFFICIENT_BALANCE: 'INSUFFICIENT_BALANCE',
+  CREATE_TRANSFER_FAILED: 'CREATE_TRANSFER_FAILED',
+  NO_STRIPE_ACCOUNT: 'NO_STRIPE_ACCOUNT',
+  STRIPE_ACCOUNT_INVALID: 'STRIPE_ACCOUNT_INVALID',
+  OTHER: 'OTHER'
+};
+
+export type PAYOUT__ERROR_TYPE_ALIAS = (typeof PAYOUT__ERROR_TYPE_ALIAS)[keyof typeof PAYOUT__ERROR_TYPE_ALIAS]
 
 }
 
@@ -190,9 +201,13 @@ export type PAYMENT_RECORD__STATUS_ALIAS = $Enums.PAYMENT_RECORD__STATUS_ALIAS
 
 export const PAYMENT_RECORD__STATUS_ALIAS: typeof $Enums.PAYMENT_RECORD__STATUS_ALIAS
 
-export type PAYOUT_STATUS_ALIAS = $Enums.PAYOUT_STATUS_ALIAS
+export type PAYOUT__STATUS_ALIAS = $Enums.PAYOUT__STATUS_ALIAS
 
-export const PAYOUT_STATUS_ALIAS: typeof $Enums.PAYOUT_STATUS_ALIAS
+export const PAYOUT__STATUS_ALIAS: typeof $Enums.PAYOUT__STATUS_ALIAS
+
+export type PAYOUT__ERROR_TYPE_ALIAS = $Enums.PAYOUT__ERROR_TYPE_ALIAS
+
+export const PAYOUT__ERROR_TYPE_ALIAS: typeof $Enums.PAYOUT__ERROR_TYPE_ALIAS
 
 /**
  * ##  Prisma Client ʲˢ
@@ -14980,21 +14995,25 @@ export namespace Prisma {
 
   export type PayoutRecordAvgAggregateOutputType = {
     id: number | null
-    amountInUsd: number | null
+    totalNetInUsd: number | null
+    totalFeeInUsd: number | null
     parkingLotId: number | null
   }
 
   export type PayoutRecordSumAggregateOutputType = {
     id: number | null
-    amountInUsd: number | null
+    totalNetInUsd: number | null
+    totalFeeInUsd: number | null
     parkingLotId: number | null
   }
 
   export type PayoutRecordMinAggregateOutputType = {
     id: number | null
     transferId: string | null
-    amountInUsd: number | null
-    status: $Enums.PAYOUT_STATUS_ALIAS | null
+    totalNetInUsd: number | null
+    totalFeeInUsd: number | null
+    status: $Enums.PAYOUT__STATUS_ALIAS | null
+    errorType: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt: Date | null
     updatedAt: Date | null
     parkingLotId: number | null
@@ -15003,8 +15022,10 @@ export namespace Prisma {
   export type PayoutRecordMaxAggregateOutputType = {
     id: number | null
     transferId: string | null
-    amountInUsd: number | null
-    status: $Enums.PAYOUT_STATUS_ALIAS | null
+    totalNetInUsd: number | null
+    totalFeeInUsd: number | null
+    status: $Enums.PAYOUT__STATUS_ALIAS | null
+    errorType: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt: Date | null
     updatedAt: Date | null
     parkingLotId: number | null
@@ -15013,8 +15034,10 @@ export namespace Prisma {
   export type PayoutRecordCountAggregateOutputType = {
     id: number
     transferId: number
-    amountInUsd: number
+    totalNetInUsd: number
+    totalFeeInUsd: number
     status: number
+    errorType: number
     createdAt: number
     updatedAt: number
     parkingLotId: number
@@ -15024,21 +15047,25 @@ export namespace Prisma {
 
   export type PayoutRecordAvgAggregateInputType = {
     id?: true
-    amountInUsd?: true
+    totalNetInUsd?: true
+    totalFeeInUsd?: true
     parkingLotId?: true
   }
 
   export type PayoutRecordSumAggregateInputType = {
     id?: true
-    amountInUsd?: true
+    totalNetInUsd?: true
+    totalFeeInUsd?: true
     parkingLotId?: true
   }
 
   export type PayoutRecordMinAggregateInputType = {
     id?: true
     transferId?: true
-    amountInUsd?: true
+    totalNetInUsd?: true
+    totalFeeInUsd?: true
     status?: true
+    errorType?: true
     createdAt?: true
     updatedAt?: true
     parkingLotId?: true
@@ -15047,8 +15074,10 @@ export namespace Prisma {
   export type PayoutRecordMaxAggregateInputType = {
     id?: true
     transferId?: true
-    amountInUsd?: true
+    totalNetInUsd?: true
+    totalFeeInUsd?: true
     status?: true
+    errorType?: true
     createdAt?: true
     updatedAt?: true
     parkingLotId?: true
@@ -15057,8 +15086,10 @@ export namespace Prisma {
   export type PayoutRecordCountAggregateInputType = {
     id?: true
     transferId?: true
-    amountInUsd?: true
+    totalNetInUsd?: true
+    totalFeeInUsd?: true
     status?: true
+    errorType?: true
     createdAt?: true
     updatedAt?: true
     parkingLotId?: true
@@ -15154,8 +15185,10 @@ export namespace Prisma {
   export type PayoutRecordGroupByOutputType = {
     id: number
     transferId: string | null
-    amountInUsd: number
-    status: $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd: number
+    totalFeeInUsd: number
+    status: $Enums.PAYOUT__STATUS_ALIAS
+    errorType: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt: Date
     updatedAt: Date
     parkingLotId: number
@@ -15183,8 +15216,10 @@ export namespace Prisma {
   export type PayoutRecordSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     transferId?: boolean
-    amountInUsd?: boolean
+    totalNetInUsd?: boolean
+    totalFeeInUsd?: boolean
     status?: boolean
+    errorType?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     parkingLotId?: boolean
@@ -15196,8 +15231,10 @@ export namespace Prisma {
   export type PayoutRecordSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     transferId?: boolean
-    amountInUsd?: boolean
+    totalNetInUsd?: boolean
+    totalFeeInUsd?: boolean
     status?: boolean
+    errorType?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     parkingLotId?: boolean
@@ -15207,8 +15244,10 @@ export namespace Prisma {
   export type PayoutRecordSelectScalar = {
     id?: boolean
     transferId?: boolean
-    amountInUsd?: boolean
+    totalNetInUsd?: boolean
+    totalFeeInUsd?: boolean
     status?: boolean
+    errorType?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     parkingLotId?: boolean
@@ -15232,8 +15271,10 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       transferId: string | null
-      amountInUsd: number
-      status: $Enums.PAYOUT_STATUS_ALIAS
+      totalNetInUsd: number
+      totalFeeInUsd: number
+      status: $Enums.PAYOUT__STATUS_ALIAS
+      errorType: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
       createdAt: Date
       updatedAt: Date
       parkingLotId: number
@@ -15634,8 +15675,10 @@ export namespace Prisma {
   interface PayoutRecordFieldRefs {
     readonly id: FieldRef<"PayoutRecord", 'Int'>
     readonly transferId: FieldRef<"PayoutRecord", 'String'>
-    readonly amountInUsd: FieldRef<"PayoutRecord", 'Float'>
-    readonly status: FieldRef<"PayoutRecord", 'PAYOUT_STATUS_ALIAS'>
+    readonly totalNetInUsd: FieldRef<"PayoutRecord", 'Float'>
+    readonly totalFeeInUsd: FieldRef<"PayoutRecord", 'Float'>
+    readonly status: FieldRef<"PayoutRecord", 'PAYOUT__STATUS_ALIAS'>
+    readonly errorType: FieldRef<"PayoutRecord", 'PAYOUT__ERROR_TYPE_ALIAS'>
     readonly createdAt: FieldRef<"PayoutRecord", 'DateTime'>
     readonly updatedAt: FieldRef<"PayoutRecord", 'DateTime'>
     readonly parkingLotId: FieldRef<"PayoutRecord", 'Int'>
@@ -16185,8 +16228,10 @@ export namespace Prisma {
   export const PayoutRecordScalarFieldEnum: {
     id: 'id',
     transferId: 'transferId',
-    amountInUsd: 'amountInUsd',
+    totalNetInUsd: 'totalNetInUsd',
+    totalFeeInUsd: 'totalFeeInUsd',
     status: 'status',
+    errorType: 'errorType',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     parkingLotId: 'parkingLotId'
@@ -16386,16 +16431,30 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'PAYOUT_STATUS_ALIAS'
+   * Reference to a field of type 'PAYOUT__STATUS_ALIAS'
    */
-  export type EnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PAYOUT_STATUS_ALIAS'>
+  export type EnumPAYOUT__STATUS_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PAYOUT__STATUS_ALIAS'>
     
 
 
   /**
-   * Reference to a field of type 'PAYOUT_STATUS_ALIAS[]'
+   * Reference to a field of type 'PAYOUT__STATUS_ALIAS[]'
    */
-  export type ListEnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PAYOUT_STATUS_ALIAS[]'>
+  export type ListEnumPAYOUT__STATUS_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PAYOUT__STATUS_ALIAS[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PAYOUT__ERROR_TYPE_ALIAS'
+   */
+  export type EnumPAYOUT__ERROR_TYPE_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PAYOUT__ERROR_TYPE_ALIAS'>
+    
+
+
+  /**
+   * Reference to a field of type 'PAYOUT__ERROR_TYPE_ALIAS[]'
+   */
+  export type ListEnumPAYOUT__ERROR_TYPE_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PAYOUT__ERROR_TYPE_ALIAS[]'>
     
   /**
    * Deep Input Types
@@ -17382,8 +17441,10 @@ export namespace Prisma {
     NOT?: PayoutRecordWhereInput | PayoutRecordWhereInput[]
     id?: IntFilter<"PayoutRecord"> | number
     transferId?: StringNullableFilter<"PayoutRecord"> | string | null
-    amountInUsd?: FloatFilter<"PayoutRecord"> | number
-    status?: EnumPAYOUT_STATUS_ALIASFilter<"PayoutRecord"> | $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd?: FloatFilter<"PayoutRecord"> | number
+    totalFeeInUsd?: FloatFilter<"PayoutRecord"> | number
+    status?: EnumPAYOUT__STATUS_ALIASFilter<"PayoutRecord"> | $Enums.PAYOUT__STATUS_ALIAS
+    errorType?: EnumPAYOUT__ERROR_TYPE_ALIASNullableFilter<"PayoutRecord"> | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFilter<"PayoutRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PayoutRecord"> | Date | string
     parkingLotId?: IntFilter<"PayoutRecord"> | number
@@ -17394,8 +17455,10 @@ export namespace Prisma {
   export type PayoutRecordOrderByWithRelationInput = {
     id?: SortOrder
     transferId?: SortOrderInput | SortOrder
-    amountInUsd?: SortOrder
+    totalNetInUsd?: SortOrder
+    totalFeeInUsd?: SortOrder
     status?: SortOrder
+    errorType?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parkingLotId?: SortOrder
@@ -17409,8 +17472,10 @@ export namespace Prisma {
     AND?: PayoutRecordWhereInput | PayoutRecordWhereInput[]
     OR?: PayoutRecordWhereInput[]
     NOT?: PayoutRecordWhereInput | PayoutRecordWhereInput[]
-    amountInUsd?: FloatFilter<"PayoutRecord"> | number
-    status?: EnumPAYOUT_STATUS_ALIASFilter<"PayoutRecord"> | $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd?: FloatFilter<"PayoutRecord"> | number
+    totalFeeInUsd?: FloatFilter<"PayoutRecord"> | number
+    status?: EnumPAYOUT__STATUS_ALIASFilter<"PayoutRecord"> | $Enums.PAYOUT__STATUS_ALIAS
+    errorType?: EnumPAYOUT__ERROR_TYPE_ALIASNullableFilter<"PayoutRecord"> | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFilter<"PayoutRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PayoutRecord"> | Date | string
     parkingLotId?: IntFilter<"PayoutRecord"> | number
@@ -17421,8 +17486,10 @@ export namespace Prisma {
   export type PayoutRecordOrderByWithAggregationInput = {
     id?: SortOrder
     transferId?: SortOrderInput | SortOrder
-    amountInUsd?: SortOrder
+    totalNetInUsd?: SortOrder
+    totalFeeInUsd?: SortOrder
     status?: SortOrder
+    errorType?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parkingLotId?: SortOrder
@@ -17439,8 +17506,10 @@ export namespace Prisma {
     NOT?: PayoutRecordScalarWhereWithAggregatesInput | PayoutRecordScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"PayoutRecord"> | number
     transferId?: StringNullableWithAggregatesFilter<"PayoutRecord"> | string | null
-    amountInUsd?: FloatWithAggregatesFilter<"PayoutRecord"> | number
-    status?: EnumPAYOUT_STATUS_ALIASWithAggregatesFilter<"PayoutRecord"> | $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd?: FloatWithAggregatesFilter<"PayoutRecord"> | number
+    totalFeeInUsd?: FloatWithAggregatesFilter<"PayoutRecord"> | number
+    status?: EnumPAYOUT__STATUS_ALIASWithAggregatesFilter<"PayoutRecord"> | $Enums.PAYOUT__STATUS_ALIAS
+    errorType?: EnumPAYOUT__ERROR_TYPE_ALIASNullableWithAggregatesFilter<"PayoutRecord"> | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeWithAggregatesFilter<"PayoutRecord"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"PayoutRecord"> | Date | string
     parkingLotId?: IntWithAggregatesFilter<"PayoutRecord"> | number
@@ -18461,8 +18530,10 @@ export namespace Prisma {
 
   export type PayoutRecordCreateInput = {
     transferId?: string | null
-    amountInUsd: number
-    status?: $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd: number
+    totalFeeInUsd: number
+    status?: $Enums.PAYOUT__STATUS_ALIAS
+    errorType?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: Date | string
     updatedAt?: Date | string
     paymentRecords?: PaymentRecordCreateNestedManyWithoutPayoutRecordInput
@@ -18472,8 +18543,10 @@ export namespace Prisma {
   export type PayoutRecordUncheckedCreateInput = {
     id?: number
     transferId?: string | null
-    amountInUsd: number
-    status?: $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd: number
+    totalFeeInUsd: number
+    status?: $Enums.PAYOUT__STATUS_ALIAS
+    errorType?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingLotId: number
@@ -18482,8 +18555,10 @@ export namespace Prisma {
 
   export type PayoutRecordUpdateInput = {
     transferId?: NullableStringFieldUpdateOperationsInput | string | null
-    amountInUsd?: FloatFieldUpdateOperationsInput | number
-    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd?: FloatFieldUpdateOperationsInput | number
+    totalFeeInUsd?: FloatFieldUpdateOperationsInput | number
+    status?: EnumPAYOUT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__STATUS_ALIAS
+    errorType?: NullableEnumPAYOUT__ERROR_TYPE_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentRecords?: PaymentRecordUpdateManyWithoutPayoutRecordNestedInput
@@ -18493,8 +18568,10 @@ export namespace Prisma {
   export type PayoutRecordUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     transferId?: NullableStringFieldUpdateOperationsInput | string | null
-    amountInUsd?: FloatFieldUpdateOperationsInput | number
-    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd?: FloatFieldUpdateOperationsInput | number
+    totalFeeInUsd?: FloatFieldUpdateOperationsInput | number
+    status?: EnumPAYOUT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__STATUS_ALIAS
+    errorType?: NullableEnumPAYOUT__ERROR_TYPE_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingLotId?: IntFieldUpdateOperationsInput | number
@@ -18504,8 +18581,10 @@ export namespace Prisma {
   export type PayoutRecordCreateManyInput = {
     id?: number
     transferId?: string | null
-    amountInUsd: number
-    status?: $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd: number
+    totalFeeInUsd: number
+    status?: $Enums.PAYOUT__STATUS_ALIAS
+    errorType?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingLotId: number
@@ -18513,8 +18592,10 @@ export namespace Prisma {
 
   export type PayoutRecordUpdateManyMutationInput = {
     transferId?: NullableStringFieldUpdateOperationsInput | string | null
-    amountInUsd?: FloatFieldUpdateOperationsInput | number
-    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd?: FloatFieldUpdateOperationsInput | number
+    totalFeeInUsd?: FloatFieldUpdateOperationsInput | number
+    status?: EnumPAYOUT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__STATUS_ALIAS
+    errorType?: NullableEnumPAYOUT__ERROR_TYPE_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -18522,8 +18603,10 @@ export namespace Prisma {
   export type PayoutRecordUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     transferId?: NullableStringFieldUpdateOperationsInput | string | null
-    amountInUsd?: FloatFieldUpdateOperationsInput | number
-    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd?: FloatFieldUpdateOperationsInput | number
+    totalFeeInUsd?: FloatFieldUpdateOperationsInput | number
+    status?: EnumPAYOUT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__STATUS_ALIAS
+    errorType?: NullableEnumPAYOUT__ERROR_TYPE_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingLotId?: IntFieldUpdateOperationsInput | number
@@ -19584,18 +19667,27 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
-  export type EnumPAYOUT_STATUS_ALIASFilter<$PrismaModel = never> = {
-    equals?: $Enums.PAYOUT_STATUS_ALIAS | EnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
-    in?: $Enums.PAYOUT_STATUS_ALIAS[] | ListEnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
-    notIn?: $Enums.PAYOUT_STATUS_ALIAS[] | ListEnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
-    not?: NestedEnumPAYOUT_STATUS_ALIASFilter<$PrismaModel> | $Enums.PAYOUT_STATUS_ALIAS
+  export type EnumPAYOUT__STATUS_ALIASFilter<$PrismaModel = never> = {
+    equals?: $Enums.PAYOUT__STATUS_ALIAS | EnumPAYOUT__STATUS_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.PAYOUT__STATUS_ALIAS[] | ListEnumPAYOUT__STATUS_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PAYOUT__STATUS_ALIAS[] | ListEnumPAYOUT__STATUS_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumPAYOUT__STATUS_ALIASFilter<$PrismaModel> | $Enums.PAYOUT__STATUS_ALIAS
+  }
+
+  export type EnumPAYOUT__ERROR_TYPE_ALIASNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | EnumPAYOUT__ERROR_TYPE_ALIASFieldRefInput<$PrismaModel> | null
+    in?: $Enums.PAYOUT__ERROR_TYPE_ALIAS[] | ListEnumPAYOUT__ERROR_TYPE_ALIASFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.PAYOUT__ERROR_TYPE_ALIAS[] | ListEnumPAYOUT__ERROR_TYPE_ALIASFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumPAYOUT__ERROR_TYPE_ALIASNullableFilter<$PrismaModel> | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
   }
 
   export type PayoutRecordCountOrderByAggregateInput = {
     id?: SortOrder
     transferId?: SortOrder
-    amountInUsd?: SortOrder
+    totalNetInUsd?: SortOrder
+    totalFeeInUsd?: SortOrder
     status?: SortOrder
+    errorType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parkingLotId?: SortOrder
@@ -19603,15 +19695,18 @@ export namespace Prisma {
 
   export type PayoutRecordAvgOrderByAggregateInput = {
     id?: SortOrder
-    amountInUsd?: SortOrder
+    totalNetInUsd?: SortOrder
+    totalFeeInUsd?: SortOrder
     parkingLotId?: SortOrder
   }
 
   export type PayoutRecordMaxOrderByAggregateInput = {
     id?: SortOrder
     transferId?: SortOrder
-    amountInUsd?: SortOrder
+    totalNetInUsd?: SortOrder
+    totalFeeInUsd?: SortOrder
     status?: SortOrder
+    errorType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parkingLotId?: SortOrder
@@ -19620,8 +19715,10 @@ export namespace Prisma {
   export type PayoutRecordMinOrderByAggregateInput = {
     id?: SortOrder
     transferId?: SortOrder
-    amountInUsd?: SortOrder
+    totalNetInUsd?: SortOrder
+    totalFeeInUsd?: SortOrder
     status?: SortOrder
+    errorType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     parkingLotId?: SortOrder
@@ -19629,18 +19726,29 @@ export namespace Prisma {
 
   export type PayoutRecordSumOrderByAggregateInput = {
     id?: SortOrder
-    amountInUsd?: SortOrder
+    totalNetInUsd?: SortOrder
+    totalFeeInUsd?: SortOrder
     parkingLotId?: SortOrder
   }
 
-  export type EnumPAYOUT_STATUS_ALIASWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.PAYOUT_STATUS_ALIAS | EnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
-    in?: $Enums.PAYOUT_STATUS_ALIAS[] | ListEnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
-    notIn?: $Enums.PAYOUT_STATUS_ALIAS[] | ListEnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
-    not?: NestedEnumPAYOUT_STATUS_ALIASWithAggregatesFilter<$PrismaModel> | $Enums.PAYOUT_STATUS_ALIAS
+  export type EnumPAYOUT__STATUS_ALIASWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PAYOUT__STATUS_ALIAS | EnumPAYOUT__STATUS_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.PAYOUT__STATUS_ALIAS[] | ListEnumPAYOUT__STATUS_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PAYOUT__STATUS_ALIAS[] | ListEnumPAYOUT__STATUS_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumPAYOUT__STATUS_ALIASWithAggregatesFilter<$PrismaModel> | $Enums.PAYOUT__STATUS_ALIAS
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumPAYOUT_STATUS_ALIASFilter<$PrismaModel>
-    _max?: NestedEnumPAYOUT_STATUS_ALIASFilter<$PrismaModel>
+    _min?: NestedEnumPAYOUT__STATUS_ALIASFilter<$PrismaModel>
+    _max?: NestedEnumPAYOUT__STATUS_ALIASFilter<$PrismaModel>
+  }
+
+  export type EnumPAYOUT__ERROR_TYPE_ALIASNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | EnumPAYOUT__ERROR_TYPE_ALIASFieldRefInput<$PrismaModel> | null
+    in?: $Enums.PAYOUT__ERROR_TYPE_ALIAS[] | ListEnumPAYOUT__ERROR_TYPE_ALIASFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.PAYOUT__ERROR_TYPE_ALIAS[] | ListEnumPAYOUT__ERROR_TYPE_ALIASFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumPAYOUT__ERROR_TYPE_ALIASNullableWithAggregatesFilter<$PrismaModel> | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumPAYOUT__ERROR_TYPE_ALIASNullableFilter<$PrismaModel>
+    _max?: NestedEnumPAYOUT__ERROR_TYPE_ALIASNullableFilter<$PrismaModel>
   }
 
   export type UserCreateNestedOneWithoutAccountInput = {
@@ -20725,8 +20833,12 @@ export namespace Prisma {
     connect?: PaymentRecordWhereUniqueInput | PaymentRecordWhereUniqueInput[]
   }
 
-  export type EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput = {
-    set?: $Enums.PAYOUT_STATUS_ALIAS
+  export type EnumPAYOUT__STATUS_ALIASFieldUpdateOperationsInput = {
+    set?: $Enums.PAYOUT__STATUS_ALIAS
+  }
+
+  export type NullableEnumPAYOUT__ERROR_TYPE_ALIASFieldUpdateOperationsInput = {
+    set?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
   }
 
   export type PaymentRecordUpdateManyWithoutPayoutRecordNestedInput = {
@@ -21101,21 +21213,38 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedEnumPAYOUT_STATUS_ALIASFilter<$PrismaModel = never> = {
-    equals?: $Enums.PAYOUT_STATUS_ALIAS | EnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
-    in?: $Enums.PAYOUT_STATUS_ALIAS[] | ListEnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
-    notIn?: $Enums.PAYOUT_STATUS_ALIAS[] | ListEnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
-    not?: NestedEnumPAYOUT_STATUS_ALIASFilter<$PrismaModel> | $Enums.PAYOUT_STATUS_ALIAS
+  export type NestedEnumPAYOUT__STATUS_ALIASFilter<$PrismaModel = never> = {
+    equals?: $Enums.PAYOUT__STATUS_ALIAS | EnumPAYOUT__STATUS_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.PAYOUT__STATUS_ALIAS[] | ListEnumPAYOUT__STATUS_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PAYOUT__STATUS_ALIAS[] | ListEnumPAYOUT__STATUS_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumPAYOUT__STATUS_ALIASFilter<$PrismaModel> | $Enums.PAYOUT__STATUS_ALIAS
   }
 
-  export type NestedEnumPAYOUT_STATUS_ALIASWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.PAYOUT_STATUS_ALIAS | EnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
-    in?: $Enums.PAYOUT_STATUS_ALIAS[] | ListEnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
-    notIn?: $Enums.PAYOUT_STATUS_ALIAS[] | ListEnumPAYOUT_STATUS_ALIASFieldRefInput<$PrismaModel>
-    not?: NestedEnumPAYOUT_STATUS_ALIASWithAggregatesFilter<$PrismaModel> | $Enums.PAYOUT_STATUS_ALIAS
+  export type NestedEnumPAYOUT__ERROR_TYPE_ALIASNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | EnumPAYOUT__ERROR_TYPE_ALIASFieldRefInput<$PrismaModel> | null
+    in?: $Enums.PAYOUT__ERROR_TYPE_ALIAS[] | ListEnumPAYOUT__ERROR_TYPE_ALIASFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.PAYOUT__ERROR_TYPE_ALIAS[] | ListEnumPAYOUT__ERROR_TYPE_ALIASFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumPAYOUT__ERROR_TYPE_ALIASNullableFilter<$PrismaModel> | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
+  }
+
+  export type NestedEnumPAYOUT__STATUS_ALIASWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PAYOUT__STATUS_ALIAS | EnumPAYOUT__STATUS_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.PAYOUT__STATUS_ALIAS[] | ListEnumPAYOUT__STATUS_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PAYOUT__STATUS_ALIAS[] | ListEnumPAYOUT__STATUS_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumPAYOUT__STATUS_ALIASWithAggregatesFilter<$PrismaModel> | $Enums.PAYOUT__STATUS_ALIAS
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumPAYOUT_STATUS_ALIASFilter<$PrismaModel>
-    _max?: NestedEnumPAYOUT_STATUS_ALIASFilter<$PrismaModel>
+    _min?: NestedEnumPAYOUT__STATUS_ALIASFilter<$PrismaModel>
+    _max?: NestedEnumPAYOUT__STATUS_ALIASFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPAYOUT__ERROR_TYPE_ALIASNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | EnumPAYOUT__ERROR_TYPE_ALIASFieldRefInput<$PrismaModel> | null
+    in?: $Enums.PAYOUT__ERROR_TYPE_ALIAS[] | ListEnumPAYOUT__ERROR_TYPE_ALIASFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.PAYOUT__ERROR_TYPE_ALIAS[] | ListEnumPAYOUT__ERROR_TYPE_ALIASFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumPAYOUT__ERROR_TYPE_ALIASNullableWithAggregatesFilter<$PrismaModel> | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumPAYOUT__ERROR_TYPE_ALIASNullableFilter<$PrismaModel>
+    _max?: NestedEnumPAYOUT__ERROR_TYPE_ALIASNullableFilter<$PrismaModel>
   }
 
   export type UserCreateWithoutAccountInput = {
@@ -22172,8 +22301,10 @@ export namespace Prisma {
 
   export type PayoutRecordCreateWithoutParkingLotInput = {
     transferId?: string | null
-    amountInUsd: number
-    status?: $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd: number
+    totalFeeInUsd: number
+    status?: $Enums.PAYOUT__STATUS_ALIAS
+    errorType?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: Date | string
     updatedAt?: Date | string
     paymentRecords?: PaymentRecordCreateNestedManyWithoutPayoutRecordInput
@@ -22182,8 +22313,10 @@ export namespace Prisma {
   export type PayoutRecordUncheckedCreateWithoutParkingLotInput = {
     id?: number
     transferId?: string | null
-    amountInUsd: number
-    status?: $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd: number
+    totalFeeInUsd: number
+    status?: $Enums.PAYOUT__STATUS_ALIAS
+    errorType?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: Date | string
     updatedAt?: Date | string
     paymentRecords?: PaymentRecordUncheckedCreateNestedManyWithoutPayoutRecordInput
@@ -22374,8 +22507,10 @@ export namespace Prisma {
     NOT?: PayoutRecordScalarWhereInput | PayoutRecordScalarWhereInput[]
     id?: IntFilter<"PayoutRecord"> | number
     transferId?: StringNullableFilter<"PayoutRecord"> | string | null
-    amountInUsd?: FloatFilter<"PayoutRecord"> | number
-    status?: EnumPAYOUT_STATUS_ALIASFilter<"PayoutRecord"> | $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd?: FloatFilter<"PayoutRecord"> | number
+    totalFeeInUsd?: FloatFilter<"PayoutRecord"> | number
+    status?: EnumPAYOUT__STATUS_ALIASFilter<"PayoutRecord"> | $Enums.PAYOUT__STATUS_ALIAS
+    errorType?: EnumPAYOUT__ERROR_TYPE_ALIASNullableFilter<"PayoutRecord"> | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFilter<"PayoutRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PayoutRecord"> | Date | string
     parkingLotId?: IntFilter<"PayoutRecord"> | number
@@ -23400,8 +23535,10 @@ export namespace Prisma {
 
   export type PayoutRecordCreateWithoutPaymentRecordsInput = {
     transferId?: string | null
-    amountInUsd: number
-    status?: $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd: number
+    totalFeeInUsd: number
+    status?: $Enums.PAYOUT__STATUS_ALIAS
+    errorType?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingLot: ParkingLotCreateNestedOneWithoutPayoutRecordInput
@@ -23410,8 +23547,10 @@ export namespace Prisma {
   export type PayoutRecordUncheckedCreateWithoutPaymentRecordsInput = {
     id?: number
     transferId?: string | null
-    amountInUsd: number
-    status?: $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd: number
+    totalFeeInUsd: number
+    status?: $Enums.PAYOUT__STATUS_ALIAS
+    errorType?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: Date | string
     updatedAt?: Date | string
     parkingLotId: number
@@ -23521,8 +23660,10 @@ export namespace Prisma {
 
   export type PayoutRecordUpdateWithoutPaymentRecordsInput = {
     transferId?: NullableStringFieldUpdateOperationsInput | string | null
-    amountInUsd?: FloatFieldUpdateOperationsInput | number
-    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd?: FloatFieldUpdateOperationsInput | number
+    totalFeeInUsd?: FloatFieldUpdateOperationsInput | number
+    status?: EnumPAYOUT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__STATUS_ALIAS
+    errorType?: NullableEnumPAYOUT__ERROR_TYPE_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingLot?: ParkingLotUpdateOneRequiredWithoutPayoutRecordNestedInput
@@ -23531,8 +23672,10 @@ export namespace Prisma {
   export type PayoutRecordUncheckedUpdateWithoutPaymentRecordsInput = {
     id?: IntFieldUpdateOperationsInput | number
     transferId?: NullableStringFieldUpdateOperationsInput | string | null
-    amountInUsd?: FloatFieldUpdateOperationsInput | number
-    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd?: FloatFieldUpdateOperationsInput | number
+    totalFeeInUsd?: FloatFieldUpdateOperationsInput | number
+    status?: EnumPAYOUT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__STATUS_ALIAS
+    errorType?: NullableEnumPAYOUT__ERROR_TYPE_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     parkingLotId?: IntFieldUpdateOperationsInput | number
@@ -24111,8 +24254,10 @@ export namespace Prisma {
   export type PayoutRecordCreateManyParkingLotInput = {
     id?: number
     transferId?: string | null
-    amountInUsd: number
-    status?: $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd: number
+    totalFeeInUsd: number
+    status?: $Enums.PAYOUT__STATUS_ALIAS
+    errorType?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -24237,8 +24382,10 @@ export namespace Prisma {
 
   export type PayoutRecordUpdateWithoutParkingLotInput = {
     transferId?: NullableStringFieldUpdateOperationsInput | string | null
-    amountInUsd?: FloatFieldUpdateOperationsInput | number
-    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd?: FloatFieldUpdateOperationsInput | number
+    totalFeeInUsd?: FloatFieldUpdateOperationsInput | number
+    status?: EnumPAYOUT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__STATUS_ALIAS
+    errorType?: NullableEnumPAYOUT__ERROR_TYPE_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentRecords?: PaymentRecordUpdateManyWithoutPayoutRecordNestedInput
@@ -24247,8 +24394,10 @@ export namespace Prisma {
   export type PayoutRecordUncheckedUpdateWithoutParkingLotInput = {
     id?: IntFieldUpdateOperationsInput | number
     transferId?: NullableStringFieldUpdateOperationsInput | string | null
-    amountInUsd?: FloatFieldUpdateOperationsInput | number
-    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd?: FloatFieldUpdateOperationsInput | number
+    totalFeeInUsd?: FloatFieldUpdateOperationsInput | number
+    status?: EnumPAYOUT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__STATUS_ALIAS
+    errorType?: NullableEnumPAYOUT__ERROR_TYPE_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentRecords?: PaymentRecordUncheckedUpdateManyWithoutPayoutRecordNestedInput
@@ -24257,8 +24406,10 @@ export namespace Prisma {
   export type PayoutRecordUncheckedUpdateManyWithoutParkingLotInput = {
     id?: IntFieldUpdateOperationsInput | number
     transferId?: NullableStringFieldUpdateOperationsInput | string | null
-    amountInUsd?: FloatFieldUpdateOperationsInput | number
-    status?: EnumPAYOUT_STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT_STATUS_ALIAS
+    totalNetInUsd?: FloatFieldUpdateOperationsInput | number
+    totalFeeInUsd?: FloatFieldUpdateOperationsInput | number
+    status?: EnumPAYOUT__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__STATUS_ALIAS
+    errorType?: NullableEnumPAYOUT__ERROR_TYPE_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

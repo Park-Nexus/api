@@ -61,6 +61,24 @@ export namespace StripeUtils {
     return connectAccount.url;
   };
 
+  // Create transfer --------------------------------------------------------------------------
+  type TCreateTransferParams = {
+    amountInCent: number;
+    destinationConnectAccountId: string;
+  };
+  export const createTransfer = async ({
+    amountInCent,
+    destinationConnectAccountId,
+  }: TCreateTransferParams) => {
+    const transfer = await stripe.transfers.create({
+      amount: amountInCent,
+      currency: "usd",
+      destination: destinationConnectAccountId,
+    });
+
+    return transfer;
+  };
+
   // Save payment method ---------------------------------------------------------------------
   type TSavePaymentMethodParams = {
     customerId: string;

@@ -63,10 +63,18 @@ enum PAYMENT_RECORD__STATUS_ALIAS {
   REFUNDED
 }
 
-enum PAYOUT_STATUS_ALIAS {
+enum PAYOUT__STATUS_ALIAS {
   PENDING
   COMPLETED
   FAILED
+}
+
+enum PAYOUT__ERROR_TYPE_ALIAS {
+  INSUFFICIENT_BALANCE
+  CREATE_TRANSFER_FAILED
+  NO_STRIPE_ACCOUNT
+  STRIPE_ACCOUNT_INVALID
+  OTHER
 }
 
 model Account {
@@ -284,12 +292,14 @@ model PaymentRecord {
 model PayoutRecord {
   id Int @id @default(autoincrement())
 
-  transferId     String?             @unique
-  amountInUsd    Float
+  transferId     String?                   @unique
+  totalNetInUsd  Float
+  totalFeeInUsd  Float
   paymentRecords PaymentRecord[]
-  status         PAYOUT_STATUS_ALIAS @default(PENDING)
-  createdAt      DateTime            @default(now())
-  updatedAt      DateTime            @updatedAt
+  status         PAYOUT__STATUS_ALIAS      @default(PENDING)
+  errorType      PAYOUT__ERROR_TYPE_ALIAS?
+  createdAt      DateTime                  @default(now())
+  updatedAt      DateTime                  @updatedAt
 
   parkingLotId Int
   parkingLot   ParkingLot @relation(fields: [parkingLotId], references: [id])
