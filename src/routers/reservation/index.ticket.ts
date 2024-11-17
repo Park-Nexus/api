@@ -4,18 +4,19 @@ import { procedure } from "../../trpc";
 import { authMiddleware } from "../../auth";
 import { prisma } from "../../db";
 import { TRPCError } from "@trpc/server";
-import cron from "node-cron";
 import { DateUtils } from "../../utils/date";
 import {
   EXPIRATION_TIME_IN_HOURS,
   MAX_AHEAD_TIME_ALLOWED_IN_HOURS,
   MAX_ALLOWED_RESERVATIONS,
+  MAXIMUM_OVERSTAYING_DURATION_IN_HOURS,
   MINIMUM_DURATION_IN_HOURS,
 } from "../../../rules";
 import { getFileSignedUrl } from "../../utils/storage";
 import { StripeUtils } from "../../utils/stripe";
 import { EventNameFn, EventEmitter } from "../../utils/sse";
 import { on } from "events";
+import cron from "node-cron";
 
 // Create a new ticket ------------------------------------------------------------------------------
 const createSchema = z.object({
@@ -326,7 +327,40 @@ export const checkIn = procedure
       where: { id: reservation.id },
       data: { status: "ON_GOING" },
     });
+
+    await prisma.parkingSpot.update({
+      where: { id: reservation.parkingSpotId },
+      data: { isAvailable: false },
+    });
+
     EventEmitter.getInstance().emit(EventNameFn.getSingleTicket(reservation.id));
+
+    const markAsOverstayedAt = dayjs(reservation.endTime).add(10, "minutes").toDate();
+    const markAsOverstayedJob = cron.schedule(
+      DateUtils.toCronDate(markAsOverstayedAt),
+      async () => {
+        await prisma.reservation.update({
+          where: { id: reservation.id },
+          data: { status: "OVERSTAYED" },
+        });
+        markAsOverstayedJob.stop();
+      },
+    );
+
+    const autoCheckoutAt = dayjs(reservation.endTime)
+      .add(MAXIMUM_OVERSTAYING_DURATION_IN_HOURS, "hours")
+      .toDate();
+    const autoCheckoutJob = cron.schedule(DateUtils.toCronDate(autoCheckoutAt), async () => {
+      await prisma.reservation.update({
+        where: { id: reservation.id },
+        data: { status: "COMPLETED" },
+      });
+      await prisma.parkingSpot.update({
+        where: { id: reservation.parkingSpotId },
+        data: { isAvailable: true },
+      });
+      autoCheckoutJob.stop();
+    });
   });
 
 // Check Out -------------------------------------------------------------------------------
@@ -359,4 +393,8 @@ export const checkOut = procedure
       data: { status: "COMPLETED" },
     });
     EventEmitter.getInstance().emit(EventNameFn.getSingleTicket(reservation.id));
+    await prisma.parkingSpot.update({
+      where: { id: reservation.parkingSpotId },
+      data: { isAvailable: true },
+    });
   });
