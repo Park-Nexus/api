@@ -15,5 +15,6 @@ export const paymentRouter = trpcInstance.router({
   payout: {
     stripeConnectUrl: { get: payout.getStripeConnectUrl },
     get: { many: payout.getMany, single: payout.getSingle },
+    create: payout.create,
   },
 });
