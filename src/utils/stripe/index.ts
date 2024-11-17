@@ -96,6 +96,19 @@ export namespace StripeUtils {
     return paymentMethods.data;
   };
 
+  // Retrieve intent with balance transaction --------------------------------------------------
+  type TRetrieveIntentWithBalanceTransactionParams = {
+    intentId: string;
+  };
+  export const retrieveIntentWithBalanceTransaction = async ({
+    intentId,
+  }: TRetrieveIntentWithBalanceTransactionParams) => {
+    const intent = await stripe.paymentIntents.retrieve(intentId, {
+      expand: ["latest_charge.balance_transaction"],
+    });
+    return intent;
+  };
+
   // Create intent -----------------------------------------------------------------------------
   type TCreateIntentParams = {
     amountInUsd: number;
@@ -118,7 +131,9 @@ export namespace StripeUtils {
     intentId: string;
   };
   export const retrieveIntent = async ({ intentId }: TRetrieveIntentParams) => {
-    const intent = await stripe.paymentIntents.retrieve(intentId);
+    const intent = await stripe.paymentIntents.retrieve(intentId, {
+      expand: ["latest_charge.balance_transaction"],
+    });
     return intent;
   };
 

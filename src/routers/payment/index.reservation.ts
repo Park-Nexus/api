@@ -87,13 +87,19 @@ export const verifyPayment = procedure
       throw new TRPCError({ code: "NOT_FOUND", message: "Payment record not found" });
     }
 
+    await new Promise((resolve) => setTimeout(resolve, 20000));
+
     const intent = await StripeUtils.retrieveIntent({ intentId });
-    if (intent.status === "succeeded") {
-      await prisma.paymentRecord.update({
-        where: { id: paymentRecord.id },
-        data: { status: "PAID" },
-      });
+    if (!intent) throw new TRPCError({ code: "NOT_FOUND", message: "Intent not found" });
+
+    if (intent.status !== "succeeded") {
+      throw new TRPCError({ code: "BAD_REQUEST", message: "Payment failed" });
     }
+
+    await prisma.paymentRecord.update({
+      where: { id: paymentRecord.id },
+      data: { status: "PAID" },
+    });
 
     EventEmitter.getInstance().emit(EventNameFn.getSingleTicket(ticketId));
   });

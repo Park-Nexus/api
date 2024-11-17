@@ -13744,6 +13744,7 @@ export namespace Prisma {
   export type PaymentRecordAvgAggregateOutputType = {
     id: number | null
     amountInUsd: number | null
+    transactionFeeInUsd: number | null
     userId: number | null
     reservationId: number | null
   }
@@ -13751,6 +13752,7 @@ export namespace Prisma {
   export type PaymentRecordSumAggregateOutputType = {
     id: number | null
     amountInUsd: number | null
+    transactionFeeInUsd: number | null
     userId: number | null
     reservationId: number | null
   }
@@ -13760,6 +13762,7 @@ export namespace Prisma {
     stripeIntentId: string | null
     status: $Enums.PAYMENT_RECORD__STATUS_ALIAS | null
     amountInUsd: number | null
+    transactionFeeInUsd: number | null
     createdAt: Date | null
     updatedAt: Date | null
     userId: number | null
@@ -13771,6 +13774,7 @@ export namespace Prisma {
     stripeIntentId: string | null
     status: $Enums.PAYMENT_RECORD__STATUS_ALIAS | null
     amountInUsd: number | null
+    transactionFeeInUsd: number | null
     createdAt: Date | null
     updatedAt: Date | null
     userId: number | null
@@ -13782,6 +13786,7 @@ export namespace Prisma {
     stripeIntentId: number
     status: number
     amountInUsd: number
+    transactionFeeInUsd: number
     createdAt: number
     updatedAt: number
     userId: number
@@ -13793,6 +13798,7 @@ export namespace Prisma {
   export type PaymentRecordAvgAggregateInputType = {
     id?: true
     amountInUsd?: true
+    transactionFeeInUsd?: true
     userId?: true
     reservationId?: true
   }
@@ -13800,6 +13806,7 @@ export namespace Prisma {
   export type PaymentRecordSumAggregateInputType = {
     id?: true
     amountInUsd?: true
+    transactionFeeInUsd?: true
     userId?: true
     reservationId?: true
   }
@@ -13809,6 +13816,7 @@ export namespace Prisma {
     stripeIntentId?: true
     status?: true
     amountInUsd?: true
+    transactionFeeInUsd?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
@@ -13820,6 +13828,7 @@ export namespace Prisma {
     stripeIntentId?: true
     status?: true
     amountInUsd?: true
+    transactionFeeInUsd?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
@@ -13831,6 +13840,7 @@ export namespace Prisma {
     stripeIntentId?: true
     status?: true
     amountInUsd?: true
+    transactionFeeInUsd?: true
     createdAt?: true
     updatedAt?: true
     userId?: true
@@ -13929,6 +13939,7 @@ export namespace Prisma {
     stripeIntentId: string | null
     status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd: number
+    transactionFeeInUsd: number
     createdAt: Date
     updatedAt: Date
     userId: number
@@ -13959,6 +13970,7 @@ export namespace Prisma {
     stripeIntentId?: boolean
     status?: boolean
     amountInUsd?: boolean
+    transactionFeeInUsd?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
@@ -13972,6 +13984,7 @@ export namespace Prisma {
     stripeIntentId?: boolean
     status?: boolean
     amountInUsd?: boolean
+    transactionFeeInUsd?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
@@ -13985,6 +13998,7 @@ export namespace Prisma {
     stripeIntentId?: boolean
     status?: boolean
     amountInUsd?: boolean
+    transactionFeeInUsd?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     userId?: boolean
@@ -14011,6 +14025,7 @@ export namespace Prisma {
       stripeIntentId: string | null
       status: $Enums.PAYMENT_RECORD__STATUS_ALIAS
       amountInUsd: number
+      transactionFeeInUsd: number
       createdAt: Date
       updatedAt: Date
       userId: number
@@ -14414,6 +14429,7 @@ export namespace Prisma {
     readonly stripeIntentId: FieldRef<"PaymentRecord", 'String'>
     readonly status: FieldRef<"PaymentRecord", 'PAYMENT_RECORD__STATUS_ALIAS'>
     readonly amountInUsd: FieldRef<"PaymentRecord", 'Float'>
+    readonly transactionFeeInUsd: FieldRef<"PaymentRecord", 'Float'>
     readonly createdAt: FieldRef<"PaymentRecord", 'DateTime'>
     readonly updatedAt: FieldRef<"PaymentRecord", 'DateTime'>
     readonly userId: FieldRef<"PaymentRecord", 'Int'>
@@ -14930,6 +14946,7 @@ export namespace Prisma {
     stripeIntentId: 'stripeIntentId',
     status: 'status',
     amountInUsd: 'amountInUsd',
+    transactionFeeInUsd: 'transactionFeeInUsd',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     userId: 'userId',
@@ -16023,6 +16040,7 @@ export namespace Prisma {
     stripeIntentId?: StringNullableFilter<"PaymentRecord"> | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFilter<"PaymentRecord"> | number
+    transactionFeeInUsd?: FloatFilter<"PaymentRecord"> | number
     createdAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     userId?: IntFilter<"PaymentRecord"> | number
@@ -16036,6 +16054,7 @@ export namespace Prisma {
     stripeIntentId?: SortOrderInput | SortOrder
     status?: SortOrder
     amountInUsd?: SortOrder
+    transactionFeeInUsd?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -16053,6 +16072,7 @@ export namespace Prisma {
     NOT?: PaymentRecordWhereInput | PaymentRecordWhereInput[]
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFilter<"PaymentRecord"> | number
+    transactionFeeInUsd?: FloatFilter<"PaymentRecord"> | number
     createdAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     userId?: IntFilter<"PaymentRecord"> | number
@@ -16065,6 +16085,7 @@ export namespace Prisma {
     stripeIntentId?: SortOrderInput | SortOrder
     status?: SortOrder
     amountInUsd?: SortOrder
+    transactionFeeInUsd?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -16084,6 +16105,7 @@ export namespace Prisma {
     stripeIntentId?: StringNullableWithAggregatesFilter<"PaymentRecord"> | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASWithAggregatesFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatWithAggregatesFilter<"PaymentRecord"> | number
+    transactionFeeInUsd?: FloatWithAggregatesFilter<"PaymentRecord"> | number
     createdAt?: DateTimeWithAggregatesFilter<"PaymentRecord"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"PaymentRecord"> | Date | string
     userId?: IntWithAggregatesFilter<"PaymentRecord"> | number
@@ -17018,6 +17040,7 @@ export namespace Prisma {
     stripeIntentId?: string | null
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd: number
+    transactionFeeInUsd?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutPaymentRecordsInput
@@ -17029,6 +17052,7 @@ export namespace Prisma {
     stripeIntentId?: string | null
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd: number
+    transactionFeeInUsd?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: number
@@ -17039,6 +17063,7 @@ export namespace Prisma {
     stripeIntentId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFieldUpdateOperationsInput | number
+    transactionFeeInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPaymentRecordsNestedInput
@@ -17050,6 +17075,7 @@ export namespace Prisma {
     stripeIntentId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFieldUpdateOperationsInput | number
+    transactionFeeInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -17061,6 +17087,7 @@ export namespace Prisma {
     stripeIntentId?: string | null
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd: number
+    transactionFeeInUsd?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: number
@@ -17071,6 +17098,7 @@ export namespace Prisma {
     stripeIntentId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFieldUpdateOperationsInput | number
+    transactionFeeInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -17080,6 +17108,7 @@ export namespace Prisma {
     stripeIntentId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFieldUpdateOperationsInput | number
+    transactionFeeInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -18037,6 +18066,7 @@ export namespace Prisma {
     stripeIntentId?: SortOrder
     status?: SortOrder
     amountInUsd?: SortOrder
+    transactionFeeInUsd?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -18046,6 +18076,7 @@ export namespace Prisma {
   export type PaymentRecordAvgOrderByAggregateInput = {
     id?: SortOrder
     amountInUsd?: SortOrder
+    transactionFeeInUsd?: SortOrder
     userId?: SortOrder
     reservationId?: SortOrder
   }
@@ -18055,6 +18086,7 @@ export namespace Prisma {
     stripeIntentId?: SortOrder
     status?: SortOrder
     amountInUsd?: SortOrder
+    transactionFeeInUsd?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -18066,6 +18098,7 @@ export namespace Prisma {
     stripeIntentId?: SortOrder
     status?: SortOrder
     amountInUsd?: SortOrder
+    transactionFeeInUsd?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     userId?: SortOrder
@@ -18075,6 +18108,7 @@ export namespace Prisma {
   export type PaymentRecordSumOrderByAggregateInput = {
     id?: SortOrder
     amountInUsd?: SortOrder
+    transactionFeeInUsd?: SortOrder
     userId?: SortOrder
     reservationId?: SortOrder
   }
@@ -19709,6 +19743,7 @@ export namespace Prisma {
     stripeIntentId?: string | null
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd: number
+    transactionFeeInUsd?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     reservation: ReservationCreateNestedOneWithoutPaymentRecordInput
@@ -19719,6 +19754,7 @@ export namespace Prisma {
     stripeIntentId?: string | null
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd: number
+    transactionFeeInUsd?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     reservationId: number
@@ -19946,6 +19982,7 @@ export namespace Prisma {
     stripeIntentId?: StringNullableFilter<"PaymentRecord"> | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFilter<"PaymentRecord"> | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFilter<"PaymentRecord"> | number
+    transactionFeeInUsd?: FloatFilter<"PaymentRecord"> | number
     createdAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     userId?: IntFilter<"PaymentRecord"> | number
@@ -21307,6 +21344,7 @@ export namespace Prisma {
     stripeIntentId?: string | null
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd: number
+    transactionFeeInUsd?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutPaymentRecordsInput
@@ -21317,6 +21355,7 @@ export namespace Prisma {
     stripeIntentId?: string | null
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd: number
+    transactionFeeInUsd?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     userId: number
@@ -21474,6 +21513,7 @@ export namespace Prisma {
     stripeIntentId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFieldUpdateOperationsInput | number
+    transactionFeeInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPaymentRecordsNestedInput
@@ -21484,6 +21524,7 @@ export namespace Prisma {
     stripeIntentId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFieldUpdateOperationsInput | number
+    transactionFeeInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -21718,6 +21759,7 @@ export namespace Prisma {
     stripeIntentId?: string | null
     status?: $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd: number
+    transactionFeeInUsd?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     reservationId: number
@@ -21877,6 +21919,7 @@ export namespace Prisma {
     stripeIntentId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFieldUpdateOperationsInput | number
+    transactionFeeInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservation?: ReservationUpdateOneRequiredWithoutPaymentRecordNestedInput
@@ -21887,6 +21930,7 @@ export namespace Prisma {
     stripeIntentId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFieldUpdateOperationsInput | number
+    transactionFeeInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservationId?: IntFieldUpdateOperationsInput | number
@@ -21897,6 +21941,7 @@ export namespace Prisma {
     stripeIntentId?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumPAYMENT_RECORD__STATUS_ALIASFieldUpdateOperationsInput | $Enums.PAYMENT_RECORD__STATUS_ALIAS
     amountInUsd?: FloatFieldUpdateOperationsInput | number
+    transactionFeeInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservationId?: IntFieldUpdateOperationsInput | number
