@@ -178,9 +178,10 @@ model ParkingLot {
   parkingLotReviews  ParkingLotReview[]
   parkingLotPrices   ParkingLotPrice[]
 
-  ownerId      Int
-  owner        User           @relation(fields: [ownerId], references: [id])
-  PayoutRecord PayoutRecord[]
+  ownerId Int
+  owner   User @relation(fields: [ownerId], references: [id])
+
+  payoutRecords PayoutRecord[]
 }
 
 model ParkingLotPrice {
@@ -281,11 +282,11 @@ model PaymentRecord {
   userId Int
   user   User @relation(fields: [userId], references: [id])
 
-  reservationId Int           @unique
-  reservation   Reservation   @relation(fields: [reservationId], references: [id])
-  PayoutRecord  PayoutRecord? @relation(fields: [payoutRecordId], references: [id])
+  reservationId Int         @unique
+  reservation   Reservation @relation(fields: [reservationId], references: [id])
 
   payoutRecordId Int?
+  payoutRecord   PayoutRecord? @relation(fields: [payoutRecordId], references: [id])
 }
 
 model PayoutRecord {

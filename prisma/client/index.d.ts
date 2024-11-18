@@ -2147,7 +2147,7 @@ export namespace Prisma {
     parkingLotServices: number
     parkingLotReviews: number
     parkingLotPrices: number
-    PayoutRecord: number
+    payoutRecords: number
   }
 
   export type ParkingLotCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2155,7 +2155,7 @@ export namespace Prisma {
     parkingLotServices?: boolean | ParkingLotCountOutputTypeCountParkingLotServicesArgs
     parkingLotReviews?: boolean | ParkingLotCountOutputTypeCountParkingLotReviewsArgs
     parkingLotPrices?: boolean | ParkingLotCountOutputTypeCountParkingLotPricesArgs
-    PayoutRecord?: boolean | ParkingLotCountOutputTypeCountPayoutRecordArgs
+    payoutRecords?: boolean | ParkingLotCountOutputTypeCountPayoutRecordsArgs
   }
 
   // Custom InputTypes
@@ -2200,7 +2200,7 @@ export namespace Prisma {
   /**
    * ParkingLotCountOutputType without action
    */
-  export type ParkingLotCountOutputTypeCountPayoutRecordArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ParkingLotCountOutputTypeCountPayoutRecordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PayoutRecordWhereInput
   }
 
@@ -7807,7 +7807,7 @@ export namespace Prisma {
     parkingLotReviews?: boolean | ParkingLot$parkingLotReviewsArgs<ExtArgs>
     parkingLotPrices?: boolean | ParkingLot$parkingLotPricesArgs<ExtArgs>
     owner?: boolean | UserDefaultArgs<ExtArgs>
-    PayoutRecord?: boolean | ParkingLot$PayoutRecordArgs<ExtArgs>
+    payoutRecords?: boolean | ParkingLot$payoutRecordsArgs<ExtArgs>
     _count?: boolean | ParkingLotCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["parkingLot"]>
 
@@ -7856,7 +7856,7 @@ export namespace Prisma {
     parkingLotReviews?: boolean | ParkingLot$parkingLotReviewsArgs<ExtArgs>
     parkingLotPrices?: boolean | ParkingLot$parkingLotPricesArgs<ExtArgs>
     owner?: boolean | UserDefaultArgs<ExtArgs>
-    PayoutRecord?: boolean | ParkingLot$PayoutRecordArgs<ExtArgs>
+    payoutRecords?: boolean | ParkingLot$payoutRecordsArgs<ExtArgs>
     _count?: boolean | ParkingLotCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ParkingLotIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7871,7 +7871,7 @@ export namespace Prisma {
       parkingLotReviews: Prisma.$ParkingLotReviewPayload<ExtArgs>[]
       parkingLotPrices: Prisma.$ParkingLotPricePayload<ExtArgs>[]
       owner: Prisma.$UserPayload<ExtArgs>
-      PayoutRecord: Prisma.$PayoutRecordPayload<ExtArgs>[]
+      payoutRecords: Prisma.$PayoutRecordPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -8259,7 +8259,7 @@ export namespace Prisma {
     parkingLotReviews<T extends ParkingLot$parkingLotReviewsArgs<ExtArgs> = {}>(args?: Subset<T, ParkingLot$parkingLotReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParkingLotReviewPayload<ExtArgs>, T, "findMany"> | Null>
     parkingLotPrices<T extends ParkingLot$parkingLotPricesArgs<ExtArgs> = {}>(args?: Subset<T, ParkingLot$parkingLotPricesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ParkingLotPricePayload<ExtArgs>, T, "findMany"> | Null>
     owner<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    PayoutRecord<T extends ParkingLot$PayoutRecordArgs<ExtArgs> = {}>(args?: Subset<T, ParkingLot$PayoutRecordArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PayoutRecordPayload<ExtArgs>, T, "findMany"> | Null>
+    payoutRecords<T extends ParkingLot$payoutRecordsArgs<ExtArgs> = {}>(args?: Subset<T, ParkingLot$payoutRecordsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PayoutRecordPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8703,9 +8703,9 @@ export namespace Prisma {
   }
 
   /**
-   * ParkingLot.PayoutRecord
+   * ParkingLot.payoutRecords
    */
-  export type ParkingLot$PayoutRecordArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ParkingLot$payoutRecordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the PayoutRecord
      */
@@ -14155,7 +14155,7 @@ export namespace Prisma {
     payoutRecordId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     reservation?: boolean | ReservationDefaultArgs<ExtArgs>
-    PayoutRecord?: boolean | PaymentRecord$PayoutRecordArgs<ExtArgs>
+    payoutRecord?: boolean | PaymentRecord$payoutRecordArgs<ExtArgs>
   }, ExtArgs["result"]["paymentRecord"]>
 
   export type PaymentRecordSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -14170,7 +14170,7 @@ export namespace Prisma {
     payoutRecordId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     reservation?: boolean | ReservationDefaultArgs<ExtArgs>
-    PayoutRecord?: boolean | PaymentRecord$PayoutRecordArgs<ExtArgs>
+    payoutRecord?: boolean | PaymentRecord$payoutRecordArgs<ExtArgs>
   }, ExtArgs["result"]["paymentRecord"]>
 
   export type PaymentRecordSelectScalar = {
@@ -14188,12 +14188,12 @@ export namespace Prisma {
   export type PaymentRecordInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     reservation?: boolean | ReservationDefaultArgs<ExtArgs>
-    PayoutRecord?: boolean | PaymentRecord$PayoutRecordArgs<ExtArgs>
+    payoutRecord?: boolean | PaymentRecord$payoutRecordArgs<ExtArgs>
   }
   export type PaymentRecordIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     reservation?: boolean | ReservationDefaultArgs<ExtArgs>
-    PayoutRecord?: boolean | PaymentRecord$PayoutRecordArgs<ExtArgs>
+    payoutRecord?: boolean | PaymentRecord$payoutRecordArgs<ExtArgs>
   }
 
   export type $PaymentRecordPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14201,7 +14201,7 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       reservation: Prisma.$ReservationPayload<ExtArgs>
-      PayoutRecord: Prisma.$PayoutRecordPayload<ExtArgs> | null
+      payoutRecord: Prisma.$PayoutRecordPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -14579,7 +14579,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     reservation<T extends ReservationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ReservationDefaultArgs<ExtArgs>>): Prisma__ReservationClient<$Result.GetResult<Prisma.$ReservationPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    PayoutRecord<T extends PaymentRecord$PayoutRecordArgs<ExtArgs> = {}>(args?: Subset<T, PaymentRecord$PayoutRecordArgs<ExtArgs>>): Prisma__PayoutRecordClient<$Result.GetResult<Prisma.$PayoutRecordPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    payoutRecord<T extends PaymentRecord$payoutRecordArgs<ExtArgs> = {}>(args?: Subset<T, PaymentRecord$payoutRecordArgs<ExtArgs>>): Prisma__PayoutRecordClient<$Result.GetResult<Prisma.$PayoutRecordPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14936,9 +14936,9 @@ export namespace Prisma {
   }
 
   /**
-   * PaymentRecord.PayoutRecord
+   * PaymentRecord.payoutRecord
    */
-  export type PaymentRecord$PayoutRecordArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PaymentRecord$payoutRecordArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the PayoutRecord
      */
@@ -16841,7 +16841,7 @@ export namespace Prisma {
     parkingLotReviews?: ParkingLotReviewListRelationFilter
     parkingLotPrices?: ParkingLotPriceListRelationFilter
     owner?: XOR<UserRelationFilter, UserWhereInput>
-    PayoutRecord?: PayoutRecordListRelationFilter
+    payoutRecords?: PayoutRecordListRelationFilter
   }
 
   export type ParkingLotOrderByWithRelationInput = {
@@ -16866,7 +16866,7 @@ export namespace Prisma {
     parkingLotReviews?: ParkingLotReviewOrderByRelationAggregateInput
     parkingLotPrices?: ParkingLotPriceOrderByRelationAggregateInput
     owner?: UserOrderByWithRelationInput
-    PayoutRecord?: PayoutRecordOrderByRelationAggregateInput
+    payoutRecords?: PayoutRecordOrderByRelationAggregateInput
   }
 
   export type ParkingLotWhereUniqueInput = Prisma.AtLeast<{
@@ -16894,7 +16894,7 @@ export namespace Prisma {
     parkingLotReviews?: ParkingLotReviewListRelationFilter
     parkingLotPrices?: ParkingLotPriceListRelationFilter
     owner?: XOR<UserRelationFilter, UserWhereInput>
-    PayoutRecord?: PayoutRecordListRelationFilter
+    payoutRecords?: PayoutRecordListRelationFilter
   }, "id">
 
   export type ParkingLotOrderByWithAggregationInput = {
@@ -17345,7 +17345,7 @@ export namespace Prisma {
     payoutRecordId?: IntNullableFilter<"PaymentRecord"> | number | null
     user?: XOR<UserRelationFilter, UserWhereInput>
     reservation?: XOR<ReservationRelationFilter, ReservationWhereInput>
-    PayoutRecord?: XOR<PayoutRecordNullableRelationFilter, PayoutRecordWhereInput> | null
+    payoutRecord?: XOR<PayoutRecordNullableRelationFilter, PayoutRecordWhereInput> | null
   }
 
   export type PaymentRecordOrderByWithRelationInput = {
@@ -17360,7 +17360,7 @@ export namespace Prisma {
     payoutRecordId?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     reservation?: ReservationOrderByWithRelationInput
-    PayoutRecord?: PayoutRecordOrderByWithRelationInput
+    payoutRecord?: PayoutRecordOrderByWithRelationInput
   }
 
   export type PaymentRecordWhereUniqueInput = Prisma.AtLeast<{
@@ -17378,7 +17378,7 @@ export namespace Prisma {
     payoutRecordId?: IntNullableFilter<"PaymentRecord"> | number | null
     user?: XOR<UserRelationFilter, UserWhereInput>
     reservation?: XOR<ReservationRelationFilter, ReservationWhereInput>
-    PayoutRecord?: XOR<PayoutRecordNullableRelationFilter, PayoutRecordWhereInput> | null
+    payoutRecord?: XOR<PayoutRecordNullableRelationFilter, PayoutRecordWhereInput> | null
   }, "id" | "stripeIntentId" | "reservationId">
 
   export type PaymentRecordOrderByWithAggregationInput = {
@@ -17904,7 +17904,7 @@ export namespace Prisma {
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceCreateNestedManyWithoutParkingLotInput
     owner: UserCreateNestedOneWithoutParkingLotsInput
-    PayoutRecord?: PayoutRecordCreateNestedManyWithoutParkingLotInput
+    payoutRecords?: PayoutRecordCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotUncheckedCreateInput = {
@@ -17928,7 +17928,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceUncheckedCreateNestedManyWithoutParkingLotInput
-    PayoutRecord?: PayoutRecordUncheckedCreateNestedManyWithoutParkingLotInput
+    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotUpdateInput = {
@@ -17951,7 +17951,7 @@ export namespace Prisma {
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUpdateManyWithoutParkingLotNestedInput
     owner?: UserUpdateOneRequiredWithoutParkingLotsNestedInput
-    PayoutRecord?: PayoutRecordUpdateManyWithoutParkingLotNestedInput
+    payoutRecords?: PayoutRecordUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotUncheckedUpdateInput = {
@@ -17975,7 +17975,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUncheckedUpdateManyWithoutParkingLotNestedInput
-    PayoutRecord?: PayoutRecordUncheckedUpdateManyWithoutParkingLotNestedInput
+    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotCreateManyInput = {
@@ -18429,7 +18429,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutPaymentRecordsInput
     reservation: ReservationCreateNestedOneWithoutPaymentRecordInput
-    PayoutRecord?: PayoutRecordCreateNestedOneWithoutPaymentRecordsInput
+    payoutRecord?: PayoutRecordCreateNestedOneWithoutPaymentRecordsInput
   }
 
   export type PaymentRecordUncheckedCreateInput = {
@@ -18452,7 +18452,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPaymentRecordsNestedInput
     reservation?: ReservationUpdateOneRequiredWithoutPaymentRecordNestedInput
-    PayoutRecord?: PayoutRecordUpdateOneWithoutPaymentRecordsNestedInput
+    payoutRecord?: PayoutRecordUpdateOneWithoutPaymentRecordsNestedInput
   }
 
   export type PaymentRecordUncheckedUpdateInput = {
@@ -18508,7 +18508,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     paymentRecords?: PaymentRecordCreateNestedManyWithoutPayoutRecordInput
-    parkingLot: ParkingLotCreateNestedOneWithoutPayoutRecordInput
+    parkingLot: ParkingLotCreateNestedOneWithoutPayoutRecordsInput
   }
 
   export type PayoutRecordUncheckedCreateInput = {
@@ -18533,7 +18533,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     paymentRecords?: PaymentRecordUpdateManyWithoutPayoutRecordNestedInput
-    parkingLot?: ParkingLotUpdateOneRequiredWithoutPayoutRecordNestedInput
+    parkingLot?: ParkingLotUpdateOneRequiredWithoutPayoutRecordsNestedInput
   }
 
   export type PayoutRecordUncheckedUpdateInput = {
@@ -20786,9 +20786,9 @@ export namespace Prisma {
     connect?: PaymentRecordWhereUniqueInput | PaymentRecordWhereUniqueInput[]
   }
 
-  export type ParkingLotCreateNestedOneWithoutPayoutRecordInput = {
-    create?: XOR<ParkingLotCreateWithoutPayoutRecordInput, ParkingLotUncheckedCreateWithoutPayoutRecordInput>
-    connectOrCreate?: ParkingLotCreateOrConnectWithoutPayoutRecordInput
+  export type ParkingLotCreateNestedOneWithoutPayoutRecordsInput = {
+    create?: XOR<ParkingLotCreateWithoutPayoutRecordsInput, ParkingLotUncheckedCreateWithoutPayoutRecordsInput>
+    connectOrCreate?: ParkingLotCreateOrConnectWithoutPayoutRecordsInput
     connect?: ParkingLotWhereUniqueInput
   }
 
@@ -20821,12 +20821,12 @@ export namespace Prisma {
     deleteMany?: PaymentRecordScalarWhereInput | PaymentRecordScalarWhereInput[]
   }
 
-  export type ParkingLotUpdateOneRequiredWithoutPayoutRecordNestedInput = {
-    create?: XOR<ParkingLotCreateWithoutPayoutRecordInput, ParkingLotUncheckedCreateWithoutPayoutRecordInput>
-    connectOrCreate?: ParkingLotCreateOrConnectWithoutPayoutRecordInput
-    upsert?: ParkingLotUpsertWithoutPayoutRecordInput
+  export type ParkingLotUpdateOneRequiredWithoutPayoutRecordsNestedInput = {
+    create?: XOR<ParkingLotCreateWithoutPayoutRecordsInput, ParkingLotUncheckedCreateWithoutPayoutRecordsInput>
+    connectOrCreate?: ParkingLotCreateOrConnectWithoutPayoutRecordsInput
+    upsert?: ParkingLotUpsertWithoutPayoutRecordsInput
     connect?: ParkingLotWhereUniqueInput
-    update?: XOR<XOR<ParkingLotUpdateToOneWithWhereWithoutPayoutRecordInput, ParkingLotUpdateWithoutPayoutRecordInput>, ParkingLotUncheckedUpdateWithoutPayoutRecordInput>
+    update?: XOR<XOR<ParkingLotUpdateToOneWithWhereWithoutPayoutRecordsInput, ParkingLotUpdateWithoutPayoutRecordsInput>, ParkingLotUncheckedUpdateWithoutPayoutRecordsInput>
   }
 
   export type PaymentRecordUncheckedUpdateManyWithoutPayoutRecordNestedInput = {
@@ -21494,7 +21494,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceCreateNestedManyWithoutParkingLotInput
-    PayoutRecord?: PayoutRecordCreateNestedManyWithoutParkingLotInput
+    payoutRecords?: PayoutRecordCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotUncheckedCreateWithoutOwnerInput = {
@@ -21517,7 +21517,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceUncheckedCreateNestedManyWithoutParkingLotInput
-    PayoutRecord?: PayoutRecordUncheckedCreateNestedManyWithoutParkingLotInput
+    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotCreateOrConnectWithoutOwnerInput = {
@@ -21537,7 +21537,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     reservation: ReservationCreateNestedOneWithoutPaymentRecordInput
-    PayoutRecord?: PayoutRecordCreateNestedOneWithoutPaymentRecordsInput
+    payoutRecord?: PayoutRecordCreateNestedOneWithoutPaymentRecordsInput
   }
 
   export type PaymentRecordUncheckedCreateWithoutUserInput = {
@@ -22498,7 +22498,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
     owner: UserCreateNestedOneWithoutParkingLotsInput
-    PayoutRecord?: PayoutRecordCreateNestedManyWithoutParkingLotInput
+    payoutRecords?: PayoutRecordCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotUncheckedCreateWithoutParkingLotPricesInput = {
@@ -22521,7 +22521,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutParkingLotInput
-    PayoutRecord?: PayoutRecordUncheckedCreateNestedManyWithoutParkingLotInput
+    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotCreateOrConnectWithoutParkingLotPricesInput = {
@@ -22559,7 +22559,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
     owner?: UserUpdateOneRequiredWithoutParkingLotsNestedInput
-    PayoutRecord?: PayoutRecordUpdateManyWithoutParkingLotNestedInput
+    payoutRecords?: PayoutRecordUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotUncheckedUpdateWithoutParkingLotPricesInput = {
@@ -22582,7 +22582,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutParkingLotNestedInput
-    PayoutRecord?: PayoutRecordUncheckedUpdateManyWithoutParkingLotNestedInput
+    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotCreateWithoutParkingLotReviewsInput = {
@@ -22604,7 +22604,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceCreateNestedManyWithoutParkingLotInput
     owner: UserCreateNestedOneWithoutParkingLotsInput
-    PayoutRecord?: PayoutRecordCreateNestedManyWithoutParkingLotInput
+    payoutRecords?: PayoutRecordCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotUncheckedCreateWithoutParkingLotReviewsInput = {
@@ -22627,7 +22627,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceUncheckedCreateNestedManyWithoutParkingLotInput
-    PayoutRecord?: PayoutRecordUncheckedCreateNestedManyWithoutParkingLotInput
+    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotCreateOrConnectWithoutParkingLotReviewsInput = {
@@ -22707,7 +22707,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUpdateManyWithoutParkingLotNestedInput
     owner?: UserUpdateOneRequiredWithoutParkingLotsNestedInput
-    PayoutRecord?: PayoutRecordUpdateManyWithoutParkingLotNestedInput
+    payoutRecords?: PayoutRecordUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotUncheckedUpdateWithoutParkingLotReviewsInput = {
@@ -22730,7 +22730,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUncheckedUpdateManyWithoutParkingLotNestedInput
-    PayoutRecord?: PayoutRecordUncheckedUpdateManyWithoutParkingLotNestedInput
+    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutParkingLotNestedInput
   }
 
   export type UserUpsertWithoutParkingLotReviewsInput = {
@@ -22800,7 +22800,7 @@ export namespace Prisma {
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceCreateNestedManyWithoutParkingLotInput
     owner: UserCreateNestedOneWithoutParkingLotsInput
-    PayoutRecord?: PayoutRecordCreateNestedManyWithoutParkingLotInput
+    payoutRecords?: PayoutRecordCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotUncheckedCreateWithoutParkingLotServicesInput = {
@@ -22823,7 +22823,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceUncheckedCreateNestedManyWithoutParkingLotInput
-    PayoutRecord?: PayoutRecordUncheckedCreateNestedManyWithoutParkingLotInput
+    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotCreateOrConnectWithoutParkingLotServicesInput = {
@@ -22893,7 +22893,7 @@ export namespace Prisma {
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUpdateManyWithoutParkingLotNestedInput
     owner?: UserUpdateOneRequiredWithoutParkingLotsNestedInput
-    PayoutRecord?: PayoutRecordUpdateManyWithoutParkingLotNestedInput
+    payoutRecords?: PayoutRecordUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotUncheckedUpdateWithoutParkingLotServicesInput = {
@@ -22916,7 +22916,7 @@ export namespace Prisma {
     parkingSpots?: ParkingSpotUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUncheckedUpdateManyWithoutParkingLotNestedInput
-    PayoutRecord?: PayoutRecordUncheckedUpdateManyWithoutParkingLotNestedInput
+    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ReservationUpsertWithWhereUniqueWithoutServicesInput = {
@@ -22991,7 +22991,7 @@ export namespace Prisma {
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceCreateNestedManyWithoutParkingLotInput
     owner: UserCreateNestedOneWithoutParkingLotsInput
-    PayoutRecord?: PayoutRecordCreateNestedManyWithoutParkingLotInput
+    payoutRecords?: PayoutRecordCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotUncheckedCreateWithoutParkingSpotsInput = {
@@ -23014,7 +23014,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceUncheckedCreateNestedManyWithoutParkingLotInput
-    PayoutRecord?: PayoutRecordUncheckedCreateNestedManyWithoutParkingLotInput
+    payoutRecords?: PayoutRecordUncheckedCreateNestedManyWithoutParkingLotInput
   }
 
   export type ParkingLotCreateOrConnectWithoutParkingSpotsInput = {
@@ -23068,7 +23068,7 @@ export namespace Prisma {
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUpdateManyWithoutParkingLotNestedInput
     owner?: UserUpdateOneRequiredWithoutParkingLotsNestedInput
-    PayoutRecord?: PayoutRecordUpdateManyWithoutParkingLotNestedInput
+    payoutRecords?: PayoutRecordUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotUncheckedUpdateWithoutParkingSpotsInput = {
@@ -23091,7 +23091,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUncheckedUpdateManyWithoutParkingLotNestedInput
-    PayoutRecord?: PayoutRecordUncheckedUpdateManyWithoutParkingLotNestedInput
+    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotServiceCreateWithoutReservationsInput = {
@@ -23233,7 +23233,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutPaymentRecordsInput
-    PayoutRecord?: PayoutRecordCreateNestedOneWithoutPaymentRecordsInput
+    payoutRecord?: PayoutRecordCreateNestedOneWithoutPaymentRecordsInput
   }
 
   export type PaymentRecordUncheckedCreateWithoutReservationInput = {
@@ -23404,7 +23404,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutPaymentRecordsNestedInput
-    PayoutRecord?: PayoutRecordUpdateOneWithoutPaymentRecordsNestedInput
+    payoutRecord?: PayoutRecordUpdateOneWithoutPaymentRecordsNestedInput
   }
 
   export type PaymentRecordUncheckedUpdateWithoutReservationInput = {
@@ -23500,7 +23500,7 @@ export namespace Prisma {
     errorType?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    parkingLot: ParkingLotCreateNestedOneWithoutPayoutRecordInput
+    parkingLot: ParkingLotCreateNestedOneWithoutPayoutRecordsInput
   }
 
   export type PayoutRecordUncheckedCreateWithoutPaymentRecordsInput = {
@@ -23625,7 +23625,7 @@ export namespace Prisma {
     errorType?: NullableEnumPAYOUT__ERROR_TYPE_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    parkingLot?: ParkingLotUpdateOneRequiredWithoutPayoutRecordNestedInput
+    parkingLot?: ParkingLotUpdateOneRequiredWithoutPayoutRecordsNestedInput
   }
 
   export type PayoutRecordUncheckedUpdateWithoutPaymentRecordsInput = {
@@ -23671,7 +23671,7 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ParkingLotCreateWithoutPayoutRecordInput = {
+  export type ParkingLotCreateWithoutPayoutRecordsInput = {
     name: string
     description?: string
     latitude: number
@@ -23693,7 +23693,7 @@ export namespace Prisma {
     owner: UserCreateNestedOneWithoutParkingLotsInput
   }
 
-  export type ParkingLotUncheckedCreateWithoutPayoutRecordInput = {
+  export type ParkingLotUncheckedCreateWithoutPayoutRecordsInput = {
     id?: number
     name: string
     description?: string
@@ -23716,9 +23716,9 @@ export namespace Prisma {
     parkingLotPrices?: ParkingLotPriceUncheckedCreateNestedManyWithoutParkingLotInput
   }
 
-  export type ParkingLotCreateOrConnectWithoutPayoutRecordInput = {
+  export type ParkingLotCreateOrConnectWithoutPayoutRecordsInput = {
     where: ParkingLotWhereUniqueInput
-    create: XOR<ParkingLotCreateWithoutPayoutRecordInput, ParkingLotUncheckedCreateWithoutPayoutRecordInput>
+    create: XOR<ParkingLotCreateWithoutPayoutRecordsInput, ParkingLotUncheckedCreateWithoutPayoutRecordsInput>
   }
 
   export type PaymentRecordUpsertWithWhereUniqueWithoutPayoutRecordInput = {
@@ -23737,18 +23737,18 @@ export namespace Prisma {
     data: XOR<PaymentRecordUpdateManyMutationInput, PaymentRecordUncheckedUpdateManyWithoutPayoutRecordInput>
   }
 
-  export type ParkingLotUpsertWithoutPayoutRecordInput = {
-    update: XOR<ParkingLotUpdateWithoutPayoutRecordInput, ParkingLotUncheckedUpdateWithoutPayoutRecordInput>
-    create: XOR<ParkingLotCreateWithoutPayoutRecordInput, ParkingLotUncheckedCreateWithoutPayoutRecordInput>
+  export type ParkingLotUpsertWithoutPayoutRecordsInput = {
+    update: XOR<ParkingLotUpdateWithoutPayoutRecordsInput, ParkingLotUncheckedUpdateWithoutPayoutRecordsInput>
+    create: XOR<ParkingLotCreateWithoutPayoutRecordsInput, ParkingLotUncheckedCreateWithoutPayoutRecordsInput>
     where?: ParkingLotWhereInput
   }
 
-  export type ParkingLotUpdateToOneWithWhereWithoutPayoutRecordInput = {
+  export type ParkingLotUpdateToOneWithWhereWithoutPayoutRecordsInput = {
     where?: ParkingLotWhereInput
-    data: XOR<ParkingLotUpdateWithoutPayoutRecordInput, ParkingLotUncheckedUpdateWithoutPayoutRecordInput>
+    data: XOR<ParkingLotUpdateWithoutPayoutRecordsInput, ParkingLotUncheckedUpdateWithoutPayoutRecordsInput>
   }
 
-  export type ParkingLotUpdateWithoutPayoutRecordInput = {
+  export type ParkingLotUpdateWithoutPayoutRecordsInput = {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     latitude?: FloatFieldUpdateOperationsInput | number
@@ -23770,7 +23770,7 @@ export namespace Prisma {
     owner?: UserUpdateOneRequiredWithoutParkingLotsNestedInput
   }
 
-  export type ParkingLotUncheckedUpdateWithoutPayoutRecordInput = {
+  export type ParkingLotUncheckedUpdateWithoutPayoutRecordsInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
@@ -23979,7 +23979,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUpdateManyWithoutParkingLotNestedInput
-    PayoutRecord?: PayoutRecordUpdateManyWithoutParkingLotNestedInput
+    payoutRecords?: PayoutRecordUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotUncheckedUpdateWithoutOwnerInput = {
@@ -24002,7 +24002,7 @@ export namespace Prisma {
     parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUncheckedUpdateManyWithoutParkingLotNestedInput
-    PayoutRecord?: PayoutRecordUncheckedUpdateManyWithoutParkingLotNestedInput
+    payoutRecords?: PayoutRecordUncheckedUpdateManyWithoutParkingLotNestedInput
   }
 
   export type ParkingLotUncheckedUpdateManyWithoutOwnerInput = {
@@ -24030,7 +24030,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservation?: ReservationUpdateOneRequiredWithoutPaymentRecordNestedInput
-    PayoutRecord?: PayoutRecordUpdateOneWithoutPaymentRecordsNestedInput
+    payoutRecord?: PayoutRecordUpdateOneWithoutPaymentRecordsNestedInput
   }
 
   export type PaymentRecordUncheckedUpdateWithoutUserInput = {
