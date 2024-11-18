@@ -4,6 +4,7 @@ node_modules
 .env.production
 dist
 gc-storage-key.json
+gc-metrics-key.json
 
 prisma/client/*
 !prisma/client/index.d.ts
