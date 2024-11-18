@@ -64,6 +64,8 @@ export async function getCloudRunApiCpuUtilizations(
       });
     });
 
+    result.data = result.data.sort((a, b) => dayjs(a.date).unix() - dayjs(b.date).unix());
+
     return result;
   } catch (err) {
     console.error("Error querying metrics:", err);
@@ -115,6 +117,8 @@ export async function getCloudRunApiMemoryUtilizations(
         });
       });
     });
+
+    result.data = result.data.sort((a, b) => dayjs(a.date).unix() - dayjs(b.date).unix());
 
     return result;
   } catch (err) {
@@ -169,6 +173,8 @@ export async function getCloudSqlCpuUtilizations(
         });
       });
     });
+
+    result.data = result.data.sort((a, b) => dayjs(a.date).unix() - dayjs(b.date).unix());
 
     return result;
   } catch (err) {
@@ -247,6 +253,8 @@ export async function getCloudSqlDataIo(durationInHours: number): Promise<TGetCl
       });
     });
 
+    result.data = result.data.sort((a, b) => dayjs(a.date).unix() - dayjs(b.date).unix());
+
     return result;
   } catch (err) {
     console.error("Error querying metrics:", err);
@@ -307,6 +315,8 @@ export async function getCloudSqlStorageUsage(
         });
       });
     });
+
+    result.data = result.data.sort((a, b) => dayjs(a.date).unix() - dayjs(b.date).unix());
 
     return result;
   } catch (err) {
