@@ -6,6 +6,7 @@ import {
   reservationRouter,
   paymentRouter,
   analyticsRoute,
+  metricsRouter,
 } from "../routers";
 
 export const trpcRouter = trpcInstance.router({
@@ -15,6 +16,7 @@ export const trpcRouter = trpcInstance.router({
   reservation: reservationRouter,
   payment: paymentRouter,
   analytics: analyticsRoute,
+  metrics: metricsRouter,
 });
 
 const separator = "------------------------------";

@@ -9,6 +9,7 @@ COPY .env.production ./.env
 COPY package.json ./package.json
 COPY yarn.lock ./yarn.lock
 COPY tsconfig.json ./tsconfig.json
+COPY gc-metrics-key.json ./gc-metrics-key.json
 COPY gc-storage-key.json ./gc-storage-key.json
 
 
@@ -18,6 +19,7 @@ RUN npx prisma db seed
 RUN yarn build
 RUN cp -r prisma/* dist/prisma
 RUN cp -r .env dist
+RUN cp -r gc-metrics-key.json dist
 RUN cp -r gc-storage-key.json dist
 
 EXPOSE 4200
