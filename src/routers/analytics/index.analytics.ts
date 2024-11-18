@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { authMiddleware } from "../../auth";
 import { prisma } from "../../db";
 import { procedure } from "../../trpc";
@@ -9,32 +10,41 @@ export const getDailyRevenue = procedure.use(authMiddleware(["ADMIN"])).query(as
       status: "PAID",
     },
     select: {
+      reservation: { select: { parkingSpot: { select: { vehicleType: true } } } },
       amountInUsd: true,
       createdAt: true,
     },
   });
 
-  // Aggregate revenue by day
+  // Aggregate revenue by day, split by vehicle type
   const dailyRevenue = paymentRecords.reduce(
     (acc, record) => {
-      const day = record.createdAt.toISOString().split("T")[0]; // Extract the date (YYYY-MM-DD)
+      const day = dayjs(record.createdAt).format("YYYY-MM-DD");
       if (!acc[day]) {
-        acc[day] = 0;
+        acc[day] = { total: 0, byVehicleType: {} as Record<string, number> };
       }
-      acc[day] += record.amountInUsd;
+      acc[day].total += record.amountInUsd;
+      if (!acc[day].byVehicleType[record.reservation.parkingSpot.vehicleType]) {
+        acc[day].byVehicleType[record.reservation.parkingSpot.vehicleType] = 0;
+      }
+      acc[day].byVehicleType[record.reservation.parkingSpot.vehicleType] += record.amountInUsd;
       return acc;
     },
-    {} as Record<string, number>,
+    {} as Record<string, { total: number; byVehicleType: Record<string, number> }>,
   );
 
-  // Transform the aggregated object into an array of { date, revenueInUsd }
-  const result = Object.entries(dailyRevenue).map(([date, revenueInUsd]) => ({
-    date,
-    revenueInUsd,
+  // Transform the aggregated object into an array of { day, totalRevenue, revenueByVehicleType }
+  const result = Object.entries(dailyRevenue).map(([day, { total, byVehicleType }]) => ({
+    day,
+    totalRevenue: total,
+    revenueByVehicleType: Object.entries(byVehicleType).map(([vehicleType, revenue]) => ({
+      vehicleType,
+      revenue,
+    })),
   }));
 
-  // Sort the result by date in ascending order
-  return result.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  // Sort the result by day in ascending order
+  return result.sort((a, b) => dayjs(a.day).unix() - dayjs(b.day).unix());
 });
 
 // Get top parking lots by revenue ------------------------------------------------------------------------
@@ -130,30 +140,39 @@ export const parkingSpotUtilizationByWeekDay = procedure
     });
 
     // Aggregate utilization by week day
-    const weekDayUtilization = parkingSpots.reduce(
+    const utilizationByWeekDay = parkingSpots.reduce(
       (acc, spot) => {
         spot.reservations.forEach((reservation) => {
           const { startTime, endTime } = reservation;
-          const startDay = new Date(startTime).getDay();
-          const endDay = new Date(endTime).getDay();
-          for (let i = startDay; i <= endDay; i++) {
-            if (!acc[i]) {
-              acc[i] = 0;
+          const startDay = dayjs(startTime).format("dddd");
+          const endDay = dayjs(endTime).format("dddd");
+          if (startDay === endDay) {
+            if (!acc[startDay]) {
+              acc[startDay] = 0;
             }
-            acc[i]++;
+            acc[startDay] += 1;
+          } else {
+            if (!acc[startDay]) {
+              acc[startDay] = 0;
+            }
+            if (!acc[endDay]) {
+              acc[endDay] = 0;
+            }
+            acc[startDay] += 1;
+            acc[endDay] += 1;
           }
         });
         return acc;
       },
-      {} as Record<number, number>,
+      {} as Record<string, number>,
     );
 
     // Transform the aggregated object into an array of { weekDay, utilization }
-    const result = Object.entries(weekDayUtilization).map(([day, utilization]) => ({
-      weekDay: Number(day),
+    const result = Object.entries(utilizationByWeekDay).map(([weekDay, utilization]) => ({
+      weekDay,
       utilization,
     }));
 
-    // Sort the result by week day in ascending order
-    return result.sort((a, b) => a.weekDay - b.weekDay);
+    // Sort the result by utilization in descending order
+    return result.sort((a, b) => b.utilization - a.utilization);
   });
