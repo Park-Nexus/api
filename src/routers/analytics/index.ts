@@ -7,6 +7,6 @@ export const analyticsRoute = trpcInstance.router({
     topParkingLotsByRevenue: analytics.topParkingLotsByRevenue,
     revenueContributionByVehicleType: analytics.revenueContributionByVehicleType,
     parkingSpotUtilizationByWeekDay: analytics.parkingSpotUtilizationByWeekDay,
-    getDataByPlace: analytics.getDataByPlace,
+    dataByPlace: analytics.getDataByPlace,
   },
 });
