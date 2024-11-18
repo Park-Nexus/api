@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import { authMiddleware } from "../../auth";
 import { prisma } from "../../db";
 import { procedure } from "../../trpc";
+import { reverseGeocode } from "../../utils/location";
 
 // Get daily revenue --------------------------------------------------------------------------
 export const getDailyRevenue = procedure.use(authMiddleware(["ADMIN"])).query(async () => {
@@ -47,6 +48,50 @@ export const getDailyRevenue = procedure.use(authMiddleware(["ADMIN"])).query(as
   return result.sort((a, b) => dayjs(a.day).unix() - dayjs(b.day).unix());
 });
 
+// Revenue by palace --------------------------------------------------------------------------------
+export const getRevenueByPlace = procedure.use(authMiddleware(["ADMIN"])).query(async () => {
+  const parkingLots = await prisma.parkingLot.findMany({
+    select: {
+      id: true,
+      name: true,
+      latitude: true,
+      longitude: true,
+      parkingSpots: {
+        select: {
+          reservations: {
+            select: {
+              paymentRecord: { where: { status: "PAID" }, select: { amountInUsd: true } },
+            },
+          },
+        },
+      },
+    },
+  });
+
+  // Aggregate revenue by place
+  const result = await Promise.all(
+    parkingLots.map(async (lot) => {
+      const result = { revenueInUsd: 0, placeName: "", placeCode: "" };
+      const feature = await reverseGeocode({ lat: lot.latitude, lon: lot.longitude });
+
+      result.placeName = feature?.properties?.context?.place?.name || "";
+      result.placeCode = feature?.properties?.context?.place?.short_code || "";
+
+      lot.parkingSpots.forEach((spot) => {
+        spot.reservations.forEach((reservation) => {
+          if (reservation.paymentRecord) {
+            result.revenueInUsd += reservation.paymentRecord.amountInUsd;
+          }
+        });
+      });
+
+      return result;
+    }),
+  );
+
+  return result.sort((a, b) => b.revenueInUsd - a.revenueInUsd);
+});
+
 // Get top parking lots by revenue ------------------------------------------------------------------------
 export const topParkingLotsByRevenue = procedure.use(authMiddleware(["ADMIN"])).query(async () => {
   const parkingLots = await prisma.parkingLot.findMany({
@@ -56,7 +101,13 @@ export const topParkingLotsByRevenue = procedure.use(authMiddleware(["ADMIN"])).
       phone: true,
       owner: { select: { account: { select: { email: true } } } },
       parkingSpots: {
-        select: { reservations: { select: { paymentRecord: { select: { amountInUsd: true } } } } },
+        select: {
+          reservations: {
+            select: {
+              paymentRecord: { where: { status: "PAID" }, select: { amountInUsd: true } },
+            },
+          },
+        },
       },
     },
   });

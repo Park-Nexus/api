@@ -69,5 +69,5 @@ export async function reverseGeocode({ lat, lon }: { lat?: number; lon?: number 
   }`;
   const response = await axios.get(endpoint);
   const featureCollection = response.data as TFeatureCollection;
-  return featureCollection.features?.[0]?.properties?.context?.place?.name;
+  return featureCollection.features?.[0];
 }
