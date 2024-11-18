@@ -48,8 +48,8 @@ export const getDailyRevenue = procedure.use(authMiddleware(["ADMIN"])).query(as
   return result.sort((a, b) => dayjs(a.day).unix() - dayjs(b.day).unix());
 });
 
-// Revenue by palace --------------------------------------------------------------------------------
-export const getRevenueByPlace = procedure.use(authMiddleware(["ADMIN"])).query(async () => {
+// Get data by place --------------------------------------------------------------------------------
+export const getDataByPlace = procedure.use(authMiddleware(["ADMIN"])).query(async () => {
   const parkingLots = await prisma.parkingLot.findMany({
     select: {
       id: true,
@@ -58,9 +58,10 @@ export const getRevenueByPlace = procedure.use(authMiddleware(["ADMIN"])).query(
       longitude: true,
       parkingSpots: {
         select: {
+          vehicleType: true,
           reservations: {
             select: {
-              paymentRecord: { where: { status: "PAID" }, select: { amountInUsd: true } },
+              paymentRecord: { select: { amountInUsd: true, status: true } },
             },
           },
         },
@@ -68,28 +69,70 @@ export const getRevenueByPlace = procedure.use(authMiddleware(["ADMIN"])).query(
     },
   });
 
+  const result: {
+    placeCode: string;
+
+    placeName: string;
+    revenueInUsd: number;
+    numberOfParkingLot: number;
+    numberOfCarSpots: number;
+    numberOfMotorcycleSpots: number;
+    numberOfTruckSpots: number;
+  }[] = [];
+
   // Aggregate revenue by place
-  const result = await Promise.all(
+  await Promise.all(
     parkingLots.map(async (lot) => {
-      const result = { revenueInUsd: 0, placeName: "", placeCode: "" };
       const feature = await reverseGeocode({ lat: lot.latitude, lon: lot.longitude });
 
-      result.placeName = feature?.properties?.context?.place?.name || "";
-      result.placeCode = feature?.properties?.context?.place?.short_code || "";
+      const placeCode = feature?.properties?.context?.place?.short_code || "";
+      if (!placeCode) return;
+      const placeName = feature?.properties?.context?.place?.name || "";
+      const revenueInUsd = lot.parkingSpots.reduce((acc, spot) => {
+        return (
+          acc +
+          spot.reservations
+            .filter((rev) => rev.paymentRecord.status === "PAID")
+            .reduce((acc, reservation) => {
+              if (reservation.paymentRecord) {
+                return acc + reservation.paymentRecord.amountInUsd;
+              }
+              return acc;
+            }, 0)
+        );
+      }, 0);
+      const numberOfCarSpots = lot.parkingSpots.filter((spot) => spot.vehicleType === "CAR").length;
+      const numberOfMotorcycleSpots = lot.parkingSpots.filter(
+        (spot) => spot.vehicleType === "MOTORCYCLE",
+      ).length;
+      const numberOfTruckSpots = lot.parkingSpots.filter(
+        (spot) => spot.vehicleType === "TRUCK",
+      ).length;
 
-      lot.parkingSpots.forEach((spot) => {
-        spot.reservations.forEach((reservation) => {
-          if (reservation.paymentRecord) {
-            result.revenueInUsd += reservation.paymentRecord.amountInUsd;
-          }
-        });
+      const currentIndex = result.find((item) => item.placeCode === placeCode);
+
+      if (currentIndex) {
+        currentIndex.revenueInUsd += revenueInUsd;
+        currentIndex.numberOfParkingLot += 1;
+        currentIndex.numberOfCarSpots += numberOfCarSpots;
+        currentIndex.numberOfMotorcycleSpots += numberOfMotorcycleSpots;
+        currentIndex.numberOfTruckSpots += numberOfTruckSpots;
+        return;
+      }
+
+      result.push({
+        placeCode,
+        placeName,
+        revenueInUsd,
+        numberOfParkingLot: 1,
+        numberOfCarSpots,
+        numberOfMotorcycleSpots,
+        numberOfTruckSpots,
       });
-
-      return result;
     }),
   );
 
-  return result.sort((a, b) => b.revenueInUsd - a.revenueInUsd);
+  return result;
 });
 
 // Get top parking lots by revenue ------------------------------------------------------------------------
