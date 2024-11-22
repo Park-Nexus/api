@@ -1,9 +1,6 @@
 steps:
   - name: node:20.9.0
     entrypoint: npm
-    args: ["install"]
-  - name: node:20.9.0
-    entrypoint: npm
     args: ["run", "create-env"]
   - name: "gcr.io/cloud-builders/docker"
     args: ["build", "-t", "asia-east2-docker.pkg.dev/parknexus-440604/park-nexus-images/api", "."]
