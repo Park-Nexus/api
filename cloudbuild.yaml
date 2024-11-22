@@ -1,22 +1,22 @@
 steps:
-- name: node:20.9.0
-  entrypoint: npm
-  args: ["install"]
-- name: node:20.9.0
-  entrypoint: npm
-  args: ["run", "create-env"]
-  # env:
-  #   - 'API_PORT=${_API_PORT}'
-  #   - 'DATABASE_URL=${_DATABASE_URL}'
-  #   - 'STRIPE_PUBLISHABLE_KEY=${_STRIPE_PUBLISHABLE_KEY}'
-  #   - 'STRIPE_SECRET_KEY=${_STRIPE_SECRET_KEY}'
-  #   - 'MAPBOX_PUBLIC_ACCESS_TOKEN=${_MAPBOX_PUBLIC_ACCESS_TOKEN}'
-  #   - 'JWT_SECRET=${_JWT_SECRET}'
-  #   - 'JWT_REFRESH_EXPIRES=${_JWT_REFRESH_EXPIRES}'
-  #   - 'JWT_ACCESS_EXPIRES=${_JWT_ACCESS_EXPIRES}'
-  #   - 'PASSWORD_ROUNDS=${_PASSWORD_ROUNDS}'
-  #   - 'ADMIN_EMAIL=${_ADMIN_EMAIL}'
-  #   - 'ADMIN_PASSWORD=${_ADMIN_PASSWORD}'
+  - name: node:20.9.0
+    entrypoint: npm
+    args: ["install"]
+  - name: node:20.9.0
+    entrypoint: npm
+    args: ["run", "create-env"]
+    # env:
+    #   - 'API_PORT=${_API_PORT}'
+    #   - 'DATABASE_URL=${_DATABASE_URL}'
+    #   - 'STRIPE_PUBLISHABLE_KEY=${_STRIPE_PUBLISHABLE_KEY}'
+    #   - 'STRIPE_SECRET_KEY=${_STRIPE_SECRET_KEY}'
+    #   - 'MAPBOX_PUBLIC_ACCESS_TOKEN=${_MAPBOX_PUBLIC_ACCESS_TOKEN}'
+    #   - 'JWT_SECRET=${_JWT_SECRET}'
+    #   - 'JWT_REFRESH_EXPIRES=${_JWT_REFRESH_EXPIRES}'
+    #   - 'JWT_ACCESS_EXPIRES=${_JWT_ACCESS_EXPIRES}'
+    #   - 'PASSWORD_ROUNDS=${_PASSWORD_ROUNDS}'
+    #   - 'ADMIN_EMAIL=${_ADMIN_EMAIL}'
+    #   - 'ADMIN_PASSWORD=${_ADMIN_PASSWORD}'
   - name: "gcr.io/cloud-builders/docker"
     args: ["build", "-t", "asia-east2-docker.pkg.dev/parknexus-440604/park-nexus-images/api", "."]
   - name: "gcr.io/cloud-builders/docker"
