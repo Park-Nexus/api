@@ -18,6 +18,18 @@ steps:
     args: ["build", "-t", "asia-east2-docker.pkg.dev/parknexus-440604/park-nexus-images/api", "."]
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "asia-east2-docker.pkg.dev/parknexus-440604/park-nexus-images/api"]
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      [
+        "run",
+        "deploy",
+        "api",
+        "--image",
+        "asia-east2-docker.pkg.dev/parknexus-440604/park-nexus-images/api",
+        "--region",
+        "asia-east1",
+      ]
 options:
   logging: CLOUD_LOGGING_ONLY
 substitutions:
@@ -32,3 +44,5 @@ substitutions:
   _PASSWORD_ROUNDS: ""
   _ADMIN_EMAIL: ""
   _ADMIN_PASSWORD: ""
+images:
+  - asia-east2-docker.pkg.dev/parknexus-440604/park-nexus-images/api
