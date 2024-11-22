@@ -3,3 +3,5 @@ steps:
     args: ["build", "-t", "asia-east2-docker.pkg.dev/parknexus-440604/park-nexus-images/api", "."]
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "asia-east2-docker.pkg.dev/parknexus-440604/park-nexus-images/api"]
+options:
+  logging: NONE
