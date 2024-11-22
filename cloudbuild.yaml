@@ -4,4 +4,4 @@ steps:
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "asia-east2-docker.pkg.dev/parknexus-440604/park-nexus-images/api"]
 options:
-  logging: NONE
+  logging: CLOUD_LOGGING_ONLY
