@@ -13,6 +13,12 @@ enum ACCOUNT__ROLE_ALIAS {
   USER
 }
 
+enum OTP_CODE__TYPE_ALIAS {
+  REGISTER
+  LOGIN
+  FORGOT_PASSWORD
+}
+
 enum USER__GENDER_ALIAS {
   MALE
   FEMALE
@@ -77,6 +83,19 @@ enum PAYOUT__ERROR_TYPE_ALIAS {
   OTHER
 }
 
+model OtpCode {
+  id Int @id @default(autoincrement())
+
+  code      String
+  type      OTP_CODE__TYPE_ALIAS
+  expiredAt DateTime
+  createdAt DateTime             @default(now())
+  updatedAt DateTime             @updatedAt
+
+  accountId String
+  account   Account @relation(fields: [accountId], references: [id])
+}
+
 model Account {
   id String @id @default(uuid())
 
@@ -88,6 +107,7 @@ model Account {
 
   user         User?
   AccountToken AccountToken[]
+  otpCodes     OtpCode[]
 }
 
 model AccountToken {

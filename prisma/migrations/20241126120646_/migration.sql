@@ -1,0 +1,18 @@
+-- CreateEnum
+CREATE TYPE "OTP__TYPE_ALIAS" AS ENUM ('REGISTER', 'LOGIN', 'FORGOT_PASSWORD');
+
+-- CreateTable
+CREATE TABLE "Otp" (
+    "id" SERIAL NOT NULL,
+    "code" TEXT NOT NULL,
+    "type" "OTP__TYPE_ALIAS" NOT NULL,
+    "expiredAt" TIMESTAMP(3) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "accountId" TEXT NOT NULL,
+
+    CONSTRAINT "Otp_pkey" PRIMARY KEY ("id")
+);
+
+-- AddForeignKey
+ALTER TABLE "Otp" ADD CONSTRAINT "Otp_accountId_fkey" FOREIGN KEY ("accountId") REFERENCES "Account"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

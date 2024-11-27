@@ -14,6 +14,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model OtpCode
+ * 
+ */
+export type OtpCode = $Result.DefaultSelection<Prisma.$OtpCodePayload>
+/**
  * Model Account
  * 
  */
@@ -83,7 +88,16 @@ export type PayoutRecord = $Result.DefaultSelection<Prisma.$PayoutRecordPayload>
  * Enums
  */
 export namespace $Enums {
-  export const ACCOUNT__ROLE_ALIAS: {
+  export const OTP_CODE__TYPE_ALIAS: {
+  REGISTER: 'REGISTER',
+  LOGIN: 'LOGIN',
+  FORGOT_PASSWORD: 'FORGOT_PASSWORD'
+};
+
+export type OTP_CODE__TYPE_ALIAS = (typeof OTP_CODE__TYPE_ALIAS)[keyof typeof OTP_CODE__TYPE_ALIAS]
+
+
+export const ACCOUNT__ROLE_ALIAS: {
   ADMIN: 'ADMIN',
   USER: 'USER'
 };
@@ -173,6 +187,10 @@ export type PAYOUT__ERROR_TYPE_ALIAS = (typeof PAYOUT__ERROR_TYPE_ALIAS)[keyof t
 
 }
 
+export type OTP_CODE__TYPE_ALIAS = $Enums.OTP_CODE__TYPE_ALIAS
+
+export const OTP_CODE__TYPE_ALIAS: typeof $Enums.OTP_CODE__TYPE_ALIAS
+
 export type ACCOUNT__ROLE_ALIAS = $Enums.ACCOUNT__ROLE_ALIAS
 
 export const ACCOUNT__ROLE_ALIAS: typeof $Enums.ACCOUNT__ROLE_ALIAS
@@ -216,8 +234,8 @@ export const PAYOUT__ERROR_TYPE_ALIAS: typeof $Enums.PAYOUT__ERROR_TYPE_ALIAS
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Accounts
- * const accounts = await prisma.account.findMany()
+ * // Fetch zero or more OtpCodes
+ * const otpCodes = await prisma.otpCode.findMany()
  * ```
  *
  * 
@@ -237,8 +255,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Accounts
-   * const accounts = await prisma.account.findMany()
+   * // Fetch zero or more OtpCodes
+   * const otpCodes = await prisma.otpCode.findMany()
    * ```
    *
    * 
@@ -333,6 +351,16 @@ export class PrismaClient<
   $extends: $Extensions.ExtendsHook<"extends", Prisma.TypeMapCb, ExtArgs>
 
       /**
+   * `prisma.otpCode`: Exposes CRUD operations for the **OtpCode** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more OtpCodes
+    * const otpCodes = await prisma.otpCode.findMany()
+    * ```
+    */
+  get otpCode(): Prisma.OtpCodeDelegate<ExtArgs>;
+
+  /**
    * `prisma.account`: Exposes CRUD operations for the **Account** model.
     * Example usage:
     * ```ts
@@ -902,6 +930,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
+    OtpCode: 'OtpCode',
     Account: 'Account',
     AccountToken: 'AccountToken',
     User: 'User',
@@ -930,10 +959,80 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "account" | "accountToken" | "user" | "userNotification" | "vehicle" | "parkingLot" | "parkingLotPrice" | "parkingLotReview" | "parkingLotService" | "parkingSpot" | "reservation" | "paymentRecord" | "payoutRecord"
+      modelProps: "otpCode" | "account" | "accountToken" | "user" | "userNotification" | "vehicle" | "parkingLot" | "parkingLotPrice" | "parkingLotReview" | "parkingLotService" | "parkingSpot" | "reservation" | "paymentRecord" | "payoutRecord"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      OtpCode: {
+        payload: Prisma.$OtpCodePayload<ExtArgs>
+        fields: Prisma.OtpCodeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OtpCodeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OtpCodePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OtpCodeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OtpCodePayload>
+          }
+          findFirst: {
+            args: Prisma.OtpCodeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OtpCodePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OtpCodeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OtpCodePayload>
+          }
+          findMany: {
+            args: Prisma.OtpCodeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OtpCodePayload>[]
+          }
+          create: {
+            args: Prisma.OtpCodeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OtpCodePayload>
+          }
+          createMany: {
+            args: Prisma.OtpCodeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.OtpCodeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OtpCodePayload>[]
+          }
+          delete: {
+            args: Prisma.OtpCodeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OtpCodePayload>
+          }
+          update: {
+            args: Prisma.OtpCodeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OtpCodePayload>
+          }
+          deleteMany: {
+            args: Prisma.OtpCodeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OtpCodeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.OtpCodeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OtpCodePayload>
+          }
+          aggregate: {
+            args: Prisma.OtpCodeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOtpCode>
+          }
+          groupBy: {
+            args: Prisma.OtpCodeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OtpCodeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.OtpCodeCountArgs<ExtArgs>
+            result: $Utils.Optional<OtpCodeCountAggregateOutputType> | number
+          }
+        }
+      }
       Account: {
         payload: Prisma.$AccountPayload<ExtArgs>
         fields: Prisma.AccountFieldRefs
@@ -2006,10 +2105,12 @@ export namespace Prisma {
 
   export type AccountCountOutputType = {
     AccountToken: number
+    otpCodes: number
   }
 
   export type AccountCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     AccountToken?: boolean | AccountCountOutputTypeCountAccountTokenArgs
+    otpCodes?: boolean | AccountCountOutputTypeCountOtpCodesArgs
   }
 
   // Custom InputTypes
@@ -2028,6 +2129,13 @@ export namespace Prisma {
    */
   export type AccountCountOutputTypeCountAccountTokenArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AccountTokenWhereInput
+  }
+
+  /**
+   * AccountCountOutputType without action
+   */
+  export type AccountCountOutputTypeCountOtpCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OtpCodeWhereInput
   }
 
 
@@ -2334,6 +2442,997 @@ export namespace Prisma {
    */
 
   /**
+   * Model OtpCode
+   */
+
+  export type AggregateOtpCode = {
+    _count: OtpCodeCountAggregateOutputType | null
+    _avg: OtpCodeAvgAggregateOutputType | null
+    _sum: OtpCodeSumAggregateOutputType | null
+    _min: OtpCodeMinAggregateOutputType | null
+    _max: OtpCodeMaxAggregateOutputType | null
+  }
+
+  export type OtpCodeAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type OtpCodeSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type OtpCodeMinAggregateOutputType = {
+    id: number | null
+    code: string | null
+    type: $Enums.OTP_CODE__TYPE_ALIAS | null
+    expiredAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    accountId: string | null
+  }
+
+  export type OtpCodeMaxAggregateOutputType = {
+    id: number | null
+    code: string | null
+    type: $Enums.OTP_CODE__TYPE_ALIAS | null
+    expiredAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    accountId: string | null
+  }
+
+  export type OtpCodeCountAggregateOutputType = {
+    id: number
+    code: number
+    type: number
+    expiredAt: number
+    createdAt: number
+    updatedAt: number
+    accountId: number
+    _all: number
+  }
+
+
+  export type OtpCodeAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type OtpCodeSumAggregateInputType = {
+    id?: true
+  }
+
+  export type OtpCodeMinAggregateInputType = {
+    id?: true
+    code?: true
+    type?: true
+    expiredAt?: true
+    createdAt?: true
+    updatedAt?: true
+    accountId?: true
+  }
+
+  export type OtpCodeMaxAggregateInputType = {
+    id?: true
+    code?: true
+    type?: true
+    expiredAt?: true
+    createdAt?: true
+    updatedAt?: true
+    accountId?: true
+  }
+
+  export type OtpCodeCountAggregateInputType = {
+    id?: true
+    code?: true
+    type?: true
+    expiredAt?: true
+    createdAt?: true
+    updatedAt?: true
+    accountId?: true
+    _all?: true
+  }
+
+  export type OtpCodeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OtpCode to aggregate.
+     */
+    where?: OtpCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OtpCodes to fetch.
+     */
+    orderBy?: OtpCodeOrderByWithRelationInput | OtpCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OtpCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OtpCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OtpCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned OtpCodes
+    **/
+    _count?: true | OtpCodeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: OtpCodeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: OtpCodeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OtpCodeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OtpCodeMaxAggregateInputType
+  }
+
+  export type GetOtpCodeAggregateType<T extends OtpCodeAggregateArgs> = {
+        [P in keyof T & keyof AggregateOtpCode]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOtpCode[P]>
+      : GetScalarType<T[P], AggregateOtpCode[P]>
+  }
+
+
+
+
+  export type OtpCodeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OtpCodeWhereInput
+    orderBy?: OtpCodeOrderByWithAggregationInput | OtpCodeOrderByWithAggregationInput[]
+    by: OtpCodeScalarFieldEnum[] | OtpCodeScalarFieldEnum
+    having?: OtpCodeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OtpCodeCountAggregateInputType | true
+    _avg?: OtpCodeAvgAggregateInputType
+    _sum?: OtpCodeSumAggregateInputType
+    _min?: OtpCodeMinAggregateInputType
+    _max?: OtpCodeMaxAggregateInputType
+  }
+
+  export type OtpCodeGroupByOutputType = {
+    id: number
+    code: string
+    type: $Enums.OTP_CODE__TYPE_ALIAS
+    expiredAt: Date
+    createdAt: Date
+    updatedAt: Date
+    accountId: string
+    _count: OtpCodeCountAggregateOutputType | null
+    _avg: OtpCodeAvgAggregateOutputType | null
+    _sum: OtpCodeSumAggregateOutputType | null
+    _min: OtpCodeMinAggregateOutputType | null
+    _max: OtpCodeMaxAggregateOutputType | null
+  }
+
+  type GetOtpCodeGroupByPayload<T extends OtpCodeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OtpCodeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OtpCodeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OtpCodeGroupByOutputType[P]>
+            : GetScalarType<T[P], OtpCodeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OtpCodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    type?: boolean
+    expiredAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    accountId?: boolean
+    account?: boolean | AccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["otpCode"]>
+
+  export type OtpCodeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    type?: boolean
+    expiredAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    accountId?: boolean
+    account?: boolean | AccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["otpCode"]>
+
+  export type OtpCodeSelectScalar = {
+    id?: boolean
+    code?: boolean
+    type?: boolean
+    expiredAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    accountId?: boolean
+  }
+
+  export type OtpCodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    account?: boolean | AccountDefaultArgs<ExtArgs>
+  }
+  export type OtpCodeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    account?: boolean | AccountDefaultArgs<ExtArgs>
+  }
+
+  export type $OtpCodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "OtpCode"
+    objects: {
+      account: Prisma.$AccountPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      code: string
+      type: $Enums.OTP_CODE__TYPE_ALIAS
+      expiredAt: Date
+      createdAt: Date
+      updatedAt: Date
+      accountId: string
+    }, ExtArgs["result"]["otpCode"]>
+    composites: {}
+  }
+
+  type OtpCodeGetPayload<S extends boolean | null | undefined | OtpCodeDefaultArgs> = $Result.GetResult<Prisma.$OtpCodePayload, S>
+
+  type OtpCodeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<OtpCodeFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: OtpCodeCountAggregateInputType | true
+    }
+
+  export interface OtpCodeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OtpCode'], meta: { name: 'OtpCode' } }
+    /**
+     * Find zero or one OtpCode that matches the filter.
+     * @param {OtpCodeFindUniqueArgs} args - Arguments to find a OtpCode
+     * @example
+     * // Get one OtpCode
+     * const otpCode = await prisma.otpCode.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends OtpCodeFindUniqueArgs>(args: SelectSubset<T, OtpCodeFindUniqueArgs<ExtArgs>>): Prisma__OtpCodeClient<$Result.GetResult<Prisma.$OtpCodePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one OtpCode that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {OtpCodeFindUniqueOrThrowArgs} args - Arguments to find a OtpCode
+     * @example
+     * // Get one OtpCode
+     * const otpCode = await prisma.otpCode.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends OtpCodeFindUniqueOrThrowArgs>(args: SelectSubset<T, OtpCodeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OtpCodeClient<$Result.GetResult<Prisma.$OtpCodePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first OtpCode that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtpCodeFindFirstArgs} args - Arguments to find a OtpCode
+     * @example
+     * // Get one OtpCode
+     * const otpCode = await prisma.otpCode.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends OtpCodeFindFirstArgs>(args?: SelectSubset<T, OtpCodeFindFirstArgs<ExtArgs>>): Prisma__OtpCodeClient<$Result.GetResult<Prisma.$OtpCodePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first OtpCode that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtpCodeFindFirstOrThrowArgs} args - Arguments to find a OtpCode
+     * @example
+     * // Get one OtpCode
+     * const otpCode = await prisma.otpCode.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends OtpCodeFindFirstOrThrowArgs>(args?: SelectSubset<T, OtpCodeFindFirstOrThrowArgs<ExtArgs>>): Prisma__OtpCodeClient<$Result.GetResult<Prisma.$OtpCodePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more OtpCodes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtpCodeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all OtpCodes
+     * const otpCodes = await prisma.otpCode.findMany()
+     * 
+     * // Get first 10 OtpCodes
+     * const otpCodes = await prisma.otpCode.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const otpCodeWithIdOnly = await prisma.otpCode.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends OtpCodeFindManyArgs>(args?: SelectSubset<T, OtpCodeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OtpCodePayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a OtpCode.
+     * @param {OtpCodeCreateArgs} args - Arguments to create a OtpCode.
+     * @example
+     * // Create one OtpCode
+     * const OtpCode = await prisma.otpCode.create({
+     *   data: {
+     *     // ... data to create a OtpCode
+     *   }
+     * })
+     * 
+     */
+    create<T extends OtpCodeCreateArgs>(args: SelectSubset<T, OtpCodeCreateArgs<ExtArgs>>): Prisma__OtpCodeClient<$Result.GetResult<Prisma.$OtpCodePayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many OtpCodes.
+     * @param {OtpCodeCreateManyArgs} args - Arguments to create many OtpCodes.
+     * @example
+     * // Create many OtpCodes
+     * const otpCode = await prisma.otpCode.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends OtpCodeCreateManyArgs>(args?: SelectSubset<T, OtpCodeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many OtpCodes and returns the data saved in the database.
+     * @param {OtpCodeCreateManyAndReturnArgs} args - Arguments to create many OtpCodes.
+     * @example
+     * // Create many OtpCodes
+     * const otpCode = await prisma.otpCode.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many OtpCodes and only return the `id`
+     * const otpCodeWithIdOnly = await prisma.otpCode.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends OtpCodeCreateManyAndReturnArgs>(args?: SelectSubset<T, OtpCodeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OtpCodePayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a OtpCode.
+     * @param {OtpCodeDeleteArgs} args - Arguments to delete one OtpCode.
+     * @example
+     * // Delete one OtpCode
+     * const OtpCode = await prisma.otpCode.delete({
+     *   where: {
+     *     // ... filter to delete one OtpCode
+     *   }
+     * })
+     * 
+     */
+    delete<T extends OtpCodeDeleteArgs>(args: SelectSubset<T, OtpCodeDeleteArgs<ExtArgs>>): Prisma__OtpCodeClient<$Result.GetResult<Prisma.$OtpCodePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one OtpCode.
+     * @param {OtpCodeUpdateArgs} args - Arguments to update one OtpCode.
+     * @example
+     * // Update one OtpCode
+     * const otpCode = await prisma.otpCode.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends OtpCodeUpdateArgs>(args: SelectSubset<T, OtpCodeUpdateArgs<ExtArgs>>): Prisma__OtpCodeClient<$Result.GetResult<Prisma.$OtpCodePayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more OtpCodes.
+     * @param {OtpCodeDeleteManyArgs} args - Arguments to filter OtpCodes to delete.
+     * @example
+     * // Delete a few OtpCodes
+     * const { count } = await prisma.otpCode.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends OtpCodeDeleteManyArgs>(args?: SelectSubset<T, OtpCodeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OtpCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtpCodeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many OtpCodes
+     * const otpCode = await prisma.otpCode.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends OtpCodeUpdateManyArgs>(args: SelectSubset<T, OtpCodeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one OtpCode.
+     * @param {OtpCodeUpsertArgs} args - Arguments to update or create a OtpCode.
+     * @example
+     * // Update or create a OtpCode
+     * const otpCode = await prisma.otpCode.upsert({
+     *   create: {
+     *     // ... data to create a OtpCode
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the OtpCode we want to update
+     *   }
+     * })
+     */
+    upsert<T extends OtpCodeUpsertArgs>(args: SelectSubset<T, OtpCodeUpsertArgs<ExtArgs>>): Prisma__OtpCodeClient<$Result.GetResult<Prisma.$OtpCodePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of OtpCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtpCodeCountArgs} args - Arguments to filter OtpCodes to count.
+     * @example
+     * // Count the number of OtpCodes
+     * const count = await prisma.otpCode.count({
+     *   where: {
+     *     // ... the filter for the OtpCodes we want to count
+     *   }
+     * })
+    **/
+    count<T extends OtpCodeCountArgs>(
+      args?: Subset<T, OtpCodeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OtpCodeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a OtpCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtpCodeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OtpCodeAggregateArgs>(args: Subset<T, OtpCodeAggregateArgs>): Prisma.PrismaPromise<GetOtpCodeAggregateType<T>>
+
+    /**
+     * Group by OtpCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OtpCodeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OtpCodeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OtpCodeGroupByArgs['orderBy'] }
+        : { orderBy?: OtpCodeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OtpCodeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOtpCodeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the OtpCode model
+   */
+  readonly fields: OtpCodeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for OtpCode.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OtpCodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    account<T extends AccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AccountDefaultArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the OtpCode model
+   */ 
+  interface OtpCodeFieldRefs {
+    readonly id: FieldRef<"OtpCode", 'Int'>
+    readonly code: FieldRef<"OtpCode", 'String'>
+    readonly type: FieldRef<"OtpCode", 'OTP_CODE__TYPE_ALIAS'>
+    readonly expiredAt: FieldRef<"OtpCode", 'DateTime'>
+    readonly createdAt: FieldRef<"OtpCode", 'DateTime'>
+    readonly updatedAt: FieldRef<"OtpCode", 'DateTime'>
+    readonly accountId: FieldRef<"OtpCode", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * OtpCode findUnique
+   */
+  export type OtpCodeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpCode
+     */
+    select?: OtpCodeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which OtpCode to fetch.
+     */
+    where: OtpCodeWhereUniqueInput
+  }
+
+  /**
+   * OtpCode findUniqueOrThrow
+   */
+  export type OtpCodeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpCode
+     */
+    select?: OtpCodeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which OtpCode to fetch.
+     */
+    where: OtpCodeWhereUniqueInput
+  }
+
+  /**
+   * OtpCode findFirst
+   */
+  export type OtpCodeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpCode
+     */
+    select?: OtpCodeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which OtpCode to fetch.
+     */
+    where?: OtpCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OtpCodes to fetch.
+     */
+    orderBy?: OtpCodeOrderByWithRelationInput | OtpCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OtpCodes.
+     */
+    cursor?: OtpCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OtpCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OtpCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OtpCodes.
+     */
+    distinct?: OtpCodeScalarFieldEnum | OtpCodeScalarFieldEnum[]
+  }
+
+  /**
+   * OtpCode findFirstOrThrow
+   */
+  export type OtpCodeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpCode
+     */
+    select?: OtpCodeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which OtpCode to fetch.
+     */
+    where?: OtpCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OtpCodes to fetch.
+     */
+    orderBy?: OtpCodeOrderByWithRelationInput | OtpCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OtpCodes.
+     */
+    cursor?: OtpCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OtpCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OtpCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OtpCodes.
+     */
+    distinct?: OtpCodeScalarFieldEnum | OtpCodeScalarFieldEnum[]
+  }
+
+  /**
+   * OtpCode findMany
+   */
+  export type OtpCodeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpCode
+     */
+    select?: OtpCodeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which OtpCodes to fetch.
+     */
+    where?: OtpCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OtpCodes to fetch.
+     */
+    orderBy?: OtpCodeOrderByWithRelationInput | OtpCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing OtpCodes.
+     */
+    cursor?: OtpCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OtpCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OtpCodes.
+     */
+    skip?: number
+    distinct?: OtpCodeScalarFieldEnum | OtpCodeScalarFieldEnum[]
+  }
+
+  /**
+   * OtpCode create
+   */
+  export type OtpCodeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpCode
+     */
+    select?: OtpCodeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpCodeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a OtpCode.
+     */
+    data: XOR<OtpCodeCreateInput, OtpCodeUncheckedCreateInput>
+  }
+
+  /**
+   * OtpCode createMany
+   */
+  export type OtpCodeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many OtpCodes.
+     */
+    data: OtpCodeCreateManyInput | OtpCodeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * OtpCode createManyAndReturn
+   */
+  export type OtpCodeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpCode
+     */
+    select?: OtpCodeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many OtpCodes.
+     */
+    data: OtpCodeCreateManyInput | OtpCodeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpCodeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * OtpCode update
+   */
+  export type OtpCodeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpCode
+     */
+    select?: OtpCodeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpCodeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a OtpCode.
+     */
+    data: XOR<OtpCodeUpdateInput, OtpCodeUncheckedUpdateInput>
+    /**
+     * Choose, which OtpCode to update.
+     */
+    where: OtpCodeWhereUniqueInput
+  }
+
+  /**
+   * OtpCode updateMany
+   */
+  export type OtpCodeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update OtpCodes.
+     */
+    data: XOR<OtpCodeUpdateManyMutationInput, OtpCodeUncheckedUpdateManyInput>
+    /**
+     * Filter which OtpCodes to update
+     */
+    where?: OtpCodeWhereInput
+  }
+
+  /**
+   * OtpCode upsert
+   */
+  export type OtpCodeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpCode
+     */
+    select?: OtpCodeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpCodeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the OtpCode to update in case it exists.
+     */
+    where: OtpCodeWhereUniqueInput
+    /**
+     * In case the OtpCode found by the `where` argument doesn't exist, create a new OtpCode with this data.
+     */
+    create: XOR<OtpCodeCreateInput, OtpCodeUncheckedCreateInput>
+    /**
+     * In case the OtpCode was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OtpCodeUpdateInput, OtpCodeUncheckedUpdateInput>
+  }
+
+  /**
+   * OtpCode delete
+   */
+  export type OtpCodeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpCode
+     */
+    select?: OtpCodeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpCodeInclude<ExtArgs> | null
+    /**
+     * Filter which OtpCode to delete.
+     */
+    where: OtpCodeWhereUniqueInput
+  }
+
+  /**
+   * OtpCode deleteMany
+   */
+  export type OtpCodeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OtpCodes to delete
+     */
+    where?: OtpCodeWhereInput
+  }
+
+  /**
+   * OtpCode without action
+   */
+  export type OtpCodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpCode
+     */
+    select?: OtpCodeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpCodeInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Account
    */
 
@@ -2507,6 +3606,7 @@ export namespace Prisma {
     updatedAt?: boolean
     user?: boolean | Account$userArgs<ExtArgs>
     AccountToken?: boolean | Account$AccountTokenArgs<ExtArgs>
+    otpCodes?: boolean | Account$otpCodesArgs<ExtArgs>
     _count?: boolean | AccountCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["account"]>
 
@@ -2531,6 +3631,7 @@ export namespace Prisma {
   export type AccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Account$userArgs<ExtArgs>
     AccountToken?: boolean | Account$AccountTokenArgs<ExtArgs>
+    otpCodes?: boolean | Account$otpCodesArgs<ExtArgs>
     _count?: boolean | AccountCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AccountIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2540,6 +3641,7 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs> | null
       AccountToken: Prisma.$AccountTokenPayload<ExtArgs>[]
+      otpCodes: Prisma.$OtpCodePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2914,6 +4016,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends Account$userArgs<ExtArgs> = {}>(args?: Subset<T, Account$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     AccountToken<T extends Account$AccountTokenArgs<ExtArgs> = {}>(args?: Subset<T, Account$AccountTokenArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountTokenPayload<ExtArgs>, T, "findMany"> | Null>
+    otpCodes<T extends Account$otpCodesArgs<ExtArgs> = {}>(args?: Subset<T, Account$otpCodesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OtpCodePayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3295,6 +4398,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AccountTokenScalarFieldEnum | AccountTokenScalarFieldEnum[]
+  }
+
+  /**
+   * Account.otpCodes
+   */
+  export type Account$otpCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OtpCode
+     */
+    select?: OtpCodeSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OtpCodeInclude<ExtArgs> | null
+    where?: OtpCodeWhereInput
+    orderBy?: OtpCodeOrderByWithRelationInput | OtpCodeOrderByWithRelationInput[]
+    cursor?: OtpCodeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OtpCodeScalarFieldEnum | OtpCodeScalarFieldEnum[]
   }
 
   /**
@@ -16032,6 +17155,19 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+  export const OtpCodeScalarFieldEnum: {
+    id: 'id',
+    code: 'code',
+    type: 'type',
+    expiredAt: 'expiredAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    accountId: 'accountId'
+  };
+
+  export type OtpCodeScalarFieldEnum = (typeof OtpCodeScalarFieldEnum)[keyof typeof OtpCodeScalarFieldEnum]
+
+
   export const AccountScalarFieldEnum: {
     id: 'id',
     email: 'email',
@@ -16253,6 +17389,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'String'
    */
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
@@ -16267,16 +17417,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'ACCOUNT__ROLE_ALIAS'
+   * Reference to a field of type 'OTP_CODE__TYPE_ALIAS'
    */
-  export type EnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ACCOUNT__ROLE_ALIAS'>
+  export type EnumOTP_CODE__TYPE_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OTP_CODE__TYPE_ALIAS'>
     
 
 
   /**
-   * Reference to a field of type 'ACCOUNT__ROLE_ALIAS[]'
+   * Reference to a field of type 'OTP_CODE__TYPE_ALIAS[]'
    */
-  export type ListEnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ACCOUNT__ROLE_ALIAS[]'>
+  export type ListEnumOTP_CODE__TYPE_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OTP_CODE__TYPE_ALIAS[]'>
     
 
 
@@ -16295,16 +17445,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
+   * Reference to a field of type 'ACCOUNT__ROLE_ALIAS'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type EnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ACCOUNT__ROLE_ALIAS'>
     
 
 
   /**
-   * Reference to a field of type 'Int[]'
+   * Reference to a field of type 'ACCOUNT__ROLE_ALIAS[]'
    */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+  export type ListEnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ACCOUNT__ROLE_ALIAS[]'>
     
 
 
@@ -16444,6 +17594,73 @@ export namespace Prisma {
    */
 
 
+  export type OtpCodeWhereInput = {
+    AND?: OtpCodeWhereInput | OtpCodeWhereInput[]
+    OR?: OtpCodeWhereInput[]
+    NOT?: OtpCodeWhereInput | OtpCodeWhereInput[]
+    id?: IntFilter<"OtpCode"> | number
+    code?: StringFilter<"OtpCode"> | string
+    type?: EnumOTP_CODE__TYPE_ALIASFilter<"OtpCode"> | $Enums.OTP_CODE__TYPE_ALIAS
+    expiredAt?: DateTimeFilter<"OtpCode"> | Date | string
+    createdAt?: DateTimeFilter<"OtpCode"> | Date | string
+    updatedAt?: DateTimeFilter<"OtpCode"> | Date | string
+    accountId?: StringFilter<"OtpCode"> | string
+    account?: XOR<AccountRelationFilter, AccountWhereInput>
+  }
+
+  export type OtpCodeOrderByWithRelationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
+    expiredAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    accountId?: SortOrder
+    account?: AccountOrderByWithRelationInput
+  }
+
+  export type OtpCodeWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: OtpCodeWhereInput | OtpCodeWhereInput[]
+    OR?: OtpCodeWhereInput[]
+    NOT?: OtpCodeWhereInput | OtpCodeWhereInput[]
+    code?: StringFilter<"OtpCode"> | string
+    type?: EnumOTP_CODE__TYPE_ALIASFilter<"OtpCode"> | $Enums.OTP_CODE__TYPE_ALIAS
+    expiredAt?: DateTimeFilter<"OtpCode"> | Date | string
+    createdAt?: DateTimeFilter<"OtpCode"> | Date | string
+    updatedAt?: DateTimeFilter<"OtpCode"> | Date | string
+    accountId?: StringFilter<"OtpCode"> | string
+    account?: XOR<AccountRelationFilter, AccountWhereInput>
+  }, "id">
+
+  export type OtpCodeOrderByWithAggregationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
+    expiredAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    accountId?: SortOrder
+    _count?: OtpCodeCountOrderByAggregateInput
+    _avg?: OtpCodeAvgOrderByAggregateInput
+    _max?: OtpCodeMaxOrderByAggregateInput
+    _min?: OtpCodeMinOrderByAggregateInput
+    _sum?: OtpCodeSumOrderByAggregateInput
+  }
+
+  export type OtpCodeScalarWhereWithAggregatesInput = {
+    AND?: OtpCodeScalarWhereWithAggregatesInput | OtpCodeScalarWhereWithAggregatesInput[]
+    OR?: OtpCodeScalarWhereWithAggregatesInput[]
+    NOT?: OtpCodeScalarWhereWithAggregatesInput | OtpCodeScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"OtpCode"> | number
+    code?: StringWithAggregatesFilter<"OtpCode"> | string
+    type?: EnumOTP_CODE__TYPE_ALIASWithAggregatesFilter<"OtpCode"> | $Enums.OTP_CODE__TYPE_ALIAS
+    expiredAt?: DateTimeWithAggregatesFilter<"OtpCode"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"OtpCode"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"OtpCode"> | Date | string
+    accountId?: StringWithAggregatesFilter<"OtpCode"> | string
+  }
+
   export type AccountWhereInput = {
     AND?: AccountWhereInput | AccountWhereInput[]
     OR?: AccountWhereInput[]
@@ -16456,6 +17673,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Account"> | Date | string
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     AccountToken?: AccountTokenListRelationFilter
+    otpCodes?: OtpCodeListRelationFilter
   }
 
   export type AccountOrderByWithRelationInput = {
@@ -16467,6 +17685,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     AccountToken?: AccountTokenOrderByRelationAggregateInput
+    otpCodes?: OtpCodeOrderByRelationAggregateInput
   }
 
   export type AccountWhereUniqueInput = Prisma.AtLeast<{
@@ -16481,6 +17700,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Account"> | Date | string
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     AccountToken?: AccountTokenListRelationFilter
+    otpCodes?: OtpCodeListRelationFilter
   }, "id" | "email">
 
   export type AccountOrderByWithAggregationInput = {
@@ -17493,6 +18713,72 @@ export namespace Prisma {
     parkingLotId?: IntWithAggregatesFilter<"PayoutRecord"> | number
   }
 
+  export type OtpCodeCreateInput = {
+    code: string
+    type: $Enums.OTP_CODE__TYPE_ALIAS
+    expiredAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    account: AccountCreateNestedOneWithoutOtpCodesInput
+  }
+
+  export type OtpCodeUncheckedCreateInput = {
+    id?: number
+    code: string
+    type: $Enums.OTP_CODE__TYPE_ALIAS
+    expiredAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accountId: string
+  }
+
+  export type OtpCodeUpdateInput = {
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumOTP_CODE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.OTP_CODE__TYPE_ALIAS
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    account?: AccountUpdateOneRequiredWithoutOtpCodesNestedInput
+  }
+
+  export type OtpCodeUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumOTP_CODE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.OTP_CODE__TYPE_ALIAS
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accountId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type OtpCodeCreateManyInput = {
+    id?: number
+    code: string
+    type: $Enums.OTP_CODE__TYPE_ALIAS
+    expiredAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    accountId: string
+  }
+
+  export type OtpCodeUpdateManyMutationInput = {
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumOTP_CODE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.OTP_CODE__TYPE_ALIAS
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OtpCodeUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumOTP_CODE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.OTP_CODE__TYPE_ALIAS
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accountId?: StringFieldUpdateOperationsInput | string
+  }
+
   export type AccountCreateInput = {
     id?: string
     email: string
@@ -17502,6 +18788,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     user?: UserCreateNestedOneWithoutAccountInput
     AccountToken?: AccountTokenCreateNestedManyWithoutAccountInput
+    otpCodes?: OtpCodeCreateNestedManyWithoutAccountInput
   }
 
   export type AccountUncheckedCreateInput = {
@@ -17513,6 +18800,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     user?: UserUncheckedCreateNestedOneWithoutAccountInput
     AccountToken?: AccountTokenUncheckedCreateNestedManyWithoutAccountInput
+    otpCodes?: OtpCodeUncheckedCreateNestedManyWithoutAccountInput
   }
 
   export type AccountUpdateInput = {
@@ -17524,6 +18812,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutAccountNestedInput
     AccountToken?: AccountTokenUpdateManyWithoutAccountNestedInput
+    otpCodes?: OtpCodeUpdateManyWithoutAccountNestedInput
   }
 
   export type AccountUncheckedUpdateInput = {
@@ -17535,6 +18824,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUncheckedUpdateOneWithoutAccountNestedInput
     AccountToken?: AccountTokenUncheckedUpdateManyWithoutAccountNestedInput
+    otpCodes?: OtpCodeUncheckedUpdateManyWithoutAccountNestedInput
   }
 
   export type AccountCreateManyInput = {
@@ -18583,6 +19873,17 @@ export namespace Prisma {
     parkingLotId?: IntFieldUpdateOperationsInput | number
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -18598,11 +19899,11 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type EnumACCOUNT__ROLE_ALIASFilter<$PrismaModel = never> = {
-    equals?: $Enums.ACCOUNT__ROLE_ALIAS | EnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
-    in?: $Enums.ACCOUNT__ROLE_ALIAS[] | ListEnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ACCOUNT__ROLE_ALIAS[] | ListEnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
-    not?: NestedEnumACCOUNT__ROLE_ALIASFilter<$PrismaModel> | $Enums.ACCOUNT__ROLE_ALIAS
+  export type EnumOTP_CODE__TYPE_ALIASFilter<$PrismaModel = never> = {
+    equals?: $Enums.OTP_CODE__TYPE_ALIAS | EnumOTP_CODE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.OTP_CODE__TYPE_ALIAS[] | ListEnumOTP_CODE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OTP_CODE__TYPE_ALIAS[] | ListEnumOTP_CODE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumOTP_CODE__TYPE_ALIASFilter<$PrismaModel> | $Enums.OTP_CODE__TYPE_ALIAS
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -18616,6 +19917,114 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type AccountRelationFilter = {
+    is?: AccountWhereInput
+    isNot?: AccountWhereInput
+  }
+
+  export type OtpCodeCountOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
+    expiredAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    accountId?: SortOrder
+  }
+
+  export type OtpCodeAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type OtpCodeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
+    expiredAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    accountId?: SortOrder
+  }
+
+  export type OtpCodeMinOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    type?: SortOrder
+    expiredAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    accountId?: SortOrder
+  }
+
+  export type OtpCodeSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type EnumOTP_CODE__TYPE_ALIASWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OTP_CODE__TYPE_ALIAS | EnumOTP_CODE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.OTP_CODE__TYPE_ALIAS[] | ListEnumOTP_CODE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OTP_CODE__TYPE_ALIAS[] | ListEnumOTP_CODE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumOTP_CODE__TYPE_ALIASWithAggregatesFilter<$PrismaModel> | $Enums.OTP_CODE__TYPE_ALIAS
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOTP_CODE__TYPE_ALIASFilter<$PrismaModel>
+    _max?: NestedEnumOTP_CODE__TYPE_ALIASFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type EnumACCOUNT__ROLE_ALIASFilter<$PrismaModel = never> = {
+    equals?: $Enums.ACCOUNT__ROLE_ALIAS | EnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.ACCOUNT__ROLE_ALIAS[] | ListEnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ACCOUNT__ROLE_ALIAS[] | ListEnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumACCOUNT__ROLE_ALIASFilter<$PrismaModel> | $Enums.ACCOUNT__ROLE_ALIAS
+  }
+
   export type UserNullableRelationFilter = {
     is?: UserWhereInput | null
     isNot?: UserWhereInput | null
@@ -18627,7 +20036,17 @@ export namespace Prisma {
     none?: AccountTokenWhereInput
   }
 
+  export type OtpCodeListRelationFilter = {
+    every?: OtpCodeWhereInput
+    some?: OtpCodeWhereInput
+    none?: OtpCodeWhereInput
+  }
+
   export type AccountTokenOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type OtpCodeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -18658,24 +20077,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
   export type EnumACCOUNT__ROLE_ALIASWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.ACCOUNT__ROLE_ALIAS | EnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
     in?: $Enums.ACCOUNT__ROLE_ALIAS[] | ListEnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
@@ -18684,36 +20085,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumACCOUNT__ROLE_ALIASFilter<$PrismaModel>
     _max?: NestedEnumACCOUNT__ROLE_ALIASFilter<$PrismaModel>
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
-  export type AccountRelationFilter = {
-    is?: AccountWhereInput
-    isNot?: AccountWhereInput
   }
 
   export type AccountTokenCountOrderByAggregateInput = {
@@ -18746,22 +20117,6 @@ export namespace Prisma {
 
   export type AccountTokenSumOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -19717,6 +21072,40 @@ export namespace Prisma {
     _max?: NestedEnumPAYOUT__ERROR_TYPE_ALIASNullableFilter<$PrismaModel>
   }
 
+  export type AccountCreateNestedOneWithoutOtpCodesInput = {
+    create?: XOR<AccountCreateWithoutOtpCodesInput, AccountUncheckedCreateWithoutOtpCodesInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutOtpCodesInput
+    connect?: AccountWhereUniqueInput
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type EnumOTP_CODE__TYPE_ALIASFieldUpdateOperationsInput = {
+    set?: $Enums.OTP_CODE__TYPE_ALIAS
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type AccountUpdateOneRequiredWithoutOtpCodesNestedInput = {
+    create?: XOR<AccountCreateWithoutOtpCodesInput, AccountUncheckedCreateWithoutOtpCodesInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutOtpCodesInput
+    upsert?: AccountUpsertWithoutOtpCodesInput
+    connect?: AccountWhereUniqueInput
+    update?: XOR<XOR<AccountUpdateToOneWithWhereWithoutOtpCodesInput, AccountUpdateWithoutOtpCodesInput>, AccountUncheckedUpdateWithoutOtpCodesInput>
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type UserCreateNestedOneWithoutAccountInput = {
     create?: XOR<UserCreateWithoutAccountInput, UserUncheckedCreateWithoutAccountInput>
     connectOrCreate?: UserCreateOrConnectWithoutAccountInput
@@ -19728,6 +21117,13 @@ export namespace Prisma {
     connectOrCreate?: AccountTokenCreateOrConnectWithoutAccountInput | AccountTokenCreateOrConnectWithoutAccountInput[]
     createMany?: AccountTokenCreateManyAccountInputEnvelope
     connect?: AccountTokenWhereUniqueInput | AccountTokenWhereUniqueInput[]
+  }
+
+  export type OtpCodeCreateNestedManyWithoutAccountInput = {
+    create?: XOR<OtpCodeCreateWithoutAccountInput, OtpCodeUncheckedCreateWithoutAccountInput> | OtpCodeCreateWithoutAccountInput[] | OtpCodeUncheckedCreateWithoutAccountInput[]
+    connectOrCreate?: OtpCodeCreateOrConnectWithoutAccountInput | OtpCodeCreateOrConnectWithoutAccountInput[]
+    createMany?: OtpCodeCreateManyAccountInputEnvelope
+    connect?: OtpCodeWhereUniqueInput | OtpCodeWhereUniqueInput[]
   }
 
   export type UserUncheckedCreateNestedOneWithoutAccountInput = {
@@ -19743,16 +21139,15 @@ export namespace Prisma {
     connect?: AccountTokenWhereUniqueInput | AccountTokenWhereUniqueInput[]
   }
 
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
+  export type OtpCodeUncheckedCreateNestedManyWithoutAccountInput = {
+    create?: XOR<OtpCodeCreateWithoutAccountInput, OtpCodeUncheckedCreateWithoutAccountInput> | OtpCodeCreateWithoutAccountInput[] | OtpCodeUncheckedCreateWithoutAccountInput[]
+    connectOrCreate?: OtpCodeCreateOrConnectWithoutAccountInput | OtpCodeCreateOrConnectWithoutAccountInput[]
+    createMany?: OtpCodeCreateManyAccountInputEnvelope
+    connect?: OtpCodeWhereUniqueInput | OtpCodeWhereUniqueInput[]
   }
 
   export type EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput = {
     set?: $Enums.ACCOUNT__ROLE_ALIAS
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type UserUpdateOneWithoutAccountNestedInput = {
@@ -19779,6 +21174,20 @@ export namespace Prisma {
     deleteMany?: AccountTokenScalarWhereInput | AccountTokenScalarWhereInput[]
   }
 
+  export type OtpCodeUpdateManyWithoutAccountNestedInput = {
+    create?: XOR<OtpCodeCreateWithoutAccountInput, OtpCodeUncheckedCreateWithoutAccountInput> | OtpCodeCreateWithoutAccountInput[] | OtpCodeUncheckedCreateWithoutAccountInput[]
+    connectOrCreate?: OtpCodeCreateOrConnectWithoutAccountInput | OtpCodeCreateOrConnectWithoutAccountInput[]
+    upsert?: OtpCodeUpsertWithWhereUniqueWithoutAccountInput | OtpCodeUpsertWithWhereUniqueWithoutAccountInput[]
+    createMany?: OtpCodeCreateManyAccountInputEnvelope
+    set?: OtpCodeWhereUniqueInput | OtpCodeWhereUniqueInput[]
+    disconnect?: OtpCodeWhereUniqueInput | OtpCodeWhereUniqueInput[]
+    delete?: OtpCodeWhereUniqueInput | OtpCodeWhereUniqueInput[]
+    connect?: OtpCodeWhereUniqueInput | OtpCodeWhereUniqueInput[]
+    update?: OtpCodeUpdateWithWhereUniqueWithoutAccountInput | OtpCodeUpdateWithWhereUniqueWithoutAccountInput[]
+    updateMany?: OtpCodeUpdateManyWithWhereWithoutAccountInput | OtpCodeUpdateManyWithWhereWithoutAccountInput[]
+    deleteMany?: OtpCodeScalarWhereInput | OtpCodeScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateOneWithoutAccountNestedInput = {
     create?: XOR<UserCreateWithoutAccountInput, UserUncheckedCreateWithoutAccountInput>
     connectOrCreate?: UserCreateOrConnectWithoutAccountInput
@@ -19803,6 +21212,20 @@ export namespace Prisma {
     deleteMany?: AccountTokenScalarWhereInput | AccountTokenScalarWhereInput[]
   }
 
+  export type OtpCodeUncheckedUpdateManyWithoutAccountNestedInput = {
+    create?: XOR<OtpCodeCreateWithoutAccountInput, OtpCodeUncheckedCreateWithoutAccountInput> | OtpCodeCreateWithoutAccountInput[] | OtpCodeUncheckedCreateWithoutAccountInput[]
+    connectOrCreate?: OtpCodeCreateOrConnectWithoutAccountInput | OtpCodeCreateOrConnectWithoutAccountInput[]
+    upsert?: OtpCodeUpsertWithWhereUniqueWithoutAccountInput | OtpCodeUpsertWithWhereUniqueWithoutAccountInput[]
+    createMany?: OtpCodeCreateManyAccountInputEnvelope
+    set?: OtpCodeWhereUniqueInput | OtpCodeWhereUniqueInput[]
+    disconnect?: OtpCodeWhereUniqueInput | OtpCodeWhereUniqueInput[]
+    delete?: OtpCodeWhereUniqueInput | OtpCodeWhereUniqueInput[]
+    connect?: OtpCodeWhereUniqueInput | OtpCodeWhereUniqueInput[]
+    update?: OtpCodeUpdateWithWhereUniqueWithoutAccountInput | OtpCodeUpdateWithWhereUniqueWithoutAccountInput[]
+    updateMany?: OtpCodeUpdateManyWithWhereWithoutAccountInput | OtpCodeUpdateManyWithWhereWithoutAccountInput[]
+    deleteMany?: OtpCodeScalarWhereInput | OtpCodeScalarWhereInput[]
+  }
+
   export type AccountCreateNestedOneWithoutAccountTokenInput = {
     create?: XOR<AccountCreateWithoutAccountTokenInput, AccountUncheckedCreateWithoutAccountTokenInput>
     connectOrCreate?: AccountCreateOrConnectWithoutAccountTokenInput
@@ -19815,14 +21238,6 @@ export namespace Prisma {
     upsert?: AccountUpsertWithoutAccountTokenInput
     connect?: AccountWhereUniqueInput
     update?: XOR<XOR<AccountUpdateToOneWithWhereWithoutAccountTokenInput, AccountUpdateWithoutAccountTokenInput>, AccountUncheckedUpdateWithoutAccountTokenInput>
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type VehicleCreateNestedManyWithoutOwnerInput = {
@@ -20843,6 +22258,17 @@ export namespace Prisma {
     deleteMany?: PaymentRecordScalarWhereInput | PaymentRecordScalarWhereInput[]
   }
 
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -20857,11 +22283,11 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type NestedEnumACCOUNT__ROLE_ALIASFilter<$PrismaModel = never> = {
-    equals?: $Enums.ACCOUNT__ROLE_ALIAS | EnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
-    in?: $Enums.ACCOUNT__ROLE_ALIAS[] | ListEnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ACCOUNT__ROLE_ALIAS[] | ListEnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
-    not?: NestedEnumACCOUNT__ROLE_ALIASFilter<$PrismaModel> | $Enums.ACCOUNT__ROLE_ALIAS
+  export type NestedEnumOTP_CODE__TYPE_ALIASFilter<$PrismaModel = never> = {
+    equals?: $Enums.OTP_CODE__TYPE_ALIAS | EnumOTP_CODE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.OTP_CODE__TYPE_ALIAS[] | ListEnumOTP_CODE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OTP_CODE__TYPE_ALIAS[] | ListEnumOTP_CODE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumOTP_CODE__TYPE_ALIASFilter<$PrismaModel> | $Enums.OTP_CODE__TYPE_ALIAS
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -20873,58 +22299,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
-  export type NestedEnumACCOUNT__ROLE_ALIASWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.ACCOUNT__ROLE_ALIAS | EnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
-    in?: $Enums.ACCOUNT__ROLE_ALIAS[] | ListEnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ACCOUNT__ROLE_ALIAS[] | ListEnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
-    not?: NestedEnumACCOUNT__ROLE_ALIASWithAggregatesFilter<$PrismaModel> | $Enums.ACCOUNT__ROLE_ALIAS
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumACCOUNT__ROLE_ALIASFilter<$PrismaModel>
-    _max?: NestedEnumACCOUNT__ROLE_ALIASFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -20952,6 +22326,64 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedEnumOTP_CODE__TYPE_ALIASWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OTP_CODE__TYPE_ALIAS | EnumOTP_CODE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.OTP_CODE__TYPE_ALIAS[] | ListEnumOTP_CODE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OTP_CODE__TYPE_ALIAS[] | ListEnumOTP_CODE__TYPE_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumOTP_CODE__TYPE_ALIASWithAggregatesFilter<$PrismaModel> | $Enums.OTP_CODE__TYPE_ALIAS
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOTP_CODE__TYPE_ALIASFilter<$PrismaModel>
+    _max?: NestedEnumOTP_CODE__TYPE_ALIASFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumACCOUNT__ROLE_ALIASFilter<$PrismaModel = never> = {
+    equals?: $Enums.ACCOUNT__ROLE_ALIAS | EnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.ACCOUNT__ROLE_ALIAS[] | ListEnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ACCOUNT__ROLE_ALIAS[] | ListEnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumACCOUNT__ROLE_ALIASFilter<$PrismaModel> | $Enums.ACCOUNT__ROLE_ALIAS
+  }
+
+  export type NestedEnumACCOUNT__ROLE_ALIASWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ACCOUNT__ROLE_ALIAS | EnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
+    in?: $Enums.ACCOUNT__ROLE_ALIAS[] | ListEnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ACCOUNT__ROLE_ALIAS[] | ListEnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
+    not?: NestedEnumACCOUNT__ROLE_ALIASWithAggregatesFilter<$PrismaModel> | $Enums.ACCOUNT__ROLE_ALIAS
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumACCOUNT__ROLE_ALIASFilter<$PrismaModel>
+    _max?: NestedEnumACCOUNT__ROLE_ALIASFilter<$PrismaModel>
   }
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
@@ -21213,6 +22645,66 @@ export namespace Prisma {
     _max?: NestedEnumPAYOUT__ERROR_TYPE_ALIASNullableFilter<$PrismaModel>
   }
 
+  export type AccountCreateWithoutOtpCodesInput = {
+    id?: string
+    email: string
+    password: string
+    role: $Enums.ACCOUNT__ROLE_ALIAS
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutAccountInput
+    AccountToken?: AccountTokenCreateNestedManyWithoutAccountInput
+  }
+
+  export type AccountUncheckedCreateWithoutOtpCodesInput = {
+    id?: string
+    email: string
+    password: string
+    role: $Enums.ACCOUNT__ROLE_ALIAS
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user?: UserUncheckedCreateNestedOneWithoutAccountInput
+    AccountToken?: AccountTokenUncheckedCreateNestedManyWithoutAccountInput
+  }
+
+  export type AccountCreateOrConnectWithoutOtpCodesInput = {
+    where: AccountWhereUniqueInput
+    create: XOR<AccountCreateWithoutOtpCodesInput, AccountUncheckedCreateWithoutOtpCodesInput>
+  }
+
+  export type AccountUpsertWithoutOtpCodesInput = {
+    update: XOR<AccountUpdateWithoutOtpCodesInput, AccountUncheckedUpdateWithoutOtpCodesInput>
+    create: XOR<AccountCreateWithoutOtpCodesInput, AccountUncheckedCreateWithoutOtpCodesInput>
+    where?: AccountWhereInput
+  }
+
+  export type AccountUpdateToOneWithWhereWithoutOtpCodesInput = {
+    where?: AccountWhereInput
+    data: XOR<AccountUpdateWithoutOtpCodesInput, AccountUncheckedUpdateWithoutOtpCodesInput>
+  }
+
+  export type AccountUpdateWithoutOtpCodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutAccountNestedInput
+    AccountToken?: AccountTokenUpdateManyWithoutAccountNestedInput
+  }
+
+  export type AccountUncheckedUpdateWithoutOtpCodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUncheckedUpdateOneWithoutAccountNestedInput
+    AccountToken?: AccountTokenUncheckedUpdateManyWithoutAccountNestedInput
+  }
+
   export type UserCreateWithoutAccountInput = {
     firstName: string
     lastName: string
@@ -21275,6 +22767,33 @@ export namespace Prisma {
 
   export type AccountTokenCreateManyAccountInputEnvelope = {
     data: AccountTokenCreateManyAccountInput | AccountTokenCreateManyAccountInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type OtpCodeCreateWithoutAccountInput = {
+    code: string
+    type: $Enums.OTP_CODE__TYPE_ALIAS
+    expiredAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OtpCodeUncheckedCreateWithoutAccountInput = {
+    id?: number
+    code: string
+    type: $Enums.OTP_CODE__TYPE_ALIAS
+    expiredAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OtpCodeCreateOrConnectWithoutAccountInput = {
+    where: OtpCodeWhereUniqueInput
+    create: XOR<OtpCodeCreateWithoutAccountInput, OtpCodeUncheckedCreateWithoutAccountInput>
+  }
+
+  export type OtpCodeCreateManyAccountInputEnvelope = {
+    data: OtpCodeCreateManyAccountInput | OtpCodeCreateManyAccountInput[]
     skipDuplicates?: boolean
   }
 
@@ -21353,6 +22872,35 @@ export namespace Prisma {
     accountId?: StringFilter<"AccountToken"> | string
   }
 
+  export type OtpCodeUpsertWithWhereUniqueWithoutAccountInput = {
+    where: OtpCodeWhereUniqueInput
+    update: XOR<OtpCodeUpdateWithoutAccountInput, OtpCodeUncheckedUpdateWithoutAccountInput>
+    create: XOR<OtpCodeCreateWithoutAccountInput, OtpCodeUncheckedCreateWithoutAccountInput>
+  }
+
+  export type OtpCodeUpdateWithWhereUniqueWithoutAccountInput = {
+    where: OtpCodeWhereUniqueInput
+    data: XOR<OtpCodeUpdateWithoutAccountInput, OtpCodeUncheckedUpdateWithoutAccountInput>
+  }
+
+  export type OtpCodeUpdateManyWithWhereWithoutAccountInput = {
+    where: OtpCodeScalarWhereInput
+    data: XOR<OtpCodeUpdateManyMutationInput, OtpCodeUncheckedUpdateManyWithoutAccountInput>
+  }
+
+  export type OtpCodeScalarWhereInput = {
+    AND?: OtpCodeScalarWhereInput | OtpCodeScalarWhereInput[]
+    OR?: OtpCodeScalarWhereInput[]
+    NOT?: OtpCodeScalarWhereInput | OtpCodeScalarWhereInput[]
+    id?: IntFilter<"OtpCode"> | number
+    code?: StringFilter<"OtpCode"> | string
+    type?: EnumOTP_CODE__TYPE_ALIASFilter<"OtpCode"> | $Enums.OTP_CODE__TYPE_ALIAS
+    expiredAt?: DateTimeFilter<"OtpCode"> | Date | string
+    createdAt?: DateTimeFilter<"OtpCode"> | Date | string
+    updatedAt?: DateTimeFilter<"OtpCode"> | Date | string
+    accountId?: StringFilter<"OtpCode"> | string
+  }
+
   export type AccountCreateWithoutAccountTokenInput = {
     id?: string
     email: string
@@ -21361,6 +22909,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user?: UserCreateNestedOneWithoutAccountInput
+    otpCodes?: OtpCodeCreateNestedManyWithoutAccountInput
   }
 
   export type AccountUncheckedCreateWithoutAccountTokenInput = {
@@ -21371,6 +22920,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user?: UserUncheckedCreateNestedOneWithoutAccountInput
+    otpCodes?: OtpCodeUncheckedCreateNestedManyWithoutAccountInput
   }
 
   export type AccountCreateOrConnectWithoutAccountTokenInput = {
@@ -21397,6 +22947,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneWithoutAccountNestedInput
+    otpCodes?: OtpCodeUpdateManyWithoutAccountNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutAccountTokenInput = {
@@ -21407,6 +22958,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUncheckedUpdateOneWithoutAccountNestedInput
+    otpCodes?: OtpCodeUncheckedUpdateManyWithoutAccountNestedInput
   }
 
   export type VehicleCreateWithoutOwnerInput = {
@@ -21629,6 +23181,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     AccountToken?: AccountTokenCreateNestedManyWithoutAccountInput
+    otpCodes?: OtpCodeCreateNestedManyWithoutAccountInput
   }
 
   export type AccountUncheckedCreateWithoutUserInput = {
@@ -21639,6 +23192,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     AccountToken?: AccountTokenUncheckedCreateNestedManyWithoutAccountInput
+    otpCodes?: OtpCodeUncheckedCreateNestedManyWithoutAccountInput
   }
 
   export type AccountCreateOrConnectWithoutUserInput = {
@@ -21856,6 +23410,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     AccountToken?: AccountTokenUpdateManyWithoutAccountNestedInput
+    otpCodes?: OtpCodeUpdateManyWithoutAccountNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutUserInput = {
@@ -21866,6 +23421,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     AccountToken?: AccountTokenUncheckedUpdateManyWithoutAccountNestedInput
+    otpCodes?: OtpCodeUncheckedUpdateManyWithoutAccountNestedInput
   }
 
   export type UserCreateWithoutUserNotificationsInput = {
@@ -23800,6 +25356,15 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type OtpCodeCreateManyAccountInput = {
+    id?: number
+    code: string
+    type: $Enums.OTP_CODE__TYPE_ALIAS
+    expiredAt: Date | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type AccountTokenUpdateWithoutAccountInput = {
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23816,6 +25381,32 @@ export namespace Prisma {
   export type AccountTokenUncheckedUpdateManyWithoutAccountInput = {
     id?: IntFieldUpdateOperationsInput | number
     token?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OtpCodeUpdateWithoutAccountInput = {
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumOTP_CODE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.OTP_CODE__TYPE_ALIAS
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OtpCodeUncheckedUpdateWithoutAccountInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumOTP_CODE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.OTP_CODE__TYPE_ALIAS
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OtpCodeUncheckedUpdateManyWithoutAccountInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    code?: StringFieldUpdateOperationsInput | string
+    type?: EnumOTP_CODE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.OTP_CODE__TYPE_ALIAS
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -24579,6 +26170,10 @@ export namespace Prisma {
      * @deprecated Use PayoutRecordCountOutputTypeDefaultArgs instead
      */
     export type PayoutRecordCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PayoutRecordCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use OtpCodeDefaultArgs instead
+     */
+    export type OtpCodeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = OtpCodeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use AccountDefaultArgs instead
      */
