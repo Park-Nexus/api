@@ -28,3 +28,27 @@ export const sendEmailNotification = async () => {
     console.error("Error sending email:", error);
   }
 };
+
+type TSendSignInOtpEmailPayload = {
+  email: string;
+  otp: string;
+};
+export const sendSignInOtpEmail = async ({ email, otp }: TSendSignInOtpEmailPayload) => {
+  const notification = new OneSignal.Notification();
+
+  notification.app_id = oneSignalConfig.appId;
+  notification.template_id = SIGN_IN_TEMPLATE_ID;
+  notification.include_email_tokens = [email];
+  notification.custom_data = {
+    otp,
+    user_email: email,
+  };
+
+  try {
+    const response = await client.createNotification(notification);
+    console.log("Email sent successfully:", response);
+  } catch (error) {
+    console.error("Error sending email:", error);
+    throw new Error("Error sending email");
+  }
+};
