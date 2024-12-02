@@ -83,6 +83,14 @@ export const loginRouter = procedure.input(loginSchema).mutation(async ({ input 
 
   // Send OTP
   const otp = generateOtp();
+  await prisma.otpCode.create({
+    data: {
+      code: otp,
+      type: "LOGIN",
+      accountId: account.id,
+      expiredAt: new Date(Date.now() + 5 * 60 * 1000),
+    },
+  });
   await sendSignInOtpEmail({ email, otp });
 
   return;
@@ -96,7 +104,7 @@ export const verifyLoginRouter = procedure.input(verifyLoginSchema).mutation(asy
 
   const otp = await prisma.otpCode.findFirst({
     where: {
-      code: code || "456123",
+      code: code,
       type: "LOGIN",
       expiredAt: {
         gte: new Date(),
