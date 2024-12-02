@@ -89,10 +89,10 @@ export const loginRouter = procedure.input(loginSchema).mutation(async ({ input 
 });
 
 const verifyLoginSchema = z.object({
-  otp: z.string().length(6, "OTP must be 6 characters"),
+  code: z.string().length(6, "OTP must be 6 characters"),
 });
 export const verifyLoginRouter = procedure.input(verifyLoginSchema).mutation(async ({ input }) => {
-  const { otp: code } = input;
+  const { code } = input;
 
   const otp = await prisma.otpCode.findFirst({
     where: {
