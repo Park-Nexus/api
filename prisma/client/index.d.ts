@@ -3445,6 +3445,7 @@ export namespace Prisma {
   export type AccountMinAggregateOutputType = {
     id: string | null
     email: string | null
+    isVerified: boolean | null
     password: string | null
     role: $Enums.ACCOUNT__ROLE_ALIAS | null
     createdAt: Date | null
@@ -3454,6 +3455,7 @@ export namespace Prisma {
   export type AccountMaxAggregateOutputType = {
     id: string | null
     email: string | null
+    isVerified: boolean | null
     password: string | null
     role: $Enums.ACCOUNT__ROLE_ALIAS | null
     createdAt: Date | null
@@ -3463,6 +3465,7 @@ export namespace Prisma {
   export type AccountCountAggregateOutputType = {
     id: number
     email: number
+    isVerified: number
     password: number
     role: number
     createdAt: number
@@ -3474,6 +3477,7 @@ export namespace Prisma {
   export type AccountMinAggregateInputType = {
     id?: true
     email?: true
+    isVerified?: true
     password?: true
     role?: true
     createdAt?: true
@@ -3483,6 +3487,7 @@ export namespace Prisma {
   export type AccountMaxAggregateInputType = {
     id?: true
     email?: true
+    isVerified?: true
     password?: true
     role?: true
     createdAt?: true
@@ -3492,6 +3497,7 @@ export namespace Prisma {
   export type AccountCountAggregateInputType = {
     id?: true
     email?: true
+    isVerified?: true
     password?: true
     role?: true
     createdAt?: true
@@ -3574,6 +3580,7 @@ export namespace Prisma {
   export type AccountGroupByOutputType = {
     id: string
     email: string
+    isVerified: boolean
     password: string
     role: $Enums.ACCOUNT__ROLE_ALIAS
     createdAt: Date
@@ -3600,6 +3607,7 @@ export namespace Prisma {
   export type AccountSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
+    isVerified?: boolean
     password?: boolean
     role?: boolean
     createdAt?: boolean
@@ -3613,6 +3621,7 @@ export namespace Prisma {
   export type AccountSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
+    isVerified?: boolean
     password?: boolean
     role?: boolean
     createdAt?: boolean
@@ -3622,6 +3631,7 @@ export namespace Prisma {
   export type AccountSelectScalar = {
     id?: boolean
     email?: boolean
+    isVerified?: boolean
     password?: boolean
     role?: boolean
     createdAt?: boolean
@@ -3646,6 +3656,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       email: string
+      isVerified: boolean
       password: string
       role: $Enums.ACCOUNT__ROLE_ALIAS
       createdAt: Date
@@ -4048,6 +4059,7 @@ export namespace Prisma {
   interface AccountFieldRefs {
     readonly id: FieldRef<"Account", 'String'>
     readonly email: FieldRef<"Account", 'String'>
+    readonly isVerified: FieldRef<"Account", 'Boolean'>
     readonly password: FieldRef<"Account", 'String'>
     readonly role: FieldRef<"Account", 'ACCOUNT__ROLE_ALIAS'>
     readonly createdAt: FieldRef<"Account", 'DateTime'>
@@ -17171,6 +17183,7 @@ export namespace Prisma {
   export const AccountScalarFieldEnum: {
     id: 'id',
     email: 'email',
+    isVerified: 'isVerified',
     password: 'password',
     role: 'role',
     createdAt: 'createdAt',
@@ -17445,6 +17458,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'ACCOUNT__ROLE_ALIAS'
    */
   export type EnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ACCOUNT__ROLE_ALIAS'>
@@ -17511,13 +17531,6 @@ export namespace Prisma {
    * Reference to a field of type 'PARKING_LOT__STATUS_ALIAS[]'
    */
   export type ListEnumPARKING_LOT__STATUS_ALIASFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PARKING_LOT__STATUS_ALIAS[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -17667,6 +17680,7 @@ export namespace Prisma {
     NOT?: AccountWhereInput | AccountWhereInput[]
     id?: StringFilter<"Account"> | string
     email?: StringFilter<"Account"> | string
+    isVerified?: BoolFilter<"Account"> | boolean
     password?: StringFilter<"Account"> | string
     role?: EnumACCOUNT__ROLE_ALIASFilter<"Account"> | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFilter<"Account"> | Date | string
@@ -17679,6 +17693,7 @@ export namespace Prisma {
   export type AccountOrderByWithRelationInput = {
     id?: SortOrder
     email?: SortOrder
+    isVerified?: SortOrder
     password?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
@@ -17694,6 +17709,7 @@ export namespace Prisma {
     AND?: AccountWhereInput | AccountWhereInput[]
     OR?: AccountWhereInput[]
     NOT?: AccountWhereInput | AccountWhereInput[]
+    isVerified?: BoolFilter<"Account"> | boolean
     password?: StringFilter<"Account"> | string
     role?: EnumACCOUNT__ROLE_ALIASFilter<"Account"> | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFilter<"Account"> | Date | string
@@ -17706,6 +17722,7 @@ export namespace Prisma {
   export type AccountOrderByWithAggregationInput = {
     id?: SortOrder
     email?: SortOrder
+    isVerified?: SortOrder
     password?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
@@ -17721,6 +17738,7 @@ export namespace Prisma {
     NOT?: AccountScalarWhereWithAggregatesInput | AccountScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Account"> | string
     email?: StringWithAggregatesFilter<"Account"> | string
+    isVerified?: BoolWithAggregatesFilter<"Account"> | boolean
     password?: StringWithAggregatesFilter<"Account"> | string
     role?: EnumACCOUNT__ROLE_ALIASWithAggregatesFilter<"Account"> | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeWithAggregatesFilter<"Account"> | Date | string
@@ -18782,6 +18800,7 @@ export namespace Prisma {
   export type AccountCreateInput = {
     id?: string
     email: string
+    isVerified?: boolean
     password: string
     role: $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: Date | string
@@ -18794,6 +18813,7 @@ export namespace Prisma {
   export type AccountUncheckedCreateInput = {
     id?: string
     email: string
+    isVerified?: boolean
     password: string
     role: $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: Date | string
@@ -18806,6 +18826,7 @@ export namespace Prisma {
   export type AccountUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18818,6 +18839,7 @@ export namespace Prisma {
   export type AccountUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18830,6 +18852,7 @@ export namespace Prisma {
   export type AccountCreateManyInput = {
     id?: string
     email: string
+    isVerified?: boolean
     password: string
     role: $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: Date | string
@@ -18839,6 +18862,7 @@ export namespace Prisma {
   export type AccountUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18848,6 +18872,7 @@ export namespace Prisma {
   export type AccountUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20018,6 +20043,11 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type EnumACCOUNT__ROLE_ALIASFilter<$PrismaModel = never> = {
     equals?: $Enums.ACCOUNT__ROLE_ALIAS | EnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
     in?: $Enums.ACCOUNT__ROLE_ALIAS[] | ListEnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
@@ -20053,6 +20083,7 @@ export namespace Prisma {
   export type AccountCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
+    isVerified?: SortOrder
     password?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
@@ -20062,6 +20093,7 @@ export namespace Prisma {
   export type AccountMaxOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
+    isVerified?: SortOrder
     password?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
@@ -20071,10 +20103,19 @@ export namespace Prisma {
   export type AccountMinOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
+    isVerified?: SortOrder
     password?: SortOrder
     role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type EnumACCOUNT__ROLE_ALIASWithAggregatesFilter<$PrismaModel = never> = {
@@ -20443,11 +20484,6 @@ export namespace Prisma {
     not?: NestedEnumPARKING_LOT__STATUS_ALIASFilter<$PrismaModel> | $Enums.PARKING_LOT__STATUS_ALIAS
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type ParkingSpotListRelationFilter = {
     every?: ParkingSpotWhereInput
     some?: ParkingSpotWhereInput
@@ -20583,14 +20619,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumPARKING_LOT__STATUS_ALIASFilter<$PrismaModel>
     _max?: NestedEnumPARKING_LOT__STATUS_ALIASFilter<$PrismaModel>
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type ParkingLotRelationFilter = {
@@ -21146,6 +21174,10 @@ export namespace Prisma {
     connect?: OtpCodeWhereUniqueInput | OtpCodeWhereUniqueInput[]
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput = {
     set?: $Enums.ACCOUNT__ROLE_ALIAS
   }
@@ -21687,10 +21719,6 @@ export namespace Prisma {
 
   export type EnumPARKING_LOT__STATUS_ALIASFieldUpdateOperationsInput = {
     set?: $Enums.PARKING_LOT__STATUS_ALIAS
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type ParkingSpotUpdateManyWithoutParkingLotNestedInput = {
@@ -22369,11 +22397,24 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedEnumACCOUNT__ROLE_ALIASFilter<$PrismaModel = never> = {
     equals?: $Enums.ACCOUNT__ROLE_ALIAS | EnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
     in?: $Enums.ACCOUNT__ROLE_ALIAS[] | ListEnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
     notIn?: $Enums.ACCOUNT__ROLE_ALIAS[] | ListEnumACCOUNT__ROLE_ALIASFieldRefInput<$PrismaModel>
     not?: NestedEnumACCOUNT__ROLE_ALIASFilter<$PrismaModel> | $Enums.ACCOUNT__ROLE_ALIAS
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedEnumACCOUNT__ROLE_ALIASWithAggregatesFilter<$PrismaModel = never> = {
@@ -22494,11 +22535,6 @@ export namespace Prisma {
     not?: NestedEnumPARKING_LOT__STATUS_ALIASFilter<$PrismaModel> | $Enums.PARKING_LOT__STATUS_ALIAS
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -22523,14 +22559,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumPARKING_LOT__STATUS_ALIASFilter<$PrismaModel>
     _max?: NestedEnumPARKING_LOT__STATUS_ALIASFilter<$PrismaModel>
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedEnumPARKING_LOT_SERVICE__TYPE_ALIASFilter<$PrismaModel = never> = {
@@ -22648,6 +22676,7 @@ export namespace Prisma {
   export type AccountCreateWithoutOtpCodesInput = {
     id?: string
     email: string
+    isVerified?: boolean
     password: string
     role: $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: Date | string
@@ -22659,6 +22688,7 @@ export namespace Prisma {
   export type AccountUncheckedCreateWithoutOtpCodesInput = {
     id?: string
     email: string
+    isVerified?: boolean
     password: string
     role: $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: Date | string
@@ -22686,6 +22716,7 @@ export namespace Prisma {
   export type AccountUpdateWithoutOtpCodesInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22697,6 +22728,7 @@ export namespace Prisma {
   export type AccountUncheckedUpdateWithoutOtpCodesInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22904,6 +22936,7 @@ export namespace Prisma {
   export type AccountCreateWithoutAccountTokenInput = {
     id?: string
     email: string
+    isVerified?: boolean
     password: string
     role: $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: Date | string
@@ -22915,6 +22948,7 @@ export namespace Prisma {
   export type AccountUncheckedCreateWithoutAccountTokenInput = {
     id?: string
     email: string
+    isVerified?: boolean
     password: string
     role: $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: Date | string
@@ -22942,6 +22976,7 @@ export namespace Prisma {
   export type AccountUpdateWithoutAccountTokenInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22953,6 +22988,7 @@ export namespace Prisma {
   export type AccountUncheckedUpdateWithoutAccountTokenInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23176,6 +23212,7 @@ export namespace Prisma {
   export type AccountCreateWithoutUserInput = {
     id?: string
     email: string
+    isVerified?: boolean
     password: string
     role: $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: Date | string
@@ -23187,6 +23224,7 @@ export namespace Prisma {
   export type AccountUncheckedCreateWithoutUserInput = {
     id?: string
     email: string
+    isVerified?: boolean
     password: string
     role: $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: Date | string
@@ -23405,6 +23443,7 @@ export namespace Prisma {
   export type AccountUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23416,6 +23455,7 @@ export namespace Prisma {
   export type AccountUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    isVerified?: BoolFieldUpdateOperationsInput | boolean
     password?: StringFieldUpdateOperationsInput | string
     role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

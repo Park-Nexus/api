@@ -4,16 +4,18 @@ import * as z from "zod";
 import { hashPassword } from "../utils/password.utils";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { TRPCError } from "@trpc/server";
+import { generateOtp } from "../utils/opt.utils";
+import { sendRegisterOtpEmail } from "../../utils/oneSignal";
 
-const inputSchema = z.object({
+// Register a new user --------------------------------------------------------------
+const registerSchema = z.object({
   email: z
     .string()
     .regex(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, "Invalid email format"),
   password: z.string().min(8, "Password must be at least 8 characters"),
   passwordRetype: z.string(),
 });
-
-export const registerRouter = procedure.input(inputSchema).mutation(async ({ input }) => {
+export const registerRouter = procedure.input(registerSchema).mutation(async ({ input }) => {
   const { email, password, passwordRetype } = input;
 
   if (password !== passwordRetype) {
@@ -49,5 +51,59 @@ export const registerRouter = procedure.input(inputSchema).mutation(async ({ inp
     throw error;
   }
 
-  return newAccount;
+  // Send OTP
+  const otp = generateOtp();
+  await prisma.otpCode.create({
+    data: {
+      code: otp,
+      type: "REGISTER",
+      accountId: newAccount.id,
+      expiredAt: new Date(Date.now() + 5 * 60 * 1000),
+    },
+  });
+  await sendRegisterOtpEmail({ email, otp });
+
+  return;
 });
+
+// Verify register --------------------------------------------------------------
+const verifyRegisterSchema = z.object({
+  code: z.string(),
+});
+export const verifyRegisterRouter = procedure
+  .input(verifyRegisterSchema)
+  .mutation(async ({ input }) => {
+    const { code } = input;
+
+    const otp = await prisma.otpCode.findFirst({
+      where: {
+        code,
+        type: "REGISTER",
+        expiredAt: {
+          gte: new Date(),
+        },
+      },
+      include: { account: true },
+    });
+    if (!otp) {
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "OTP code not found",
+      });
+    }
+
+    const { account } = otp;
+    if (account.role === "ADMIN") {
+      throw new TRPCError({ code: "UNAUTHORIZED", message: "Admin accounts are not allowed" });
+    }
+    if (account.isVerified === true) {
+      throw new TRPCError({ code: "UNAUTHORIZED", message: "User already verified" });
+    }
+
+    await prisma.account.update({
+      where: { id: account.id },
+      data: { isVerified: true },
+    });
+
+    return;
+  });

@@ -7,6 +7,7 @@ import { comparePassword } from "../utils/password.utils";
 import { sendSignInOtpEmail } from "../../utils/oneSignal";
 import { generateOtp } from "../utils/opt.utils";
 
+// Admin Login --------------------------------------------------------------
 const adminLoginSchema = z.object({
   email: z
     .string()
@@ -53,6 +54,7 @@ export const adminLoginRouter = procedure.input(adminLoginSchema).mutation(async
   return { accessToken, refreshToken };
 });
 
+// User Login --------------------------------------------------------------
 const loginSchema = z.object({
   email: z
     .string()
@@ -81,6 +83,18 @@ export const loginRouter = procedure.input(loginSchema).mutation(async ({ input 
     });
   }
 
+  // Check if there is an existing OTP
+  const existingOtp = await prisma.otpCode.findFirst({
+    where: {
+      accountId: account.id,
+      type: "LOGIN",
+      expiredAt: {
+        gte: new Date(),
+      },
+    },
+  });
+  if (existingOtp) return;
+
   // Send OTP
   const otp = generateOtp();
   await prisma.otpCode.create({
@@ -96,6 +110,7 @@ export const loginRouter = procedure.input(loginSchema).mutation(async ({ input 
   return;
 });
 
+// Verify Login --------------------------------------------------------------
 const verifyLoginSchema = z.object({
   code: z.string().length(6, "OTP must be 6 characters"),
 });
@@ -138,6 +153,9 @@ export const verifyLoginRouter = procedure.input(verifyLoginSchema).mutation(asy
       token: refreshToken,
       accountId: account.id,
     },
+  });
+  await prisma.otpCode.delete({
+    where: { id: otp.id },
   });
 
   return { accessToken, refreshToken };
