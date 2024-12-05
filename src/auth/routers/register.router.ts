@@ -5,6 +5,9 @@ import { hashPassword } from "../utils/password.utils";
 import { TRPCError } from "@trpc/server";
 import { generateOtp } from "../utils/opt.utils";
 import { sendRegisterOtpEmail } from "../../utils/oneSignal";
+import cron from "node-cron";
+import { DateUtils } from "../../utils/date";
+import dayjs from "dayjs";
 
 const OTP_EXPIRES_IN_MINUTES = 5;
 
@@ -54,7 +57,7 @@ export const registerRouter = procedure.input(registerSchema).mutation(async ({ 
 
   // Send OTP
   const otp = generateOtp();
-  await prisma.otpCode.create({
+  const newOtp = await prisma.otpCode.create({
     data: {
       code: otp,
       type: "REGISTER",
@@ -64,6 +67,17 @@ export const registerRouter = procedure.input(registerSchema).mutation(async ({ 
   });
   await sendRegisterOtpEmail({ email, otp });
   // cronjob remove otp code after 5 minutes
+  const deleteOtpJob = cron.schedule(
+    DateUtils.toCronDate(dayjs().add(OTP_EXPIRES_IN_MINUTES, "minutes").toDate()),
+    async () => {
+      await prisma.otpCode.delete({
+        where: {
+          id: newOtp.id,
+        },
+      });
+      deleteOtpJob.stop();
+    },
+  );
 
   return;
 });

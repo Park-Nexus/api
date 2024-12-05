@@ -6,6 +6,9 @@ import { genAccessToken, genRefreshToken } from "../utils/jwt.utils";
 import { comparePassword } from "../utils/password.utils";
 import { sendSignInOtpEmail } from "../../utils/oneSignal";
 import { generateOtp } from "../utils/opt.utils";
+import cron from "node-cron";
+import { DateUtils } from "../../utils/date";
+import dayjs from "dayjs";
 
 const OTP_EXPIRES_IN_MINUTES = 5;
 
@@ -100,7 +103,7 @@ export const loginRouter = procedure.input(loginSchema).mutation(async ({ input 
 
   // Send OTP
   const otp = generateOtp();
-  await prisma.otpCode.create({
+  const newOtp = await prisma.otpCode.create({
     data: {
       code: otp,
       type: "LOGIN",
@@ -109,6 +112,19 @@ export const loginRouter = procedure.input(loginSchema).mutation(async ({ input 
     },
   });
   await sendSignInOtpEmail({ email, otp });
+
+  // Schedule OTP deletion
+  const deleteOtpJob = cron.schedule(
+    DateUtils.toCronDate(dayjs().add(OTP_EXPIRES_IN_MINUTES, "minutes").toDate()),
+    async () => {
+      await prisma.otpCode.delete({
+        where: {
+          id: newOtp.id,
+        },
+      });
+      deleteOtpJob.stop();
+    },
+  );
 
   return;
 });
