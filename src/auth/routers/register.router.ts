@@ -51,6 +51,17 @@ export const registerRouter = procedure.input(registerSchema).mutation(async ({ 
     throw error;
   }
 
+  const existingOtp = await prisma.otpCode.findFirst({
+    where: {
+      type: "REGISTER",
+      accountId: newAccount.id,
+      expiredAt: {
+        gte: new Date(),
+      },
+    },
+  });
+  if (existingOtp) return;
+
   // Send OTP
   const otp = generateOtp();
   await prisma.otpCode.create({
