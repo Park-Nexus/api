@@ -7,6 +7,8 @@ import { comparePassword } from "../utils/password.utils";
 import { sendSignInOtpEmail } from "../../utils/oneSignal";
 import { generateOtp } from "../utils/opt.utils";
 
+const OTP_EXPIRES_IN_MINUTES = 5;
+
 // Admin Login --------------------------------------------------------------
 const adminLoginSchema = z.object({
   email: z
@@ -93,6 +95,7 @@ export const loginRouter = procedure.input(loginSchema).mutation(async ({ input 
       },
     },
   });
+  console.log(existingOtp);
   if (existingOtp) return;
 
   // Send OTP
@@ -102,7 +105,7 @@ export const loginRouter = procedure.input(loginSchema).mutation(async ({ input 
       code: otp,
       type: "LOGIN",
       accountId: account.id,
-      expiredAt: new Date(Date.now() + 5 * 60 * 1000),
+      expiredAt: new Date(Date.now() + OTP_EXPIRES_IN_MINUTES * 60 * 1000),
     },
   });
   await sendSignInOtpEmail({ email, otp });
@@ -154,8 +157,8 @@ export const verifyLoginRouter = procedure.input(verifyLoginSchema).mutation(asy
       accountId: account.id,
     },
   });
-  await prisma.otpCode.delete({
-    where: { id: otp.id },
+  await prisma.otpCode.deleteMany({
+    where: { accountId: account.id, type: "LOGIN" },
   });
 
   return { accessToken, refreshToken };

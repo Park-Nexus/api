@@ -2,10 +2,11 @@ import { ACCOUNT__ROLE_ALIAS, prisma } from "../../db";
 import { procedure } from "../../trpc";
 import * as z from "zod";
 import { hashPassword } from "../utils/password.utils";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { TRPCError } from "@trpc/server";
 import { generateOtp } from "../utils/opt.utils";
 import { sendRegisterOtpEmail } from "../../utils/oneSignal";
+
+const OTP_EXPIRES_IN_MINUTES = 5;
 
 // Register a new user --------------------------------------------------------------
 const registerSchema = z.object({
@@ -26,7 +27,7 @@ export const registerRouter = procedure.input(registerSchema).mutation(async ({ 
   }
 
   const currentAccount = await prisma.account.findUnique({ where: { email } });
-  if (currentAccount) {
+  if (currentAccount?.isVerified === true) {
     throw new TRPCError({
       code: "CONFLICT",
       message: "User already exists, please login",
@@ -34,22 +35,11 @@ export const registerRouter = procedure.input(registerSchema).mutation(async ({ 
   }
 
   const hash = await hashPassword(password);
-
-  let newAccount;
-  try {
-    await prisma.account.create({
-      data: { email, password: hash, role: ACCOUNT__ROLE_ALIAS.USER },
-    });
-  } catch (error) {
-    if (error instanceof PrismaClientKnownRequestError) {
-      throw new TRPCError({
-        code: "CONFLICT",
-        message: "User already exists",
-      });
-    }
-
-    throw error;
-  }
+  const newAccount = await prisma.account.upsert({
+    update: { email, password: hash, role: ACCOUNT__ROLE_ALIAS.USER },
+    create: { email, password: hash, role: ACCOUNT__ROLE_ALIAS.USER },
+    where: { email },
+  });
 
   const existingOtp = await prisma.otpCode.findFirst({
     where: {
@@ -69,10 +59,11 @@ export const registerRouter = procedure.input(registerSchema).mutation(async ({ 
       code: otp,
       type: "REGISTER",
       accountId: newAccount.id,
-      expiredAt: new Date(Date.now() + 5 * 60 * 1000),
+      expiredAt: new Date(Date.now() + OTP_EXPIRES_IN_MINUTES * 60 * 1000),
     },
   });
   await sendRegisterOtpEmail({ email, otp });
+  // cronjob remove otp code after 5 minutes
 
   return;
 });
@@ -114,6 +105,12 @@ export const verifyRegisterRouter = procedure
     await prisma.account.update({
       where: { id: account.id },
       data: { isVerified: true },
+    });
+    await prisma.otpCode.deleteMany({
+      where: {
+        accountId: account.id,
+        type: "REGISTER",
+      },
     });
 
     return;
