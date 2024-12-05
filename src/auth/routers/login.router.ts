@@ -65,7 +65,7 @@ export const loginRouter = procedure.input(loginSchema).mutation(async ({ input 
   const { email, password } = input;
 
   const account = await prisma.account.findUnique({
-    where: { email: email.toLowerCase() },
+    where: { email: email.toLowerCase(), isVerified: true },
   });
 
   if (!account) throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
