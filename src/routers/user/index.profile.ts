@@ -75,12 +75,12 @@ export const getSingle = procedure
     if (userId) {
       user = await prisma.user.findUnique({
         where: { id: userId },
-        include: { account: { select: { email: true } } },
+        include: { account: { select: { id: true, email: true } } },
       });
     } else {
       user = await prisma.user.findUnique({
         where: { accountId: id },
-        include: { account: { select: { email: true } } },
+        include: { account: { select: { id: true, email: true } } },
       });
     }
 
