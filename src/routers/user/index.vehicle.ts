@@ -85,19 +85,22 @@ export const update = procedure
 // Get many vehicles -----------------------------------------------------------------------
 const getManySchema = z.object({
   userId: z.number().optional(),
+
+  availabilityStart: z.string().optional(),
+  availabilityEnd: z.string().optional(),
 });
 export const getMany = procedure
   .use(authMiddleware(["USER", "ADMIN"]))
   .input(getManySchema)
   .query(async ({ input, ctx }) => {
-    const { userId } = input;
+    const { userId, availabilityStart, availabilityEnd } = input;
     const {
       account: { role },
     } = ctx;
 
     if (role !== "ADMIN" && userId) throw new TRPCError({ code: "FORBIDDEN" });
 
-    let vehicles: Vehicle[];
+    let vehicles: (Vehicle & { isReserved?: boolean })[];
 
     if (userId) {
       vehicles = await prisma.vehicle.findMany({ where: { ownerId: userId } });
@@ -117,6 +120,50 @@ export const getMany = procedure
         };
       }),
     );
+
+    if (availabilityStart && availabilityEnd) {
+      vehicles = await Promise.all(
+        vehicles.map(async (vehicle) => {
+          const reservation = await prisma.reservation.findFirst({
+            where: {
+              vehicleId: vehicle.id,
+              OR: [
+                {
+                  // start before, end after
+                  AND: [
+                    { startTime: { lte: new Date(availabilityStart) } },
+                    { endTime: { gte: new Date(availabilityStart) } },
+                  ],
+                },
+                {
+                  // start in between
+                  AND: [
+                    { startTime: { lte: new Date(availabilityEnd) } },
+                    { startTime: { gte: new Date(availabilityStart) } },
+                  ],
+                },
+                {
+                  // end in between
+                  AND: [
+                    { endTime: { gte: new Date(availabilityStart) } },
+                    { endTime: { lte: new Date(availabilityEnd) } },
+                  ],
+                },
+                {
+                  // start after, end before
+                  AND: [
+                    { startTime: { gte: new Date(input.availabilityStart) } },
+                    { endTime: { lte: new Date(input.availabilityEnd) } },
+                  ],
+                },
+              ],
+            },
+          });
+
+          return { ...vehicle, isReserved: !!reservation };
+        }),
+      );
+    }
 
     return vehicles;
   });
