@@ -127,6 +127,7 @@ export const getMany = procedure
           const reservation = await prisma.reservation.findFirst({
             where: {
               vehicleId: vehicle.id,
+              status: { in: ["PENDING", "ON_GOING"] },
               OR: [
                 {
                   // start before, end after
