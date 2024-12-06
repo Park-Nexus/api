@@ -28,8 +28,7 @@ export const sendSignInOtpEmail = async ({ email, otp }: TSendSignInOtpEmailPayl
   };
 
   try {
-    const response = await client.createNotification(notification);
-    console.log("Email sent successfully:", response);
+    await client.createNotification(notification);
   } catch (error) {
     console.error("Error sending email:", error);
     throw new Error("Error sending email");
@@ -53,8 +52,7 @@ export const sendRegisterOtpEmail = async ({ email, otp }: TSendRegisterOtpEmail
   };
 
   try {
-    const response = await client.createNotification(notification);
-    console.log("Email sent successfully:", response);
+    await client.createNotification(notification);
   } catch (error) {
     console.error("Error sending email:", error);
     throw new Error("Error sending email");
@@ -81,8 +79,7 @@ export const sendExternalIdNotification = async ({
   notification.contents = { en: content };
 
   try {
-    const noti = await client.createNotification(notification);
-    console.log("Notification sent successfully:", noti);
+    await client.createNotification(notification);
   } catch (error) {
     console.error("Error sending notification:", error);
     throw new Error("Error sending notification");
