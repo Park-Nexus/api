@@ -177,5 +177,5 @@ export const verifyLoginRouter = procedure.input(verifyLoginSchema).mutation(asy
     where: { accountId: account.id, type: "LOGIN" },
   });
 
-  return { accessToken, refreshToken };
+  return { accessToken, refreshToken, accountId: account.id };
 });
