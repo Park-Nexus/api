@@ -4,11 +4,11 @@ import { procedure } from "../../trpc";
 import * as z from "zod";
 import { genAccessToken, genRefreshToken } from "../utils/jwt.utils";
 import { comparePassword } from "../utils/password.utils";
-import { sendSignInOtpEmail } from "../../utils/oneSignal";
 import { generateOtp } from "../utils/opt.utils";
 import cron from "node-cron";
 import { DateUtils } from "../../utils/date";
 import dayjs from "dayjs";
+import { OneSignalUtils } from "../../utils/oneSignal";
 
 const OTP_EXPIRES_IN_MINUTES = 5;
 
@@ -111,7 +111,7 @@ export const loginRouter = procedure.input(loginSchema).mutation(async ({ input 
       expiredAt: new Date(Date.now() + OTP_EXPIRES_IN_MINUTES * 60 * 1000),
     },
   });
-  await sendSignInOtpEmail({ email, otp });
+  await OneSignalUtils.sendSignInOtpEmail({ email, otp });
 
   // Schedule OTP deletion
   const deleteOtpJob = cron.schedule(

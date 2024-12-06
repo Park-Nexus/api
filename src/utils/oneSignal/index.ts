@@ -11,77 +11,79 @@ const configuration = OneSignal.createConfiguration({
 
 export const client = new OneSignal.DefaultApi(configuration);
 
-// Sign in OTP email -----------------------------------------------------------
-type TSendSignInOtpEmailPayload = {
-  email: string;
-  otp: string;
-};
-export const sendSignInOtpEmail = async ({ email, otp }: TSendSignInOtpEmailPayload) => {
-  const notification = new OneSignal.Notification();
+export namespace OneSignalUtils {
+  // Sign in OTP email -----------------------------------------------------------
+  type TSendSignInOtpEmailPayload = {
+    email: string;
+    otp: string;
+  };
+  export const sendSignInOtpEmail = async ({ email, otp }: TSendSignInOtpEmailPayload) => {
+    const notification = new OneSignal.Notification();
 
-  notification.app_id = oneSignalConfig.appId;
-  notification.template_id = SIGN_IN_TEMPLATE_ID;
-  notification.include_email_tokens = [email];
-  notification.custom_data = {
-    otp,
-    user_email: email,
+    notification.app_id = oneSignalConfig.appId;
+    notification.template_id = SIGN_IN_TEMPLATE_ID;
+    notification.include_email_tokens = [email];
+    notification.custom_data = {
+      otp,
+      user_email: email,
+    };
+
+    try {
+      await client.createNotification(notification);
+    } catch (error) {
+      console.error("Error sending email:", error);
+      throw new Error("Error sending email");
+    }
   };
 
-  try {
-    await client.createNotification(notification);
-  } catch (error) {
-    console.error("Error sending email:", error);
-    throw new Error("Error sending email");
-  }
-};
+  // Register OTP email -----------------------------------------------------------
+  type TSendRegisterOtpEmailPayload = {
+    email: string;
+    otp: string;
+  };
+  export const sendRegisterOtpEmail = async ({ email, otp }: TSendRegisterOtpEmailPayload) => {
+    const notification = new OneSignal.Notification();
 
-// Register OTP email -----------------------------------------------------------
-type TSendRegisterOtpEmailPayload = {
-  email: string;
-  otp: string;
-};
-export const sendRegisterOtpEmail = async ({ email, otp }: TSendRegisterOtpEmailPayload) => {
-  const notification = new OneSignal.Notification();
+    notification.app_id = oneSignalConfig.appId;
+    notification.template_id = REGISTER_TEMPLATE_ID;
+    notification.include_email_tokens = [email];
+    notification.custom_data = {
+      otp,
+      user_email: email,
+    };
 
-  notification.app_id = oneSignalConfig.appId;
-  notification.template_id = REGISTER_TEMPLATE_ID;
-  notification.include_email_tokens = [email];
-  notification.custom_data = {
-    otp,
-    user_email: email,
+    try {
+      await client.createNotification(notification);
+    } catch (error) {
+      console.error("Error sending email:", error);
+      throw new Error("Error sending email");
+    }
   };
 
-  try {
-    await client.createNotification(notification);
-  } catch (error) {
-    console.error("Error sending email:", error);
-    throw new Error("Error sending email");
-  }
-};
+  // External ID notification -----------------------------------------------------
+  type TSendExternalIdNotificationPayload = {
+    externalId: string;
+    content: string;
+    type: "CHECK-IN" | "CHECK-OUT" | "PAYMENT";
+  };
+  export const sendExternalIdNotification = async ({
+    externalId,
+    content,
+    type,
+  }: TSendExternalIdNotificationPayload) => {
+    const notification = new OneSignal.Notification();
 
-// External ID notification -----------------------------------------------------
-type TSendExternalIdNotificationPayload = {
-  externalId: string;
-  content: string;
-  type: "CHECK-IN" | "CHECK-OUT" | "PAYMENT";
-};
-export const sendExternalIdNotification = async ({
-  externalId,
-  content,
-  type,
-}: TSendExternalIdNotificationPayload) => {
-  const notification = new OneSignal.Notification();
+    notification.app_id = oneSignalConfig.appId;
+    notification.target_channel = "push";
+    notification.include_aliases = { external_id: [externalId] };
+    notification.name = type;
+    notification.contents = { en: content };
 
-  notification.app_id = oneSignalConfig.appId;
-  notification.included_segments = ["Active Subscriptions"];
-  notification["include_external_user_ids"] = [externalId];
-  notification.name = type;
-  notification.contents = { en: content };
-
-  try {
-    await client.createNotification(notification);
-  } catch (error) {
-    console.error("Error sending notification:", error);
-    throw new Error("Error sending notification");
-  }
-};
+    try {
+      await client.createNotification(notification);
+    } catch (error) {
+      console.error("Error sending notification:", error);
+      throw new Error("Error sending notification");
+    }
+  };
+}

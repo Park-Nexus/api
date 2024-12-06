@@ -5,7 +5,7 @@ import { prisma } from "../../db";
 import { TRPCError } from "@trpc/server";
 import { StripeUtils } from "../../utils/stripe";
 import { EventNameFn, EventEmitter } from "../../utils/sse";
-import { sendExternalIdNotification } from "../../utils/oneSignal";
+import { OneSignalUtils } from "../../utils/oneSignal";
 
 // Create a new Stripe intent ----------------------------------------------------------------
 const getIntentSchema = z.object({
@@ -102,7 +102,7 @@ export const verifyPayment = procedure
 
     EventEmitter.getInstance().emit(EventNameFn.getSingleTicket(ticketId));
 
-    void sendExternalIdNotification({
+    void OneSignalUtils.sendExternalIdNotification({
       externalId: accountId,
       content: `We have received ${paymentRecord.amountInUsd} USD for your reservation, thank you!`,
       type: "PAYMENT",

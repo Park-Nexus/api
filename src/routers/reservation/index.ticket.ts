@@ -17,6 +17,7 @@ import { StripeUtils } from "../../utils/stripe";
 import { EventNameFn, EventEmitter } from "../../utils/sse";
 import { on } from "events";
 import cron from "node-cron";
+import { OneSignalUtils } from "../../utils/oneSignal";
 
 // Create a new ticket ------------------------------------------------------------------------------
 const createSchema = z.object({
@@ -278,20 +279,48 @@ const cancelSchema = z.object({
 export const cancel = procedure
   .use(authMiddleware())
   .input(cancelSchema)
-  .mutation(async ({ input }) => {
+  .mutation(async ({ input, ctx }) => {
     const { id } = input;
-    const reservation = await prisma.reservation.findUnique({ where: { id } });
+    const { account } = ctx;
+
+    const reservation = await prisma.reservation.findUnique({
+      where: { id, user: { accountId: account.id } },
+    });
     if (!reservation) throw new TRPCError({ code: "NOT_FOUND", message: "Reservation not found" });
     if (reservation.status !== "PENDING") {
       throw new TRPCError({ code: "BAD_REQUEST", message: "Reservation is not pending" });
     }
 
+    // refund payment
+    const refund = async () => {
+      const paymentRecord = await prisma.paymentRecord.findUnique({
+        where: { reservationId: id, status: "PAID" },
+      });
+      if (paymentRecord) {
+        const intent = await StripeUtils.retrieveIntent({ intentId: paymentRecord.stripeIntentId });
+        try {
+          await StripeUtils.refundIntent({ intentId: intent.id });
+          await OneSignalUtils.sendExternalIdNotification({
+            externalId: account.id,
+            type: "PAYMENT",
+            content: `Your reservation has been cancelled, ${intent.amount / 100} USD refund has been issued`,
+          });
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+    refund();
+
+    // update cancel status
     await prisma.reservation.update({
       where: { id },
       data: {
         status: "CANCELLED",
       },
     });
+
+    // push update event to client
     EventEmitter.getInstance().emit(EventNameFn.getSingleTicket(id));
   });
 

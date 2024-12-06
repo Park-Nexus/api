@@ -8,9 +8,7 @@ export const getAuthState = procedure.use(authMiddleware()).query(async ({ ctx }
   } = ctx;
 
   const account = await prisma.account.findUnique({ where: { id } });
-  if (account) {
-    return { isAuthenticated: true };
-  }
+  if (account) return { isAuthenticated: true };
 
   return { isAuthenticated: false };
 });

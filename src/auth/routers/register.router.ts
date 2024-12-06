@@ -4,10 +4,10 @@ import * as z from "zod";
 import { hashPassword } from "../utils/password.utils";
 import { TRPCError } from "@trpc/server";
 import { generateOtp } from "../utils/opt.utils";
-import { sendRegisterOtpEmail } from "../../utils/oneSignal";
 import cron from "node-cron";
 import { DateUtils } from "../../utils/date";
 import dayjs from "dayjs";
+import { OneSignalUtils } from "../../utils/oneSignal";
 
 const OTP_EXPIRES_IN_MINUTES = 5;
 
@@ -65,7 +65,7 @@ export const registerRouter = procedure.input(registerSchema).mutation(async ({ 
       expiredAt: new Date(Date.now() + OTP_EXPIRES_IN_MINUTES * 60 * 1000),
     },
   });
-  await sendRegisterOtpEmail({ email, otp });
+  await OneSignalUtils.sendRegisterOtpEmail({ email, otp });
   // cronjob remove otp code after 5 minutes
   const deleteOtpJob = cron.schedule(
     DateUtils.toCronDate(dayjs().add(OTP_EXPIRES_IN_MINUTES, "minutes").toDate()),
