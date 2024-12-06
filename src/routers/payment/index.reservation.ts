@@ -5,6 +5,7 @@ import { prisma } from "../../db";
 import { TRPCError } from "@trpc/server";
 import { StripeUtils } from "../../utils/stripe";
 import { EventNameFn, EventEmitter } from "../../utils/sse";
+import { sendExternalIdNotification } from "../../utils/oneSignal";
 
 // Create a new Stripe intent ----------------------------------------------------------------
 const getIntentSchema = z.object({
@@ -87,8 +88,6 @@ export const verifyPayment = procedure
       throw new TRPCError({ code: "NOT_FOUND", message: "Payment record not found" });
     }
 
-    await new Promise((resolve) => setTimeout(resolve, 20000));
-
     const intent = await StripeUtils.retrieveIntent({ intentId });
     if (!intent) throw new TRPCError({ code: "NOT_FOUND", message: "Intent not found" });
 
@@ -102,4 +101,10 @@ export const verifyPayment = procedure
     });
 
     EventEmitter.getInstance().emit(EventNameFn.getSingleTicket(ticketId));
+
+    void sendExternalIdNotification({
+      externalId: accountId,
+      content: `We have received ${paymentRecord.amountInUsd} USD for your reservation, thank you!`,
+      type: "PAYMENT",
+    });
   });

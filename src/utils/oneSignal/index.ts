@@ -11,6 +11,7 @@ const configuration = OneSignal.createConfiguration({
 
 export const client = new OneSignal.DefaultApi(configuration);
 
+// Sign in OTP email -----------------------------------------------------------
 type TSendSignInOtpEmailPayload = {
   email: string;
   otp: string;
@@ -35,6 +36,7 @@ export const sendSignInOtpEmail = async ({ email, otp }: TSendSignInOtpEmailPayl
   }
 };
 
+// Register OTP email -----------------------------------------------------------
 type TSendRegisterOtpEmailPayload = {
   email: string;
   otp: string;
@@ -56,5 +58,33 @@ export const sendRegisterOtpEmail = async ({ email, otp }: TSendRegisterOtpEmail
   } catch (error) {
     console.error("Error sending email:", error);
     throw new Error("Error sending email");
+  }
+};
+
+// External ID notification -----------------------------------------------------
+type TSendExternalIdNotificationPayload = {
+  externalId: string;
+  content: string;
+  type: "CHECK-IN" | "CHECK-OUT" | "PAYMENT";
+};
+export const sendExternalIdNotification = async ({
+  externalId,
+  content,
+  type,
+}: TSendExternalIdNotificationPayload) => {
+  const notification = new OneSignal.Notification();
+
+  notification.app_id = oneSignalConfig.appId;
+  notification.included_segments = ["Active Subscriptions"];
+  notification["include_external_user_ids"] = [externalId];
+  notification.name = type;
+  notification.contents = { en: content };
+
+  try {
+    const noti = await client.createNotification(notification);
+    console.log("Notification sent successfully:", noti);
+  } catch (error) {
+    console.error("Error sending notification:", error);
+    throw new Error("Error sending notification");
   }
 };
