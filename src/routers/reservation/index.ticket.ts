@@ -352,7 +352,9 @@ export const checkIn = procedure
 
     const reservation = await prisma.reservation.findFirst({
       where: { code: ticketCode, parkingSpot: { parkingLot: { ownerId: user.id } } },
-      include: { paymentRecord: { select: { status: true } } },
+      include: {
+        paymentRecord: { select: { status: true, user: { select: { accountId: true } } } },
+      },
     });
     if (!reservation) throw new TRPCError({ code: "NOT_FOUND", message: "Reservation not found" });
     if (reservation.status !== "PENDING") {
@@ -372,6 +374,12 @@ export const checkIn = procedure
       data: { isAvailable: false },
     });
 
+    await OneSignalUtils.sendExternalIdNotification({
+      externalId: reservation.paymentRecord.user.accountId,
+      type: "CHECK-IN",
+      content: `Your reservation has been checked in, please check out before ${dayjs(reservation.endTime).format("HH:mm mmm DD, YYYY")} to avoid additional charges!`,
+    });
+
     EventEmitter.getInstance().emit(EventNameFn.getSingleTicket(reservation.id));
 
     const markAsOverstayedAt = dayjs(reservation.endTime).add(10, "minutes").toDate();
@@ -381,6 +389,11 @@ export const checkIn = procedure
         await prisma.reservation.update({
           where: { id: reservation.id },
           data: { status: "OVERSTAYED" },
+        });
+        await OneSignalUtils.sendExternalIdNotification({
+          externalId: reservation.paymentRecord.user.accountId,
+          type: "CHECK-OUT",
+          content: "You have overstayed your reservation, please check out as soon as possible",
         });
         markAsOverstayedJob.stop();
       },
@@ -397,6 +410,11 @@ export const checkIn = procedure
       await prisma.parkingSpot.update({
         where: { id: reservation.parkingSpotId },
         data: { isAvailable: true },
+      });
+      await OneSignalUtils.sendExternalIdNotification({
+        externalId: reservation.paymentRecord.user.accountId,
+        type: "CHECK-OUT",
+        content: `Your reservation has been automatically checked out after ${MAXIMUM_OVERSTAYING_DURATION_IN_HOURS} hours, please contact the parking lot owner for further information`,
       });
       autoCheckoutJob.stop();
     });
