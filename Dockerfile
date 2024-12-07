@@ -14,6 +14,7 @@ COPY gc-storage-key.json ./gc-storage-key.json
 
 
 RUN yarn install
+# RUN npx prisma migrate reset --force
 RUN npx prisma migrate deploy
 RUN npx prisma db seed
 RUN yarn build

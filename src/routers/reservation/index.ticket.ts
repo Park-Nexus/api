@@ -2,7 +2,7 @@ import { z } from "zod";
 import dayjs from "dayjs";
 import { procedure } from "../../trpc";
 import { authMiddleware } from "../../auth";
-import { prisma } from "../../db";
+import { prisma, RESERVATION__STATUS_ALIAS } from "../../db";
 import { TRPCError } from "@trpc/server";
 import { DateUtils } from "../../utils/date";
 import {
@@ -186,12 +186,22 @@ export const create = procedure
 const getManySchema = z.object({
   isMine: z.boolean().optional(),
   parkingLotId: z.number().optional(),
+
+  filter: z
+    .object({
+      status: z.nativeEnum(RESERVATION__STATUS_ALIAS).optional(),
+    })
+    .optional(),
 });
 export const getMany = procedure
   .use(authMiddleware())
   .input(getManySchema)
   .query(async ({ input, ctx }) => {
-    const { isMine, parkingLotId } = input;
+    const {
+      isMine,
+      parkingLotId,
+      filter: { status },
+    } = input;
     const {
       account: { id: accountId },
     } = ctx;
@@ -201,8 +211,8 @@ export const getMany = procedure
 
     const reservations = await prisma.reservation.findMany({
       where: isMine
-        ? { userId: user.id }
-        : { parkingSpot: { parkingLot: { id: parkingLotId, ownerId: user.id } } },
+        ? { userId: user.id, status: status }
+        : { parkingSpot: { parkingLot: { id: parkingLotId, ownerId: user.id } }, status: status },
       include: {
         paymentRecord: {
           select: { status: true },
