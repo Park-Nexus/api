@@ -186,7 +186,6 @@ export const create = procedure
 const getManySchema = z.object({
   isMine: z.boolean().optional(),
   parkingLotId: z.number().optional(),
-
   filter: z
     .object({
       status: z.nativeEnum(RESERVATION__STATUS_ALIAS).optional(),
@@ -197,11 +196,7 @@ export const getMany = procedure
   .use(authMiddleware())
   .input(getManySchema)
   .query(async ({ input, ctx }) => {
-    const {
-      isMine,
-      parkingLotId,
-      filter: { status },
-    } = input;
+    const { isMine, parkingLotId, filter } = input;
     const {
       account: { id: accountId },
     } = ctx;
@@ -211,8 +206,11 @@ export const getMany = procedure
 
     const reservations = await prisma.reservation.findMany({
       where: isMine
-        ? { userId: user.id, status: status }
-        : { parkingSpot: { parkingLot: { id: parkingLotId, ownerId: user.id } }, status: status },
+        ? { userId: user.id, status: filter?.status }
+        : {
+            parkingSpot: { parkingLot: { id: parkingLotId, ownerId: user.id } },
+            status: filter?.status,
+          },
       include: {
         paymentRecord: {
           select: { status: true },
@@ -438,20 +436,65 @@ export const checkOut = procedure
 
     const reservation = await prisma.reservation.findFirst({
       where: { code: ticketCode, parkingSpot: { parkingLot: { ownerId: user.id } } },
-      include: { paymentRecord: { select: { status: true } } },
+      include: {
+        paymentRecord: true,
+        parkingSpot: true,
+        vehicle: { include: { owner: true } },
+        services: true,
+      },
     });
     if (!reservation) throw new TRPCError({ code: "NOT_FOUND", message: "Reservation not found" });
     if (reservation.status !== "ON_GOING" && reservation.status !== "OVERSTAYED") {
       throw new TRPCError({ code: "BAD_REQUEST", message: "Reservation is not on going" });
     }
 
+    const hourLeft = dayjs(reservation.endTime).diff(dayjs(), "hours");
+
+    // early out refund
+    const earlyOutRefund = async () => {
+      const parkedDuration = dayjs().diff(dayjs(reservation.startTime), "hours");
+      const parkingRate = await prisma.parkingLotPrice.findFirst({
+        where: {
+          parkingLotId: reservation.parkingSpot.parkingLotId,
+          vehicleType: reservation.vehicle.type,
+        },
+      });
+      const servicesPriceInUsd = reservation.services.reduce(
+        (acc, service) => acc + service.price,
+        0,
+      );
+      let refundAmountInUsd = 0;
+      if (parkedDuration < 1) {
+        // 1 hour parking + services
+        refundAmountInUsd =
+          reservation.paymentRecord.amountInUsd - servicesPriceInUsd - parkingRate.price;
+      } else {
+        refundAmountInUsd =
+          reservation.paymentRecord.amountInUsd -
+          servicesPriceInUsd -
+          parkingRate.price * parkedDuration;
+      }
+      await StripeUtils.refundIntent({
+        intentId: reservation.paymentRecord.stripeIntentId,
+        amountInUsd: refundAmountInUsd,
+      });
+      await OneSignalUtils.sendExternalIdNotification({
+        externalId: reservation.vehicle.owner.accountId,
+        type: "CHECK-OUT",
+        content: `Your reservation has been checked out early, ${refundAmountInUsd} USD refund has been issued`,
+      });
+      return;
+    };
+    if (hourLeft > 1) earlyOutRefund();
+
     await prisma.reservation.update({
       where: { id: reservation.id },
       data: { status: "COMPLETED" },
     });
-    EventEmitter.getInstance().emit(EventNameFn.getSingleTicket(reservation.id));
     await prisma.parkingSpot.update({
       where: { id: reservation.parkingSpotId },
       data: { isAvailable: true },
     });
+
+    EventEmitter.getInstance().emit(EventNameFn.getSingleTicket(reservation.id));
   });

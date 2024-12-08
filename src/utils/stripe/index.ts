@@ -184,9 +184,14 @@ export namespace StripeUtils {
   // Refund intent -------------------------------------------------------------------------------
   type TRefundIntentParams = {
     intentId: string;
+    amountInUsd?: number;
   };
-  export const refundIntent = async ({ intentId }: TRefundIntentParams) => {
-    const intent = await stripe.refunds.create({ payment_intent: intentId });
+  export const refundIntent = async ({ intentId, amountInUsd }: TRefundIntentParams) => {
+    const intent = await stripe.refunds.create({
+      payment_intent: intentId,
+      amount: amountInUsd ? amountInUsd * 100 : undefined,
+    });
+
     return intent;
   };
 
