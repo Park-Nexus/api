@@ -99,6 +99,7 @@ const updateSchema = z.object({
   closeAt: z.string().regex(timeRegex, "Close time must be in hh:mm format").optional(),
   additionalMediaUrls: z.array(z.string()).optional(),
   removalMediaUrls: z.array(z.string()).optional(),
+  status: z.nativeEnum(PARKING_LOT__STATUS_ALIAS).optional(),
 });
 export const update = procedure
   .use(authMiddleware(["USER"]))
@@ -118,10 +119,11 @@ export const update = procedure
       closeAt,
       additionalMediaUrls,
       removalMediaUrls,
+      status,
     } = input;
 
     const owner = await prisma.user.findUnique({ where: { accountId: ownerAccountId } });
-    if (!owner) throw new Error("User not found");
+    if (!owner) throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
 
     const parkingLot = await prisma.parkingLot.findFirst({
       where: {
@@ -129,7 +131,10 @@ export const update = procedure
         ownerId: owner.id,
       },
     });
-    if (!parkingLot) throw new Error("Parking lot not found");
+    if (!parkingLot) throw new TRPCError({ code: "NOT_FOUND", message: "Parking lot not found" });
+    if (!parkingLot?.isApproved && status === "ACTIVE") {
+      throw new TRPCError({ code: "BAD_REQUEST", message: "Parking lot is not approved" });
+    }
 
     await Promise.all(
       removalMediaUrls?.map(async (url) => deleteFile({ path: extractPathFromURL(url) })),
@@ -149,6 +154,7 @@ export const update = procedure
         openAt,
         closeAt,
         mediaUrls: newMediaUrls,
+        status,
       },
     });
 
