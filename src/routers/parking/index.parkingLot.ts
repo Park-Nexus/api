@@ -136,9 +136,11 @@ export const update = procedure
       throw new TRPCError({ code: "BAD_REQUEST", message: "Parking lot is not approved" });
     }
 
-    await Promise.all(
-      removalMediaUrls?.map(async (url) => deleteFile({ path: extractPathFromURL(url) })),
-    );
+    if (removalMediaUrls) {
+      await Promise.all(
+        removalMediaUrls?.map(async (url) => deleteFile({ path: extractPathFromURL(url) })),
+      );
+    }
     const newMediaUrls = parkingLot.mediaUrls
       .filter((url) => !removalMediaUrls?.map((u) => extractPathFromURL(u)).includes(url))
       .concat(additionalMediaUrls || []);
