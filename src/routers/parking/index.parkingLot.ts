@@ -16,6 +16,7 @@ import { MAXIMUM_OVERSTAYING_DURATION_IN_HOURS } from "../../../rules";
 import { TRPCError } from "@trpc/server";
 import { on } from "events";
 import { EventNameFn, EventEmitter } from "../../utils/sse";
+import { OneSignalUtils } from "../../utils/oneSignal";
 
 const EARTH_RADIUS_IN_KM = 6371;
 
@@ -40,9 +41,12 @@ export const submit = procedure
       account: { id },
     } = ctx;
 
-    const { id: ownerId } = await prisma.user.findUnique({ where: { accountId: id } });
+    const { id: ownerId, ...owner } = await prisma.user.findUnique({
+      where: { accountId: id },
+      include: { account: { select: { email: true } } },
+    });
 
-    await prisma.parkingLot.create({
+    const newParkingLot = await prisma.parkingLot.create({
       data: {
         name,
         latitude,
@@ -55,6 +59,14 @@ export const submit = procedure
         closeAt,
         description,
       },
+    });
+
+    OneSignalUtils.sendParkingLotSubmissionEmail({
+      lotName: newParkingLot.name,
+      lotLocation: `${newParkingLot.latitude}, ${newParkingLot.longitude}`,
+      ownerName: `${owner.firstName} ${owner.lastName}`,
+      ownerEmail: owner.account.email,
+      submittedAt: dayjs(newParkingLot.createdAt).format("YYYY-MM-DD HH:mm:ss"),
     });
   });
 
