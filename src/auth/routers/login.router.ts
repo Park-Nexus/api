@@ -232,5 +232,5 @@ export const googleLoginRouter = procedure.input(googleLoginSchema).mutation(asy
     },
   });
 
-  return { accessToken, refreshToken };
+  return { accessToken, refreshToken, accountId: account.id };
 });
