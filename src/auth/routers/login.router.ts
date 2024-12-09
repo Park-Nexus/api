@@ -195,5 +195,42 @@ export const googleLoginRouter = procedure.input(googleLoginSchema).mutation(asy
     audience: authConfig.iosOauthClientId,
   });
 
-  console.log(ticket.getPayload());
+  const email = ticket.getPayload()?.email;
+  if (!email) {
+    throw new TRPCError({
+      code: "UNAUTHORIZED",
+      message: "Invalid ID Token",
+    });
+  }
+
+  const account = await prisma.account.findUnique({
+    where: { email: email.toLowerCase() },
+  });
+  if (!account) {
+    throw new TRPCError({
+      code: "NOT_FOUND",
+      message: "Account not found, please register first!",
+    });
+  }
+
+  if (account.role === "ADMIN") {
+    throw new TRPCError({ code: "UNAUTHORIZED", message: "Admin accounts are not allowed" });
+  }
+
+  const refreshToken = genRefreshToken({
+    id: account.id,
+  });
+  const accessToken = genAccessToken({
+    id: account.id,
+    role: account.role,
+  });
+
+  await prisma.accountToken.create({
+    data: {
+      token: refreshToken,
+      accountId: account.id,
+    },
+  });
+
+  return { accessToken, refreshToken };
 });
