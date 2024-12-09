@@ -228,6 +228,7 @@ export const getMany = procedure
 
 // Get single ticket ---------------------------------------------------------------------------
 const getSingleSchema = z.object({
+  spotId: z.number().optional(),
   id: z.number().optional(),
   code: z.string().optional(),
 });
@@ -246,7 +247,7 @@ export const getSingle = procedure
   .use(authMiddleware())
   .input(getSingleSchema)
   .query(async ({ input, ctx }) => {
-    const { id, code } = input;
+    const { id, code, spotId } = input;
     const {
       account: { id: accountId },
     } = ctx;
@@ -254,13 +255,18 @@ export const getSingle = procedure
     const user = await prisma.user.findUnique({ where: { accountId } });
     if (!user) throw new Error("User not found");
 
-    if (!id && !code) throw new TRPCError({ code: "BAD_REQUEST", message: "Missing id or code" });
+    if (!id && !code && !spotId) {
+      throw new TRPCError({ code: "BAD_REQUEST", message: "Missing query data" });
+    }
 
     const reservation = await prisma.reservation.findFirst({
       where: {
         OR: [
+          // user can query by id or code
           { OR: [{ id: id }, { code: code }], userId: user.id },
+          // owner can query by id or code, and spotId
           { OR: [{ id: id }, { code: code }], parkingSpot: { parkingLot: { ownerId: user.id } } },
+          { parkingSpot: { id: spotId, isAvailable: false, parkingLot: { ownerId: user.id } } },
         ],
       },
       include: {

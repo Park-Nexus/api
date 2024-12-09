@@ -289,7 +289,7 @@ export const getSingle = procedure
         parkingLotServices: true,
       },
     });
-    if (!parkingLot) throw new Error("Parking lot not found");
+    if (!parkingLot) throw new TRPCError({ code: "NOT_FOUND", message: "Parking lot not found" });
 
     const mediaSignedUrls = await Promise.all(
       parkingLot.mediaUrls.map(async (url) => {
