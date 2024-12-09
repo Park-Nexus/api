@@ -275,12 +275,16 @@ export const getSingle = procedure
                 },
               ],
             }
-          : { parkingSpot: { id: spotId, isAvailable: false, parkingLot: { ownerId: user.id } } },
+          : {
+              parkingSpot: { id: spotId, isAvailable: false, parkingLot: { ownerId: user.id } },
+              status: "ON_GOING",
+            },
       include: {
         paymentRecord: true,
         parkingSpot: { include: { parkingLot: true } },
         vehicle: true,
         services: true,
+        user: { select: { firstName: true, lastName: true, phone: true } },
       },
     });
     if (!reservation) throw new TRPCError({ code: "NOT_FOUND", message: "Reservation not found" });
