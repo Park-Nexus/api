@@ -376,7 +376,18 @@ export const addSpot = procedure
         ownerId: owner.id,
       },
     });
-    if (!parkingLot) throw new Error("Parking lot not found");
+    if (!parkingLot) throw new TRPCError({ code: "NOT_FOUND", message: "Parking lot not found" });
+
+    const currentParkingSpot = await prisma.parkingSpot.findFirst({
+      where: {
+        parkingLotId: parkingLot.id,
+        vehicleType: input.vehicleType,
+        name: input.name.trim(),
+      },
+    });
+    if (currentParkingSpot) {
+      throw new TRPCError({ code: "BAD_REQUEST", message: `Spot ${input.name} is already exists` });
+    }
 
     await prisma.parkingSpot.create({
       data: {

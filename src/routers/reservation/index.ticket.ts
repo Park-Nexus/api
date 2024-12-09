@@ -71,7 +71,7 @@ export const create = procedure
       });
     }
 
-    // check if parking lot exists, check if owned by user
+    // check if parking lot exists and active, check if owned by user
     const parkingLot = await prisma.parkingLot.findUnique({ where: { id: parkingLotId } });
     if (!parkingLot) throw new TRPCError({ code: "NOT_FOUND", message: "Parking lot not found" });
     if (parkingLot.ownerId === user.id) {
@@ -79,6 +79,9 @@ export const create = procedure
         code: "BAD_REQUEST",
         message: "You cannot reserve your own parking lot",
       });
+    }
+    if (parkingLot.status !== "ACTIVE") {
+      throw new TRPCError({ code: "BAD_REQUEST", message: "Parking lot is not available" });
     }
 
     // check if services exist
@@ -104,6 +107,7 @@ export const create = procedure
       where: {
         parkingLotId,
         vehicleType: vehicle.type,
+        isAvailable: true,
       },
     });
     if (!availableParkingSpot) {
@@ -260,15 +264,18 @@ export const getSingle = procedure
     }
 
     const reservation = await prisma.reservation.findFirst({
-      where: {
-        OR: [
-          // user can query by id or code
-          { OR: [{ id: id }, { code: code }], userId: user.id },
-          // owner can query by id or code, and spotId
-          { OR: [{ id: id }, { code: code }], parkingSpot: { parkingLot: { ownerId: user.id } } },
-          { parkingSpot: { id: spotId, isAvailable: false, parkingLot: { ownerId: user.id } } },
-        ],
-      },
+      where:
+        id || code
+          ? {
+              OR: [
+                { OR: [{ id: id }, { code: code }], userId: user.id },
+                {
+                  OR: [{ id: id }, { code: code }],
+                  parkingSpot: { parkingLot: { ownerId: user.id } },
+                },
+              ],
+            }
+          : { parkingSpot: { id: spotId, isAvailable: false, parkingLot: { ownerId: user.id } } },
       include: {
         paymentRecord: true,
         parkingSpot: { include: { parkingLot: true } },
@@ -381,7 +388,7 @@ export const checkIn = procedure
     await OneSignalUtils.sendExternalIdNotification({
       externalId: reservation.paymentRecord.user.accountId,
       type: "CHECK-IN",
-      content: `Your reservation has been checked in, please check out before ${dayjs(reservation.endTime).format("HH:mm mmm DD, YYYY")} to avoid additional charges!`,
+      content: `Your reservation has been checked in, please check out before ${dayjs(reservation.endTime).format("HH:mm MMM DD, YYYY")} to avoid additional charges!`,
     });
 
     EventEmitter.getInstance().emit(EventNameFn.getSingleTicket(reservation.id));
