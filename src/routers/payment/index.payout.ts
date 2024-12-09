@@ -32,6 +32,7 @@ export const getStripeConnectUrl = procedure
 
     const stripeAccountId = user.stripeAccountId;
 
+    // If user does not have a stripe account, create one and redirect to onboarding
     if (!stripeAccountId) {
       const newAccount = await StripeUtils.createConnectAccount({
         email: account.email,
@@ -55,11 +56,13 @@ export const getStripeConnectUrl = procedure
       throw new TRPCError({ code: "NOT_FOUND", message: "Stripe account not found" });
     }
 
+    // If the account is not submitted or charges are not enabled, redirect to onboarding
     if (!stripeConnectAccount.details_submitted || !stripeConnectAccount.charges_enabled) {
       const url = await StripeUtils.getConnectAccountOnboardingUrl({ accountId: stripeAccountId });
       return { url };
     }
 
+    // If the account is already connected, redirect to the dashboard
     const url = await StripeUtils.getConnectAccountUrl({ accountId: stripeAccountId });
     return { url };
   });

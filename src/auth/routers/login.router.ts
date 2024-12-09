@@ -9,8 +9,11 @@ import cron from "node-cron";
 import { DateUtils } from "../../utils/date";
 import dayjs from "dayjs";
 import { OneSignalUtils } from "../../utils/oneSignal";
+import { OAuth2Client } from "google-auth-library";
+import { authConfig } from "../../configs/auth.config";
 
 const OTP_EXPIRES_IN_MINUTES = 5;
+const iosOauthClient = new OAuth2Client({ clientId: authConfig.iosOauthClientId });
 
 // Admin Login --------------------------------------------------------------
 const adminLoginSchema = z.object({
@@ -178,4 +181,19 @@ export const verifyLoginRouter = procedure.input(verifyLoginSchema).mutation(asy
   });
 
   return { accessToken, refreshToken, accountId: account.id };
+});
+
+// Google Login --------------------------------------------------------------
+const googleLoginSchema = z.object({
+  idToken: z.string(),
+});
+export const googleLoginRouter = procedure.input(googleLoginSchema).mutation(async ({ input }) => {
+  const { idToken } = input;
+
+  const ticket = await iosOauthClient.verifyIdToken({
+    idToken,
+    audience: authConfig.iosOauthClientId,
+  });
+
+  console.log(ticket.getPayload());
 });
