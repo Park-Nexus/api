@@ -44,7 +44,7 @@ export const getStripeConnectUrl = procedure
         data: { stripeAccountId: newAccount.id },
       });
 
-      const url = await StripeUtils.getConnectAccountUrl({ accountId: newAccount.id });
+      const url = await StripeUtils.getConnectAccountOnboardingUrl({ accountId: newAccount.id });
       return { url };
     }
 
@@ -56,12 +56,10 @@ export const getStripeConnectUrl = procedure
     }
 
     if (!stripeConnectAccount.details_submitted || !stripeConnectAccount.charges_enabled) {
-      console.log("details not submitted");
       const url = await StripeUtils.getConnectAccountOnboardingUrl({ accountId: stripeAccountId });
       return { url };
     }
 
-    console.log("details submitted");
     const url = await StripeUtils.getConnectAccountUrl({ accountId: stripeAccountId });
     return { url };
   });
