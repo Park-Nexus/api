@@ -108,6 +108,7 @@ export const create = procedure
         parkingLotId,
         vehicleType: vehicle.type,
         isAvailable: true,
+        deletedAt: null,
       },
     });
     if (!availableParkingSpot) {

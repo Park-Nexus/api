@@ -285,8 +285,8 @@ export const getSingle = procedure
         approvedAt: true,
         mediaUrls: true,
         parkingLotPrices: true,
-        parkingSpots: { orderBy: { vehicleType: "desc" } },
-        parkingLotServices: true,
+        parkingSpots: { orderBy: { vehicleType: "desc" }, where: { deletedAt: null } },
+        parkingLotServices: { where: { deletedAt: null } },
       },
     });
     if (!parkingLot) throw new TRPCError({ code: "NOT_FOUND", message: "Parking lot not found" });
