@@ -1,6 +1,15 @@
 import { PrismaClient } from "../../prisma/client";
 
-export const prisma = new PrismaClient();
+export const prisma = new PrismaClient().$extends({
+  query: {
+    $allModels: {
+      async findMany({ args, query }) {
+        args = { ...args, where: { deletedAt: null } };
+        return query(args);
+      },
+    },
+  },
+});
 
 async function checkDbConnection() {
   try {

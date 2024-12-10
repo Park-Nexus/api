@@ -2468,6 +2468,7 @@ export namespace Prisma {
     expiredAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
     accountId: string | null
   }
 
@@ -2478,6 +2479,7 @@ export namespace Prisma {
     expiredAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
     accountId: string | null
   }
 
@@ -2488,6 +2490,7 @@ export namespace Prisma {
     expiredAt: number
     createdAt: number
     updatedAt: number
+    deletedAt: number
     accountId: number
     _all: number
   }
@@ -2508,6 +2511,7 @@ export namespace Prisma {
     expiredAt?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     accountId?: true
   }
 
@@ -2518,6 +2522,7 @@ export namespace Prisma {
     expiredAt?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     accountId?: true
   }
 
@@ -2528,6 +2533,7 @@ export namespace Prisma {
     expiredAt?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     accountId?: true
     _all?: true
   }
@@ -2625,6 +2631,7 @@ export namespace Prisma {
     expiredAt: Date
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
     accountId: string
     _count: OtpCodeCountAggregateOutputType | null
     _avg: OtpCodeAvgAggregateOutputType | null
@@ -2654,6 +2661,7 @@ export namespace Prisma {
     expiredAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     accountId?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["otpCode"]>
@@ -2665,6 +2673,7 @@ export namespace Prisma {
     expiredAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     accountId?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["otpCode"]>
@@ -2676,6 +2685,7 @@ export namespace Prisma {
     expiredAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     accountId?: boolean
   }
 
@@ -2698,6 +2708,7 @@ export namespace Prisma {
       expiredAt: Date
       createdAt: Date
       updatedAt: Date
+      deletedAt: Date | null
       accountId: string
     }, ExtArgs["result"]["otpCode"]>
     composites: {}
@@ -3099,6 +3110,7 @@ export namespace Prisma {
     readonly expiredAt: FieldRef<"OtpCode", 'DateTime'>
     readonly createdAt: FieldRef<"OtpCode", 'DateTime'>
     readonly updatedAt: FieldRef<"OtpCode", 'DateTime'>
+    readonly deletedAt: FieldRef<"OtpCode", 'DateTime'>
     readonly accountId: FieldRef<"OtpCode", 'String'>
   }
     
@@ -3450,6 +3462,7 @@ export namespace Prisma {
     role: $Enums.ACCOUNT__ROLE_ALIAS | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
   }
 
   export type AccountMaxAggregateOutputType = {
@@ -3460,6 +3473,7 @@ export namespace Prisma {
     role: $Enums.ACCOUNT__ROLE_ALIAS | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
   }
 
   export type AccountCountAggregateOutputType = {
@@ -3470,6 +3484,7 @@ export namespace Prisma {
     role: number
     createdAt: number
     updatedAt: number
+    deletedAt: number
     _all: number
   }
 
@@ -3482,6 +3497,7 @@ export namespace Prisma {
     role?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
   }
 
   export type AccountMaxAggregateInputType = {
@@ -3492,6 +3508,7 @@ export namespace Prisma {
     role?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
   }
 
   export type AccountCountAggregateInputType = {
@@ -3502,6 +3519,7 @@ export namespace Prisma {
     role?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     _all?: true
   }
 
@@ -3585,6 +3603,7 @@ export namespace Prisma {
     role: $Enums.ACCOUNT__ROLE_ALIAS
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
     _count: AccountCountAggregateOutputType | null
     _min: AccountMinAggregateOutputType | null
     _max: AccountMaxAggregateOutputType | null
@@ -3612,6 +3631,7 @@ export namespace Prisma {
     role?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     user?: boolean | Account$userArgs<ExtArgs>
     AccountToken?: boolean | Account$AccountTokenArgs<ExtArgs>
     otpCodes?: boolean | Account$otpCodesArgs<ExtArgs>
@@ -3626,6 +3646,7 @@ export namespace Prisma {
     role?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
   }, ExtArgs["result"]["account"]>
 
   export type AccountSelectScalar = {
@@ -3636,6 +3657,7 @@ export namespace Prisma {
     role?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
   }
 
   export type AccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3661,6 +3683,7 @@ export namespace Prisma {
       role: $Enums.ACCOUNT__ROLE_ALIAS
       createdAt: Date
       updatedAt: Date
+      deletedAt: Date | null
     }, ExtArgs["result"]["account"]>
     composites: {}
   }
@@ -4064,6 +4087,7 @@ export namespace Prisma {
     readonly role: FieldRef<"Account", 'ACCOUNT__ROLE_ALIAS'>
     readonly createdAt: FieldRef<"Account", 'DateTime'>
     readonly updatedAt: FieldRef<"Account", 'DateTime'>
+    readonly deletedAt: FieldRef<"Account", 'DateTime'>
   }
     
 
@@ -4472,6 +4496,7 @@ export namespace Prisma {
     token: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
     accountId: string | null
   }
 
@@ -4480,6 +4505,7 @@ export namespace Prisma {
     token: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
     accountId: string | null
   }
 
@@ -4488,6 +4514,7 @@ export namespace Prisma {
     token: number
     createdAt: number
     updatedAt: number
+    deletedAt: number
     accountId: number
     _all: number
   }
@@ -4506,6 +4533,7 @@ export namespace Prisma {
     token?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     accountId?: true
   }
 
@@ -4514,6 +4542,7 @@ export namespace Prisma {
     token?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     accountId?: true
   }
 
@@ -4522,6 +4551,7 @@ export namespace Prisma {
     token?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     accountId?: true
     _all?: true
   }
@@ -4617,6 +4647,7 @@ export namespace Prisma {
     token: string
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
     accountId: string
     _count: AccountTokenCountAggregateOutputType | null
     _avg: AccountTokenAvgAggregateOutputType | null
@@ -4644,6 +4675,7 @@ export namespace Prisma {
     token?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     accountId?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["accountToken"]>
@@ -4653,6 +4685,7 @@ export namespace Prisma {
     token?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     accountId?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["accountToken"]>
@@ -4662,6 +4695,7 @@ export namespace Prisma {
     token?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     accountId?: boolean
   }
 
@@ -4682,6 +4716,7 @@ export namespace Prisma {
       token: string
       createdAt: Date
       updatedAt: Date
+      deletedAt: Date | null
       accountId: string
     }, ExtArgs["result"]["accountToken"]>
     composites: {}
@@ -5081,6 +5116,7 @@ export namespace Prisma {
     readonly token: FieldRef<"AccountToken", 'String'>
     readonly createdAt: FieldRef<"AccountToken", 'DateTime'>
     readonly updatedAt: FieldRef<"AccountToken", 'DateTime'>
+    readonly deletedAt: FieldRef<"AccountToken", 'DateTime'>
     readonly accountId: FieldRef<"AccountToken", 'String'>
   }
     
@@ -5445,6 +5481,7 @@ export namespace Prisma {
     stripeAccountId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
     accountId: string | null
   }
 
@@ -5459,6 +5496,7 @@ export namespace Prisma {
     stripeAccountId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
     accountId: string | null
   }
 
@@ -5473,6 +5511,7 @@ export namespace Prisma {
     stripeAccountId: number
     createdAt: number
     updatedAt: number
+    deletedAt: number
     accountId: number
     _all: number
   }
@@ -5497,6 +5536,7 @@ export namespace Prisma {
     stripeAccountId?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     accountId?: true
   }
 
@@ -5511,6 +5551,7 @@ export namespace Prisma {
     stripeAccountId?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     accountId?: true
   }
 
@@ -5525,6 +5566,7 @@ export namespace Prisma {
     stripeAccountId?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     accountId?: true
     _all?: true
   }
@@ -5626,6 +5668,7 @@ export namespace Prisma {
     stripeAccountId: string | null
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
     accountId: string
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
@@ -5659,6 +5702,7 @@ export namespace Prisma {
     stripeAccountId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     accountId?: boolean
     vehicles?: boolean | User$vehiclesArgs<ExtArgs>
     parkingLotReviews?: boolean | User$parkingLotReviewsArgs<ExtArgs>
@@ -5681,6 +5725,7 @@ export namespace Prisma {
     stripeAccountId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     accountId?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -5696,6 +5741,7 @@ export namespace Prisma {
     stripeAccountId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     accountId?: boolean
   }
 
@@ -5735,6 +5781,7 @@ export namespace Prisma {
       stripeAccountId: string | null
       createdAt: Date
       updatedAt: Date
+      deletedAt: Date | null
       accountId: string
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -6146,6 +6193,7 @@ export namespace Prisma {
     readonly stripeAccountId: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
+    readonly deletedAt: FieldRef<"User", 'DateTime'>
     readonly accountId: FieldRef<"User", 'String'>
   }
     
@@ -6626,6 +6674,7 @@ export namespace Prisma {
     title: string | null
     message: string | null
     createdAt: Date | null
+    deletedAt: Date | null
     userId: number | null
   }
 
@@ -6634,6 +6683,7 @@ export namespace Prisma {
     title: string | null
     message: string | null
     createdAt: Date | null
+    deletedAt: Date | null
     userId: number | null
   }
 
@@ -6642,6 +6692,7 @@ export namespace Prisma {
     title: number
     message: number
     createdAt: number
+    deletedAt: number
     userId: number
     _all: number
   }
@@ -6662,6 +6713,7 @@ export namespace Prisma {
     title?: true
     message?: true
     createdAt?: true
+    deletedAt?: true
     userId?: true
   }
 
@@ -6670,6 +6722,7 @@ export namespace Prisma {
     title?: true
     message?: true
     createdAt?: true
+    deletedAt?: true
     userId?: true
   }
 
@@ -6678,6 +6731,7 @@ export namespace Prisma {
     title?: true
     message?: true
     createdAt?: true
+    deletedAt?: true
     userId?: true
     _all?: true
   }
@@ -6773,6 +6827,7 @@ export namespace Prisma {
     title: string
     message: string
     createdAt: Date
+    deletedAt: Date | null
     userId: number
     _count: UserNotificationCountAggregateOutputType | null
     _avg: UserNotificationAvgAggregateOutputType | null
@@ -6800,6 +6855,7 @@ export namespace Prisma {
     title?: boolean
     message?: boolean
     createdAt?: boolean
+    deletedAt?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userNotification"]>
@@ -6809,6 +6865,7 @@ export namespace Prisma {
     title?: boolean
     message?: boolean
     createdAt?: boolean
+    deletedAt?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["userNotification"]>
@@ -6818,6 +6875,7 @@ export namespace Prisma {
     title?: boolean
     message?: boolean
     createdAt?: boolean
+    deletedAt?: boolean
     userId?: boolean
   }
 
@@ -6838,6 +6896,7 @@ export namespace Prisma {
       title: string
       message: string
       createdAt: Date
+      deletedAt: Date | null
       userId: number
     }, ExtArgs["result"]["userNotification"]>
     composites: {}
@@ -7237,6 +7296,7 @@ export namespace Prisma {
     readonly title: FieldRef<"UserNotification", 'String'>
     readonly message: FieldRef<"UserNotification", 'String'>
     readonly createdAt: FieldRef<"UserNotification", 'DateTime'>
+    readonly deletedAt: FieldRef<"UserNotification", 'DateTime'>
     readonly userId: FieldRef<"UserNotification", 'Int'>
   }
     
@@ -7600,7 +7660,7 @@ export namespace Prisma {
     model: string | null
     color: string | null
     imageUrl: string | null
-    deleteAt: Date | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
     ownerId: number | null
@@ -7614,7 +7674,7 @@ export namespace Prisma {
     model: string | null
     color: string | null
     imageUrl: string | null
-    deleteAt: Date | null
+    deletedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
     ownerId: number | null
@@ -7628,7 +7688,7 @@ export namespace Prisma {
     model: number
     color: number
     imageUrl: number
-    deleteAt: number
+    deletedAt: number
     createdAt: number
     updatedAt: number
     ownerId: number
@@ -7654,7 +7714,7 @@ export namespace Prisma {
     model?: true
     color?: true
     imageUrl?: true
-    deleteAt?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     ownerId?: true
@@ -7668,7 +7728,7 @@ export namespace Prisma {
     model?: true
     color?: true
     imageUrl?: true
-    deleteAt?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     ownerId?: true
@@ -7682,7 +7742,7 @@ export namespace Prisma {
     model?: true
     color?: true
     imageUrl?: true
-    deleteAt?: true
+    deletedAt?: true
     createdAt?: true
     updatedAt?: true
     ownerId?: true
@@ -7783,7 +7843,7 @@ export namespace Prisma {
     model: string
     color: string
     imageUrl: string
-    deleteAt: Date | null
+    deletedAt: Date | null
     createdAt: Date
     updatedAt: Date
     ownerId: number
@@ -7816,7 +7876,7 @@ export namespace Prisma {
     model?: boolean
     color?: boolean
     imageUrl?: boolean
-    deleteAt?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     ownerId?: boolean
@@ -7833,7 +7893,7 @@ export namespace Prisma {
     model?: boolean
     color?: boolean
     imageUrl?: boolean
-    deleteAt?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     ownerId?: boolean
@@ -7848,7 +7908,7 @@ export namespace Prisma {
     model?: boolean
     color?: boolean
     imageUrl?: boolean
-    deleteAt?: boolean
+    deletedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     ownerId?: boolean
@@ -7877,7 +7937,7 @@ export namespace Prisma {
       model: string
       color: string
       imageUrl: string
-      deleteAt: Date | null
+      deletedAt: Date | null
       createdAt: Date
       updatedAt: Date
       ownerId: number
@@ -8283,7 +8343,7 @@ export namespace Prisma {
     readonly model: FieldRef<"Vehicle", 'String'>
     readonly color: FieldRef<"Vehicle", 'String'>
     readonly imageUrl: FieldRef<"Vehicle", 'String'>
-    readonly deleteAt: FieldRef<"Vehicle", 'DateTime'>
+    readonly deletedAt: FieldRef<"Vehicle", 'DateTime'>
     readonly createdAt: FieldRef<"Vehicle", 'DateTime'>
     readonly updatedAt: FieldRef<"Vehicle", 'DateTime'>
     readonly ownerId: FieldRef<"Vehicle", 'Int'>
@@ -8682,6 +8742,7 @@ export namespace Prisma {
     approvedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
     ownerId: number | null
   }
 
@@ -8700,6 +8761,7 @@ export namespace Prisma {
     approvedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
     ownerId: number | null
   }
 
@@ -8719,6 +8781,7 @@ export namespace Prisma {
     approvedAt: number
     createdAt: number
     updatedAt: number
+    deletedAt: number
     ownerId: number
     _all: number
   }
@@ -8755,6 +8818,7 @@ export namespace Prisma {
     approvedAt?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     ownerId?: true
   }
 
@@ -8773,6 +8837,7 @@ export namespace Prisma {
     approvedAt?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     ownerId?: true
   }
 
@@ -8792,6 +8857,7 @@ export namespace Prisma {
     approvedAt?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     ownerId?: true
     _all?: true
   }
@@ -8898,6 +8964,7 @@ export namespace Prisma {
     approvedAt: Date | null
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
     ownerId: number
     _count: ParkingLotCountAggregateOutputType | null
     _avg: ParkingLotAvgAggregateOutputType | null
@@ -8936,6 +9003,7 @@ export namespace Prisma {
     approvedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     ownerId?: boolean
     parkingSpots?: boolean | ParkingLot$parkingSpotsArgs<ExtArgs>
     parkingLotServices?: boolean | ParkingLot$parkingLotServicesArgs<ExtArgs>
@@ -8962,6 +9030,7 @@ export namespace Prisma {
     approvedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     ownerId?: boolean
     owner?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["parkingLot"]>
@@ -8982,6 +9051,7 @@ export namespace Prisma {
     approvedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     ownerId?: boolean
   }
 
@@ -9024,6 +9094,7 @@ export namespace Prisma {
       approvedAt: Date | null
       createdAt: Date
       updatedAt: Date
+      deletedAt: Date | null
       ownerId: number
     }, ExtArgs["result"]["parkingLot"]>
     composites: {}
@@ -9439,6 +9510,7 @@ export namespace Prisma {
     readonly approvedAt: FieldRef<"ParkingLot", 'DateTime'>
     readonly createdAt: FieldRef<"ParkingLot", 'DateTime'>
     readonly updatedAt: FieldRef<"ParkingLot", 'DateTime'>
+    readonly deletedAt: FieldRef<"ParkingLot", 'DateTime'>
     readonly ownerId: FieldRef<"ParkingLot", 'Int'>
   }
     
@@ -9898,6 +9970,7 @@ export namespace Prisma {
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS | null
     price: number | null
     updatedAt: Date | null
+    deletedAt: Date | null
     parkingLotId: number | null
   }
 
@@ -9905,6 +9978,7 @@ export namespace Prisma {
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS | null
     price: number | null
     updatedAt: Date | null
+    deletedAt: Date | null
     parkingLotId: number | null
   }
 
@@ -9912,6 +9986,7 @@ export namespace Prisma {
     vehicleType: number
     price: number
     updatedAt: number
+    deletedAt: number
     parkingLotId: number
     _all: number
   }
@@ -9931,6 +10006,7 @@ export namespace Prisma {
     vehicleType?: true
     price?: true
     updatedAt?: true
+    deletedAt?: true
     parkingLotId?: true
   }
 
@@ -9938,6 +10014,7 @@ export namespace Prisma {
     vehicleType?: true
     price?: true
     updatedAt?: true
+    deletedAt?: true
     parkingLotId?: true
   }
 
@@ -9945,6 +10022,7 @@ export namespace Prisma {
     vehicleType?: true
     price?: true
     updatedAt?: true
+    deletedAt?: true
     parkingLotId?: true
     _all?: true
   }
@@ -10039,6 +10117,7 @@ export namespace Prisma {
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     price: number
     updatedAt: Date
+    deletedAt: Date | null
     parkingLotId: number
     _count: ParkingLotPriceCountAggregateOutputType | null
     _avg: ParkingLotPriceAvgAggregateOutputType | null
@@ -10065,6 +10144,7 @@ export namespace Prisma {
     vehicleType?: boolean
     price?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     parkingLotId?: boolean
     parkingLot?: boolean | ParkingLotDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["parkingLotPrice"]>
@@ -10073,6 +10153,7 @@ export namespace Prisma {
     vehicleType?: boolean
     price?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     parkingLotId?: boolean
     parkingLot?: boolean | ParkingLotDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["parkingLotPrice"]>
@@ -10081,6 +10162,7 @@ export namespace Prisma {
     vehicleType?: boolean
     price?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     parkingLotId?: boolean
   }
 
@@ -10100,6 +10182,7 @@ export namespace Prisma {
       vehicleType: $Enums.VEHICLE__TYPE_ALIAS
       price: number
       updatedAt: Date
+      deletedAt: Date | null
       parkingLotId: number
     }, ExtArgs["result"]["parkingLotPrice"]>
     composites: {}
@@ -10498,6 +10581,7 @@ export namespace Prisma {
     readonly vehicleType: FieldRef<"ParkingLotPrice", 'VEHICLE__TYPE_ALIAS'>
     readonly price: FieldRef<"ParkingLotPrice", 'Float'>
     readonly updatedAt: FieldRef<"ParkingLotPrice", 'DateTime'>
+    readonly deletedAt: FieldRef<"ParkingLotPrice", 'DateTime'>
     readonly parkingLotId: FieldRef<"ParkingLotPrice", 'Int'>
   }
     
@@ -10863,6 +10947,7 @@ export namespace Prisma {
     comment: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
     parkingLotId: number | null
     userId: number | null
   }
@@ -10873,6 +10958,7 @@ export namespace Prisma {
     comment: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
     parkingLotId: number | null
     userId: number | null
   }
@@ -10884,6 +10970,7 @@ export namespace Prisma {
     mediaUrls: number
     createdAt: number
     updatedAt: number
+    deletedAt: number
     parkingLotId: number
     userId: number
     _all: number
@@ -10910,6 +10997,7 @@ export namespace Prisma {
     comment?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     parkingLotId?: true
     userId?: true
   }
@@ -10920,6 +11008,7 @@ export namespace Prisma {
     comment?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     parkingLotId?: true
     userId?: true
   }
@@ -10931,6 +11020,7 @@ export namespace Prisma {
     mediaUrls?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     parkingLotId?: true
     userId?: true
     _all?: true
@@ -11029,6 +11119,7 @@ export namespace Prisma {
     mediaUrls: string[]
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
     parkingLotId: number
     userId: number
     _count: ParkingLotReviewCountAggregateOutputType | null
@@ -11059,6 +11150,7 @@ export namespace Prisma {
     mediaUrls?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     parkingLotId?: boolean
     userId?: boolean
     parkingLot?: boolean | ParkingLotDefaultArgs<ExtArgs>
@@ -11072,6 +11164,7 @@ export namespace Prisma {
     mediaUrls?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     parkingLotId?: boolean
     userId?: boolean
     parkingLot?: boolean | ParkingLotDefaultArgs<ExtArgs>
@@ -11085,6 +11178,7 @@ export namespace Prisma {
     mediaUrls?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     parkingLotId?: boolean
     userId?: boolean
   }
@@ -11111,6 +11205,7 @@ export namespace Prisma {
       mediaUrls: string[]
       createdAt: Date
       updatedAt: Date
+      deletedAt: Date | null
       parkingLotId: number
       userId: number
     }, ExtArgs["result"]["parkingLotReview"]>
@@ -11514,6 +11609,7 @@ export namespace Prisma {
     readonly mediaUrls: FieldRef<"ParkingLotReview", 'String[]'>
     readonly createdAt: FieldRef<"ParkingLotReview", 'DateTime'>
     readonly updatedAt: FieldRef<"ParkingLotReview", 'DateTime'>
+    readonly deletedAt: FieldRef<"ParkingLotReview", 'DateTime'>
     readonly parkingLotId: FieldRef<"ParkingLotReview", 'Int'>
     readonly userId: FieldRef<"ParkingLotReview", 'Int'>
   }
@@ -13980,6 +14076,7 @@ export namespace Prisma {
     endTime: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
     userId: number | null
     parkingSpotId: number | null
     vehicleId: number | null
@@ -13993,6 +14090,7 @@ export namespace Prisma {
     endTime: Date | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
     userId: number | null
     parkingSpotId: number | null
     vehicleId: number | null
@@ -14006,6 +14104,7 @@ export namespace Prisma {
     endTime: number
     createdAt: number
     updatedAt: number
+    deletedAt: number
     userId: number
     parkingSpotId: number
     vehicleId: number
@@ -14035,6 +14134,7 @@ export namespace Prisma {
     endTime?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     userId?: true
     parkingSpotId?: true
     vehicleId?: true
@@ -14048,6 +14148,7 @@ export namespace Prisma {
     endTime?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     userId?: true
     parkingSpotId?: true
     vehicleId?: true
@@ -14061,6 +14162,7 @@ export namespace Prisma {
     endTime?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     userId?: true
     parkingSpotId?: true
     vehicleId?: true
@@ -14161,6 +14263,7 @@ export namespace Prisma {
     endTime: Date
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
     userId: number
     parkingSpotId: number
     vehicleId: number
@@ -14193,6 +14296,7 @@ export namespace Prisma {
     endTime?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     userId?: boolean
     parkingSpotId?: boolean
     vehicleId?: boolean
@@ -14212,6 +14316,7 @@ export namespace Prisma {
     endTime?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     userId?: boolean
     parkingSpotId?: boolean
     vehicleId?: boolean
@@ -14228,6 +14333,7 @@ export namespace Prisma {
     endTime?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     userId?: boolean
     parkingSpotId?: boolean
     vehicleId?: boolean
@@ -14264,6 +14370,7 @@ export namespace Prisma {
       endTime: Date
       createdAt: Date
       updatedAt: Date
+      deletedAt: Date | null
       userId: number
       parkingSpotId: number
       vehicleId: number
@@ -14672,6 +14779,7 @@ export namespace Prisma {
     readonly endTime: FieldRef<"Reservation", 'DateTime'>
     readonly createdAt: FieldRef<"Reservation", 'DateTime'>
     readonly updatedAt: FieldRef<"Reservation", 'DateTime'>
+    readonly deletedAt: FieldRef<"Reservation", 'DateTime'>
     readonly userId: FieldRef<"Reservation", 'Int'>
     readonly parkingSpotId: FieldRef<"Reservation", 'Int'>
     readonly vehicleId: FieldRef<"Reservation", 'Int'>
@@ -15077,6 +15185,7 @@ export namespace Prisma {
     amountInUsd: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
     userId: number | null
     reservationId: number | null
     payoutRecordId: number | null
@@ -15089,6 +15198,7 @@ export namespace Prisma {
     amountInUsd: number | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
     userId: number | null
     reservationId: number | null
     payoutRecordId: number | null
@@ -15101,6 +15211,7 @@ export namespace Prisma {
     amountInUsd: number
     createdAt: number
     updatedAt: number
+    deletedAt: number
     userId: number
     reservationId: number
     payoutRecordId: number
@@ -15131,6 +15242,7 @@ export namespace Prisma {
     amountInUsd?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     userId?: true
     reservationId?: true
     payoutRecordId?: true
@@ -15143,6 +15255,7 @@ export namespace Prisma {
     amountInUsd?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     userId?: true
     reservationId?: true
     payoutRecordId?: true
@@ -15155,6 +15268,7 @@ export namespace Prisma {
     amountInUsd?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     userId?: true
     reservationId?: true
     payoutRecordId?: true
@@ -15254,6 +15368,7 @@ export namespace Prisma {
     amountInUsd: number
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
     userId: number
     reservationId: number
     payoutRecordId: number | null
@@ -15285,6 +15400,7 @@ export namespace Prisma {
     amountInUsd?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     userId?: boolean
     reservationId?: boolean
     payoutRecordId?: boolean
@@ -15300,6 +15416,7 @@ export namespace Prisma {
     amountInUsd?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     userId?: boolean
     reservationId?: boolean
     payoutRecordId?: boolean
@@ -15315,6 +15432,7 @@ export namespace Prisma {
     amountInUsd?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     userId?: boolean
     reservationId?: boolean
     payoutRecordId?: boolean
@@ -15345,6 +15463,7 @@ export namespace Prisma {
       amountInUsd: number
       createdAt: Date
       updatedAt: Date
+      deletedAt: Date | null
       userId: number
       reservationId: number
       payoutRecordId: number | null
@@ -15750,6 +15869,7 @@ export namespace Prisma {
     readonly amountInUsd: FieldRef<"PaymentRecord", 'Float'>
     readonly createdAt: FieldRef<"PaymentRecord", 'DateTime'>
     readonly updatedAt: FieldRef<"PaymentRecord", 'DateTime'>
+    readonly deletedAt: FieldRef<"PaymentRecord", 'DateTime'>
     readonly userId: FieldRef<"PaymentRecord", 'Int'>
     readonly reservationId: FieldRef<"PaymentRecord", 'Int'>
     readonly payoutRecordId: FieldRef<"PaymentRecord", 'Int'>
@@ -16135,6 +16255,7 @@ export namespace Prisma {
     errorType: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
     parkingLotId: number | null
   }
 
@@ -16147,6 +16268,7 @@ export namespace Prisma {
     errorType: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt: Date | null
     updatedAt: Date | null
+    deletedAt: Date | null
     parkingLotId: number | null
   }
 
@@ -16159,6 +16281,7 @@ export namespace Prisma {
     errorType: number
     createdAt: number
     updatedAt: number
+    deletedAt: number
     parkingLotId: number
     _all: number
   }
@@ -16187,6 +16310,7 @@ export namespace Prisma {
     errorType?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     parkingLotId?: true
   }
 
@@ -16199,6 +16323,7 @@ export namespace Prisma {
     errorType?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     parkingLotId?: true
   }
 
@@ -16211,6 +16336,7 @@ export namespace Prisma {
     errorType?: true
     createdAt?: true
     updatedAt?: true
+    deletedAt?: true
     parkingLotId?: true
     _all?: true
   }
@@ -16310,6 +16436,7 @@ export namespace Prisma {
     errorType: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt: Date
     updatedAt: Date
+    deletedAt: Date | null
     parkingLotId: number
     _count: PayoutRecordCountAggregateOutputType | null
     _avg: PayoutRecordAvgAggregateOutputType | null
@@ -16341,6 +16468,7 @@ export namespace Prisma {
     errorType?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     parkingLotId?: boolean
     paymentRecords?: boolean | PayoutRecord$paymentRecordsArgs<ExtArgs>
     parkingLot?: boolean | ParkingLotDefaultArgs<ExtArgs>
@@ -16356,6 +16484,7 @@ export namespace Prisma {
     errorType?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     parkingLotId?: boolean
     parkingLot?: boolean | ParkingLotDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["payoutRecord"]>
@@ -16369,6 +16498,7 @@ export namespace Prisma {
     errorType?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    deletedAt?: boolean
     parkingLotId?: boolean
   }
 
@@ -16396,6 +16526,7 @@ export namespace Prisma {
       errorType: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
       createdAt: Date
       updatedAt: Date
+      deletedAt: Date | null
       parkingLotId: number
     }, ExtArgs["result"]["payoutRecord"]>
     composites: {}
@@ -16800,6 +16931,7 @@ export namespace Prisma {
     readonly errorType: FieldRef<"PayoutRecord", 'PAYOUT__ERROR_TYPE_ALIAS'>
     readonly createdAt: FieldRef<"PayoutRecord", 'DateTime'>
     readonly updatedAt: FieldRef<"PayoutRecord", 'DateTime'>
+    readonly deletedAt: FieldRef<"PayoutRecord", 'DateTime'>
     readonly parkingLotId: FieldRef<"PayoutRecord", 'Int'>
   }
     
@@ -17174,6 +17306,7 @@ export namespace Prisma {
     expiredAt: 'expiredAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt',
     accountId: 'accountId'
   };
 
@@ -17187,7 +17320,8 @@ export namespace Prisma {
     password: 'password',
     role: 'role',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt'
   };
 
   export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
@@ -17198,6 +17332,7 @@ export namespace Prisma {
     token: 'token',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt',
     accountId: 'accountId'
   };
 
@@ -17215,6 +17350,7 @@ export namespace Prisma {
     stripeAccountId: 'stripeAccountId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt',
     accountId: 'accountId'
   };
 
@@ -17226,6 +17362,7 @@ export namespace Prisma {
     title: 'title',
     message: 'message',
     createdAt: 'createdAt',
+    deletedAt: 'deletedAt',
     userId: 'userId'
   };
 
@@ -17240,7 +17377,7 @@ export namespace Prisma {
     model: 'model',
     color: 'color',
     imageUrl: 'imageUrl',
-    deleteAt: 'deleteAt',
+    deletedAt: 'deletedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     ownerId: 'ownerId'
@@ -17265,6 +17402,7 @@ export namespace Prisma {
     approvedAt: 'approvedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt',
     ownerId: 'ownerId'
   };
 
@@ -17275,6 +17413,7 @@ export namespace Prisma {
     vehicleType: 'vehicleType',
     price: 'price',
     updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt',
     parkingLotId: 'parkingLotId'
   };
 
@@ -17288,6 +17427,7 @@ export namespace Prisma {
     mediaUrls: 'mediaUrls',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt',
     parkingLotId: 'parkingLotId',
     userId: 'userId'
   };
@@ -17334,6 +17474,7 @@ export namespace Prisma {
     endTime: 'endTime',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt',
     userId: 'userId',
     parkingSpotId: 'parkingSpotId',
     vehicleId: 'vehicleId'
@@ -17349,6 +17490,7 @@ export namespace Prisma {
     amountInUsd: 'amountInUsd',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt',
     userId: 'userId',
     reservationId: 'reservationId',
     payoutRecordId: 'payoutRecordId'
@@ -17366,6 +17508,7 @@ export namespace Prisma {
     errorType: 'errorType',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt',
     parkingLotId: 'parkingLotId'
   };
 
@@ -17617,6 +17760,7 @@ export namespace Prisma {
     expiredAt?: DateTimeFilter<"OtpCode"> | Date | string
     createdAt?: DateTimeFilter<"OtpCode"> | Date | string
     updatedAt?: DateTimeFilter<"OtpCode"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"OtpCode"> | Date | string | null
     accountId?: StringFilter<"OtpCode"> | string
     account?: XOR<AccountRelationFilter, AccountWhereInput>
   }
@@ -17628,6 +17772,7 @@ export namespace Prisma {
     expiredAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     accountId?: SortOrder
     account?: AccountOrderByWithRelationInput
   }
@@ -17642,6 +17787,7 @@ export namespace Prisma {
     expiredAt?: DateTimeFilter<"OtpCode"> | Date | string
     createdAt?: DateTimeFilter<"OtpCode"> | Date | string
     updatedAt?: DateTimeFilter<"OtpCode"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"OtpCode"> | Date | string | null
     accountId?: StringFilter<"OtpCode"> | string
     account?: XOR<AccountRelationFilter, AccountWhereInput>
   }, "id">
@@ -17653,6 +17799,7 @@ export namespace Prisma {
     expiredAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     accountId?: SortOrder
     _count?: OtpCodeCountOrderByAggregateInput
     _avg?: OtpCodeAvgOrderByAggregateInput
@@ -17671,6 +17818,7 @@ export namespace Prisma {
     expiredAt?: DateTimeWithAggregatesFilter<"OtpCode"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"OtpCode"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"OtpCode"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"OtpCode"> | Date | string | null
     accountId?: StringWithAggregatesFilter<"OtpCode"> | string
   }
 
@@ -17685,6 +17833,7 @@ export namespace Prisma {
     role?: EnumACCOUNT__ROLE_ALIASFilter<"Account"> | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFilter<"Account"> | Date | string
     updatedAt?: DateTimeFilter<"Account"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"Account"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     AccountToken?: AccountTokenListRelationFilter
     otpCodes?: OtpCodeListRelationFilter
@@ -17698,6 +17847,7 @@ export namespace Prisma {
     role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     AccountToken?: AccountTokenOrderByRelationAggregateInput
     otpCodes?: OtpCodeOrderByRelationAggregateInput
@@ -17714,6 +17864,7 @@ export namespace Prisma {
     role?: EnumACCOUNT__ROLE_ALIASFilter<"Account"> | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFilter<"Account"> | Date | string
     updatedAt?: DateTimeFilter<"Account"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"Account"> | Date | string | null
     user?: XOR<UserNullableRelationFilter, UserWhereInput> | null
     AccountToken?: AccountTokenListRelationFilter
     otpCodes?: OtpCodeListRelationFilter
@@ -17727,6 +17878,7 @@ export namespace Prisma {
     role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     _count?: AccountCountOrderByAggregateInput
     _max?: AccountMaxOrderByAggregateInput
     _min?: AccountMinOrderByAggregateInput
@@ -17743,6 +17895,7 @@ export namespace Prisma {
     role?: EnumACCOUNT__ROLE_ALIASWithAggregatesFilter<"Account"> | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeWithAggregatesFilter<"Account"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Account"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Account"> | Date | string | null
   }
 
   export type AccountTokenWhereInput = {
@@ -17753,6 +17906,7 @@ export namespace Prisma {
     token?: StringFilter<"AccountToken"> | string
     createdAt?: DateTimeFilter<"AccountToken"> | Date | string
     updatedAt?: DateTimeFilter<"AccountToken"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"AccountToken"> | Date | string | null
     accountId?: StringFilter<"AccountToken"> | string
     account?: XOR<AccountRelationFilter, AccountWhereInput>
   }
@@ -17762,6 +17916,7 @@ export namespace Prisma {
     token?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     accountId?: SortOrder
     account?: AccountOrderByWithRelationInput
   }
@@ -17774,6 +17929,7 @@ export namespace Prisma {
     token?: StringFilter<"AccountToken"> | string
     createdAt?: DateTimeFilter<"AccountToken"> | Date | string
     updatedAt?: DateTimeFilter<"AccountToken"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"AccountToken"> | Date | string | null
     accountId?: StringFilter<"AccountToken"> | string
     account?: XOR<AccountRelationFilter, AccountWhereInput>
   }, "id">
@@ -17783,6 +17939,7 @@ export namespace Prisma {
     token?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     accountId?: SortOrder
     _count?: AccountTokenCountOrderByAggregateInput
     _avg?: AccountTokenAvgOrderByAggregateInput
@@ -17799,6 +17956,7 @@ export namespace Prisma {
     token?: StringWithAggregatesFilter<"AccountToken"> | string
     createdAt?: DateTimeWithAggregatesFilter<"AccountToken"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"AccountToken"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"AccountToken"> | Date | string | null
     accountId?: StringWithAggregatesFilter<"AccountToken"> | string
   }
 
@@ -17816,6 +17974,7 @@ export namespace Prisma {
     stripeAccountId?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     accountId?: StringFilter<"User"> | string
     vehicles?: VehicleListRelationFilter
     parkingLotReviews?: ParkingLotReviewListRelationFilter
@@ -17837,6 +17996,7 @@ export namespace Prisma {
     stripeAccountId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     accountId?: SortOrder
     vehicles?: VehicleOrderByRelationAggregateInput
     parkingLotReviews?: ParkingLotReviewOrderByRelationAggregateInput
@@ -17862,6 +18022,7 @@ export namespace Prisma {
     stripeAccountId?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"User"> | Date | string | null
     vehicles?: VehicleListRelationFilter
     parkingLotReviews?: ParkingLotReviewListRelationFilter
     parkingLots?: ParkingLotListRelationFilter
@@ -17882,6 +18043,7 @@ export namespace Prisma {
     stripeAccountId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     accountId?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
@@ -17904,6 +18066,7 @@ export namespace Prisma {
     stripeAccountId?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     accountId?: StringWithAggregatesFilter<"User"> | string
   }
 
@@ -17915,6 +18078,7 @@ export namespace Prisma {
     title?: StringFilter<"UserNotification"> | string
     message?: StringFilter<"UserNotification"> | string
     createdAt?: DateTimeFilter<"UserNotification"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"UserNotification"> | Date | string | null
     userId?: IntFilter<"UserNotification"> | number
     user?: XOR<UserRelationFilter, UserWhereInput>
   }
@@ -17924,6 +18088,7 @@ export namespace Prisma {
     title?: SortOrder
     message?: SortOrder
     createdAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     userId?: SortOrder
     user?: UserOrderByWithRelationInput
   }
@@ -17936,6 +18101,7 @@ export namespace Prisma {
     title?: StringFilter<"UserNotification"> | string
     message?: StringFilter<"UserNotification"> | string
     createdAt?: DateTimeFilter<"UserNotification"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"UserNotification"> | Date | string | null
     userId?: IntFilter<"UserNotification"> | number
     user?: XOR<UserRelationFilter, UserWhereInput>
   }, "id">
@@ -17945,6 +18111,7 @@ export namespace Prisma {
     title?: SortOrder
     message?: SortOrder
     createdAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     userId?: SortOrder
     _count?: UserNotificationCountOrderByAggregateInput
     _avg?: UserNotificationAvgOrderByAggregateInput
@@ -17961,6 +18128,7 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"UserNotification"> | string
     message?: StringWithAggregatesFilter<"UserNotification"> | string
     createdAt?: DateTimeWithAggregatesFilter<"UserNotification"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"UserNotification"> | Date | string | null
     userId?: IntWithAggregatesFilter<"UserNotification"> | number
   }
 
@@ -17975,7 +18143,7 @@ export namespace Prisma {
     model?: StringFilter<"Vehicle"> | string
     color?: StringFilter<"Vehicle"> | string
     imageUrl?: StringFilter<"Vehicle"> | string
-    deleteAt?: DateTimeNullableFilter<"Vehicle"> | Date | string | null
+    deletedAt?: DateTimeNullableFilter<"Vehicle"> | Date | string | null
     createdAt?: DateTimeFilter<"Vehicle"> | Date | string
     updatedAt?: DateTimeFilter<"Vehicle"> | Date | string
     ownerId?: IntFilter<"Vehicle"> | number
@@ -17991,7 +18159,7 @@ export namespace Prisma {
     model?: SortOrder
     color?: SortOrder
     imageUrl?: SortOrder
-    deleteAt?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
@@ -18010,7 +18178,7 @@ export namespace Prisma {
     model?: StringFilter<"Vehicle"> | string
     color?: StringFilter<"Vehicle"> | string
     imageUrl?: StringFilter<"Vehicle"> | string
-    deleteAt?: DateTimeNullableFilter<"Vehicle"> | Date | string | null
+    deletedAt?: DateTimeNullableFilter<"Vehicle"> | Date | string | null
     createdAt?: DateTimeFilter<"Vehicle"> | Date | string
     updatedAt?: DateTimeFilter<"Vehicle"> | Date | string
     ownerId?: IntFilter<"Vehicle"> | number
@@ -18026,7 +18194,7 @@ export namespace Prisma {
     model?: SortOrder
     color?: SortOrder
     imageUrl?: SortOrder
-    deleteAt?: SortOrderInput | SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
@@ -18048,7 +18216,7 @@ export namespace Prisma {
     model?: StringWithAggregatesFilter<"Vehicle"> | string
     color?: StringWithAggregatesFilter<"Vehicle"> | string
     imageUrl?: StringWithAggregatesFilter<"Vehicle"> | string
-    deleteAt?: DateTimeNullableWithAggregatesFilter<"Vehicle"> | Date | string | null
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Vehicle"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Vehicle"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Vehicle"> | Date | string
     ownerId?: IntWithAggregatesFilter<"Vehicle"> | number
@@ -18073,6 +18241,7 @@ export namespace Prisma {
     approvedAt?: DateTimeNullableFilter<"ParkingLot"> | Date | string | null
     createdAt?: DateTimeFilter<"ParkingLot"> | Date | string
     updatedAt?: DateTimeFilter<"ParkingLot"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"ParkingLot"> | Date | string | null
     ownerId?: IntFilter<"ParkingLot"> | number
     parkingSpots?: ParkingSpotListRelationFilter
     parkingLotServices?: ParkingLotServiceListRelationFilter
@@ -18098,6 +18267,7 @@ export namespace Prisma {
     approvedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     ownerId?: SortOrder
     parkingSpots?: ParkingSpotOrderByRelationAggregateInput
     parkingLotServices?: ParkingLotServiceOrderByRelationAggregateInput
@@ -18126,6 +18296,7 @@ export namespace Prisma {
     approvedAt?: DateTimeNullableFilter<"ParkingLot"> | Date | string | null
     createdAt?: DateTimeFilter<"ParkingLot"> | Date | string
     updatedAt?: DateTimeFilter<"ParkingLot"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"ParkingLot"> | Date | string | null
     ownerId?: IntFilter<"ParkingLot"> | number
     parkingSpots?: ParkingSpotListRelationFilter
     parkingLotServices?: ParkingLotServiceListRelationFilter
@@ -18151,6 +18322,7 @@ export namespace Prisma {
     approvedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     ownerId?: SortOrder
     _count?: ParkingLotCountOrderByAggregateInput
     _avg?: ParkingLotAvgOrderByAggregateInput
@@ -18178,6 +18350,7 @@ export namespace Prisma {
     approvedAt?: DateTimeNullableWithAggregatesFilter<"ParkingLot"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"ParkingLot"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ParkingLot"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"ParkingLot"> | Date | string | null
     ownerId?: IntWithAggregatesFilter<"ParkingLot"> | number
   }
 
@@ -18188,6 +18361,7 @@ export namespace Prisma {
     vehicleType?: EnumVEHICLE__TYPE_ALIASFilter<"ParkingLotPrice"> | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatFilter<"ParkingLotPrice"> | number
     updatedAt?: DateTimeFilter<"ParkingLotPrice"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"ParkingLotPrice"> | Date | string | null
     parkingLotId?: IntFilter<"ParkingLotPrice"> | number
     parkingLot?: XOR<ParkingLotRelationFilter, ParkingLotWhereInput>
   }
@@ -18196,6 +18370,7 @@ export namespace Prisma {
     vehicleType?: SortOrder
     price?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     parkingLotId?: SortOrder
     parkingLot?: ParkingLotOrderByWithRelationInput
   }
@@ -18208,6 +18383,7 @@ export namespace Prisma {
     vehicleType?: EnumVEHICLE__TYPE_ALIASFilter<"ParkingLotPrice"> | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatFilter<"ParkingLotPrice"> | number
     updatedAt?: DateTimeFilter<"ParkingLotPrice"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"ParkingLotPrice"> | Date | string | null
     parkingLotId?: IntFilter<"ParkingLotPrice"> | number
     parkingLot?: XOR<ParkingLotRelationFilter, ParkingLotWhereInput>
   }, "vehicleType_parkingLotId">
@@ -18216,6 +18392,7 @@ export namespace Prisma {
     vehicleType?: SortOrder
     price?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     parkingLotId?: SortOrder
     _count?: ParkingLotPriceCountOrderByAggregateInput
     _avg?: ParkingLotPriceAvgOrderByAggregateInput
@@ -18231,6 +18408,7 @@ export namespace Prisma {
     vehicleType?: EnumVEHICLE__TYPE_ALIASWithAggregatesFilter<"ParkingLotPrice"> | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatWithAggregatesFilter<"ParkingLotPrice"> | number
     updatedAt?: DateTimeWithAggregatesFilter<"ParkingLotPrice"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"ParkingLotPrice"> | Date | string | null
     parkingLotId?: IntWithAggregatesFilter<"ParkingLotPrice"> | number
   }
 
@@ -18244,6 +18422,7 @@ export namespace Prisma {
     mediaUrls?: StringNullableListFilter<"ParkingLotReview">
     createdAt?: DateTimeFilter<"ParkingLotReview"> | Date | string
     updatedAt?: DateTimeFilter<"ParkingLotReview"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"ParkingLotReview"> | Date | string | null
     parkingLotId?: IntFilter<"ParkingLotReview"> | number
     userId?: IntFilter<"ParkingLotReview"> | number
     parkingLot?: XOR<ParkingLotRelationFilter, ParkingLotWhereInput>
@@ -18257,6 +18436,7 @@ export namespace Prisma {
     mediaUrls?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     parkingLotId?: SortOrder
     userId?: SortOrder
     parkingLot?: ParkingLotOrderByWithRelationInput
@@ -18273,6 +18453,7 @@ export namespace Prisma {
     mediaUrls?: StringNullableListFilter<"ParkingLotReview">
     createdAt?: DateTimeFilter<"ParkingLotReview"> | Date | string
     updatedAt?: DateTimeFilter<"ParkingLotReview"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"ParkingLotReview"> | Date | string | null
     parkingLotId?: IntFilter<"ParkingLotReview"> | number
     userId?: IntFilter<"ParkingLotReview"> | number
     parkingLot?: XOR<ParkingLotRelationFilter, ParkingLotWhereInput>
@@ -18286,6 +18467,7 @@ export namespace Prisma {
     mediaUrls?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     parkingLotId?: SortOrder
     userId?: SortOrder
     _count?: ParkingLotReviewCountOrderByAggregateInput
@@ -18305,6 +18487,7 @@ export namespace Prisma {
     mediaUrls?: StringNullableListFilter<"ParkingLotReview">
     createdAt?: DateTimeWithAggregatesFilter<"ParkingLotReview"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ParkingLotReview"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"ParkingLotReview"> | Date | string | null
     parkingLotId?: IntWithAggregatesFilter<"ParkingLotReview"> | number
     userId?: IntWithAggregatesFilter<"ParkingLotReview"> | number
   }
@@ -18485,6 +18668,7 @@ export namespace Prisma {
     endTime?: DateTimeFilter<"Reservation"> | Date | string
     createdAt?: DateTimeFilter<"Reservation"> | Date | string
     updatedAt?: DateTimeFilter<"Reservation"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
     userId?: IntFilter<"Reservation"> | number
     parkingSpotId?: IntFilter<"Reservation"> | number
     vehicleId?: IntFilter<"Reservation"> | number
@@ -18503,6 +18687,7 @@ export namespace Prisma {
     endTime?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     userId?: SortOrder
     parkingSpotId?: SortOrder
     vehicleId?: SortOrder
@@ -18524,6 +18709,7 @@ export namespace Prisma {
     endTime?: DateTimeFilter<"Reservation"> | Date | string
     createdAt?: DateTimeFilter<"Reservation"> | Date | string
     updatedAt?: DateTimeFilter<"Reservation"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
     userId?: IntFilter<"Reservation"> | number
     parkingSpotId?: IntFilter<"Reservation"> | number
     vehicleId?: IntFilter<"Reservation"> | number
@@ -18542,6 +18728,7 @@ export namespace Prisma {
     endTime?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     userId?: SortOrder
     parkingSpotId?: SortOrder
     vehicleId?: SortOrder
@@ -18563,6 +18750,7 @@ export namespace Prisma {
     endTime?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
     createdAt?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Reservation"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"Reservation"> | Date | string | null
     userId?: IntWithAggregatesFilter<"Reservation"> | number
     parkingSpotId?: IntWithAggregatesFilter<"Reservation"> | number
     vehicleId?: IntWithAggregatesFilter<"Reservation"> | number
@@ -18578,6 +18766,7 @@ export namespace Prisma {
     amountInUsd?: FloatFilter<"PaymentRecord"> | number
     createdAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PaymentRecord"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"PaymentRecord"> | Date | string | null
     userId?: IntFilter<"PaymentRecord"> | number
     reservationId?: IntFilter<"PaymentRecord"> | number
     payoutRecordId?: IntNullableFilter<"PaymentRecord"> | number | null
@@ -18593,6 +18782,7 @@ export namespace Prisma {
     amountInUsd?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     userId?: SortOrder
     reservationId?: SortOrder
     payoutRecordId?: SortOrderInput | SortOrder
@@ -18612,6 +18802,7 @@ export namespace Prisma {
     amountInUsd?: FloatFilter<"PaymentRecord"> | number
     createdAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PaymentRecord"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"PaymentRecord"> | Date | string | null
     userId?: IntFilter<"PaymentRecord"> | number
     payoutRecordId?: IntNullableFilter<"PaymentRecord"> | number | null
     user?: XOR<UserRelationFilter, UserWhereInput>
@@ -18626,6 +18817,7 @@ export namespace Prisma {
     amountInUsd?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     userId?: SortOrder
     reservationId?: SortOrder
     payoutRecordId?: SortOrderInput | SortOrder
@@ -18646,6 +18838,7 @@ export namespace Prisma {
     amountInUsd?: FloatWithAggregatesFilter<"PaymentRecord"> | number
     createdAt?: DateTimeWithAggregatesFilter<"PaymentRecord"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"PaymentRecord"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"PaymentRecord"> | Date | string | null
     userId?: IntWithAggregatesFilter<"PaymentRecord"> | number
     reservationId?: IntWithAggregatesFilter<"PaymentRecord"> | number
     payoutRecordId?: IntNullableWithAggregatesFilter<"PaymentRecord"> | number | null
@@ -18663,6 +18856,7 @@ export namespace Prisma {
     errorType?: EnumPAYOUT__ERROR_TYPE_ALIASNullableFilter<"PayoutRecord"> | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFilter<"PayoutRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PayoutRecord"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"PayoutRecord"> | Date | string | null
     parkingLotId?: IntFilter<"PayoutRecord"> | number
     paymentRecords?: PaymentRecordListRelationFilter
     parkingLot?: XOR<ParkingLotRelationFilter, ParkingLotWhereInput>
@@ -18677,6 +18871,7 @@ export namespace Prisma {
     errorType?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     parkingLotId?: SortOrder
     paymentRecords?: PaymentRecordOrderByRelationAggregateInput
     parkingLot?: ParkingLotOrderByWithRelationInput
@@ -18694,6 +18889,7 @@ export namespace Prisma {
     errorType?: EnumPAYOUT__ERROR_TYPE_ALIASNullableFilter<"PayoutRecord"> | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFilter<"PayoutRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PayoutRecord"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"PayoutRecord"> | Date | string | null
     parkingLotId?: IntFilter<"PayoutRecord"> | number
     paymentRecords?: PaymentRecordListRelationFilter
     parkingLot?: XOR<ParkingLotRelationFilter, ParkingLotWhereInput>
@@ -18708,6 +18904,7 @@ export namespace Prisma {
     errorType?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
     parkingLotId?: SortOrder
     _count?: PayoutRecordCountOrderByAggregateInput
     _avg?: PayoutRecordAvgOrderByAggregateInput
@@ -18728,6 +18925,7 @@ export namespace Prisma {
     errorType?: EnumPAYOUT__ERROR_TYPE_ALIASNullableWithAggregatesFilter<"PayoutRecord"> | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeWithAggregatesFilter<"PayoutRecord"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"PayoutRecord"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"PayoutRecord"> | Date | string | null
     parkingLotId?: IntWithAggregatesFilter<"PayoutRecord"> | number
   }
 
@@ -18737,6 +18935,7 @@ export namespace Prisma {
     expiredAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     account: AccountCreateNestedOneWithoutOtpCodesInput
   }
 
@@ -18747,6 +18946,7 @@ export namespace Prisma {
     expiredAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     accountId: string
   }
 
@@ -18756,6 +18956,7 @@ export namespace Prisma {
     expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     account?: AccountUpdateOneRequiredWithoutOtpCodesNestedInput
   }
 
@@ -18766,6 +18967,7 @@ export namespace Prisma {
     expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accountId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -18776,6 +18978,7 @@ export namespace Prisma {
     expiredAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     accountId: string
   }
 
@@ -18785,6 +18988,7 @@ export namespace Prisma {
     expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OtpCodeUncheckedUpdateManyInput = {
@@ -18794,6 +18998,7 @@ export namespace Prisma {
     expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accountId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -18805,6 +19010,7 @@ export namespace Prisma {
     role: $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     user?: UserCreateNestedOneWithoutAccountInput
     AccountToken?: AccountTokenCreateNestedManyWithoutAccountInput
     otpCodes?: OtpCodeCreateNestedManyWithoutAccountInput
@@ -18818,6 +19024,7 @@ export namespace Prisma {
     role: $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     user?: UserUncheckedCreateNestedOneWithoutAccountInput
     AccountToken?: AccountTokenUncheckedCreateNestedManyWithoutAccountInput
     otpCodes?: OtpCodeUncheckedCreateNestedManyWithoutAccountInput
@@ -18831,6 +19038,7 @@ export namespace Prisma {
     role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneWithoutAccountNestedInput
     AccountToken?: AccountTokenUpdateManyWithoutAccountNestedInput
     otpCodes?: OtpCodeUpdateManyWithoutAccountNestedInput
@@ -18844,6 +19052,7 @@ export namespace Prisma {
     role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUncheckedUpdateOneWithoutAccountNestedInput
     AccountToken?: AccountTokenUncheckedUpdateManyWithoutAccountNestedInput
     otpCodes?: OtpCodeUncheckedUpdateManyWithoutAccountNestedInput
@@ -18857,6 +19066,7 @@ export namespace Prisma {
     role: $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type AccountUpdateManyMutationInput = {
@@ -18867,6 +19077,7 @@ export namespace Prisma {
     role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AccountUncheckedUpdateManyInput = {
@@ -18877,12 +19088,14 @@ export namespace Prisma {
     role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AccountTokenCreateInput = {
     token: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     account: AccountCreateNestedOneWithoutAccountTokenInput
   }
 
@@ -18891,6 +19104,7 @@ export namespace Prisma {
     token: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     accountId: string
   }
 
@@ -18898,6 +19112,7 @@ export namespace Prisma {
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     account?: AccountUpdateOneRequiredWithoutAccountTokenNestedInput
   }
 
@@ -18906,6 +19121,7 @@ export namespace Prisma {
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accountId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -18914,6 +19130,7 @@ export namespace Prisma {
     token: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     accountId: string
   }
 
@@ -18921,6 +19138,7 @@ export namespace Prisma {
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AccountTokenUncheckedUpdateManyInput = {
@@ -18928,6 +19146,7 @@ export namespace Prisma {
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accountId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -18941,6 +19160,7 @@ export namespace Prisma {
     stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     vehicles?: VehicleCreateNestedManyWithoutOwnerInput
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutUserInput
     parkingLots?: ParkingLotCreateNestedManyWithoutOwnerInput
@@ -18961,6 +19181,7 @@ export namespace Prisma {
     stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     accountId: string
     vehicles?: VehicleUncheckedCreateNestedManyWithoutOwnerInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutUserInput
@@ -18980,6 +19201,7 @@ export namespace Prisma {
     stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutUserNestedInput
     parkingLots?: ParkingLotUpdateManyWithoutOwnerNestedInput
@@ -19000,6 +19222,7 @@ export namespace Prisma {
     stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accountId?: StringFieldUpdateOperationsInput | string
     vehicles?: VehicleUncheckedUpdateManyWithoutOwnerNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutUserNestedInput
@@ -19020,6 +19243,7 @@ export namespace Prisma {
     stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     accountId: string
   }
 
@@ -19033,6 +19257,7 @@ export namespace Prisma {
     stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -19046,6 +19271,7 @@ export namespace Prisma {
     stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accountId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -19053,6 +19279,7 @@ export namespace Prisma {
     title: string
     message: string
     createdAt?: Date | string
+    deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutUserNotificationsInput
   }
 
@@ -19061,6 +19288,7 @@ export namespace Prisma {
     title: string
     message: string
     createdAt?: Date | string
+    deletedAt?: Date | string | null
     userId: number
   }
 
@@ -19068,6 +19296,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutUserNotificationsNestedInput
   }
 
@@ -19076,6 +19305,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -19084,6 +19314,7 @@ export namespace Prisma {
     title: string
     message: string
     createdAt?: Date | string
+    deletedAt?: Date | string | null
     userId: number
   }
 
@@ -19091,6 +19322,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserNotificationUncheckedUpdateManyInput = {
@@ -19098,6 +19330,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -19108,7 +19341,7 @@ export namespace Prisma {
     model: string
     color: string
     imageUrl: string
-    deleteAt?: Date | string | null
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     reservations?: ReservationCreateNestedManyWithoutVehicleInput
@@ -19123,7 +19356,7 @@ export namespace Prisma {
     model: string
     color: string
     imageUrl: string
-    deleteAt?: Date | string | null
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: number
@@ -19137,7 +19370,7 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    deleteAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservations?: ReservationUpdateManyWithoutVehicleNestedInput
@@ -19152,7 +19385,7 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    deleteAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: IntFieldUpdateOperationsInput | number
@@ -19167,7 +19400,7 @@ export namespace Prisma {
     model: string
     color: string
     imageUrl: string
-    deleteAt?: Date | string | null
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: number
@@ -19180,7 +19413,7 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    deleteAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -19193,7 +19426,7 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    deleteAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: IntFieldUpdateOperationsInput | number
@@ -19214,6 +19447,7 @@ export namespace Prisma {
     approvedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingSpots?: ParkingSpotCreateNestedManyWithoutParkingLotInput
     parkingLotServices?: ParkingLotServiceCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
@@ -19238,6 +19472,7 @@ export namespace Prisma {
     approvedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     ownerId: number
     parkingSpots?: ParkingSpotUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
@@ -19261,6 +19496,7 @@ export namespace Prisma {
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingSpots?: ParkingSpotUpdateManyWithoutParkingLotNestedInput
     parkingLotServices?: ParkingLotServiceUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
@@ -19285,6 +19521,7 @@ export namespace Prisma {
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerId?: IntFieldUpdateOperationsInput | number
     parkingSpots?: ParkingSpotUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
@@ -19309,6 +19546,7 @@ export namespace Prisma {
     approvedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     ownerId: number
   }
 
@@ -19327,6 +19565,7 @@ export namespace Prisma {
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ParkingLotUncheckedUpdateManyInput = {
@@ -19345,6 +19584,7 @@ export namespace Prisma {
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -19352,6 +19592,7 @@ export namespace Prisma {
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     price: number
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingLot: ParkingLotCreateNestedOneWithoutParkingLotPricesInput
   }
 
@@ -19359,6 +19600,7 @@ export namespace Prisma {
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     price: number
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingLotId: number
   }
 
@@ -19366,6 +19608,7 @@ export namespace Prisma {
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingLot?: ParkingLotUpdateOneRequiredWithoutParkingLotPricesNestedInput
   }
 
@@ -19373,6 +19616,7 @@ export namespace Prisma {
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingLotId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -19380,6 +19624,7 @@ export namespace Prisma {
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     price: number
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingLotId: number
   }
 
@@ -19387,12 +19632,14 @@ export namespace Prisma {
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ParkingLotPriceUncheckedUpdateManyInput = {
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingLotId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -19402,6 +19649,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotReviewCreatemediaUrlsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingLot: ParkingLotCreateNestedOneWithoutParkingLotReviewsInput
     user: UserCreateNestedOneWithoutParkingLotReviewsInput
   }
@@ -19413,6 +19661,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotReviewCreatemediaUrlsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingLotId: number
     userId: number
   }
@@ -19423,6 +19672,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotReviewUpdatemediaUrlsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingLot?: ParkingLotUpdateOneRequiredWithoutParkingLotReviewsNestedInput
     user?: UserUpdateOneRequiredWithoutParkingLotReviewsNestedInput
   }
@@ -19434,6 +19684,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotReviewUpdatemediaUrlsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingLotId?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
   }
@@ -19445,6 +19696,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotReviewCreatemediaUrlsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingLotId: number
     userId: number
   }
@@ -19455,6 +19707,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotReviewUpdatemediaUrlsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ParkingLotReviewUncheckedUpdateManyInput = {
@@ -19464,6 +19717,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotReviewUpdatemediaUrlsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingLotId?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
   }
@@ -19650,6 +19904,7 @@ export namespace Prisma {
     endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     services?: ParkingLotServiceCreateNestedManyWithoutReservationsInput
     user: UserCreateNestedOneWithoutReservationsInput
     parkingSpot: ParkingSpotCreateNestedOneWithoutReservationsInput
@@ -19665,6 +19920,7 @@ export namespace Prisma {
     endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     userId: number
     parkingSpotId: number
     vehicleId: number
@@ -19679,6 +19935,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     services?: ParkingLotServiceUpdateManyWithoutReservationsNestedInput
     user?: UserUpdateOneRequiredWithoutReservationsNestedInput
     parkingSpot?: ParkingSpotUpdateOneRequiredWithoutReservationsNestedInput
@@ -19694,6 +19951,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: IntFieldUpdateOperationsInput | number
     parkingSpotId?: IntFieldUpdateOperationsInput | number
     vehicleId?: IntFieldUpdateOperationsInput | number
@@ -19709,6 +19967,7 @@ export namespace Prisma {
     endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     userId: number
     parkingSpotId: number
     vehicleId: number
@@ -19721,6 +19980,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ReservationUncheckedUpdateManyInput = {
@@ -19731,6 +19991,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: IntFieldUpdateOperationsInput | number
     parkingSpotId?: IntFieldUpdateOperationsInput | number
     vehicleId?: IntFieldUpdateOperationsInput | number
@@ -19742,6 +20003,7 @@ export namespace Prisma {
     amountInUsd: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutPaymentRecordsInput
     reservation: ReservationCreateNestedOneWithoutPaymentRecordInput
     payoutRecord?: PayoutRecordCreateNestedOneWithoutPaymentRecordsInput
@@ -19754,6 +20016,7 @@ export namespace Prisma {
     amountInUsd: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     userId: number
     reservationId: number
     payoutRecordId?: number | null
@@ -19765,6 +20028,7 @@ export namespace Prisma {
     amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutPaymentRecordsNestedInput
     reservation?: ReservationUpdateOneRequiredWithoutPaymentRecordNestedInput
     payoutRecord?: PayoutRecordUpdateOneWithoutPaymentRecordsNestedInput
@@ -19777,6 +20041,7 @@ export namespace Prisma {
     amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: IntFieldUpdateOperationsInput | number
     reservationId?: IntFieldUpdateOperationsInput | number
     payoutRecordId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -19789,6 +20054,7 @@ export namespace Prisma {
     amountInUsd: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     userId: number
     reservationId: number
     payoutRecordId?: number | null
@@ -19800,6 +20066,7 @@ export namespace Prisma {
     amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PaymentRecordUncheckedUpdateManyInput = {
@@ -19809,6 +20076,7 @@ export namespace Prisma {
     amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: IntFieldUpdateOperationsInput | number
     reservationId?: IntFieldUpdateOperationsInput | number
     payoutRecordId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -19822,6 +20090,7 @@ export namespace Prisma {
     errorType?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     paymentRecords?: PaymentRecordCreateNestedManyWithoutPayoutRecordInput
     parkingLot: ParkingLotCreateNestedOneWithoutPayoutRecordsInput
   }
@@ -19835,6 +20104,7 @@ export namespace Prisma {
     errorType?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingLotId: number
     paymentRecords?: PaymentRecordUncheckedCreateNestedManyWithoutPayoutRecordInput
   }
@@ -19847,6 +20117,7 @@ export namespace Prisma {
     errorType?: NullableEnumPAYOUT__ERROR_TYPE_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     paymentRecords?: PaymentRecordUpdateManyWithoutPayoutRecordNestedInput
     parkingLot?: ParkingLotUpdateOneRequiredWithoutPayoutRecordsNestedInput
   }
@@ -19860,6 +20131,7 @@ export namespace Prisma {
     errorType?: NullableEnumPAYOUT__ERROR_TYPE_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingLotId?: IntFieldUpdateOperationsInput | number
     paymentRecords?: PaymentRecordUncheckedUpdateManyWithoutPayoutRecordNestedInput
   }
@@ -19873,6 +20145,7 @@ export namespace Prisma {
     errorType?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingLotId: number
   }
 
@@ -19884,6 +20157,7 @@ export namespace Prisma {
     errorType?: NullableEnumPAYOUT__ERROR_TYPE_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PayoutRecordUncheckedUpdateManyInput = {
@@ -19895,6 +20169,7 @@ export namespace Prisma {
     errorType?: NullableEnumPAYOUT__ERROR_TYPE_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingLotId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -19942,9 +20217,25 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type AccountRelationFilter = {
     is?: AccountWhereInput
     isNot?: AccountWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type OtpCodeCountOrderByAggregateInput = {
@@ -19954,6 +20245,7 @@ export namespace Prisma {
     expiredAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     accountId?: SortOrder
   }
 
@@ -19968,6 +20260,7 @@ export namespace Prisma {
     expiredAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     accountId?: SortOrder
   }
 
@@ -19978,6 +20271,7 @@ export namespace Prisma {
     expiredAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     accountId?: SortOrder
   }
 
@@ -20043,6 +20337,20 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -20088,6 +20396,7 @@ export namespace Prisma {
     role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
   }
 
   export type AccountMaxOrderByAggregateInput = {
@@ -20098,6 +20407,7 @@ export namespace Prisma {
     role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
   }
 
   export type AccountMinOrderByAggregateInput = {
@@ -20108,6 +20418,7 @@ export namespace Prisma {
     role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -20133,6 +20444,7 @@ export namespace Prisma {
     token?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     accountId?: SortOrder
   }
 
@@ -20145,6 +20457,7 @@ export namespace Prisma {
     token?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     accountId?: SortOrder
   }
 
@@ -20153,6 +20466,7 @@ export namespace Prisma {
     token?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     accountId?: SortOrder
   }
 
@@ -20218,11 +20532,6 @@ export namespace Prisma {
     none?: ReservationWhereInput
   }
 
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
   export type VehicleOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -20258,6 +20567,7 @@ export namespace Prisma {
     stripeAccountId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     accountId?: SortOrder
   }
 
@@ -20276,6 +20586,7 @@ export namespace Prisma {
     stripeAccountId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     accountId?: SortOrder
   }
 
@@ -20290,6 +20601,7 @@ export namespace Prisma {
     stripeAccountId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     accountId?: SortOrder
   }
 
@@ -20335,6 +20647,7 @@ export namespace Prisma {
     title?: SortOrder
     message?: SortOrder
     createdAt?: SortOrder
+    deletedAt?: SortOrder
     userId?: SortOrder
   }
 
@@ -20348,6 +20661,7 @@ export namespace Prisma {
     title?: SortOrder
     message?: SortOrder
     createdAt?: SortOrder
+    deletedAt?: SortOrder
     userId?: SortOrder
   }
 
@@ -20356,6 +20670,7 @@ export namespace Prisma {
     title?: SortOrder
     message?: SortOrder
     createdAt?: SortOrder
+    deletedAt?: SortOrder
     userId?: SortOrder
   }
 
@@ -20371,17 +20686,6 @@ export namespace Prisma {
     not?: NestedEnumVEHICLE__TYPE_ALIASFilter<$PrismaModel> | $Enums.VEHICLE__TYPE_ALIAS
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type VehicleCountOrderByAggregateInput = {
     id?: SortOrder
     type?: SortOrder
@@ -20390,7 +20694,7 @@ export namespace Prisma {
     model?: SortOrder
     color?: SortOrder
     imageUrl?: SortOrder
-    deleteAt?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
@@ -20409,7 +20713,7 @@ export namespace Prisma {
     model?: SortOrder
     color?: SortOrder
     imageUrl?: SortOrder
-    deleteAt?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
@@ -20423,7 +20727,7 @@ export namespace Prisma {
     model?: SortOrder
     color?: SortOrder
     imageUrl?: SortOrder
-    deleteAt?: SortOrder
+    deletedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     ownerId?: SortOrder
@@ -20442,20 +20746,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumVEHICLE__TYPE_ALIASFilter<$PrismaModel>
     _max?: NestedEnumVEHICLE__TYPE_ALIASFilter<$PrismaModel>
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type FloatFilter<$PrismaModel = never> = {
@@ -20540,6 +20830,7 @@ export namespace Prisma {
     approvedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     ownerId?: SortOrder
   }
 
@@ -20566,6 +20857,7 @@ export namespace Prisma {
     approvedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     ownerId?: SortOrder
   }
 
@@ -20584,6 +20876,7 @@ export namespace Prisma {
     approvedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     ownerId?: SortOrder
   }
 
@@ -20635,6 +20928,7 @@ export namespace Prisma {
     vehicleType?: SortOrder
     price?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     parkingLotId?: SortOrder
   }
 
@@ -20647,6 +20941,7 @@ export namespace Prisma {
     vehicleType?: SortOrder
     price?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     parkingLotId?: SortOrder
   }
 
@@ -20654,6 +20949,7 @@ export namespace Prisma {
     vehicleType?: SortOrder
     price?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     parkingLotId?: SortOrder
   }
 
@@ -20669,6 +20965,7 @@ export namespace Prisma {
     mediaUrls?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     parkingLotId?: SortOrder
     userId?: SortOrder
   }
@@ -20686,6 +20983,7 @@ export namespace Prisma {
     comment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     parkingLotId?: SortOrder
     userId?: SortOrder
   }
@@ -20696,6 +20994,7 @@ export namespace Prisma {
     comment?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     parkingLotId?: SortOrder
     userId?: SortOrder
   }
@@ -20855,6 +21154,7 @@ export namespace Prisma {
     endTime?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     userId?: SortOrder
     parkingSpotId?: SortOrder
     vehicleId?: SortOrder
@@ -20875,6 +21175,7 @@ export namespace Prisma {
     endTime?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     userId?: SortOrder
     parkingSpotId?: SortOrder
     vehicleId?: SortOrder
@@ -20888,6 +21189,7 @@ export namespace Prisma {
     endTime?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     userId?: SortOrder
     parkingSpotId?: SortOrder
     vehicleId?: SortOrder
@@ -20945,6 +21247,7 @@ export namespace Prisma {
     amountInUsd?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     userId?: SortOrder
     reservationId?: SortOrder
     payoutRecordId?: SortOrder
@@ -20965,6 +21268,7 @@ export namespace Prisma {
     amountInUsd?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     userId?: SortOrder
     reservationId?: SortOrder
     payoutRecordId?: SortOrder
@@ -20977,6 +21281,7 @@ export namespace Prisma {
     amountInUsd?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     userId?: SortOrder
     reservationId?: SortOrder
     payoutRecordId?: SortOrder
@@ -21039,6 +21344,7 @@ export namespace Prisma {
     errorType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     parkingLotId?: SortOrder
   }
 
@@ -21058,6 +21364,7 @@ export namespace Prisma {
     errorType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     parkingLotId?: SortOrder
   }
 
@@ -21070,6 +21377,7 @@ export namespace Prisma {
     errorType?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    deletedAt?: SortOrder
     parkingLotId?: SortOrder
   }
 
@@ -21116,6 +21424,10 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type AccountUpdateOneRequiredWithoutOtpCodesNestedInput = {
@@ -21582,10 +21894,6 @@ export namespace Prisma {
 
   export type EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput = {
     set?: $Enums.VEHICLE__TYPE_ALIAS
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
   }
 
   export type ReservationUpdateManyWithoutVehicleNestedInput = {
@@ -22329,6 +22637,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -22395,6 +22714,31 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedBoolFilter<$PrismaModel = never> = {
@@ -22465,17 +22809,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedEnumUSER__GENDER_ALIASWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.USER__GENDER_ALIAS | EnumUSER__GENDER_ALIASFieldRefInput<$PrismaModel>
     in?: $Enums.USER__GENDER_ALIAS[] | ListEnumUSER__GENDER_ALIASFieldRefInput<$PrismaModel>
@@ -22493,17 +22826,6 @@ export namespace Prisma {
     not?: NestedEnumVEHICLE__TYPE_ALIASFilter<$PrismaModel> | $Enums.VEHICLE__TYPE_ALIAS
   }
 
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type NestedEnumVEHICLE__TYPE_ALIASWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.VEHICLE__TYPE_ALIAS | EnumVEHICLE__TYPE_ALIASFieldRefInput<$PrismaModel>
     in?: $Enums.VEHICLE__TYPE_ALIAS[] | ListEnumVEHICLE__TYPE_ALIASFieldRefInput<$PrismaModel>
@@ -22512,20 +22834,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumVEHICLE__TYPE_ALIASFilter<$PrismaModel>
     _max?: NestedEnumVEHICLE__TYPE_ALIASFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumPARKING_LOT__STATUS_ALIASFilter<$PrismaModel = never> = {
@@ -22681,6 +22989,7 @@ export namespace Prisma {
     role: $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     user?: UserCreateNestedOneWithoutAccountInput
     AccountToken?: AccountTokenCreateNestedManyWithoutAccountInput
   }
@@ -22693,6 +23002,7 @@ export namespace Prisma {
     role: $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     user?: UserUncheckedCreateNestedOneWithoutAccountInput
     AccountToken?: AccountTokenUncheckedCreateNestedManyWithoutAccountInput
   }
@@ -22721,6 +23031,7 @@ export namespace Prisma {
     role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneWithoutAccountNestedInput
     AccountToken?: AccountTokenUpdateManyWithoutAccountNestedInput
   }
@@ -22733,6 +23044,7 @@ export namespace Prisma {
     role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUncheckedUpdateOneWithoutAccountNestedInput
     AccountToken?: AccountTokenUncheckedUpdateManyWithoutAccountNestedInput
   }
@@ -22747,6 +23059,7 @@ export namespace Prisma {
     stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     vehicles?: VehicleCreateNestedManyWithoutOwnerInput
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutUserInput
     parkingLots?: ParkingLotCreateNestedManyWithoutOwnerInput
@@ -22766,6 +23079,7 @@ export namespace Prisma {
     stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     vehicles?: VehicleUncheckedCreateNestedManyWithoutOwnerInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutUserInput
     parkingLots?: ParkingLotUncheckedCreateNestedManyWithoutOwnerInput
@@ -22783,6 +23097,7 @@ export namespace Prisma {
     token: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type AccountTokenUncheckedCreateWithoutAccountInput = {
@@ -22790,6 +23105,7 @@ export namespace Prisma {
     token: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type AccountTokenCreateOrConnectWithoutAccountInput = {
@@ -22808,6 +23124,7 @@ export namespace Prisma {
     expiredAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type OtpCodeUncheckedCreateWithoutAccountInput = {
@@ -22817,6 +23134,7 @@ export namespace Prisma {
     expiredAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type OtpCodeCreateOrConnectWithoutAccountInput = {
@@ -22850,6 +23168,7 @@ export namespace Prisma {
     stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutUserNestedInput
     parkingLots?: ParkingLotUpdateManyWithoutOwnerNestedInput
@@ -22869,6 +23188,7 @@ export namespace Prisma {
     stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     vehicles?: VehicleUncheckedUpdateManyWithoutOwnerNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutUserNestedInput
     parkingLots?: ParkingLotUncheckedUpdateManyWithoutOwnerNestedInput
@@ -22901,6 +23221,7 @@ export namespace Prisma {
     token?: StringFilter<"AccountToken"> | string
     createdAt?: DateTimeFilter<"AccountToken"> | Date | string
     updatedAt?: DateTimeFilter<"AccountToken"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"AccountToken"> | Date | string | null
     accountId?: StringFilter<"AccountToken"> | string
   }
 
@@ -22930,6 +23251,7 @@ export namespace Prisma {
     expiredAt?: DateTimeFilter<"OtpCode"> | Date | string
     createdAt?: DateTimeFilter<"OtpCode"> | Date | string
     updatedAt?: DateTimeFilter<"OtpCode"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"OtpCode"> | Date | string | null
     accountId?: StringFilter<"OtpCode"> | string
   }
 
@@ -22941,6 +23263,7 @@ export namespace Prisma {
     role: $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     user?: UserCreateNestedOneWithoutAccountInput
     otpCodes?: OtpCodeCreateNestedManyWithoutAccountInput
   }
@@ -22953,6 +23276,7 @@ export namespace Prisma {
     role: $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     user?: UserUncheckedCreateNestedOneWithoutAccountInput
     otpCodes?: OtpCodeUncheckedCreateNestedManyWithoutAccountInput
   }
@@ -22981,6 +23305,7 @@ export namespace Prisma {
     role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneWithoutAccountNestedInput
     otpCodes?: OtpCodeUpdateManyWithoutAccountNestedInput
   }
@@ -22993,6 +23318,7 @@ export namespace Prisma {
     role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUncheckedUpdateOneWithoutAccountNestedInput
     otpCodes?: OtpCodeUncheckedUpdateManyWithoutAccountNestedInput
   }
@@ -23004,7 +23330,7 @@ export namespace Prisma {
     model: string
     color: string
     imageUrl: string
-    deleteAt?: Date | string | null
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     reservations?: ReservationCreateNestedManyWithoutVehicleInput
@@ -23018,7 +23344,7 @@ export namespace Prisma {
     model: string
     color: string
     imageUrl: string
-    deleteAt?: Date | string | null
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     reservations?: ReservationUncheckedCreateNestedManyWithoutVehicleInput
@@ -23040,6 +23366,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotReviewCreatemediaUrlsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingLot: ParkingLotCreateNestedOneWithoutParkingLotReviewsInput
   }
 
@@ -23050,6 +23377,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotReviewCreatemediaUrlsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingLotId: number
   }
 
@@ -23078,6 +23406,7 @@ export namespace Prisma {
     approvedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingSpots?: ParkingSpotCreateNestedManyWithoutParkingLotInput
     parkingLotServices?: ParkingLotServiceCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
@@ -23101,6 +23430,7 @@ export namespace Prisma {
     approvedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingSpots?: ParkingSpotUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutParkingLotInput
@@ -23124,6 +23454,7 @@ export namespace Prisma {
     amountInUsd: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     reservation: ReservationCreateNestedOneWithoutPaymentRecordInput
     payoutRecord?: PayoutRecordCreateNestedOneWithoutPaymentRecordsInput
   }
@@ -23135,6 +23466,7 @@ export namespace Prisma {
     amountInUsd: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     reservationId: number
     payoutRecordId?: number | null
   }
@@ -23153,6 +23485,7 @@ export namespace Prisma {
     title: string
     message: string
     createdAt?: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type UserNotificationUncheckedCreateWithoutUserInput = {
@@ -23160,6 +23493,7 @@ export namespace Prisma {
     title: string
     message: string
     createdAt?: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type UserNotificationCreateOrConnectWithoutUserInput = {
@@ -23179,6 +23513,7 @@ export namespace Prisma {
     endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     services?: ParkingLotServiceCreateNestedManyWithoutReservationsInput
     parkingSpot: ParkingSpotCreateNestedOneWithoutReservationsInput
     vehicle: VehicleCreateNestedOneWithoutReservationsInput
@@ -23193,6 +23528,7 @@ export namespace Prisma {
     endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingSpotId: number
     vehicleId: number
     services?: ParkingLotServiceUncheckedCreateNestedManyWithoutReservationsInput
@@ -23217,6 +23553,7 @@ export namespace Prisma {
     role: $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     AccountToken?: AccountTokenCreateNestedManyWithoutAccountInput
     otpCodes?: OtpCodeCreateNestedManyWithoutAccountInput
   }
@@ -23229,6 +23566,7 @@ export namespace Prisma {
     role: $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     AccountToken?: AccountTokenUncheckedCreateNestedManyWithoutAccountInput
     otpCodes?: OtpCodeUncheckedCreateNestedManyWithoutAccountInput
   }
@@ -23265,7 +23603,7 @@ export namespace Prisma {
     model?: StringFilter<"Vehicle"> | string
     color?: StringFilter<"Vehicle"> | string
     imageUrl?: StringFilter<"Vehicle"> | string
-    deleteAt?: DateTimeNullableFilter<"Vehicle"> | Date | string | null
+    deletedAt?: DateTimeNullableFilter<"Vehicle"> | Date | string | null
     createdAt?: DateTimeFilter<"Vehicle"> | Date | string
     updatedAt?: DateTimeFilter<"Vehicle"> | Date | string
     ownerId?: IntFilter<"Vehicle"> | number
@@ -23297,6 +23635,7 @@ export namespace Prisma {
     mediaUrls?: StringNullableListFilter<"ParkingLotReview">
     createdAt?: DateTimeFilter<"ParkingLotReview"> | Date | string
     updatedAt?: DateTimeFilter<"ParkingLotReview"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"ParkingLotReview"> | Date | string | null
     parkingLotId?: IntFilter<"ParkingLotReview"> | number
     userId?: IntFilter<"ParkingLotReview"> | number
   }
@@ -23336,6 +23675,7 @@ export namespace Prisma {
     approvedAt?: DateTimeNullableFilter<"ParkingLot"> | Date | string | null
     createdAt?: DateTimeFilter<"ParkingLot"> | Date | string
     updatedAt?: DateTimeFilter<"ParkingLot"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"ParkingLot"> | Date | string | null
     ownerId?: IntFilter<"ParkingLot"> | number
   }
 
@@ -23365,6 +23705,7 @@ export namespace Prisma {
     amountInUsd?: FloatFilter<"PaymentRecord"> | number
     createdAt?: DateTimeFilter<"PaymentRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PaymentRecord"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"PaymentRecord"> | Date | string | null
     userId?: IntFilter<"PaymentRecord"> | number
     reservationId?: IntFilter<"PaymentRecord"> | number
     payoutRecordId?: IntNullableFilter<"PaymentRecord"> | number | null
@@ -23394,6 +23735,7 @@ export namespace Prisma {
     title?: StringFilter<"UserNotification"> | string
     message?: StringFilter<"UserNotification"> | string
     createdAt?: DateTimeFilter<"UserNotification"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"UserNotification"> | Date | string | null
     userId?: IntFilter<"UserNotification"> | number
   }
 
@@ -23424,6 +23766,7 @@ export namespace Prisma {
     endTime?: DateTimeFilter<"Reservation"> | Date | string
     createdAt?: DateTimeFilter<"Reservation"> | Date | string
     updatedAt?: DateTimeFilter<"Reservation"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
     userId?: IntFilter<"Reservation"> | number
     parkingSpotId?: IntFilter<"Reservation"> | number
     vehicleId?: IntFilter<"Reservation"> | number
@@ -23448,6 +23791,7 @@ export namespace Prisma {
     role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     AccountToken?: AccountTokenUpdateManyWithoutAccountNestedInput
     otpCodes?: OtpCodeUpdateManyWithoutAccountNestedInput
   }
@@ -23460,6 +23804,7 @@ export namespace Prisma {
     role?: EnumACCOUNT__ROLE_ALIASFieldUpdateOperationsInput | $Enums.ACCOUNT__ROLE_ALIAS
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     AccountToken?: AccountTokenUncheckedUpdateManyWithoutAccountNestedInput
     otpCodes?: OtpCodeUncheckedUpdateManyWithoutAccountNestedInput
   }
@@ -23474,6 +23819,7 @@ export namespace Prisma {
     stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     vehicles?: VehicleCreateNestedManyWithoutOwnerInput
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutUserInput
     parkingLots?: ParkingLotCreateNestedManyWithoutOwnerInput
@@ -23493,6 +23839,7 @@ export namespace Prisma {
     stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     accountId: string
     vehicles?: VehicleUncheckedCreateNestedManyWithoutOwnerInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutUserInput
@@ -23527,6 +23874,7 @@ export namespace Prisma {
     stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutUserNestedInput
     parkingLots?: ParkingLotUpdateManyWithoutOwnerNestedInput
@@ -23546,6 +23894,7 @@ export namespace Prisma {
     stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accountId?: StringFieldUpdateOperationsInput | string
     vehicles?: VehicleUncheckedUpdateManyWithoutOwnerNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutUserNestedInput
@@ -23561,6 +23910,7 @@ export namespace Prisma {
     endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     services?: ParkingLotServiceCreateNestedManyWithoutReservationsInput
     user: UserCreateNestedOneWithoutReservationsInput
     parkingSpot: ParkingSpotCreateNestedOneWithoutReservationsInput
@@ -23575,6 +23925,7 @@ export namespace Prisma {
     endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     userId: number
     parkingSpotId: number
     services?: ParkingLotServiceUncheckedCreateNestedManyWithoutReservationsInput
@@ -23601,6 +23952,7 @@ export namespace Prisma {
     stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutUserInput
     parkingLots?: ParkingLotCreateNestedManyWithoutOwnerInput
     paymentRecords?: PaymentRecordCreateNestedManyWithoutUserInput
@@ -23620,6 +23972,7 @@ export namespace Prisma {
     stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     accountId: string
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutUserInput
     parkingLots?: ParkingLotUncheckedCreateNestedManyWithoutOwnerInput
@@ -23670,6 +24023,7 @@ export namespace Prisma {
     stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutUserNestedInput
     parkingLots?: ParkingLotUpdateManyWithoutOwnerNestedInput
     paymentRecords?: PaymentRecordUpdateManyWithoutUserNestedInput
@@ -23689,6 +24043,7 @@ export namespace Prisma {
     stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accountId?: StringFieldUpdateOperationsInput | string
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutUserNestedInput
     parkingLots?: ParkingLotUncheckedUpdateManyWithoutOwnerNestedInput
@@ -23771,6 +24126,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotReviewCreatemediaUrlsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutParkingLotReviewsInput
   }
 
@@ -23781,6 +24137,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotReviewCreatemediaUrlsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     userId: number
   }
 
@@ -23798,12 +24155,14 @@ export namespace Prisma {
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     price: number
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type ParkingLotPriceUncheckedCreateWithoutParkingLotInput = {
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     price: number
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type ParkingLotPriceCreateOrConnectWithoutParkingLotInput = {
@@ -23826,6 +24185,7 @@ export namespace Prisma {
     stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     vehicles?: VehicleCreateNestedManyWithoutOwnerInput
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutUserInput
     paymentRecords?: PaymentRecordCreateNestedManyWithoutUserInput
@@ -23845,6 +24205,7 @@ export namespace Prisma {
     stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     accountId: string
     vehicles?: VehicleUncheckedCreateNestedManyWithoutOwnerInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutUserInput
@@ -23866,6 +24227,7 @@ export namespace Prisma {
     errorType?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     paymentRecords?: PaymentRecordCreateNestedManyWithoutPayoutRecordInput
   }
 
@@ -23878,6 +24240,7 @@ export namespace Prisma {
     errorType?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     paymentRecords?: PaymentRecordUncheckedCreateNestedManyWithoutPayoutRecordInput
   }
 
@@ -23993,6 +24356,7 @@ export namespace Prisma {
     vehicleType?: EnumVEHICLE__TYPE_ALIASFilter<"ParkingLotPrice"> | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatFilter<"ParkingLotPrice"> | number
     updatedAt?: DateTimeFilter<"ParkingLotPrice"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"ParkingLotPrice"> | Date | string | null
     parkingLotId?: IntFilter<"ParkingLotPrice"> | number
   }
 
@@ -24017,6 +24381,7 @@ export namespace Prisma {
     stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutUserNestedInput
     paymentRecords?: PaymentRecordUpdateManyWithoutUserNestedInput
@@ -24036,6 +24401,7 @@ export namespace Prisma {
     stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accountId?: StringFieldUpdateOperationsInput | string
     vehicles?: VehicleUncheckedUpdateManyWithoutOwnerNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutUserNestedInput
@@ -24072,6 +24438,7 @@ export namespace Prisma {
     errorType?: EnumPAYOUT__ERROR_TYPE_ALIASNullableFilter<"PayoutRecord"> | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFilter<"PayoutRecord"> | Date | string
     updatedAt?: DateTimeFilter<"PayoutRecord"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"PayoutRecord"> | Date | string | null
     parkingLotId?: IntFilter<"PayoutRecord"> | number
   }
 
@@ -24090,6 +24457,7 @@ export namespace Prisma {
     approvedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingSpots?: ParkingSpotCreateNestedManyWithoutParkingLotInput
     parkingLotServices?: ParkingLotServiceCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
@@ -24113,6 +24481,7 @@ export namespace Prisma {
     approvedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     ownerId: number
     parkingSpots?: ParkingSpotUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
@@ -24151,6 +24520,7 @@ export namespace Prisma {
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingSpots?: ParkingSpotUpdateManyWithoutParkingLotNestedInput
     parkingLotServices?: ParkingLotServiceUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
@@ -24174,6 +24544,7 @@ export namespace Prisma {
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerId?: IntFieldUpdateOperationsInput | number
     parkingSpots?: ParkingSpotUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
@@ -24196,6 +24567,7 @@ export namespace Prisma {
     approvedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingSpots?: ParkingSpotCreateNestedManyWithoutParkingLotInput
     parkingLotServices?: ParkingLotServiceCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceCreateNestedManyWithoutParkingLotInput
@@ -24219,6 +24591,7 @@ export namespace Prisma {
     approvedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     ownerId: number
     parkingSpots?: ParkingSpotUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
@@ -24241,6 +24614,7 @@ export namespace Prisma {
     stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     vehicles?: VehicleCreateNestedManyWithoutOwnerInput
     parkingLots?: ParkingLotCreateNestedManyWithoutOwnerInput
     paymentRecords?: PaymentRecordCreateNestedManyWithoutUserInput
@@ -24260,6 +24634,7 @@ export namespace Prisma {
     stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     accountId: string
     vehicles?: VehicleUncheckedCreateNestedManyWithoutOwnerInput
     parkingLots?: ParkingLotUncheckedCreateNestedManyWithoutOwnerInput
@@ -24299,6 +24674,7 @@ export namespace Prisma {
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingSpots?: ParkingSpotUpdateManyWithoutParkingLotNestedInput
     parkingLotServices?: ParkingLotServiceUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUpdateManyWithoutParkingLotNestedInput
@@ -24322,6 +24698,7 @@ export namespace Prisma {
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerId?: IntFieldUpdateOperationsInput | number
     parkingSpots?: ParkingSpotUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
@@ -24350,6 +24727,7 @@ export namespace Prisma {
     stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
     parkingLots?: ParkingLotUpdateManyWithoutOwnerNestedInput
     paymentRecords?: PaymentRecordUpdateManyWithoutUserNestedInput
@@ -24369,6 +24747,7 @@ export namespace Prisma {
     stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accountId?: StringFieldUpdateOperationsInput | string
     vehicles?: VehicleUncheckedUpdateManyWithoutOwnerNestedInput
     parkingLots?: ParkingLotUncheckedUpdateManyWithoutOwnerNestedInput
@@ -24392,6 +24771,7 @@ export namespace Prisma {
     approvedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingSpots?: ParkingSpotCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceCreateNestedManyWithoutParkingLotInput
@@ -24415,6 +24795,7 @@ export namespace Prisma {
     approvedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     ownerId: number
     parkingSpots?: ParkingSpotUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutParkingLotInput
@@ -24434,6 +24815,7 @@ export namespace Prisma {
     endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutReservationsInput
     parkingSpot: ParkingSpotCreateNestedOneWithoutReservationsInput
     vehicle: VehicleCreateNestedOneWithoutReservationsInput
@@ -24448,6 +24830,7 @@ export namespace Prisma {
     endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     userId: number
     parkingSpotId: number
     vehicleId: number
@@ -24485,6 +24868,7 @@ export namespace Prisma {
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingSpots?: ParkingSpotUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUpdateManyWithoutParkingLotNestedInput
@@ -24508,6 +24892,7 @@ export namespace Prisma {
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerId?: IntFieldUpdateOperationsInput | number
     parkingSpots?: ParkingSpotUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutParkingLotNestedInput
@@ -24538,6 +24923,7 @@ export namespace Prisma {
     endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     services?: ParkingLotServiceCreateNestedManyWithoutReservationsInput
     user: UserCreateNestedOneWithoutReservationsInput
     vehicle: VehicleCreateNestedOneWithoutReservationsInput
@@ -24552,6 +24938,7 @@ export namespace Prisma {
     endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     userId: number
     vehicleId: number
     services?: ParkingLotServiceUncheckedCreateNestedManyWithoutReservationsInput
@@ -24583,6 +24970,7 @@ export namespace Prisma {
     approvedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingLotServices?: ParkingLotServiceCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
     parkingLotPrices?: ParkingLotPriceCreateNestedManyWithoutParkingLotInput
@@ -24606,6 +24994,7 @@ export namespace Prisma {
     approvedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     ownerId: number
     parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutParkingLotInput
@@ -24660,6 +25049,7 @@ export namespace Prisma {
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingLotServices?: ParkingLotServiceUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
     parkingLotPrices?: ParkingLotPriceUpdateManyWithoutParkingLotNestedInput
@@ -24683,6 +25073,7 @@ export namespace Prisma {
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerId?: IntFieldUpdateOperationsInput | number
     parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutParkingLotNestedInput
@@ -24732,6 +25123,7 @@ export namespace Prisma {
     stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     vehicles?: VehicleCreateNestedManyWithoutOwnerInput
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutUserInput
     parkingLots?: ParkingLotCreateNestedManyWithoutOwnerInput
@@ -24751,6 +25143,7 @@ export namespace Prisma {
     stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     accountId: string
     vehicles?: VehicleUncheckedCreateNestedManyWithoutOwnerInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutUserInput
@@ -24797,7 +25190,7 @@ export namespace Prisma {
     model: string
     color: string
     imageUrl: string
-    deleteAt?: Date | string | null
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     owner: UserCreateNestedOneWithoutVehiclesInput
@@ -24811,7 +25204,7 @@ export namespace Prisma {
     model: string
     color: string
     imageUrl: string
-    deleteAt?: Date | string | null
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     ownerId: number
@@ -24828,6 +25221,7 @@ export namespace Prisma {
     amountInUsd: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutPaymentRecordsInput
     payoutRecord?: PayoutRecordCreateNestedOneWithoutPaymentRecordsInput
   }
@@ -24839,6 +25233,7 @@ export namespace Prisma {
     amountInUsd: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     userId: number
     payoutRecordId?: number | null
   }
@@ -24885,6 +25280,7 @@ export namespace Prisma {
     stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutUserNestedInput
     parkingLots?: ParkingLotUpdateManyWithoutOwnerNestedInput
@@ -24904,6 +25300,7 @@ export namespace Prisma {
     stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accountId?: StringFieldUpdateOperationsInput | string
     vehicles?: VehicleUncheckedUpdateManyWithoutOwnerNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutUserNestedInput
@@ -24962,7 +25359,7 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    deleteAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     owner?: UserUpdateOneRequiredWithoutVehiclesNestedInput
@@ -24976,7 +25373,7 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    deleteAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ownerId?: IntFieldUpdateOperationsInput | number
@@ -24999,6 +25396,7 @@ export namespace Prisma {
     amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutPaymentRecordsNestedInput
     payoutRecord?: PayoutRecordUpdateOneWithoutPaymentRecordsNestedInput
   }
@@ -25010,6 +25408,7 @@ export namespace Prisma {
     amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: IntFieldUpdateOperationsInput | number
     payoutRecordId?: NullableIntFieldUpdateOperationsInput | number | null
   }
@@ -25024,6 +25423,7 @@ export namespace Prisma {
     stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     vehicles?: VehicleCreateNestedManyWithoutOwnerInput
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutUserInput
     parkingLots?: ParkingLotCreateNestedManyWithoutOwnerInput
@@ -25043,6 +25443,7 @@ export namespace Prisma {
     stripeAccountId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     accountId: string
     vehicles?: VehicleUncheckedCreateNestedManyWithoutOwnerInput
     parkingLotReviews?: ParkingLotReviewUncheckedCreateNestedManyWithoutUserInput
@@ -25063,6 +25464,7 @@ export namespace Prisma {
     endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     services?: ParkingLotServiceCreateNestedManyWithoutReservationsInput
     user: UserCreateNestedOneWithoutReservationsInput
     parkingSpot: ParkingSpotCreateNestedOneWithoutReservationsInput
@@ -25077,6 +25479,7 @@ export namespace Prisma {
     endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     userId: number
     parkingSpotId: number
     vehicleId: number
@@ -25096,6 +25499,7 @@ export namespace Prisma {
     errorType?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingLot: ParkingLotCreateNestedOneWithoutPayoutRecordsInput
   }
 
@@ -25108,6 +25512,7 @@ export namespace Prisma {
     errorType?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingLotId: number
   }
 
@@ -25137,6 +25542,7 @@ export namespace Prisma {
     stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     vehicles?: VehicleUpdateManyWithoutOwnerNestedInput
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutUserNestedInput
     parkingLots?: ParkingLotUpdateManyWithoutOwnerNestedInput
@@ -25156,6 +25562,7 @@ export namespace Prisma {
     stripeAccountId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accountId?: StringFieldUpdateOperationsInput | string
     vehicles?: VehicleUncheckedUpdateManyWithoutOwnerNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutUserNestedInput
@@ -25182,6 +25589,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     services?: ParkingLotServiceUpdateManyWithoutReservationsNestedInput
     user?: UserUpdateOneRequiredWithoutReservationsNestedInput
     parkingSpot?: ParkingSpotUpdateOneRequiredWithoutReservationsNestedInput
@@ -25196,6 +25604,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: IntFieldUpdateOperationsInput | number
     parkingSpotId?: IntFieldUpdateOperationsInput | number
     vehicleId?: IntFieldUpdateOperationsInput | number
@@ -25221,6 +25630,7 @@ export namespace Prisma {
     errorType?: NullableEnumPAYOUT__ERROR_TYPE_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingLot?: ParkingLotUpdateOneRequiredWithoutPayoutRecordsNestedInput
   }
 
@@ -25233,6 +25643,7 @@ export namespace Prisma {
     errorType?: NullableEnumPAYOUT__ERROR_TYPE_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingLotId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -25242,6 +25653,7 @@ export namespace Prisma {
     amountInUsd: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     user: UserCreateNestedOneWithoutPaymentRecordsInput
     reservation: ReservationCreateNestedOneWithoutPaymentRecordInput
   }
@@ -25253,6 +25665,7 @@ export namespace Prisma {
     amountInUsd: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     userId: number
     reservationId: number
   }
@@ -25282,6 +25695,7 @@ export namespace Prisma {
     approvedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingSpots?: ParkingSpotCreateNestedManyWithoutParkingLotInput
     parkingLotServices?: ParkingLotServiceCreateNestedManyWithoutParkingLotInput
     parkingLotReviews?: ParkingLotReviewCreateNestedManyWithoutParkingLotInput
@@ -25305,6 +25719,7 @@ export namespace Prisma {
     approvedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     ownerId: number
     parkingSpots?: ParkingSpotUncheckedCreateNestedManyWithoutParkingLotInput
     parkingLotServices?: ParkingLotServiceUncheckedCreateNestedManyWithoutParkingLotInput
@@ -25359,6 +25774,7 @@ export namespace Prisma {
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingSpots?: ParkingSpotUpdateManyWithoutParkingLotNestedInput
     parkingLotServices?: ParkingLotServiceUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
@@ -25382,6 +25798,7 @@ export namespace Prisma {
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerId?: IntFieldUpdateOperationsInput | number
     parkingSpots?: ParkingSpotUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
@@ -25394,6 +25811,7 @@ export namespace Prisma {
     token: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type OtpCodeCreateManyAccountInput = {
@@ -25403,12 +25821,14 @@ export namespace Prisma {
     expiredAt: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type AccountTokenUpdateWithoutAccountInput = {
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AccountTokenUncheckedUpdateWithoutAccountInput = {
@@ -25416,6 +25836,7 @@ export namespace Prisma {
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AccountTokenUncheckedUpdateManyWithoutAccountInput = {
@@ -25423,6 +25844,7 @@ export namespace Prisma {
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OtpCodeUpdateWithoutAccountInput = {
@@ -25431,6 +25853,7 @@ export namespace Prisma {
     expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OtpCodeUncheckedUpdateWithoutAccountInput = {
@@ -25440,6 +25863,7 @@ export namespace Prisma {
     expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OtpCodeUncheckedUpdateManyWithoutAccountInput = {
@@ -25449,6 +25873,7 @@ export namespace Prisma {
     expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type VehicleCreateManyOwnerInput = {
@@ -25459,7 +25884,7 @@ export namespace Prisma {
     model: string
     color: string
     imageUrl: string
-    deleteAt?: Date | string | null
+    deletedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -25471,6 +25896,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotReviewCreatemediaUrlsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingLotId: number
   }
 
@@ -25490,6 +25916,7 @@ export namespace Prisma {
     approvedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type PaymentRecordCreateManyUserInput = {
@@ -25499,6 +25926,7 @@ export namespace Prisma {
     amountInUsd: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     reservationId: number
     payoutRecordId?: number | null
   }
@@ -25508,6 +25936,7 @@ export namespace Prisma {
     title: string
     message: string
     createdAt?: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type ReservationCreateManyUserInput = {
@@ -25518,6 +25947,7 @@ export namespace Prisma {
     endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     parkingSpotId: number
     vehicleId: number
   }
@@ -25529,7 +25959,7 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    deleteAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservations?: ReservationUpdateManyWithoutVehicleNestedInput
@@ -25543,7 +25973,7 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    deleteAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     reservations?: ReservationUncheckedUpdateManyWithoutVehicleNestedInput
@@ -25557,7 +25987,7 @@ export namespace Prisma {
     model?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     imageUrl?: StringFieldUpdateOperationsInput | string
-    deleteAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -25568,6 +25998,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotReviewUpdatemediaUrlsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingLot?: ParkingLotUpdateOneRequiredWithoutParkingLotReviewsNestedInput
   }
 
@@ -25578,6 +26009,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotReviewUpdatemediaUrlsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingLotId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -25588,6 +26020,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotReviewUpdatemediaUrlsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingLotId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -25606,6 +26039,7 @@ export namespace Prisma {
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingSpots?: ParkingSpotUpdateManyWithoutParkingLotNestedInput
     parkingLotServices?: ParkingLotServiceUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUpdateManyWithoutParkingLotNestedInput
@@ -25629,6 +26063,7 @@ export namespace Prisma {
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingSpots?: ParkingSpotUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotServices?: ParkingLotServiceUncheckedUpdateManyWithoutParkingLotNestedInput
     parkingLotReviews?: ParkingLotReviewUncheckedUpdateManyWithoutParkingLotNestedInput
@@ -25652,6 +26087,7 @@ export namespace Prisma {
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PaymentRecordUpdateWithoutUserInput = {
@@ -25660,6 +26096,7 @@ export namespace Prisma {
     amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reservation?: ReservationUpdateOneRequiredWithoutPaymentRecordNestedInput
     payoutRecord?: PayoutRecordUpdateOneWithoutPaymentRecordsNestedInput
   }
@@ -25671,6 +26108,7 @@ export namespace Prisma {
     amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reservationId?: IntFieldUpdateOperationsInput | number
     payoutRecordId?: NullableIntFieldUpdateOperationsInput | number | null
   }
@@ -25682,6 +26120,7 @@ export namespace Prisma {
     amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     reservationId?: IntFieldUpdateOperationsInput | number
     payoutRecordId?: NullableIntFieldUpdateOperationsInput | number | null
   }
@@ -25690,6 +26129,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserNotificationUncheckedUpdateWithoutUserInput = {
@@ -25697,6 +26137,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserNotificationUncheckedUpdateManyWithoutUserInput = {
@@ -25704,6 +26145,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     message?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ReservationUpdateWithoutUserInput = {
@@ -25713,6 +26155,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     services?: ParkingLotServiceUpdateManyWithoutReservationsNestedInput
     parkingSpot?: ParkingSpotUpdateOneRequiredWithoutReservationsNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutReservationsNestedInput
@@ -25727,6 +26170,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingSpotId?: IntFieldUpdateOperationsInput | number
     vehicleId?: IntFieldUpdateOperationsInput | number
     services?: ParkingLotServiceUncheckedUpdateManyWithoutReservationsNestedInput
@@ -25741,6 +26185,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     parkingSpotId?: IntFieldUpdateOperationsInput | number
     vehicleId?: IntFieldUpdateOperationsInput | number
   }
@@ -25753,6 +26198,7 @@ export namespace Prisma {
     endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     userId: number
     parkingSpotId: number
   }
@@ -25764,6 +26210,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     services?: ParkingLotServiceUpdateManyWithoutReservationsNestedInput
     user?: UserUpdateOneRequiredWithoutReservationsNestedInput
     parkingSpot?: ParkingSpotUpdateOneRequiredWithoutReservationsNestedInput
@@ -25778,6 +26225,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: IntFieldUpdateOperationsInput | number
     parkingSpotId?: IntFieldUpdateOperationsInput | number
     services?: ParkingLotServiceUncheckedUpdateManyWithoutReservationsNestedInput
@@ -25792,6 +26240,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: IntFieldUpdateOperationsInput | number
     parkingSpotId?: IntFieldUpdateOperationsInput | number
   }
@@ -25826,6 +26275,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotReviewCreatemediaUrlsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     userId: number
   }
 
@@ -25833,6 +26283,7 @@ export namespace Prisma {
     vehicleType: $Enums.VEHICLE__TYPE_ALIAS
     price: number
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type PayoutRecordCreateManyParkingLotInput = {
@@ -25844,6 +26295,7 @@ export namespace Prisma {
     errorType?: $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
   }
 
   export type ParkingSpotUpdateWithoutParkingLotInput = {
@@ -25923,6 +26375,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotReviewUpdatemediaUrlsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutParkingLotReviewsNestedInput
   }
 
@@ -25933,6 +26386,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotReviewUpdatemediaUrlsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -25943,6 +26397,7 @@ export namespace Prisma {
     mediaUrls?: ParkingLotReviewUpdatemediaUrlsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -25950,18 +26405,21 @@ export namespace Prisma {
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ParkingLotPriceUncheckedUpdateWithoutParkingLotInput = {
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ParkingLotPriceUncheckedUpdateManyWithoutParkingLotInput = {
     vehicleType?: EnumVEHICLE__TYPE_ALIASFieldUpdateOperationsInput | $Enums.VEHICLE__TYPE_ALIAS
     price?: FloatFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PayoutRecordUpdateWithoutParkingLotInput = {
@@ -25972,6 +26430,7 @@ export namespace Prisma {
     errorType?: NullableEnumPAYOUT__ERROR_TYPE_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     paymentRecords?: PaymentRecordUpdateManyWithoutPayoutRecordNestedInput
   }
 
@@ -25984,6 +26443,7 @@ export namespace Prisma {
     errorType?: NullableEnumPAYOUT__ERROR_TYPE_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     paymentRecords?: PaymentRecordUncheckedUpdateManyWithoutPayoutRecordNestedInput
   }
 
@@ -25996,6 +26456,7 @@ export namespace Prisma {
     errorType?: NullableEnumPAYOUT__ERROR_TYPE_ALIASFieldUpdateOperationsInput | $Enums.PAYOUT__ERROR_TYPE_ALIAS | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ReservationUpdateWithoutServicesInput = {
@@ -26005,6 +26466,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutReservationsNestedInput
     parkingSpot?: ParkingSpotUpdateOneRequiredWithoutReservationsNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutReservationsNestedInput
@@ -26019,6 +26481,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: IntFieldUpdateOperationsInput | number
     parkingSpotId?: IntFieldUpdateOperationsInput | number
     vehicleId?: IntFieldUpdateOperationsInput | number
@@ -26033,6 +26496,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: IntFieldUpdateOperationsInput | number
     parkingSpotId?: IntFieldUpdateOperationsInput | number
     vehicleId?: IntFieldUpdateOperationsInput | number
@@ -26046,6 +26510,7 @@ export namespace Prisma {
     endTime: Date | string
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     userId: number
     vehicleId: number
   }
@@ -26057,6 +26522,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     services?: ParkingLotServiceUpdateManyWithoutReservationsNestedInput
     user?: UserUpdateOneRequiredWithoutReservationsNestedInput
     vehicle?: VehicleUpdateOneRequiredWithoutReservationsNestedInput
@@ -26071,6 +26537,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: IntFieldUpdateOperationsInput | number
     vehicleId?: IntFieldUpdateOperationsInput | number
     services?: ParkingLotServiceUncheckedUpdateManyWithoutReservationsNestedInput
@@ -26085,6 +26552,7 @@ export namespace Prisma {
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: IntFieldUpdateOperationsInput | number
     vehicleId?: IntFieldUpdateOperationsInput | number
   }
@@ -26137,6 +26605,7 @@ export namespace Prisma {
     amountInUsd: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    deletedAt?: Date | string | null
     userId: number
     reservationId: number
   }
@@ -26147,6 +26616,7 @@ export namespace Prisma {
     amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutPaymentRecordsNestedInput
     reservation?: ReservationUpdateOneRequiredWithoutPaymentRecordNestedInput
   }
@@ -26158,6 +26628,7 @@ export namespace Prisma {
     amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: IntFieldUpdateOperationsInput | number
     reservationId?: IntFieldUpdateOperationsInput | number
   }
@@ -26169,6 +26640,7 @@ export namespace Prisma {
     amountInUsd?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: IntFieldUpdateOperationsInput | number
     reservationId?: IntFieldUpdateOperationsInput | number
   }

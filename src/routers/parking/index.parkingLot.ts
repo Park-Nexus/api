@@ -187,7 +187,7 @@ export const getMany = procedure
 
     let parkingLots: Omit<
       ParkingLot,
-      "mediaUrls" | "description" | "phone" | "ratings" | "openAt" | "closeAt"
+      "mediaUrls" | "description" | "phone" | "ratings" | "openAt" | "closeAt" | "deletedAt"
     >[];
 
     if (!latitude || !longitude || !radiusInKm) {
@@ -383,6 +383,7 @@ export const addSpot = procedure
         parkingLotId: parkingLot.id,
         vehicleType: input.vehicleType,
         name: input.name.trim(),
+        deletedAt: null,
       },
     });
     if (currentParkingSpot) {
@@ -451,7 +452,7 @@ export const removeSpot = procedure
     const { spotId } = input;
 
     const owner = await prisma.user.findUnique({ where: { accountId: ownerAccountId } });
-    if (!owner) throw new Error("User not found");
+    if (!owner) throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
 
     const spot = await prisma.parkingSpot.findFirst({
       where: {
@@ -461,7 +462,10 @@ export const removeSpot = procedure
         },
       },
     });
-    if (!spot) throw new Error("Parking spot not found");
+    if (!spot) throw new TRPCError({ code: "NOT_FOUND", message: "Parking spot not found" });
+    if (!spot.isAvailable) {
+      throw new TRPCError({ code: "BAD_REQUEST", message: "Parking spot is occupied" });
+    }
 
     await prisma.parkingSpot.update({
       where: { id: spotId },

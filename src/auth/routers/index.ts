@@ -6,7 +6,7 @@ import * as register from "./register.router";
 
 export const authRouter = trpcInstance.router({
   login: {
-    user: login.adminLoginRouter,
+    user: login.loginRouter,
     admin: login.adminLoginRouter,
     verify: login.verifyLoginRouter,
     google: login.googleLoginRouter,

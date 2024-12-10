@@ -85,9 +85,9 @@ export const getDataByPlace = procedure.use(authMiddleware(["ADMIN"])).query(asy
     parkingLots.map(async (lot) => {
       const feature = await reverseGeocode({ lat: lot.latitude, lon: lot.longitude });
 
-      const placeCode = feature?.properties?.context?.place?.short_code || "";
+      const placeCode = feature?.properties?.context?.place?.short_code || "Other";
       if (!placeCode) return;
-      const placeName = feature?.properties?.context?.place?.name || "";
+      const placeName = feature?.properties?.context?.place?.name || "Other";
       const revenueInUsd = lot.parkingSpots.reduce((acc, spot) => {
         return (
           acc +
