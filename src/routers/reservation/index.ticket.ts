@@ -379,6 +379,9 @@ export const checkIn = procedure
     if (reservation.paymentRecord.status !== "PAID") {
       throw new TRPCError({ code: "BAD_REQUEST", message: "Reservation is not paid" });
     }
+    if (dayjs().isBefore(dayjs(reservation.startTime))) {
+      throw new TRPCError({ code: "BAD_REQUEST", message: "Reservation is not started yet" });
+    }
 
     await prisma.reservation.update({
       where: { id: reservation.id },
