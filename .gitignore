@@ -7,3 +7,6 @@ dist
 
 prisma/client/*
 !prisma/client/index.d.ts
+
+gc-metrics-key.json
+gc-storage-key.json
