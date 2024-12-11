@@ -107,4 +107,11 @@ export const verifyPayment = procedure
       content: `We have received ${paymentRecord.amountInUsd} USD for your reservation, thank you!`,
       type: "PAYMENT",
     });
+    await prisma.userNotification.create({
+      data: {
+        userId: user.id,
+        title: "Payment received",
+        message: `We have received ${paymentRecord.amountInUsd} USD for your reservation, thank you!`,
+      },
+    });
   });

@@ -331,6 +331,13 @@ export const cancel = procedure
             type: "PAYMENT",
             content: `Your reservation has been cancelled, ${intent.amount / 100} USD refund has been issued`,
           });
+          await prisma.userNotification.create({
+            data: {
+              userId: paymentRecord.userId,
+              title: "Reservation Cancelled",
+              message: `Your reservation has been cancelled, ${intent.amount / 100} USD refund has been issued`,
+            },
+          });
         } catch (error) {
           console.error(error);
         }
@@ -398,6 +405,13 @@ export const checkIn = procedure
       type: "CHECK-IN",
       content: `Your reservation has been checked in, please check out before ${dayjs(reservation.endTime).format("HH:mm MMM DD, YYYY")} to avoid additional charges!`,
     });
+    await prisma.userNotification.create({
+      data: {
+        userId: user.id,
+        title: "Reservation Check-In",
+        message: `Your reservation has been checked in, please check out before ${dayjs(reservation.endTime).format("HH:mm MMM DD, YYYY")} to avoid additional charges!`,
+      },
+    });
 
     EventEmitter.getInstance().emit(EventNameFn.getSingleTicket(reservation.id));
 
@@ -413,6 +427,13 @@ export const checkIn = procedure
           externalId: reservation.paymentRecord.user.accountId,
           type: "CHECK-OUT",
           content: "You have overstayed your reservation, please check out as soon as possible",
+        });
+        await prisma.userNotification.create({
+          data: {
+            userId: user.id,
+            title: "Overstayed Reservation",
+            message: "You have overstayed your reservation, please check out as soon as possible",
+          },
         });
         markAsOverstayedJob.stop();
       },
@@ -434,6 +455,13 @@ export const checkIn = procedure
         externalId: reservation.paymentRecord.user.accountId,
         type: "CHECK-OUT",
         content: `Your reservation has been automatically checked out after ${MAXIMUM_OVERSTAYING_DURATION_IN_HOURS} hours, please contact the parking lot owner for further information`,
+      });
+      await prisma.userNotification.create({
+        data: {
+          userId: user.id,
+          title: "Auto Checkout",
+          message: `Your reservation has been automatically checked out after ${MAXIMUM_OVERSTAYING_DURATION_IN_HOURS} hours, please contact the parking lot owner for further information`,
+        },
       });
       autoCheckoutJob.stop();
     });
@@ -503,6 +531,13 @@ export const checkOut = procedure
         externalId: reservation.vehicle.owner.accountId,
         type: "CHECK-OUT",
         content: `Your reservation has been checked out early, ${refundAmountInUsd} USD refund has been issued`,
+      });
+      await prisma.userNotification.create({
+        data: {
+          userId: reservation.vehicle.ownerId,
+          title: "Early Check-Out",
+          message: `Your reservation has been checked out early, ${refundAmountInUsd} USD refund has been issued`,
+        },
       });
       return;
     };

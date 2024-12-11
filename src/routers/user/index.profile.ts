@@ -122,7 +122,6 @@ export const update = procedure
     const {
       account: { id, role },
     } = ctx;
-
     if (role !== "ADMIN" && userId) throw new TRPCError({ code: "FORBIDDEN" });
 
     let user: User;

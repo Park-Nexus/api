@@ -12,7 +12,7 @@ import { OneSignalUtils } from "../../utils/oneSignal";
 import { OAuth2Client } from "google-auth-library";
 import { authConfig } from "../../configs/auth.config";
 
-const OTP_EXPIRES_IN_MINUTES = 5;
+const OTP_EXPIRES_IN_MINUTES = 3;
 const iosOauthClient = new OAuth2Client({ clientId: authConfig.iosOauthClientId });
 
 // Admin Login --------------------------------------------------------------
@@ -101,8 +101,7 @@ export const loginRouter = procedure.input(loginSchema).mutation(async ({ input 
       },
     },
   });
-  console.log(existingOtp);
-  if (existingOtp) return;
+  if (existingOtp) return await OneSignalUtils.sendSignInOtpEmail({ email, otp: existingOtp.code });
 
   // Send OTP
   const otp = generateOtp();

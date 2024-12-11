@@ -4,16 +4,16 @@ export const prisma = new PrismaClient().$extends({
   query: {
     $allModels: {
       async findMany({ args, query }) {
-        args = { ...args, where: { deletedAt: null } };
+        args.where = { ...args.where, deletedAt: null };
 
         return query(args);
       },
       async groupBy({ args, query }) {
-        args = { ...args, where: { deletedAt: null } };
+        args.where = { ...args.where, deletedAt: null };
         return query(args);
       },
       async aggregate({ args, query }) {
-        args = { ...args, where: { deletedAt: null } };
+        args.where = { ...args.where, deletedAt: null };
         return query(args);
       },
     },

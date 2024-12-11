@@ -9,7 +9,7 @@ import { DateUtils } from "../../utils/date";
 import dayjs from "dayjs";
 import { OneSignalUtils } from "../../utils/oneSignal";
 
-const OTP_EXPIRES_IN_MINUTES = 5;
+const OTP_EXPIRES_IN_MINUTES = 3;
 
 // Register a new user --------------------------------------------------------------
 const registerSchema = z.object({
@@ -53,7 +53,9 @@ export const registerRouter = procedure.input(registerSchema).mutation(async ({ 
       },
     },
   });
-  if (existingOtp) return;
+  if (existingOtp) {
+    return await OneSignalUtils.sendRegisterOtpEmail({ email, otp: existingOtp.code });
+  }
 
   // Send OTP
   const otp = generateOtp();

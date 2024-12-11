@@ -5,6 +5,7 @@ import { apiConfig } from "../../configs/api.config";
 const SIGN_IN_TEMPLATE_ID = "fd0c1b46-7b93-4267-a3fc-34873b523d1f";
 const REGISTER_TEMPLATE_ID = "4115a3e0-da8e-457b-a03f-148a0e68c1f3";
 const PARKING_LOT_SUBMISSION_TEMPLATE_ID = "554a9dd1-e7d1-4046-84bd-3b5c1cf3defb";
+const FORGOT_PASSWORD_TEMPLATE_ID = "4c83f40a-8bcd-4d73-967d-a719f3b0f214";
 
 const configuration = OneSignal.createConfiguration({
   restApiKey: oneSignalConfig.restApiKey,
@@ -48,6 +49,33 @@ export namespace OneSignalUtils {
 
     notification.app_id = oneSignalConfig.appId;
     notification.template_id = REGISTER_TEMPLATE_ID;
+    notification.include_email_tokens = [email];
+    notification.custom_data = {
+      otp,
+      user_email: email,
+    };
+
+    try {
+      await client.createNotification(notification);
+    } catch (error) {
+      console.error("Error sending email:", error);
+      throw new Error("Error sending email");
+    }
+  };
+
+  // Forgot password email -----------------------------------------------------------
+  type TSendForgotPasswordEmailPayload = {
+    email: string;
+    otp: string;
+  };
+  export const sendForgotPasswordEmail = async ({
+    email,
+    otp,
+  }: TSendForgotPasswordEmailPayload) => {
+    const notification = new OneSignal.Notification();
+
+    notification.app_id = oneSignalConfig.appId;
+    notification.template_id = FORGOT_PASSWORD_TEMPLATE_ID;
     notification.include_email_tokens = [email];
     notification.custom_data = {
       otp,

@@ -6,7 +6,6 @@ import {
   PARKING_LOT__STATUS_ALIAS,
   PARKING_LOT_SERVICE__TYPE_ALIAS,
   ParkingLot,
-  Prisma,
   prisma,
   VEHICLE__TYPE_ALIAS,
 } from "../../db";
@@ -18,7 +17,7 @@ import { on } from "events";
 import { EventNameFn, EventEmitter } from "../../utils/sse";
 import { OneSignalUtils } from "../../utils/oneSignal";
 
-const EARTH_RADIUS_IN_KM = 6371;
+// const EARTH_RADIUS_IN_KM = 6371;
 
 // Submit new parking lot for approval --------------------------------------------------------
 const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/; // hh:mm
@@ -180,58 +179,58 @@ export const getMany = procedure
     const {
       account: { id },
     } = ctx;
-    const { name, latitude, longitude, radiusInKm, status, isApproved } = input;
+    const { name, status, isApproved } = input;
 
     const user = await prisma.user.findUnique({ where: { accountId: id } });
     if (!user) throw new Error("User not found");
 
-    let parkingLots: Omit<
+    const parkingLots: Omit<
       ParkingLot,
       "mediaUrls" | "description" | "phone" | "ratings" | "openAt" | "closeAt" | "deletedAt"
-    >[];
+    >[] = await prisma.parkingLot.findMany({
+      where: {
+        name: { contains: name },
+        status,
+        isApproved,
+        ownerId: input.isMine ? user.id : undefined,
+      },
+      select: {
+        id: true,
+        name: true,
+        latitude: true,
+        longitude: true,
+        status: true,
+        ownerId: true,
+        isApproved: true,
+        createdAt: true,
+        updatedAt: true,
+        approvedAt: true,
+      },
+    });
 
-    if (!latitude || !longitude || !radiusInKm) {
-      parkingLots = await prisma.parkingLot.findMany({
-        where: {
-          name: { contains: name },
-          status,
-          isApproved,
-          ownerId: input.isMine ? { equals: user.id } : {},
-        },
-        select: {
-          id: true,
-          name: true,
-          latitude: true,
-          longitude: true,
-          status: true,
-          ownerId: true,
-          isApproved: true,
-          createdAt: true,
-          updatedAt: true,
-          approvedAt: true,
-        },
-      });
-    } else {
-      parkingLots = await prisma.$queryRaw(
-        Prisma.sql`
-          SELECT id, name, latitude, longitude, status, ownerId, isApproved, createdAt, updatedAt, approvedAt,
-        (${EARTH_RADIUS_IN_KM} * acos(
-            cos(radians(${latitude})) * 
-            cos(radians(latitude)) * 
-            cos(radians(longitude) - radians(${longitude})) + 
-            sin(radians(${latitude})) * 
-            sin(radians(latitude))
-        )) AS distance
-          FROM "ParkingLot"
-          WHERE 
-        "isApproved" = COALESCE(${isApproved}, "isApproved") 
-        AND "status" = COALESCE(${status}, "status")
-        AND "name" = COALESCE(${name}, "name")
-          HAVING distance < ${radiusInKm}
-          ORDER BY distance ASC;
-        `,
-      );
-    }
+    // if (!latitude || !longitude || !radiusInKm) {
+
+    // } else {
+    //   parkingLots = await prisma.$queryRaw(
+    //     Prisma.sql`
+    //       SELECT id, name, latitude, longitude, status, ownerId, isApproved, createdAt, updatedAt, approvedAt,
+    //     (${EARTH_RADIUS_IN_KM} * acos(
+    //         cos(radians(${latitude})) *
+    //         cos(radians(latitude)) *
+    //         cos(radians(longitude) - radians(${longitude})) +
+    //         sin(radians(${latitude})) *
+    //         sin(radians(latitude))
+    //     )) AS distance
+    //       FROM "ParkingLot"
+    //       WHERE
+    //     "isApproved" = COALESCE(${isApproved}, "isApproved")
+    //     AND "status" = COALESCE(${status}, "status")
+    //     AND "name" = COALESCE(${name}, "name")
+    //       HAVING distance < ${radiusInKm}
+    //       ORDER BY distance ASC;
+    //     `,
+    //   );
+    // }
 
     const result = parkingLots.map((lot) => ({ ...lot, isMine: lot.ownerId === user.id }));
 
