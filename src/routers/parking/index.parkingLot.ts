@@ -665,7 +665,11 @@ export const getAvailability = procedure
 
     const parkingLot = await prisma.parkingLot.findUnique({
       where: { id: lotId },
-      include: { parkingSpots: true },
+      include: {
+        parkingSpots: {
+          where: { deletedAt: null },
+        },
+      },
     });
     if (!parkingLot) throw new Error("Parking lot not found");
 
