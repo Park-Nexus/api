@@ -2,6 +2,7 @@ import { trpcInstance } from "../../trpc";
 
 import * as profile from "./index.profile";
 import * as vehicle from "./index.vehicle";
+import * as notification from "./index.notification";
 
 export const userRouter = trpcInstance.router({
   profile: {
@@ -17,6 +18,11 @@ export const userRouter = trpcInstance.router({
     update: vehicle.update,
     get: {
       many: vehicle.getMany,
+    },
+  },
+  notification: {
+    get: {
+      many: notification.getMany,
     },
   },
 });
