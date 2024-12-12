@@ -57,6 +57,7 @@ export const getDataByPlace = procedure.use(authMiddleware(["ADMIN"])).query(asy
       latitude: true,
       longitude: true,
       parkingSpots: {
+        where: { deletedAt: null },
         select: {
           vehicleType: true,
           reservations: {
