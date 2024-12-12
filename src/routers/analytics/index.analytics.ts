@@ -109,7 +109,7 @@ export const getDataByPlace = procedure.use(authMiddleware(["ADMIN"])).query(asy
         (spot) => spot.vehicleType === "TRUCK",
       ).length;
 
-      const currentIndex = result.find((item) => item.placeCode === placeCode);
+      const currentIndex = result.find((item) => item.placeName === placeName);
 
       if (currentIndex) {
         currentIndex.revenueInUsd += revenueInUsd;
