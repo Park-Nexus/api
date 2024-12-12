@@ -407,7 +407,7 @@ export const checkIn = procedure
     });
     await prisma.userNotification.create({
       data: {
-        userId: user.id,
+        userId: reservation.userId,
         title: "Reservation Check-In",
         message: `Your reservation has been checked in, please check out before ${dayjs(reservation.endTime).format("HH:mm MMM DD, YYYY")} to avoid additional charges!`,
       },
@@ -430,7 +430,7 @@ export const checkIn = procedure
         });
         await prisma.userNotification.create({
           data: {
-            userId: user.id,
+            userId: reservation.userId,
             title: "Overstayed Reservation",
             message: "You have overstayed your reservation, please check out as soon as possible",
           },
@@ -458,7 +458,7 @@ export const checkIn = procedure
       });
       await prisma.userNotification.create({
         data: {
-          userId: user.id,
+          userId: reservation.userId,
           title: "Auto Checkout",
           message: `Your reservation has been automatically checked out after ${MAXIMUM_OVERSTAYING_DURATION_IN_HOURS} hours, please contact the parking lot owner for further information`,
         },
@@ -534,7 +534,7 @@ export const checkOut = procedure
       });
       await prisma.userNotification.create({
         data: {
-          userId: reservation.vehicle.ownerId,
+          userId: reservation.userId,
           title: "Early Check-Out",
           message: `Your reservation has been checked out early, ${refundAmountInUsd} USD refund has been issued`,
         },
